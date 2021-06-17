@@ -1,2 +1,2 @@
-# adagawe
+# Adagawe
 PRG7 Project
