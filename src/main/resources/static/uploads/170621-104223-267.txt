@@ -1,0 +1,6 @@
+SMART
+Specific = Menghidupkan proses pembelajaran daring mahasiswa pada prodi MI 
+Measureable = Meningkatkan semangat belajar mahasiswa prodi MI pada saat kuliah daring
+Achievable = Mengingat waktu yang tidak memungkinkan untuk dilakukannya implementasi mendalam, penulis menggunakan metode kuesioner untuk menggambarkan hasil dari proses implementasi
+Reasonable = Menurunnya semangat belajar yang ditandai dengan ketidakaktifan mahasiswa selama pembelajaran daring
+Time = Batas waktu yang disepakati adalah 21 Juni atau 2 minggu proses pengerjaan
