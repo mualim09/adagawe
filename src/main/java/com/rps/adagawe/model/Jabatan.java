@@ -1,24 +1,31 @@
 package com.rps.adagawe.model;
 
+import org.hibernate.annotations.Check;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Jabatan {
 
     @Id
+    @NotNull
+    @NotEmpty
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
+    @NotEmpty
     @Column(name = "nama_jabatan")
     private String namaJabatan;
 
     private String deskripsi;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

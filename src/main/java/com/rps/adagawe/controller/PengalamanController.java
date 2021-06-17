@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -50,8 +52,16 @@ public class PengalamanController {
 
     @PostMapping("/pengalaman/create")
     public String postCreate(RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file,
-                             @ModelAttribute("pengalaman") Pengalaman pengalaman, BindingResult result, Model model) {
+                             @ModelAttribute("pengalaman") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
+        if (pengalaman.getJabatan().getId() == null) {
+            System.out.println("ID Jabatan null");
+
+            result.addError();
+        }
+
         if (result.hasErrors()) {
+            System.out.println("Error");
+            result.getAllErrors();
             return "/pengalaman/create";
         }
         String fileName = FileUploadHelper.Upload(file);

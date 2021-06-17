@@ -4,6 +4,9 @@ package com.rps.adagawe.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -17,6 +20,7 @@ public class Pengalaman {
     @JoinColumn(name = "id_pelamar", nullable = false)
     private Pelamar pelamar;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_jabatan", nullable = false)
     private Jabatan jabatan;
@@ -25,13 +29,16 @@ public class Pengalaman {
     @JoinColumn(name = "id_jenis_pegawai", nullable = false)
     private JenisPegawai jenisPegawai;
 
+    @NotEmpty
     @Column(name = "nama_perusahaan")
     private String namaPerusahaan;
 
+    @NotNull
     @Column(name = "mulai_kerja")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date mulaiKerja;
 
+    @NotNull
     @Column(name = "terakhir_kerja")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date terakhirKerja;
@@ -49,14 +56,6 @@ public class Pengalaman {
         this.id = id;
     }
 
-//    public int getIdPelamar() {
-//        return idPelamar;
-//    }
-//
-//    public void setIdPelamar(int idPelamar) {
-//        this.idPelamar = idPelamar;
-//    }
-
     public Pelamar getPelamar() {
         return pelamar;
     }
@@ -65,14 +64,6 @@ public class Pengalaman {
         this.pelamar = pelamar;
     }
 
-//    public int getIdJabatan() {
-//        return idJabatan;
-//    }
-//
-//    public void setIdJabatan(int idJabatan) {
-//        this.idJabatan = idJabatan;
-//    }
-
     public Jabatan getJabatan() {
         return jabatan;
     }
@@ -80,14 +71,6 @@ public class Pengalaman {
     public void setJabatan(Jabatan jabatan) {
         this.jabatan = jabatan;
     }
-
-//    public int getIdJenisPegawai() {
-//        return idJenisPegawai;
-//    }
-//
-//    public void setIdJenisPegawai(int idJenisPegawai) {
-//        this.idJenisPegawai = idJenisPegawai;
-//    }
 
     public JenisPegawai getJenisPegawai() {
         return jenisPegawai;

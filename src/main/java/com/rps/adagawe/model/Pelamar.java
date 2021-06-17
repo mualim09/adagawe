@@ -1,6 +1,10 @@
 package com.rps.adagawe.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -10,25 +14,33 @@ public class Pelamar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty
     @Column(name = "nama_pelamar")
     private String namaPelamar;
 
+    @NotNull
     @Column(name = "tanggal_lahir")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tanggalLahir;
 
+    @NotEmpty
     @Column(name = "jenis_kelamin")
     private char jenisKelamin;
 
+    @NotEmpty
     @Column(name = "no_telepon")
     private String noTelepon;
 
+    @NotEmpty
     @Column(name = "dokumen_cv")
     private String dokumenCv;
 
+    @NotEmpty
     @ManyToOne
     @JoinColumn(name = "id_user_login", nullable = false)
     private UserLogin userLogin;
 
+    @NotEmpty
     @Column(name = "foto_profil")
     private String fotoProfil;
 
