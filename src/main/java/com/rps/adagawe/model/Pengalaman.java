@@ -20,7 +20,6 @@ public class Pengalaman {
     @JoinColumn(name = "id_pelamar", nullable = false)
     private Pelamar pelamar;
 
-    @Valid
     @ManyToOne
     @JoinColumn(name = "id_jabatan", nullable = false)
     private Jabatan jabatan;
@@ -29,16 +28,16 @@ public class Pengalaman {
     @JoinColumn(name = "id_jenis_pegawai", nullable = false)
     private JenisPegawai jenisPegawai;
 
-    @NotEmpty
+    @NotEmpty(message = "Nama perusahaan wajib diisi.")
     @Column(name = "nama_perusahaan")
     private String namaPerusahaan;
 
-    @NotNull
+    @NotNull(message = "Mulai kerja wajib diisi.")
     @Column(name = "mulai_kerja")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date mulaiKerja;
 
-    @NotNull
+    @NotNull(message = "Akhir kerja wajib diisi.")
     @Column(name = "terakhir_kerja")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date terakhirKerja;

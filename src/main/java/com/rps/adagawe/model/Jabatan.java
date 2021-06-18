@@ -1,16 +1,13 @@
 package com.rps.adagawe.model;
 
-import org.hibernate.annotations.Check;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Jabatan {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

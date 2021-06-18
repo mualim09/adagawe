@@ -20,44 +20,44 @@
             <option value="">Pilih Jabatan</option>
             <option th:each="jabatan : ${jabatans}" th:value="${jabatan.id}" th:text="${jabatan.namaJabatan}"></option>
           </select>
-          <div class="invalid-feedback" th:if="${#fields.hasErrors('jabatan.id')}" th:errors="*{jabatan.id}"></div>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('jabatan')}" th:errors="*{jabatan}"></div>
         </div>
         <div class="form-group">
           <label for="idJenisPegawai">Jenis Pegawai</label>
-          <select id="idJenisPegawai" th:field="*{jenisPegawai.id}" class="form-control">
+          <select id="idJenisPegawai" th:field="*{jenisPegawai.id}" th:class="'form-control '+ ${#fields.hasErrors('jenisPegawai') ? 'is-invalid' : ''}">
             <option value="">Pilih Jenis Pegawai</option>
             <option th:each="jenisPegawai : ${jenisPegawais}" th:value="${jenisPegawai.id}" th:text="${jenisPegawai.jenisPegawai}"></option>
           </select>
-          <span th:if="${#fields.hasErrors('jenisPegawai.id')}" th:errors="*{jenisPegawai.id}"></span>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('jenisPegawai')}" th:errors="*{jenisPegawai}"></div>
         </div>
         <div class="form-group">
           <label for="namaPerusahaan">Nama Perusahaan</label>
           <input type="text" th:field="*{namaPerusahaan}" id="namaPerusahaan" placeholder="Nama Perusahaan"
-                 class="form-control">
-          <span th:if="${#fields.hasErrors('namaPerusahaan')}" th:errors="*{namaPerusahaan}"></span>
+                 th:class="'form-control '+ ${#fields.hasErrors('namaPerusahaan') ? 'is-invalid' : ''}">
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('namaPerusahaan')}" th:errors="*{namaPerusahaan}"></div>
         </div>
         <div class="form-group">
           <label for="mulaiKerja">Mulai Kerja</label>
           <input type="date" th:field="*{mulaiKerja}" id="mulaiKerja" placeholder="Mulai Kerja"
-                 class="form-control">
-          <span th:if="${#fields.hasErrors('mulaiKerja')}" th:errors="*{mulaiKerja}"></span>
+                 th:class="'form-control '+ ${#fields.hasErrors('mulaiKerja') ? 'is-invalid' : ''}">
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('mulaiKerja')}" th:errors="*{mulaiKerja}"></div>
         </div>
         <div class="form-group">
           <label for="terakhirKerja">Akhir Kerja</label>
           <input type="date" th:field="*{terakhirKerja}" id="terakhirKerja" placeholder="Akhir Kerja"
-                 class="form-control">
-          <span th:if="${#fields.hasErrors('terakhirKerja')}" th:errors="*{terakhirKerja}"></span>
+                 th:class="'form-control '+ ${#fields.hasErrors('terakhirKerja') ? 'is-invalid' : ''}">
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('terakhirKerja')}" th:errors="*{terakhirKerja}"></div>
         </div>
         <div class="form-group">
           <label for="deskripsi">Deskripsi</label>
           <textarea th:field="*{deskripsi}" id="deskripsi" placeholder="Deskripsi"
-                    class="form-control"></textarea>
-          <span th:if="${#fields.hasErrors('deskripsi')}" th:errors="*{deskripsi}"></span>
+                    th:class="'form-control '+ ${#fields.hasErrors('deskripsi') ? 'is-invalid' : ''}"></textarea>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('deskripsi')}" th:errors="*{deskripsi}"></div>
         </div>
         <div class="form-group">
           <label for="file">File Attachment</label>
           <input type="file" name="file" id="file" placeholder="File attachment" class="form-control">
-          <span th:if="${#fields.hasErrors('fileAttachment')}" th:errors="*{fileAttachment}"></span>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('fileAttachment')}" th:errors="*{fileAttachment}"></div>
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>

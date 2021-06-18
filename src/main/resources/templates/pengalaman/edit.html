@@ -4,53 +4,60 @@
       layout:decorate="~{layout/main}">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Employee</title>
+    <title>Ubah Pengalaman</title>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="ibox ">
         <div class="ibox-title">
-            <h5>Edit Employee</h5>
+            <h5>Ubah Pengalaman</h5>
         </div>
         <div class="ibox-content">
-            <form th:action="@{/editemployeeth/{id}(id=${employeeObject.idEmployee})}" th:object="${employeeObject}" id="employeeForm" method="post">
+            <form th:action="@{/pengalaman/edit/{id}(id=${pengalaman.id})}" th:object="${pengalaman}" id="pengalamanForm" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="namaEmployee">Nama Employee</label>
-                    <input type="text" th:field="*{namaEmployee}" id="namaEmployee" placeholder="Nama Employee"
-                           th:class="'form-control '+ ${#fields.hasErrors('namaEmployee') ? 'is-invalid' : ''}">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('namaEmployee')}" th:errors="*{namaEmployee}"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="emailEmployee">Email Employee</label>
-                    <input type="text" th:field="*{emailEmployee}" id="emailEmployee" placeholder="Email Employee"
-                           th:class="'form-control '+ ${#fields.hasErrors('emailEmployee') ? 'is-invalid' : ''}">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('emailEmployee')}" th:errors="*{emailEmployee}"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" th:value="${employeeObject.password}" id="password" placeholder="Password"
-                           th:class="'form-control '+ ${#fields.hasErrors('password') ? 'is-invalid' : ''}">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Konfirmasi Password</label>
-                    <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Konfirmasi Password" class="form-control">
-
-                </div>
-
-                <div class="form-group">
-                    <label for="roleEmployee">Role Employee</label>
-                    <select id="roleEmployee" th:field="*{roleEmployee}"
-                            th:class="'form-control '+ ${#fields.hasErrors('roleEmployee') ? 'is-invalid' : ''}">
-                        <option value="">Pilih Role</option>
-                        <option value="ADMIN HR">ADMIN HR</option>
-                        <option value="KARYAWAN">KARYAWAN</option>
-                        <option value="MANAGER HR">MANAGER HR</option>
+                    <label for="idJabatan">Jabatan</label>
+                    <select id="idJabatan" th:field="*{jabatan.id}" th:class="'form-control '+ ${#fields.hasErrors('jabatan') ? 'is-invalid' : ''}">
+                        <option value="">Pilih Jabatan</option>
+                        <option th:each="jabatan : ${jabatans}" th:value="${jabatan.id}" th:text="${jabatan.namaJabatan}"></option>
                     </select>
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('roleEmployee')}" th:errors="*{roleEmployee}"></div>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('jabatan')}" th:errors="*{jabatan}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="idJenisPegawai">Jenis Pegawai</label>
+                    <select id="idJenisPegawai" th:field="*{jenisPegawai.id}" th:class="'form-control '+ ${#fields.hasErrors('jenisPegawai') ? 'is-invalid' : ''}">
+                        <option value="">Pilih Jenis Pegawai</option>
+                        <option th:each="jenisPegawai : ${jenisPegawais}" th:value="${jenisPegawai.id}" th:text="${jenisPegawai.jenisPegawai}"></option>
+                    </select>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('jenisPegawai')}" th:errors="*{jenisPegawai}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="namaPerusahaan">Nama Perusahaan</label>
+                    <input type="text" th:field="*{namaPerusahaan}" id="namaPerusahaan" placeholder="Nama Perusahaan"
+                           th:class="'form-control '+ ${#fields.hasErrors('namaPerusahaan') ? 'is-invalid' : ''}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('namaPerusahaan')}" th:errors="*{namaPerusahaan}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="mulaiKerja">Mulai Kerja</label>
+                    <input type="date" th:field="*{mulaiKerja}" id="mulaiKerja" placeholder="Mulai Kerja"
+                           th:class="'form-control '+ ${#fields.hasErrors('mulaiKerja') ? 'is-invalid' : ''}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('mulaiKerja')}" th:errors="*{mulaiKerja}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="terakhirKerja">Akhir Kerja</label>
+                    <input type="date" th:field="*{terakhirKerja}" id="terakhirKerja" placeholder="Akhir Kerja"
+                           th:class="'form-control '+ ${#fields.hasErrors('terakhirKerja') ? 'is-invalid' : ''}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('terakhirKerja')}" th:errors="*{terakhirKerja}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea th:field="*{deskripsi}" id="deskripsi" placeholder="Deskripsi"
+                              th:class="'form-control '+ ${#fields.hasErrors('deskripsi') ? 'is-invalid' : ''}"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('deskripsi')}" th:errors="*{deskripsi}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="file">File Attachment</label>
+                    <input type="file" name="file" id="file" placeholder="File attachment" class="form-control">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('fileAttachment')}" th:errors="*{fileAttachment}"></div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -58,29 +65,6 @@
         </div>
     </div>
 </div>
-
-<th:block layout:fragment="scripts">
-    <script type="text/javascript">
-        $("#employeeForm").validate({
-            rules: {
-                password: {
-                    required: true,
-                },
-                passwordConfirm: {
-                    equalTo: "#password"
-                },
-            },
-            messages: {
-                password: {
-                    required: "Password wajib diisi!",
-                },
-                passwordConfirm: {
-                    equalTo: "Password harus sama!"
-                }
-            }
-        });
-    </script>
-</th:block>
 
 </body>
 </html>

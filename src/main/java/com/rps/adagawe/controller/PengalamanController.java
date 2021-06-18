@@ -54,16 +54,17 @@ public class PengalamanController {
     public String postCreate(RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file,
                              @ModelAttribute("pengalaman") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
         if (pengalaman.getJabatan().getId() == null) {
-            System.out.println("ID Jabatan null");
+            result.addError(new FieldError("pengalaman", "jabatan", "Jabatan wajib diisi."));
+        }
 
-//            result.addError();
+        if (pengalaman.getJenisPegawai().getId() == null) {
+            result.addError(new FieldError("pengalaman", "jenisPegawai", "Jenis pegawai wajib diisi."));
         }
 
         if (result.hasErrors()) {
-            System.out.println("Error");
-            result.getAllErrors();
             return "/pengalaman/create";
         }
+
         String fileName = FileUploadHelper.Upload(file);
         Pelamar pelamar = pelamarService.getPelamarById(1);
         pengalaman.setPelamar(pelamar);
@@ -78,15 +79,28 @@ public class PengalamanController {
     @GetMapping("/pengalaman/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Pengalaman pengalaman = pengalamanService.getPengalamanById(id);
-        model.addAttribute("pengalamanObject", pengalaman);
+        System.out.println(pengalaman);
+        model.addAttribute("jabatans", jabatanService.getAll());
+        model.addAttribute("jenisPegawais", jenisPegawaiService.getAll());
+        model.addAttribute("pengalaman", pengalaman);
         return "/pengalaman/edit";
     }
 
     @PostMapping("/pengalaman/edit/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
-                               @ModelAttribute("pengalamanObject") @Valid Pengalaman pengalaman, BindingResult result) {
+                               @ModelAttribute("pengalaman") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
+        if (pengalaman.getJabatan().getId() == null) {
+            result.addError(new FieldError("pengalaman", "jabatan", "Jabatan wajib diisi."));
+        }
+
+        if (pengalaman.getJenisPegawai().getId() == null) {
+            result.addError(new FieldError("pengalaman", "jenisPegawai", "Jenis pegawai wajib diisi."));
+        }
+
         if (result.hasErrors()) {
             pengalaman.setId(id);
+            model.addAttribute("jabatans", jabatanService.getAll());
+            model.addAttribute("jenisPegawais", jenisPegawaiService.getAll());
             return "/pengalaman/edit";
         }
 
@@ -102,7 +116,6 @@ public class PengalamanController {
     @PostMapping("/pengalaman/delete/{id}")
     public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
         Pengalaman emp = pengalamanService.deletePengalaman(id);
-
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil dihapus.");
         return "redirect:/pengalaman";
