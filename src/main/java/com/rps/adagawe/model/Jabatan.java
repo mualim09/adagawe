@@ -11,7 +11,6 @@ public class Jabatan {
 
     @Id
     @NotNull
-    @NotEmpty
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

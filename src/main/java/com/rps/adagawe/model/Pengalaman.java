@@ -20,7 +20,7 @@ public class Pengalaman {
     @JoinColumn(name = "id_pelamar", nullable = false)
     private Pelamar pelamar;
 
-    @NotNull
+    @Valid
     @ManyToOne
     @JoinColumn(name = "id_jabatan", nullable = false)
     private Jabatan jabatan;

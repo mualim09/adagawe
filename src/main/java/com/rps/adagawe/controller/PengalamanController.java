@@ -56,7 +56,7 @@ public class PengalamanController {
         if (pengalaman.getJabatan().getId() == null) {
             System.out.println("ID Jabatan null");
 
-            result.addError();
+//            result.addError();
         }
 
         if (result.hasErrors()) {
