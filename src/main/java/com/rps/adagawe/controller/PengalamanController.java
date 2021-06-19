@@ -104,8 +104,8 @@ public class PengalamanController {
             return "/pengalaman/edit";
         }
 
-        Pengalaman emp = pengalamanService.updatePengalaman(id, pengalaman);
-        if (emp == null) {
+        Pengalaman p = pengalamanService.updatePengalaman(id, pengalaman);
+        if (p == null) {
             return "/pengalaman/edit";
         }
 
