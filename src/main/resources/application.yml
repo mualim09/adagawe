@@ -1,4 +1,17 @@
+server:
+  servlet:
+    session:
+      tracking-modes: cookie
 spring:
+  datasource:
+    url: jdbc:sqlserver://localhost\\SQLEXPRESS:1433;database=Adagawe
+    username: sa
+    password: polman
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   mail:
     host: smtp.gmail.com
     port: 587
@@ -13,16 +26,3 @@ spring:
           connectiontimeout: 5000
           timeout: 3000
           writetimeout: 5000
-  datasource:
-    url: jdbc:sqlserver://localhost\\SQLEXPRESS:1433;database=Adagawe
-    username: sa
-    password: polman
-  jpa:
-    show-sql: true
-    hibernate:
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-server:
-  servlet:
-    session:
-      tracking-modes: cookie

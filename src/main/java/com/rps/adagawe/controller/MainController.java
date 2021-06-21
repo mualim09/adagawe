@@ -14,6 +14,7 @@ public class MainController {
     public String index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
+        System.out.println(authentication.getAuthorities());
 
         model.addAttribute("userEmail", userEmail);
         return "index";
