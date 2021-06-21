@@ -1,4 +1,6 @@
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 
     <meta charset="utf-8">
@@ -26,7 +28,7 @@
                     <div class="dropdown profile-element">
                         <img alt="image" class="rounded-circle" th:src="@{/img/profile_small.jpg}"/>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="block m-t-xs font-bold">David Williams</span>
+                            <span class="block m-t-xs font-bold" sec:authorize="isAuthenticated()"><span th:text="${userEmail}"></span></span>
                             <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">

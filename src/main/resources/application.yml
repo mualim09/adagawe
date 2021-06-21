@@ -1,0 +1,28 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: hijikatato23@gmail.com
+    password: Samodra1234
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+  datasource:
+    url: jdbc:sqlserver://localhost\\SQLEXPRESS:1433;database=Adagawe
+    username: sa
+    password: polman
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+server:
+  servlet:
+    session:
+      tracking-modes: cookie
