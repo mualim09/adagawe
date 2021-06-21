@@ -27,15 +27,11 @@ public class UserLogin implements UserDetails {
 
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user_role", nullable = false)
-    private UserRole userRole;
-
     private int status;
 
     @Builder.Default
-    @Column(name = "user_role_enum")
-    private UserRoleEnum userRoleEnum = UserRoleEnum.Pelamar;
+    @Column(name = "user_role")
+    private UserRole userRole = UserRole.Pelamar;
 
     @Builder.Default
     private Boolean locked = false;
@@ -45,7 +41,7 @@ public class UserLogin implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(userRoleEnum.name());
+        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(userRole.name());
         return Collections.singletonList(simpleGrantedAuthority);
     }
 
