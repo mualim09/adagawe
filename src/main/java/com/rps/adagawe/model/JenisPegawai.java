@@ -2,8 +2,6 @@ package com.rps.adagawe.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name = "JenisPegawai")
 public class JenisPegawai {

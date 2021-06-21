@@ -27,19 +27,14 @@ public class PengalamanService {
 
     public Pengalaman updatePengalaman(int id, Pengalaman pengalaman) {
         Pengalaman p = pengalamanRepository.findById(id).orElse(null);
+        assert p != null;
 
-        if (p == null) return null;
-        p.setJabatan(pengalaman.getJabatan());
-        p.setJenisPegawai(pengalaman.getJenisPegawai());
-        p.setNamaPerusahaan(pengalaman.getNamaPerusahaan());
-        p.setMulaiKerja(pengalaman.getMulaiKerja());
-        p.setTerakhirKerja(pengalaman.getTerakhirKerja());
-        p.setDeskripsi(pengalaman.getDeskripsi());
-        p.setFileAttachment(pengalaman.getFileAttachment());
+        pengalaman.setId(id);
+        pengalaman.setPelamar(p.getPelamar());
 
-        pengalamanRepository.save(p);
+        pengalamanRepository.save(pengalaman);
 
-        return p;
+        return pengalaman;
     }
 
     public Pengalaman deletePengalaman(int id) {

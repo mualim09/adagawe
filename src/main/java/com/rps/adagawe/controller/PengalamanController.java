@@ -79,7 +79,7 @@ public class PengalamanController {
     @GetMapping("/pengalaman/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Pengalaman pengalaman = pengalamanService.getPengalamanById(id);
-        System.out.println(pengalaman);
+
         model.addAttribute("jabatans", jabatanService.getAll());
         model.addAttribute("jenisPegawais", jenisPegawaiService.getAll());
         model.addAttribute("pengalaman", pengalaman);
