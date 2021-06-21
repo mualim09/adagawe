@@ -865,7 +865,7 @@ h5 {
   padding: 3px 20px;
   display: block;
 }
-.nav.navbar-right > li > a {
+.nav.navbar-right > li > a, .nav.navbar-right > li button {
   color: #999c9e;
 }
 .nav > li.active > a {
@@ -882,7 +882,9 @@ h5 {
   background: #fff;
 }
 .nav.navbar-top-links > li > a:hover,
-.nav.navbar-top-links > li > a:focus {
+.nav.navbar-top-links > li > a:focus,
+.nav.navbar-top-links > li button:hover,
+.nav.navbar-top-links > li button:focus {
   background-color: transparent;
 }
 .nav > li > a i {
@@ -905,7 +907,7 @@ h5 {
 .body-small .navbar-top-links li:last-child {
   margin-right: 0;
 }
-.navbar-top-links li a {
+.navbar-top-links li a, .navbar-top-links li button {
   padding: 20px 10px;
   min-height: 50px;
 }
@@ -8976,12 +8978,14 @@ body.skin-2 #wrapper {
 .skin-2 .rounded-circle {
   border-radius: 10px;
 }
-.skin-2 .nav.navbar-top-links > li > a:hover,
-.skin-2 .nav.navbar-top-links > li > a:focus {
+.skin-2 .nav.navbar-top-links > li > a:hover, .skin-2 .nav.navbar-top-links > li > button:hover,
+.skin-2 .nav.navbar-top-links > li > a:focus, .skin-2 .nav.navbar-top-links > li > button:focus {
   background: #1a2d41;
 }
 .skin-2 .navbar-default .nav > li > a:hover,
-.skin-2 .navbar-default .nav > li > a:focus {
+.skin-2 .navbar-default .nav > li > a:focus,
+.skin-2 .navbar-default .nav > li > button:hover,
+.skin-2 .navbar-default .nav > li > button:focus {
   background: #e0e0e0;
   color: #213a53;
 }
@@ -9186,7 +9190,7 @@ body.md-skin {
   color: #676a6c;
   padding: 14px 20px 14px 25px;
 }
-.md-skin .nav.navbar-right > li > a {
+.md-skin .nav.navbar-right > li > a, .md-skin .nav.navbar-right > li button {
   color: #ffffff;
 }
 .md-skin .nav > li.active > a {
@@ -9221,7 +9225,7 @@ body.md-skin {
 .md-skin .nav-third-level li a {
   padding-left: 62px;
 }
-.md-skin .navbar-top-links li a {
+.md-skin .navbar-top-links li a, .md-skin .navbar-top-links li button {
   padding: 20px 10px;
   min-height: 50px;
 }
@@ -9361,7 +9365,7 @@ body.md-skin {
   background: inherit;
   color: #1ab394;
 }
-.md-skin.landing-page.body-small .nav.navbar-right > li > a {
+.md-skin.landing-page.body-small .nav.navbar-right > li > a, .md-skin.landing-page.body-small .nav.navbar-right > li button {
   color: #676a6c;
 }
 .md-skin .landing_link a,
@@ -9381,7 +9385,7 @@ body.md-skin {
 .md-skin.mini-navbar.fixed-sidebar .nav-second-level li a {
   padding-left: 52px;
 }
-.md-skin.top-navigation .nav.navbar-right > li > a {
+.md-skin.top-navigation .nav.navbar-right > li > a, .md-skin.top-navigation .nav.navbar-right > li button {
   padding: 15px 20px;
   color: #676a6c;
 }
@@ -9552,4 +9556,10 @@ body.md-skin {
   #page-wrapper {
     margin: 0;
   }
+}
+
+.btn-logout {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
