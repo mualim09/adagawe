@@ -1,4 +1,4 @@
-package com.rps.adagawe.user;
+package com.rps.adagawe.model;
 
 import com.rps.adagawe.model.UserLogin;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-class ConfirmationToken {
+public class ConfirmationToken {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ class ConfirmationToken {
 	@JoinColumn(nullable = false, name = "id_user")
 	private UserLogin user;
 
-	ConfirmationToken(UserLogin user) {
+	public ConfirmationToken(UserLogin user) {
 		this.user = user;
 		this.createdDate = LocalDate.now();
 		this.confirmationToken = UUID.randomUUID().toString();

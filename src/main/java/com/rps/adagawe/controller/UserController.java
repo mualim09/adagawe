@@ -1,10 +1,10 @@
-package com.rps.adagawe.user;
+package com.rps.adagawe.controller;
 
+import com.rps.adagawe.model.ConfirmationToken;
 import com.rps.adagawe.model.UserLogin;
+import com.rps.adagawe.service.ConfirmationTokenService;
+import com.rps.adagawe.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,33 +20,33 @@ public class UserController {
 
 	private final ConfirmationTokenService confirmationTokenService;
 
-	@GetMapping("/sign-in")
+	@GetMapping("/masuk")
 	public String signIn(Model model) {
 		return "main/login";
 	}
 
-	@GetMapping("/sign-up")
+	@GetMapping("/daftar")
 	public String signUpPage(Model model, UserLogin user) {
 		model.addAttribute("user", new UserLogin());
 		return "main/register";
 	}
 
-	@PostMapping("/sign-up")
+	@PostMapping("/daftar")
 	public String signUp(UserLogin user) {
 
 		userService.signUpUser(user);
 
-		return "redirect:/sign-in";
+		return "redirect:/masuk";
 	}
 
-	@GetMapping("/sign-up/confirm")
+	@GetMapping("/daftar/confirm")
 	public String confirmMail(@RequestParam("token") String token) {
 
 		ConfirmationToken confirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
 
 		if (confirmationToken != null) userService.confirmUser(confirmationToken);
 
-		return "redirect:/sign-in";
+		return "redirect:/masuk";
 	}
 
 }

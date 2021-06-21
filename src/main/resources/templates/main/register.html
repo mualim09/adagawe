@@ -19,7 +19,7 @@
 
 <body class="gray-bg">
 
-<div class="middle-box text-center loginscreen   animated fadeInDown">
+<div class="middle-box text-center loginscreen animated fadeInDown">
     <div>
         <div>
 
@@ -28,7 +28,7 @@
         </div>
         <h3>Register to IN+</h3>
         <p>Create account to see it in action.</p>
-        <form class="m-t" th:action="@{/sign-up}" th:method="post" th:object="${user}">
+        <form class="m-t" th:action="@{/daftar}" th:method="post" th:object="${user}">
             <div class="form-group">
                 <input type="email" class="form-control" placeholder="Email" th:field="*{email}" required="">
             </div>

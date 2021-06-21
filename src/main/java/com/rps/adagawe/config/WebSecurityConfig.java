@@ -1,6 +1,6 @@
 package com.rps.adagawe.config;
 
-import com.rps.adagawe.user.UserService;
+import com.rps.adagawe.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
-				.antMatchers("/sign-up/**",
-						"/sign-in/**",
+				.antMatchers("/daftar/**",
+						"/masuk/**",
 						"/css/**",
 						"/js/**",
 						"/img/**", "/font-awesome/**")
@@ -35,12 +35,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticated()
 				.and()
 				.logout()
-				.logoutUrl("/logout")
+				.logoutUrl("/keluar")
 				.invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID")
 				.and()
 				.formLogin()
-				.loginPage("/sign-in")
+				.loginPage("/masuk")
 				.permitAll();
 	}
 

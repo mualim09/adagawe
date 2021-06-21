@@ -1,4 +1,4 @@
-package com.rps.adagawe.user;
+package com.rps.adagawe.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class EmailSenderService {
-
 	private JavaMailSender javaMailSender;
 
 	@Async

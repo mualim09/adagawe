@@ -1,4 +1,4 @@
-package com.rps.adagawe.user;
+package com.rps.adagawe.repository;
 
 import com.rps.adagawe.model.UserLogin;
 import org.springframework.data.repository.CrudRepository;
@@ -12,7 +12,7 @@ import java.util.Optional;
  * @author kamer
  */
 @Repository
-interface UserRepository extends CrudRepository<UserLogin, Long> {
+public interface UserRepository extends CrudRepository<UserLogin, Long> {
 
 	Optional<UserLogin> findByEmail(String email);
 }
