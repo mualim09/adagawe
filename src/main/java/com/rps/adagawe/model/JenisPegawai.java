@@ -3,16 +3,19 @@ package com.rps.adagawe.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
-@Entity(name = "JenisPegawai")
+@Entity
 public class JenisPegawai {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty
+    @NotEmpty(message = "Nama Jenis Pegawai wajib diisi.")
     @Column(name = "jenis_pegawai")
-    private String jenisPegawai;
+    private String namajenisPegawai;
+
+    @Column(name = "row_status")
+    private Integer rowStatus;
 
     public Integer getId() {
         return id;
@@ -22,19 +25,28 @@ public class JenisPegawai {
         this.id = id;
     }
 
-    public String getJenisPegawai() {
-        return jenisPegawai;
+    public String getNamajenisPegawai() {
+        return namajenisPegawai;
     }
 
-    public void setJenisPegawai(String jenisPegawai) {
-        this.jenisPegawai = jenisPegawai;
+    public void setNamajenisPegawai(String jenisPegawai) {
+        this.namajenisPegawai = jenisPegawai;
+    }
+
+    public Integer getRowStatus() {
+        return rowStatus;
+    }
+
+    public void setRowStatus(Integer rowStatus) {
+        this.rowStatus = rowStatus;
     }
 
     @Override
     public String toString() {
         return "JenisPegawai{" +
                 "id=" + id +
-                ", jenisPegawai='" + jenisPegawai + '\'' +
+                ", jenisPegawai='" + namajenisPegawai + '\'' +
+                ", rowStatus='" + rowStatus + '\'' +
                 '}';
     }
 }

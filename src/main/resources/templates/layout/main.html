@@ -8,11 +8,11 @@
 
     <title>Spring Kel. 04</title>
 
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/static/main/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
 
-    <link th:href="@{/css/animate.css}" rel="stylesheet">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/static/main/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/static/main/css/style.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
 
     <!-- Optional Section -->
@@ -26,7 +26,7 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <img alt="image" class="rounded-circle" th:src="@{/img/profile_small.jpg}"/>
+                        <img alt="image" class="rounded-circle" th:src="@{/static/main/img/profile_small.jpg}"/>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="block m-t-xs font-bold" sec:authorize="isAuthenticated()"><span th:text="${userEmail}"></span></span>
                             <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
@@ -44,6 +44,18 @@
                 </li>
                 <li>
                     <a href="/pengalaman"><i class="fa fa-pie-chart"></i> <span class="nav-label">Pengalaman</span> </a>
+                </li>
+                <li>
+                    <a href="/jabatan"><i class="fa fa-black-tie"></i> <span class="nav-label">Jabatan</span> </a>
+                </li>
+                <li>
+                    <a href="/jenispegawai"><i class="fa fa-male"></i> <span class="nav-label">Jenis Pegawai</span> </a>
+                </li>
+                <li>
+                    <a href="/pendidikan"><i class="fa fa-address-book"></i> <span class="nav-label">Pendidikan</span> </a>
+                </li>
+                <li>
+                    <a href="/perusahaan"><i class="fa fa-building"></i> <span class="nav-label">Perusahaan<span> </a>
                 </li>
 
             </ul>
@@ -89,20 +101,20 @@
     </div>
 </div>
 <!-- Mainly scripts -->
-<script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script th:src="@{/static/main/js/jquery-3.1.1.min.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
-<script th:src="@{/js/popper.min.js}"></script>
-<script th:src="@{/js/bootstrap.js}"></script>
-<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/static/main/js/popper.min.js}"></script>
+<script th:src="@{/static/main/js/bootstrap.js}"></script>
+<script th:src="@{/static/main/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
 
-<script th:src="@{/js/plugins/dataTables/datatables.min.js}"></script>
-<script th:src="@{/js/plugins/dataTables/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/static/main/js/plugins/dataTables/datatables.min.js}"></script>
+<script th:src="@{/static/main/js/plugins/dataTables/dataTables.bootstrap4.min.js}"></script>
 
 <!-- Custom and plugin javascript -->
-<script th:src="@{/js/inspinia.js}"></script>
+<script th:src="@{/static/main/js/inspinia.js}"></script>
 
 <!-- jQuery UI -->
-<script th:src="@{/js/plugins/jquery-ui/jquery-ui.min.js}"></script>
+<script th:src="@{/static/main/js/plugins/jquery-ui/jquery-ui.min.js}"></script>
 
 
 <script>

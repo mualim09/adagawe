@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * Created on September, 2019
@@ -22,15 +23,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	@Autowired
+	private CustomAuthenticationSuccessHandler successHandler;
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
 				.antMatchers("/daftar/**",
+						"/",
+						"/main/**",
 						"/masuk/**",
 						"/css/**",
 						"/js/**",
 						"/img/**", "/font-awesome/**")
 				.permitAll()
+				.antMatchers("/admin/**").hasAuthority("Admin")
+				.antMatchers("/perusahaan/**").hasAuthority("Perusahaan")
 				.anyRequest()
 				.authenticated()
 				.and()
@@ -40,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.deleteCookies("JSESSIONID")
 				.and()
 				.formLogin()
+				.successHandler(successHandler)
 				.loginPage("/masuk")
 				.permitAll();
 	}

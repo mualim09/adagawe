@@ -1,6 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.FileUploadHelper;
+import com.rps.adagawe.model.JenisPegawai;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.Pengalaman;
 import com.rps.adagawe.service.JabatanService;
@@ -37,15 +38,15 @@ public class PengalamanController {
 
     @GetMapping("/pengalaman")
     public String index(Model model) {
-        List<Pengalaman> pengalamans = pengalamanService.getAll();
+        List<Pengalaman> pengalamans = pengalamanService.findPengalamanByRowStatus();
         model.addAttribute("pengalamans", pengalamans);
         return "/pengalaman/index";
     }
 
     @GetMapping("/pengalaman/create")
     public String create(Model model) {
-        model.addAttribute("jabatans", jabatanService.getAll());
-        model.addAttribute("jenisPegawais", jenisPegawaiService.getAll());
+        model.addAttribute("jabatans", jabatanService.findJabatanByRowStatus());
+        model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
         model.addAttribute("pengalaman", new Pengalaman());
         return "/pengalaman/create";
     }
@@ -75,13 +76,12 @@ public class PengalamanController {
         return "redirect:/pengalaman";
     }
 
-
     @GetMapping("/pengalaman/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Pengalaman pengalaman = pengalamanService.getPengalamanById(id);
 
-        model.addAttribute("jabatans", jabatanService.getAll());
-        model.addAttribute("jenisPegawais", jenisPegawaiService.getAll());
+        model.addAttribute("jabatans", jabatanService.findJabatanByRowStatus());
+        model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
         model.addAttribute("pengalaman", pengalaman);
         return "/pengalaman/edit";
     }
@@ -114,8 +114,9 @@ public class PengalamanController {
     }
 
     @PostMapping("/pengalaman/delete/{id}")
-    public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
-        Pengalaman emp = pengalamanService.deletePengalaman(id);
+    public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
+                                   @ModelAttribute("jenispegawai") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
+        Pengalaman emp = pengalamanService.deletePengalaman(id, pengalaman);
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil dihapus.");
         return "redirect:/pengalaman";

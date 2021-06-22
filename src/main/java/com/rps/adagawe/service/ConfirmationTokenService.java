@@ -27,7 +27,7 @@ public class ConfirmationTokenService {
 
 	public ConfirmationToken findConfirmationTokenByToken(String token) {
 		ConfirmationToken c = confirmationTokenRepository.findConfirmationTokenByConfirmationToken(token);
-		System.out.println(c);
+
 		return c;
 	}
 

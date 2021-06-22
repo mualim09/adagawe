@@ -11,11 +11,15 @@ public class Jabatan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty
+    @NotEmpty(message = "Nama Jabatan wajib diisi.")
     @Column(name = "nama_jabatan")
     private String namaJabatan;
 
+    @NotEmpty(message = "Deskripsi wajib diisi.")
     private String deskripsi;
+
+    @Column(name = "row_status")
+    private Integer rowStatus;
 
     public Integer getId() {
         return id;
@@ -41,12 +45,21 @@ public class Jabatan {
         this.deskripsi = deskripsi;
     }
 
+    public Integer getRowStatus() {
+        return rowStatus;
+    }
+
+    public void setRowStatus(Integer rowStatus) {
+        this.rowStatus = rowStatus;
+    }
+
     @Override
     public String toString() {
         return "Jabatan{" +
                 "id=" + id +
                 ", namaJabatan='" + namaJabatan + '\'' +
                 ", deskripsi='" + deskripsi + '\'' +
+                ", rowStatus='" + rowStatus + '\'' +
                 '}';
     }
 }
