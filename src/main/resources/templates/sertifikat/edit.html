@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Ubah Sertifikat</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5>Ubah Sertifikat</h5>
+        </div>
+        <div class="ibox-content">
+            <form th:action="@{/sertifikat/edit/{id}(id=${sertifikat.id})}" th:object="${sertifikat}" id="sertifikatForm" method="post">
+                <div class="form-group">
+                    <label for="noSertifikat">No Sertifikat</label>
+                    <input type="text" th:field="*{noSertifikat}" id="noSertifikat" placeholder="Nomor Sertifikat"
+                           th:class="'form-control '+ ${#fields.hasErrors('noSertifikat') ? 'is-invalid' : ''}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('noSertifikat')}" th:errors="*{noSertifikat}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="berlakuMulai">Berlaku Mulai</label>
+                    <input type="date" th:field="*{berlakuMulai}" id="berlakuMulai" placeholder="Berlaku Mulai"
+                           th:class="'form-control '+ ${#fields.hasErrors('berlakuMulai') ? 'is-invalid' : ''}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('berlakuMulai')}" th:errors="*{berlakuMulai}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="berlakuSampai">Berlaku Sampai</label>
+                    <input type="date" th:field="*{berlakuSampai}" id="berlakuSampai" placeholder="Berlaku Sampai"
+                           th:class="'form-control '+ ${#fields.hasErrors('berlakuSampai') ? 'is-invalid' : ''}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('berlakuSampai')}" th:errors="*{berlakuSampai}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="fileAttachment">URL Attachment</label>
+                    <input type="text" th:field="*{fileAttachment}" id="fileAttachment" placeholder="URL Berkas"
+                           th:class="'form-control '+ ${#fields.hasErrors('fileAttachment') ? 'is-invalid' : ''}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('fileAttachment')}" th:errors="*{fileAttachment}"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
