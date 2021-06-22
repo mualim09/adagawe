@@ -10,13 +10,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/")
-    public String index(Model model) {
+    private void redirectIndex(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
-        System.out.println(authentication.getAuthorities());
 
         model.addAttribute("userEmail", userEmail);
-        return "index";
+    }
+
+    @GetMapping("/admin")
+    public String index(Model model) {
+        redirectIndex(model);
+        return "main/index-admin";
+    }
+
+    @GetMapping("/perusahaan")
+    public String indexPerusahaan(Model model) {
+        redirectIndex(model);
+        return "main/index-perusahaan";
     }
 }
