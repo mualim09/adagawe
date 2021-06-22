@@ -26,7 +26,7 @@
           <label for="idJenisPegawai">Jenis Pegawai</label>
           <select id="idJenisPegawai" th:field="*{jenisPegawai.id}" th:class="'form-control '+ ${#fields.hasErrors('jenisPegawai') ? 'is-invalid' : ''}">
             <option value="">Pilih Jenis Pegawai</option>
-            <option th:each="jenisPegawai : ${jenisPegawais}" th:value="${jenisPegawai.id}" th:text="${jenisPegawai.jenisPegawai}"></option>
+            <option th:each="jenisPegawai : ${jenisPegawais}" th:value="${jenisPegawai.id}" th:text="${jenisPegawai.namajenisPegawai}"></option>
           </select>
           <div class="invalid-feedback" th:if="${#fields.hasErrors('jenisPegawai')}" th:errors="*{jenisPegawai}"></div>
         </div>

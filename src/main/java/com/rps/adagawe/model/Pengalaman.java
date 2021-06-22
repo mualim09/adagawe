@@ -47,6 +47,9 @@ public class Pengalaman {
     @Column(name = "file_attachment")
     private String fileAttachment;
 
+    @Column(name = "row_status")
+    private Integer rowStatus;
+
     public int getId() {
         return id;
     }
@@ -119,6 +122,14 @@ public class Pengalaman {
         this.fileAttachment = fileAttachment;
     }
 
+    public Integer getRowStatus() {
+        return rowStatus;
+    }
+
+    public void setRowStatus(Integer rowStatus) {
+        this.rowStatus = rowStatus;
+    }
+
     @Override
     public String toString() {
         return "Pengalaman{" +
@@ -131,6 +142,7 @@ public class Pengalaman {
                 ", terakhirKerja=" + terakhirKerja +
                 ", deskripsi='" + deskripsi + '\'' +
                 ", fileAttachment='" + fileAttachment + '\'' +
+                ", rowStatus='" + rowStatus + '\'' +
                 '}';
     }
 }

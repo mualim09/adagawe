@@ -24,24 +24,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-				.antMatchers("/daftar/**",
-						"/masuk/**",
-						"/css/**",
-						"/js/**",
-						"/img/**", "/font-awesome/**")
-				.permitAll()
-				.anyRequest()
-				.authenticated()
-				.and()
-				.logout()
-				.logoutUrl("/keluar")
-				.invalidateHttpSession(true)
-				.deleteCookies("JSESSIONID")
-				.and()
-				.formLogin()
-				.loginPage("/masuk")
-				.permitAll();
+//		http.csrf().disable().authorizeRequests()
+//				.antMatchers("/daftar/**",
+//						"/masuk/**",
+//						"/css/**",
+//						"/js/**",
+//						"/img/**", "/font-awesome/**")
+//				.permitAll()
+//				.anyRequest()
+//				.authenticated()
+//				.and()
+//				.logout()
+//				.logoutUrl("/keluar")
+//				.invalidateHttpSession(true)
+//				.deleteCookies("JSESSIONID")
+//				.and()
+//				.formLogin()
+//				.loginPage("/masuk")
+//				.permitAll();
 	}
 
 	@Autowired

@@ -19,5 +19,4 @@ public class MainController {
         model.addAttribute("userEmail", userEmail);
         return "index";
     }
-
 }
