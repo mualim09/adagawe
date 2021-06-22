@@ -28,5 +28,4 @@ public class MainController {
         redirectIndex(model);
         return "main/index-perusahaan";
     }
-
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Pendidikan</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5>Data Pendidikan</h5>
+        </div>
+        <div class="ibox-content">
+            <div th:if="${message}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <span th:text="${message}"></span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+            <div th:switch="${pendidikans}">
+                <a href="/pendidikan/create" class="btn btn-primary btn-sm mb-3"><i class="fa fa-plus"></i> Tambah Data</a>
+                <h2 th:case="null">Tidak ada data!</h2>
+                <div th:case="*">
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Nama Pelamar</td>
+                            <td>Jenjang</td>
+                            <td>Jurusan</td>
+                            <td>Universitas</td>
+                            <td>Tahun Mulai</td>
+                            <td>Tahun Selesai</td>
+                            <td>Aksi</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="pendidikan, iter : ${pendidikans}">
+                            <td th:text="${iter.index + 1}"></td>
+                            <td th:text="${pendidikan.pelamar.namaPelamar}"></td>
+                            <td th:text="${pendidikan.jenjang.namaJenjang}"></td>
+                            <td th:text="${pendidikan.namaJurusan}"></td>
+                            <td th:text="${pendidikan.namaUniversitas}"></td>
+                            <td th:text="${pendidikan.tahunMulai}"></td>
+                            <td th:text="${pendidikan.tahunSelesai}"></td>
+                            <td>
+                                <a th:href="@{/pendidikan/edit/{id}(id=${pendidikan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
+                                <form th:action="@{/pendidikan/delete/{id}(id=${pendidikan.id})}" method="post" class="d-inline">
+                                    <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash"></i> Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

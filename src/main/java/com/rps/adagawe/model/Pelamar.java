@@ -44,6 +44,9 @@ public class Pelamar {
     @Column(name = "foto_profil")
     private String fotoProfil;
 
+    @Column(name = "row_status")
+    private Integer rowStatus;
+
     public int getId() {
         return id;
     }
@@ -106,5 +109,13 @@ public class Pelamar {
 
     public void setFotoProfil(String fotoProfil) {
         this.fotoProfil = fotoProfil;
+    }
+
+    public Integer getRowStatus() {
+        return rowStatus;
+    }
+
+    public void setRowStatus(Integer rowStatus) {
+        this.rowStatus = rowStatus;
     }
 }

@@ -1,5 +1,6 @@
 package com.rps.adagawe.service;
 
+import com.rps.adagawe.model.Pendidikan;
 import com.rps.adagawe.model.Pengalaman;
 import com.rps.adagawe.repository.PengalamanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class PengalamanService {
     }
 
     public void save(Pengalaman pengalaman) {
+        pengalaman.setRowStatus(1);
         pengalamanRepository.save(pengalaman);
     }
 
@@ -31,19 +33,35 @@ public class PengalamanService {
 
         pengalaman.setId(id);
         pengalaman.setPelamar(p.getPelamar());
+        pengalaman.setRowStatus(1);
 
         pengalamanRepository.save(pengalaman);
 
         return pengalaman;
     }
 
-    public Pengalaman deletePengalaman(int id) {
+    public Pengalaman deletePengalaman(int id, Pengalaman pengalaman) {
         Pengalaman p = pengalamanRepository.findById(id).orElse(null);
 
-        if (p == null) return null;
+        assert p != null;
 
-        pengalamanRepository.delete(p);
+        pengalaman.setId(id);
+        pengalaman.setPelamar(p.getPelamar());
+        pengalaman.setJabatan(p.getJabatan());
+        pengalaman.setJenisPegawai(p.getJenisPegawai());
+        pengalaman.setNamaPerusahaan(p.getNamaPerusahaan());
+        pengalaman.setMulaiKerja(p.getMulaiKerja());
+        pengalaman.setTerakhirKerja(p.getTerakhirKerja());
+        pengalaman.setDeskripsi(p.getDeskripsi());
+        pengalaman.setFileAttachment(p.getFileAttachment());
+        pengalaman.setRowStatus(0);
+        pengalamanRepository.save(pengalaman);
 
-        return p;
+        return pengalaman;
+    }
+
+    public List<Pengalaman> findPengalamanByRowStatus() {
+
+        return (List<Pengalaman>) pengalamanRepository.findPengalamanByRowStatus();
     }
 }
