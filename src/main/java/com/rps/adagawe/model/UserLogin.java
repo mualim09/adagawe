@@ -27,6 +27,7 @@ public class UserLogin implements UserDetails {
 
     private String password;
 
+    @Column(name = "row_status")
     private int status;
 
     @Builder.Default
