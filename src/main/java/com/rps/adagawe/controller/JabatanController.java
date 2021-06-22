@@ -20,20 +20,20 @@ public class JabatanController {
     @Autowired
     JabatanService jabatanService;
 
-    @GetMapping("/jabatan")
+    @GetMapping("/admin/jabatan")
     public String index(Model model) {
             List<Jabatan> jabatans = jabatanService.findJabatanByRowStatus();
         model.addAttribute("jabatans", jabatans);
         return "/jabatan/index";
     }
 
-    @GetMapping("/jabatan/create")
+    @GetMapping("/admin/jabatan/create")
     public String create(Model model) {
         model.addAttribute("jabatan", new Jabatan());
         return "/jabatan/create";
     }
 
-    @PostMapping("/jabatan/create")
+    @PostMapping("/admin/jabatan/create")
     public String postCreate(RedirectAttributes redirectAttributes,
                              @ModelAttribute("jabatan") @Valid Jabatan jabatan, BindingResult result, Model model) {
 
@@ -48,7 +48,7 @@ public class JabatanController {
     }
 
 
-    @GetMapping("/jabatan/edit/{id}")
+    @GetMapping("/admin/jabatan/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Jabatan jabatan = jabatanService.getJabatanById(id);
 
@@ -56,7 +56,7 @@ public class JabatanController {
         return "/jabatan/edit";
     }
 
-    @PostMapping("/jabatan/edit/{id}")
+    @PostMapping("/admin/jabatan/edit/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                            @ModelAttribute("jabatan") @Valid Jabatan jabatan, BindingResult result, Model model) {
 
@@ -74,7 +74,7 @@ public class JabatanController {
         return "redirect:/jabatan";
     }
 
-    @PostMapping("/jabatan/delete/{id}")
+    @PostMapping("/admin/jabatan/delete/{id}")
     public String deleteJabatan(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                 @ModelAttribute("jabatan") @Valid Jabatan jabatan, BindingResult result, Model model) {
 

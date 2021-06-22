@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -17,15 +18,20 @@ public class MainController {
         model.addAttribute("userEmail", userEmail);
     }
 
+    @GetMapping("/")
+    public String pelamarIndex(Model model) {
+        return "main/index";
+    }
+
     @GetMapping("/admin")
     public String index(Model model) {
         redirectIndex(model);
         return "main/index-admin";
     }
 
-    @GetMapping("/perusahaan")
-    public String indexPerusahaan(Model model) {
-        redirectIndex(model);
-        return "main/index-perusahaan";
-    }
+//    @GetMapping("/perusahaan")
+//    public String indexPerusahaan(Model model) {
+//        redirectIndex(model);
+//        return "main/index-perusahaan";
+//    }
 }

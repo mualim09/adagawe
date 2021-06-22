@@ -1,0 +1,60 @@
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adagawe</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="/main/css/sf_pro.css">
+  <link rel="stylesheet" href="/main/css/apercu.css">
+  <link rel="stylesheet" href="/main/css/styles.css">
+  <script src="https://kit.fontawesome.com/1d480496f0.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<header>
+  <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+    <a class="navbar-brand font-weight-bold" href="#">Adagawe</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tentang Kami</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Cari Kerja</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav navbar-nav-right">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Masuk</a>
+        </li>
+        <a class="ml-4 btn btn-outline-primary my-2 my-sm-0 btn-rounded" type="submit">Daftar</a>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+<main layout:fragment="content">
+
+</main>
+
+<!-- Optional Section -->
+<th:block layout:fragment="scripts" />
+
+</body>
+</html>
