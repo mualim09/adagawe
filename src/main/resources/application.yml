@@ -4,7 +4,7 @@ server:
       tracking-modes: cookie
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost\\SQLEXPRESS:1433;database=Adagawe
+    url: jdbc:sqlserver://LAPTOP-QPJLLNKN\SQLEXPRESS;database=Adagawe
     username: sa
     password: polman
   jpa:
