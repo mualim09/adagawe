@@ -2,6 +2,7 @@ package com.rps.adagawe.service;
 
 import com.rps.adagawe.model.Pendidikan;
 import com.rps.adagawe.model.Pengalaman;
+import com.rps.adagawe.model.Sertifikat;
 import com.rps.adagawe.repository.PengalamanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,5 +64,9 @@ public class PengalamanService {
     public List<Pengalaman> findPengalamanByRowStatus() {
 
         return (List<Pengalaman>) pengalamanRepository.findPengalamanByRowStatus();
+    }
+
+    public List<Pengalaman> getPengalamanByIdUser(int idUser) {
+        return (List<Pengalaman>) pengalamanRepository.findPengalamanByIdUser(idUser);
     }
 }
