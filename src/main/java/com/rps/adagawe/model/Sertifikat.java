@@ -18,7 +18,6 @@ public class Sertifikat {
     @JoinColumn(name = "id_pelamar", nullable = false)
     private Pelamar pelamar;
 
-    @NotEmpty
     @Column(name = "no_sertifikat")
     private String noSertifikat;
 
