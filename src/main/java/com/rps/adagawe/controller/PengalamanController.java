@@ -1,6 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.FileUploadHelper;
+import com.rps.adagawe.model.AdagaweConstants;
 import com.rps.adagawe.model.JenisPegawai;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.Pengalaman;
@@ -35,6 +36,7 @@ public class PengalamanController {
     @Autowired
     JenisPegawaiService jenisPegawaiService;
 
+    private AdagaweConstants adats = new AdagaweConstants();
 
     @GetMapping("/pengalaman")
     public String index(Model model) {
@@ -51,6 +53,10 @@ public class PengalamanController {
         return "/pengalaman/create";
     }
 
+    /**
+     * Menambah Data Pengalaman
+     * @CheckedBy Rifqy
+     */
     @PostMapping("/pengalaman/create")
     public String postCreate(RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file,
                              @ModelAttribute("pengalaman") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
@@ -73,7 +79,7 @@ public class PengalamanController {
         pengalamanService.save(pengalaman);
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil ditambah.");
-        return "redirect:/pengalaman";
+        return adats.REDIRECT_TO_PROFILE;
     }
 
     @GetMapping("/pengalaman/edit/{id}")
@@ -86,6 +92,10 @@ public class PengalamanController {
         return "/pengalaman/edit";
     }
 
+    /**
+     * Mengubah Data Pengalaman
+     * @CheckedBy Rifqy
+     */
     @PostMapping("/pengalaman/edit/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                @ModelAttribute("pengalaman") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
@@ -110,11 +120,11 @@ public class PengalamanController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil diubah.");
-        return "redirect:/pengalaman";
+        return adats.REDIRECT_TO_PROFILE;
     }
 
     /**
-     * Ubah Status Pengalaman Menjadi 0 (Tidak Aktif)
+     * Mengubah Status Pengalaman Menjadi 0 (Tidak Aktif)
      * @CheckedBy Rifqy
      */
     @PostMapping("/pengalaman/delete/{id}")
@@ -123,6 +133,6 @@ public class PengalamanController {
         Pengalaman emp = pengalamanService.deletePengalaman(id, pengalaman);
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil dihapus.");
-        return "redirect:/pelamar/profile";
+        return adats.REDIRECT_TO_PROFILE;
     }
 }
