@@ -1,6 +1,8 @@
 package com.rps.adagawe.service;
 
+import com.rps.adagawe.model.Jabatan;
 import com.rps.adagawe.model.Pelamar;
+import com.rps.adagawe.model.UserLogin;
 import com.rps.adagawe.repository.PelamarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +53,13 @@ public class PelamarService {
         pelamarRepository.delete(p);
 
         return p;
+    }
+
+    public UserLogin findUserLoginByEmail(String email) {
+        return (UserLogin) pelamarRepository.getIdUserLoginByEmail(email);
+    }
+
+    public Pelamar findPelamarByUserLogin(int userId) {
+        return pelamarRepository.getPelamarByUserLogin(userId);
     }
 }

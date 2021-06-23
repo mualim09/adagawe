@@ -18,6 +18,9 @@ public class Sertifikat {
     @JoinColumn(name = "id_pelamar", nullable = false)
     private Pelamar pelamar;
 
+    @Column(name = "judul")
+    private String judul;
+
     @Column(name = "no_sertifikat")
     private String noSertifikat;
 
@@ -92,5 +95,13 @@ public class Sertifikat {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getJudul() {
+        return judul;
+    }
+
+    public void setJudul(String judul) {
+        this.judul = judul;
     }
 }

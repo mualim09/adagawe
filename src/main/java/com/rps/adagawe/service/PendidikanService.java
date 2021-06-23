@@ -2,6 +2,7 @@ package com.rps.adagawe.service;
 
 import com.rps.adagawe.model.JenisPegawai;
 import com.rps.adagawe.model.Pendidikan;
+import com.rps.adagawe.model.Pendidikan;
 import com.rps.adagawe.repository.PendidikanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +61,10 @@ public class PendidikanService {
     }
 
     public List<Pendidikan> findPendidikanByRowStatus() {
-
         return (List<Pendidikan>) pendidikanRepository.findPendidikanByRowStatus();
+    }
+
+    public List<Pendidikan> getPendidikanByIdUser(int idUser) {
+        return (List<Pendidikan>) pendidikanRepository.findPendidikanByIdUser(idUser);
     }
 }

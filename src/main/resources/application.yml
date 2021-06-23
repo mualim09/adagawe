@@ -3,15 +3,18 @@ server:
     session:
       tracking-modes: cookie
 spring:
+  # URL Database
   datasource:
     url: jdbc:sqlserver://LAPTOP-QPJLLNKN\SQLEXPRESS;database=Adagawe
     username: sa
     password: polman
+  # JPA
   jpa:
     show-sql: true
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  # E-mail
   mail:
     host: smtp.gmail.com
     port: 587

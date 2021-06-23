@@ -48,4 +48,8 @@ public class SertifikatService {
 
         return p;
     }
+
+    public List<Sertifikat> getSertifikatByIdUser(int idUser) {
+        return (List<Sertifikat>) sertifikatRepository.findSertifikatByIdUser(idUser);
+    }
 }
