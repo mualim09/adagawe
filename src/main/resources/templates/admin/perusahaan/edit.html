@@ -13,7 +13,7 @@
             <h5>Ubah Perusahaan</h5>
         </div>
         <div class="ibox-content">
-            <form th:action="@{/perusahaan/edit/{id}(id=${perusahaan.id})}" th:object="${perusahaan}" id="pengalamanForm" method="post" enctype="multipart/form-data">
+            <form th:action="@{/admin/perusahaan/edit/{id}(id=${perusahaan.id})}" th:object="${perusahaan}" id="pengalamanForm" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="namaPerusahaan">Nama Perusahaan</label>
                     <input type="text" th:field="*{namaPerusahaan}" id="namaPerusahaan" placeholder="Nama Perusahaan"

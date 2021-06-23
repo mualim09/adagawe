@@ -13,7 +13,7 @@
             <h5>Ubah Jenis Pegawai</h5>
         </div>
         <div class="ibox-content">
-            <form th:action="@{/jenispegawai/edit/{id}(id=${jenispegawai.id})}" th:object="${jenispegawai}" id="jenispegawaiForm" method="post" enctype="multipart/form-data">
+            <form th:action="@{/admin/jenispegawai/edit/{id}(id=${jenispegawai.id})}" th:object="${jenispegawai}" id="jenispegawaiForm" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="namajenisPegawai">Nama Jenis Pegawai</label>
                     <input type="text" th:field="*{namajenisPegawai}" id="namajenisPegawai" placeholder="Nama Jenis Pegawai"
