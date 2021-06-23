@@ -6,6 +6,8 @@ import com.rps.adagawe.model.Pengalaman;
 import com.rps.adagawe.model.Perusahaan;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -91,6 +93,10 @@ public class PerusahaanController {
 //    Perusahaan User
     @GetMapping("/perusahaan")
     public String userPerusahaanIndex(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+
+        model.addAttribute("userEmail", userEmail);
         return "/main/index-perusahaan";
     }
 }

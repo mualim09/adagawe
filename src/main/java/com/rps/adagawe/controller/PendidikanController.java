@@ -55,6 +55,7 @@ public class PendidikanController {
         }
 
         if (result.hasErrors()) {
+            model.addAttribute("jenjangs", jenjangService.getAll());
             return "/pendidikan/create";
         }
 

@@ -18,23 +18,25 @@ public class Sertifikat {
     @JoinColumn(name = "id_pelamar", nullable = false)
     private Pelamar pelamar;
 
+    @NotEmpty(message = "Judul wajib diisi.")
     @Column(name = "judul")
     private String judul;
 
+    @NotEmpty(message = "No. Sertifikat wajib diisi.")
     @Column(name = "no_sertifikat")
     private String noSertifikat;
 
-    @NotNull
+    @NotNull(message = "Tanggal mulai wajib diisi.")
     @Column(name = "berlaku_mulai")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date berlakuMulai;
 
-    @NotNull
+    @NotNull(message = "Tanggal akhir wajib diisi.")
     @Column(name = "berlaku_sampai")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date berlakuSampai;
 
-    @NotEmpty
+    @NotEmpty(message = "Lampiran wajib diisi.")
     @Column(name = "file_attachment")
     private String fileAttachment;
 
