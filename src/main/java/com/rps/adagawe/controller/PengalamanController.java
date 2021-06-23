@@ -1,8 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.FileUploadHelper;
-import com.rps.adagawe.model.AdagaweConstants;
-import com.rps.adagawe.model.JenisPegawai;
+import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.Pengalaman;
 import com.rps.adagawe.service.JabatanService;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -35,8 +33,6 @@ public class PengalamanController {
 
     @Autowired
     JenisPegawaiService jenisPegawaiService;
-
-    private AdagaweConstants adats = new AdagaweConstants();
 
     @GetMapping("/pengalaman")
     public String index(Model model) {
@@ -79,7 +75,7 @@ public class PengalamanController {
         pengalamanService.save(pengalaman);
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil ditambah.");
-        return adats.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PROFILE;
     }
 
     @GetMapping("/pengalaman/edit/{id}")
@@ -120,7 +116,7 @@ public class PengalamanController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil diubah.");
-        return adats.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PROFILE;
     }
 
     /**
@@ -133,6 +129,6 @@ public class PengalamanController {
         Pengalaman emp = pengalamanService.deletePengalaman(id, pengalaman);
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil dihapus.");
-        return adats.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PROFILE;
     }
 }

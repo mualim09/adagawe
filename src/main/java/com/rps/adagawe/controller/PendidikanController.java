@@ -1,6 +1,6 @@
 package com.rps.adagawe.controller;
 
-import com.rps.adagawe.helper.FileUploadHelper;
+import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -28,7 +27,6 @@ public class PendidikanController {
     @Autowired
     JenjangService jenjangService;
 
-    private AdagaweConstants adats = new AdagaweConstants();
 
     @GetMapping("/pendidikan")
     public String index(Model model) {
@@ -69,7 +67,7 @@ public class PendidikanController {
         pendidikanService.save(pendidikan);
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil ditambah.");
-        return adats.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PROFILE;
     }
 
 
@@ -105,7 +103,7 @@ public class PendidikanController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil diubah.");
-        return adats.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PROFILE;
     }
 
     /**
@@ -118,6 +116,6 @@ public class PendidikanController {
         Pendidikan emp = pendidikanService.deletePendidikan(id, pendidikan);
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil dihapus.");
-        return adats.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PROFILE;
     }
 }

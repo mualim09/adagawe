@@ -1,6 +1,6 @@
 package com.rps.adagawe.controller;
 
-import com.rps.adagawe.model.AdagaweConstants;
+import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.Sertifikat;
 import com.rps.adagawe.service.PelamarService;
@@ -23,8 +23,6 @@ public class SertifikatController {
 
     @Autowired
     PelamarService pelamarService;
-
-    private AdagaweConstants adats = new AdagaweConstants();
 
     @GetMapping("/sertifikat")
     public String index(Model model) {
@@ -59,7 +57,7 @@ public class SertifikatController {
         sertifikatService.save(sertifikat);
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil ditambah.");
-        return adats.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PROFILE;
     }
 
 
@@ -90,7 +88,7 @@ public class SertifikatController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil diubah.");
-        return adats.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PROFILE;
     }
 
     /**
@@ -102,6 +100,6 @@ public class SertifikatController {
         Sertifikat data = sertifikatService.deleteSertifikat(id);
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil dihapus.");
-        return adats.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PROFILE;
     }
 }
