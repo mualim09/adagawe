@@ -23,7 +23,7 @@ public class PerusahaanController {
     @Autowired
     PerusahaanService perusahaanService;
 
-    @GetMapping("/perusahaan")
+    @GetMapping("/admin/perusahaan")
     public String index(Model model) {
         List<Perusahaan> perusahaans = perusahaanService.findPerusahaanByRowStatus();
         model.addAttribute("perusahaans", perusahaans);
@@ -85,5 +85,12 @@ public class PerusahaanController {
 
         redirectAttributes.addFlashAttribute("message", "Perusahaan berhasil dihapus.");
         return "redirect:/perusahaan";
+    }
+
+
+//    Perusahaan User
+    @GetMapping("/perusahaan")
+    public String userPerusahaanIndex(Model model) {
+        return "/main/index-perusahaan";
     }
 }

@@ -5,7 +5,7 @@ server:
 spring:
   # URL Database
   datasource:
-    url: jdbc:sqlserver://LAPTOP-QPJLLNKN\SQLEXPRESS;database=Adagawe
+    url: jdbc:sqlserver://localhost\SQLEXPRESS;database=Adagawe
     username: sa
     password: polman
   # JPA
