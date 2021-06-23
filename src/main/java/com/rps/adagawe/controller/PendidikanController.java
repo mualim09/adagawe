@@ -1,11 +1,11 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.FileUploadHelper;
-import com.rps.adagawe.model.Pelamar;
-import com.rps.adagawe.model.Pendidikan;
-import com.rps.adagawe.model.Pengalaman;
+import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +28,8 @@ public class PendidikanController {
     @Autowired
     JenjangService jenjangService;
 
+    private AdagaweConstants adats = new AdagaweConstants();
+
     @GetMapping("/pendidikan")
     public String index(Model model) {
         List<Pendidikan> pendidikans = pendidikanService.findPendidikanByRowStatus();
@@ -42,6 +44,10 @@ public class PendidikanController {
         return "/pendidikan/create";
     }
 
+    /**
+     * Tambah Data Pendidikan
+     * @CheckedBy Rifqy
+     */
     @PostMapping("/pendidikan/create")
     public String postCreate(RedirectAttributes redirectAttributes,
                              @ModelAttribute("pendidikan") @Valid Pendidikan pendidikan, BindingResult result, Model model) {
@@ -53,13 +59,17 @@ public class PendidikanController {
             return "/pendidikan/create";
         }
 
-        Pelamar pelamar = pelamarService.getPelamarById(1);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserLogin ul = pelamarService.findUserLoginByEmail(authentication.getName());
+        int idPelamar = pelamarService.findPelamarByUserLogin(ul.getId()).getId();
+
+        Pelamar pelamar = pelamarService.getPelamarById(idPelamar);
         pendidikan.setPelamar(pelamar);
 
         pendidikanService.save(pendidikan);
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil ditambah.");
-        return "redirect:/pendidikan";
+        return adats.REDIRECT_TO_PROFILE;
     }
 
 
@@ -72,6 +82,10 @@ public class PendidikanController {
         return "/pendidikan/edit";
     }
 
+    /**
+     * Mengubah Data Pendidikan
+     * @CheckedBy Rifqy
+     */
     @PostMapping("/pendidikan/edit/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                            @ModelAttribute("pendidikan") @Valid Pendidikan pendidikan, BindingResult result, Model model) {
@@ -91,15 +105,19 @@ public class PendidikanController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil diubah.");
-        return "redirect:/pendidikan";
+        return adats.REDIRECT_TO_PROFILE;
     }
 
+    /**
+     * Mengubah Status Pengalaman Menjadi 0 (Tidak Aktif)
+     * @CheckedBy Rifqy
+     */
     @PostMapping("/pendidikan/delete/{id}")
     public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                    @ModelAttribute("pendidikan") @Valid Pendidikan pendidikan, BindingResult result, Model model) {
         Pendidikan emp = pendidikanService.deletePendidikan(id, pendidikan);
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil dihapus.");
-        return "redirect:/pendidikan";
+        return adats.REDIRECT_TO_PROFILE;
     }
 }

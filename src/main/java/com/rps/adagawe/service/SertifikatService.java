@@ -1,5 +1,6 @@
 package com.rps.adagawe.service;
 
+import com.rps.adagawe.model.Pendidikan;
 import com.rps.adagawe.model.Sertifikat;
 import com.rps.adagawe.model.Sertifikat;
 import com.rps.adagawe.repository.SertifikatRepository;
@@ -18,8 +19,9 @@ public class SertifikatService {
         return (List<Sertifikat>) sertifikatRepository.findAll();
     }
 
-    public void save(Sertifikat Sertifikat) {
-        sertifikatRepository.save(Sertifikat);
+    public void save(Sertifikat sertifikat) {
+        sertifikat.setStatus(1);
+        sertifikatRepository.save(sertifikat);
     }
 
     public Sertifikat getSertifikatById(Integer id) {
@@ -40,13 +42,12 @@ public class SertifikatService {
     }
 
     public Sertifikat deleteSertifikat(int id) {
-        Sertifikat p = sertifikatRepository.findById(id).orElse(null);
+        Sertifikat s = sertifikatRepository.findById(id).orElse(null);
+        s.setStatus(0);
 
-        if (p == null) return null;
+        sertifikatRepository.save(s);
 
-        sertifikatRepository.delete(p);
-
-        return p;
+        return s;
     }
 
     public List<Sertifikat> getSertifikatByIdUser(int idUser) {

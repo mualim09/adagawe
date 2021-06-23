@@ -14,6 +14,6 @@ public interface PengalamanRepository extends CrudRepository<Pengalaman, Integer
     @Query("from Pengalaman a WHERE a.rowStatus = 1")
     List<Pengalaman> findPengalamanByRowStatus();
 
-    @Query("from Pengalaman a WHERE a.pelamar.id = :idUser")
+    @Query("from Pengalaman a WHERE a.pelamar.id = :idUser and a.rowStatus = 1")
     List<Pengalaman> findPengalamanByIdUser(int idUser);
 }

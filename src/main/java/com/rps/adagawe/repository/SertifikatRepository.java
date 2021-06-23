@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface SertifikatRepository extends CrudRepository<Sertifikat, Integer> {
 
-    @Query("from Sertifikat a WHERE a.pelamar.id = :idUser")
+    @Query("from Sertifikat a WHERE a.pelamar.id = :idUser and a.status = 1")
     List<Sertifikat> findSertifikatByIdUser(int idUser);
 }

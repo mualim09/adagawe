@@ -26,6 +26,12 @@
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('noSertifikat')}" th:errors="*{noSertifikat}"></div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="judul">Judul Sertifikat</label>
+                                        <input type="text" th:field="*{judul}" id="judul" placeholder="Judul Sertifikat"
+                                               th:class="'form-control '+ ${#fields.hasErrors('judul') ? 'is-invalid' : ''}">
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('judul')}" th:errors="*{judul}"></div>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="berlakuMulai">Berlaku Mulai</label>
                                         <input type="date" th:field="*{berlakuMulai}" id="berlakuMulai" placeholder="Berlaku Mulai"
                                                th:class="'form-control '+ ${#fields.hasErrors('berlakuMulai') ? 'is-invalid' : ''}">
