@@ -1,6 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweConstants;
+import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.Sertifikat;
 import com.rps.adagawe.service.PelamarService;
@@ -51,9 +52,10 @@ public class SertifikatController {
             return "/sertifikat/create";
         }
 
-        Pelamar pelamar = pelamarService.getPelamarById(1);
+        int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
+        Pelamar pelamar = pelamarService.getPelamarById(idPelamar);
         sertifikat.setPelamar(pelamar);
-        sertifikat.setStatus(0);
+        sertifikat.setStatus(1);
         sertifikatService.save(sertifikat);
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil ditambah.");

@@ -1,6 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweConstants;
+import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +58,7 @@ public class PendidikanController {
             return "/pendidikan/create";
         }
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserLogin ul = pelamarService.findUserLoginByEmail(authentication.getName());
-        int idPelamar = pelamarService.findPelamarByUserLogin(ul.getId()).getId();
-
+        int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
         Pelamar pelamar = pelamarService.getPelamarById(idPelamar);
         pendidikan.setPelamar(pelamar);
 
