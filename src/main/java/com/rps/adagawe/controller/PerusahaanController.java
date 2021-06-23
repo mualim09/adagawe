@@ -27,21 +27,21 @@ public class PerusahaanController {
     public String index(Model model) {
         List<Perusahaan> perusahaans = perusahaanService.findPerusahaanByRowStatus();
         model.addAttribute("perusahaans", perusahaans);
-        return "/perusahaan/index";
+        return "/admin/perusahaan/index";
     }
 
-    @GetMapping("/perusahaan/create")
+    @GetMapping("/admin/perusahaan/create")
     public String create(Model model) {
         model.addAttribute("perusahaan", new Perusahaan());
-        return "/perusahaan/create";
+        return "/admin/perusahaan/create";
     }
 
-    @PostMapping("/perusahaan/create")
+    @PostMapping("/admin/perusahaan/create")
     public String postCreate(RedirectAttributes redirectAttributes,
                              @ModelAttribute("perusahaan") @Valid Perusahaan perusahaan, BindingResult result, Model model) {
         System.out.println(result.getAllErrors());
         if (result.hasErrors()) {
-            return "/perusahaan/create";
+            return "/admin/perusahaan/create";
         }
 
 //        String fileName = FileUploadHelper.Upload(file);
@@ -49,42 +49,42 @@ public class PerusahaanController {
         perusahaanService.save(perusahaan);
 
         redirectAttributes.addFlashAttribute("message", "Perusahaan berhasil ditambah.");
-        return "redirect:/perusahaan";
+        return "redirect:/admin/perusahaan";
     }
 
-    @GetMapping("/perusahaan/edit/{id}")
+    @GetMapping("/admin/perusahaan/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Perusahaan perusahaan = perusahaanService.getPerusahaanById(id);
 
         model.addAttribute("perusahaan", perusahaan);
-        return "/perusahaan/edit";
+        return "/admin/perusahaan/edit";
     }
 
-    @PostMapping("/perusahaan/edit/{id}")
+    @PostMapping("/admin/perusahaan/edit/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                            @ModelAttribute("perusahaan") @Valid Perusahaan perusahaan, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             perusahaan.setId(id);
-            return "/perusahaan/edit";
+            return "/admin/perusahaan/edit";
         }
 
         Perusahaan p = perusahaanService.updatePerusahaan(id, perusahaan);
         if (p == null) {
-            return "/perusahaan/edit";
+            return "/admin/perusahaan/edit";
         }
 
         redirectAttributes.addFlashAttribute("message", "Perusahaan berhasil diubah.");
-        return "redirect:/perusahaan";
+        return "redirect:/admin/perusahaan";
     }
 
-    @PostMapping("/perusahaan/delete/{id}")
+    @PostMapping("/admin/perusahaan/delete/{id}")
     public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                    @ModelAttribute("perusahaan") @Valid Perusahaan perusahaan, BindingResult result, Model model) {
         Perusahaan emp = perusahaanService.deletePerusahaan(id, perusahaan);
 
         redirectAttributes.addFlashAttribute("message", "Perusahaan berhasil dihapus.");
-        return "redirect:/perusahaan";
+        return "redirect:/admin/perusahaan";
     }
 
 

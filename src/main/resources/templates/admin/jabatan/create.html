@@ -13,7 +13,7 @@
             <h5>Tambah Jabatan</h5>
         </div>
         <div class="ibox-content">
-            <form th:action="@{/jabatan/create}" th:object="${jabatan}" id="jabatanForm" method="post" enctype="multipart/form-data">
+            <form th:action="@{/admin/jabatan/create}" th:object="${jabatan}" id="jabatanForm" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="namaJabatan">Nama Jabatan</label>
                     <input type="text" th:field="*{namaJabatan}" id="namaJabatan" placeholder="Nama Jabatan"
