@@ -103,7 +103,7 @@
                                                 class="img-company img-company-profile mr-3">
                                         <div class="media-body">
                                             <a href="#" class="experience-title" th:text="${pendidikan.namaUniversitas}"></a>
-                                            <label class="experience-subtitle" th:text="${pendidikan.namaJurusan} + ' ' + ${pendidikan.jenjang.deskripsi}"/>
+                                            <label class="experience-subtitle" th:utext="${pendidikan.namaJurusan} + ' &bull; ' + ${pendidikan.jenjang.deskripsi}"/>
                                             <p class="experience-date" th:text="${pendidikan.tahunMulai} + ' - ' + ${pendidikan.tahunSelesai}" />
                                             <a th:href="@{/pendidikan/edit/{id}(id=${pendidikan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                                             <form th:action="@{/pendidikan/delete/{id}(id=${pendidikan.id})}" method="post" class="d-inline">

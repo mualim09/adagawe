@@ -1,4 +1,5 @@
 <html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
@@ -37,12 +38,23 @@
                 </li>
             </ul>
 
-            <ul class="navbar-nav navbar-nav-right">
+            <ul class="navbar-nav navbar-nav-right" sec:authorize="!isAuthenticated()">
                 <li class="nav-item">
                     <a class="nav-link" href="/masuk">Masuk</a>
                 </li>
                 <li>
                     <a class="ml-4 btn btn-outline-primary my-2 my-sm-0 btn-rounded" href="/daftar">Daftar</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav navbar-nav-right" sec:authorize="isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="/pelamar/profile">Profile</a>
+                </li>
+                <li>
+                    <form action="/keluar" method="post" class="d-inline">
+                        <button type="submit" class="ml-4 btn btn-outline-primary my-2 my-sm-0 btn-rounded">Logout</button>
+                    </form>
                 </li>
             </ul>
         </div>

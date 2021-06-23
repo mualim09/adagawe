@@ -65,6 +65,8 @@ public class PengalamanController {
         }
 
         if (result.hasErrors()) {
+            model.addAttribute("jabatans", jabatanService.findJabatanByRowStatus());
+            model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
             return "/pengalaman/create";
         }
 
