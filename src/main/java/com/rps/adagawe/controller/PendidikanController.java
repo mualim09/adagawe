@@ -94,12 +94,16 @@ public class PendidikanController {
         return "redirect:/pendidikan";
     }
 
+    /**
+     * Ubah Status Pengalaman Menjadi 0 (Tidak Aktif)
+     * @CheckedBy Rifqy
+     */
     @PostMapping("/pendidikan/delete/{id}")
     public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                    @ModelAttribute("pendidikan") @Valid Pendidikan pendidikan, BindingResult result, Model model) {
         Pendidikan emp = pendidikanService.deletePendidikan(id, pendidikan);
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil dihapus.");
-        return "redirect:/pendidikan";
+        return "redirect:/pelamar/profile";
     }
 }

@@ -28,6 +28,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-7">
                 <div class="card-job p-0 overflow-hidden">
                     <div class="card-job-content">
@@ -40,6 +41,17 @@
                                 suscipit justo dolor, et condimentum ante pretium ac. Donec nec efficitur elit. Duis et
                                 malesuada justo.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div th:if="${message}">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <span th:text="${message}"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -65,6 +77,11 @@
                                             <a href="#" class="experience-title" th:text="${pengalaman.jabatan.namaJabatan}"></a>
                                             <a href="#" class="experience-subtitle" th:text="${pengalaman.namaPerusahaan}"> &#183; Full Time</a>
                                             <p class="experience-date" th:text="${#dates.format(pengalaman.mulaiKerja, 'MMM yyyy')} + ' - ' + ${#dates.format(pengalaman.terakhirKerja, 'MMM yyyy')}" />
+                                            <a th:href="@{/pengalaman/edit/{id}(id=${pengalaman.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                            <form th:action="@{/pengalaman/delete/{id}(id=${pengalaman.id})}" method="post" class="d-inline">
+                                                <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash"></i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -88,6 +105,11 @@
                                             <a href="#" class="experience-title" th:text="${pendidikan.namaUniversitas}"></a>
                                             <label class="experience-subtitle" th:text="${pendidikan.namaJurusan} + ' ' + ${pendidikan.jenjang.deskripsi}"/>
                                             <p class="experience-date" th:text="${pendidikan.tahunMulai} + ' - ' + ${pendidikan.tahunSelesai}" />
+                                            <a th:href="@{/pendidikan/edit/{id}(id=${pendidikan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                            <form th:action="@{/pendidikan/delete/{id}(id=${pendidikan.id})}" method="post" class="d-inline">
+                                                <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash"></i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -111,6 +133,11 @@
                                             <a href="#" class="experience-title" th:text="${sertifikat.judul}"></a>
                                             <label class="experience-subtitle" th:text="${sertifikat.noSertifikat}"/>
                                             <p class="experience-date" th:text="${#dates.format(sertifikat.berlakuMulai, 'MMM yyyy')} + ' - ' + ${#dates.format(sertifikat.berlakuSampai, 'MMM yyyy')}" />
+                                            <a th:href="@{/sertifikat/edit/{id}(id=${sertifikat.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                            <form th:action="@{/sertifikat/delete/{id}(id=${sertifikat.id})}" method="post" class="d-inline">
+                                                <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash"></i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

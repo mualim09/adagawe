@@ -85,11 +85,15 @@ public class SertifikatController {
         return "redirect:/sertifikat";
     }
 
+    /**
+     * Ubah Status Sertifikat Menjadi 0 (Tidak Aktif)
+     * @CheckedBy Rifqy
+     */
     @PostMapping("/sertifikat/delete/{id}")
     public String deleteSertifikat(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
         Sertifikat data = sertifikatService.deleteSertifikat(id);
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil dihapus.");
-        return "redirect:/sertifikat";
+        return "redirect:/pelamar/profile";
     }
 }

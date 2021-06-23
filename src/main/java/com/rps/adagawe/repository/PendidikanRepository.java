@@ -13,6 +13,6 @@ public interface PendidikanRepository extends CrudRepository<Pendidikan, Integer
     @Query("from Pendidikan a WHERE a.rowStatus = 1")
     List<Pendidikan> findPendidikanByRowStatus();
 
-    @Query("from Pendidikan a WHERE a.pelamar.id = :idUser")
+    @Query("from Pendidikan a WHERE a.pelamar.id = :idUser and a.rowStatus = 1")
     List<Pendidikan> findPendidikanByIdUser(int idUser);
 }
