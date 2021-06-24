@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class JenisPegawaiService {
+
     @Autowired
     JenisPegawaiRepository jenisPegawaiRepository;
 
@@ -52,7 +53,6 @@ public class JenisPegawaiService {
     }
 
     public List<JenisPegawai> findJenisPegawaiByRowStatus() {
-
         return (List<JenisPegawai>) jenisPegawaiRepository.findJenisPegawaiByRowStatus();
     }
 }

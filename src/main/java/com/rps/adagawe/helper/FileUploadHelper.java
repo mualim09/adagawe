@@ -11,6 +11,11 @@ import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Created on June, 2021
+ * @author RPS
+ */
+
 public class FileUploadHelper {
 
     private static final String UPLOAD_DIR = "src/main/resources/static/uploads/";

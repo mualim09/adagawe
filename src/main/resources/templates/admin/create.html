@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Admin</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>Tambah Admin</h5>
+        </div>
+        <div class="ibox-content">
+            <form th:action="@{/admin/create}" th:object="${userAdmin}" id="userAdminForm" method="post">
+                <div class="form-group">
+                    <label for="namaAdmin">Nama Admin</label>
+                    <input type="text" th:field="*{namaAdmin}" id="namaAdmin" placeholder="Nama Admin"
+                           th:class="'form-control '+ ${#fields.hasErrors('namaAdmin') ? 'is-invalid' : ''}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('namaAdmin')}" th:errors="*{namaAdmin}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="tanggalLahir">Tanggal Lahir</label>
+                    <input type="date" th:field="*{tanggalLahir}" id="tanggalLahir" placeholder="Tanggal Lahir"
+                           th:class="'form-control '+ ${#fields.hasErrors('tanggalLahir') ? 'is-invalid' : ''}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('tanggalLahir')}" th:errors="*{tanggalLahir}"></div>
+                </div>
+                <div class="form-group">
+                    <label>Jenis Kelamin</label>
+                    <div class="form-check">
+                        <input class="form-check-input" value="L" th:field="*{jenisKelamin}" type="radio" name="jenisKelaminL" id="jenisKelaminL">
+                        <label class="form-check-label" for="jenisKelaminL">
+                            Laki-Laki
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" value="P" th:field="*{jenisKelamin}" type="radio" name="jenisKelaminP" id="jenisKelaminP">
+                        <label class="form-check-label" for="jenisKelaminP">
+                            Perempuan
+                        </label>
+                    </div>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('jenisKelamin')}" th:errors="*{jenisKelamin}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="noTelepon">No. Telepon</label>
+                    <textarea th:field="*{noTelepon}" id="noTelepon" placeholder="Nomor Telepon"
+                              th:class="'form-control '+ ${#fields.hasErrors('noTelepon') ? 'is-invalid' : ''}"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('noTelepon')}" th:errors="*{noTelepon}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <textarea th:field="*{email}" id="email" placeholder="Email"
+                              th:class="'form-control '+ ${#fields.hasErrors('email') ? 'is-invalid' : ''}"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" th:field="*{password}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
