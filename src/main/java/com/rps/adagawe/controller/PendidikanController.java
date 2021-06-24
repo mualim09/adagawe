@@ -66,7 +66,7 @@ public class PendidikanController {
         pendidikanService.save(pendidikan);
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil ditambah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
 
@@ -102,7 +102,7 @@ public class PendidikanController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil diubah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
     /**
@@ -115,6 +115,6 @@ public class PendidikanController {
         Pendidikan emp = pendidikanService.deletePendidikan(id, pendidikan);
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil dihapus.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 }

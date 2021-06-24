@@ -7,5 +7,9 @@ package com.rps.adagawe.helper;
 
 public class AdagaweConstants {
 
-    public static final String REDIRECT_TO_PROFILE = "redirect:/pelamar/profile";
+    // REDIRECT URL
+    public static final String REDIRECT_TO_PELAMAR_PROFILE = "redirect:/pelamar/profile";
+
+    // URL
+    public static final String URL_PENDIDIKAN_EDIT = "/pendidikan/edit";
 }

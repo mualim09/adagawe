@@ -59,7 +59,7 @@ public class SertifikatController {
         sertifikatService.save(sertifikat);
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil ditambah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
 
@@ -90,7 +90,7 @@ public class SertifikatController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil diubah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
     /**
@@ -102,6 +102,6 @@ public class SertifikatController {
         Sertifikat data = sertifikatService.deleteSertifikat(id);
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil dihapus.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 }

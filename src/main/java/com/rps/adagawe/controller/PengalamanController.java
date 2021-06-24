@@ -77,7 +77,7 @@ public class PengalamanController {
         pengalamanService.save(pengalaman);
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil ditambah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
     @GetMapping("/pengalaman/edit/{id}")
@@ -118,7 +118,7 @@ public class PengalamanController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil diubah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
     /**
@@ -131,6 +131,6 @@ public class PengalamanController {
         Pengalaman emp = pengalamanService.deletePengalaman(id, pengalaman);
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil dihapus.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 }

@@ -1,9 +1,9 @@
 package com.rps.adagawe.controller;
 
+import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.UserAdmin;
 import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.AdminService;
-import com.rps.adagawe.service.SertifikatService;
 import com.rps.adagawe.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,13 +24,6 @@ public class AdminController {
 
     @Autowired
     UserService userService;
-
-    @GetMapping("/admin/view")
-    public String view(Model model) {
-        Admin admin = adminService.getAdminById(1);
-        model.addAttribute("admin", admin);
-        return "/admin/view";
-    }
 
     @GetMapping("/admin/create")
     public String getCreate(Model model) {
@@ -65,5 +58,37 @@ public class AdminController {
 
         //redirectAttributes.addFlashAttribute("message", "Jabatan berhasil ditambah.");
         return "redirect:/admin/view";
+    }
+
+    @GetMapping("/admin/profile")
+    public String getView(Model model) {
+        //Admin admin = adminService.getAdminById(AdagaweMethods.getIdAdminBySession(adminService));
+        Admin admin = adminService.getAdminById(1);
+        model.addAttribute("admin", admin);
+        return "/admin/profile/index";
+    }
+
+    @GetMapping("/admin/profile/security")
+    public String getSecurity(Model model) {
+
+        UserLogin userLogin = userService.getUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
+        model.addAttribute("userLogin", userLogin);
+        return "/admin/profile/security";
+    }
+
+    @PostMapping("/admin/profile/security")
+    public String postSecurity(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
+
+        //userService.updateUserLogin(userLogin);
+        return "/admin/profile/index";
+    }
+
+    @GetMapping("/admin/profile/edit")
+    public String getProfileEdit(Model model) {
+
+        //Admin admin = adminService.getAdminById(AdagaweMethods.getIdAdminBySession(adminService));
+        Admin admin = adminService.getAdminById(1);
+        model.addAttribute("admin", admin);
+        return "/admin/profile/edit";
     }
 }
