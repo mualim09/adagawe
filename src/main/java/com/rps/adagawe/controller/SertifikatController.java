@@ -29,7 +29,7 @@ public class SertifikatController {
     private final String PREFIX = "/pelamar/sertifikat";
     private final String PREFIX_CREATE = "/pelamar/sertifikat/create";
     private final String PREFIX_EDIT = "/pelamar/sertifikat/edit";
-    
+
     /**
      * Menambah Data Sertifikat
      * @CheckedBy Rifqy

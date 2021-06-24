@@ -28,9 +28,13 @@ public class MainController {
         return "main/index-admin";
     }
 
-//    @GetMapping("/perusahaan")
-//    public String indexPerusahaan(Model model) {
-//        redirectIndex(model);
-//        return "main/index-perusahaan";
-//    }
+    @GetMapping("/about")
+    public String aboutUs() {
+        return "/main/about";
+    }
+
+    @GetMapping("/lowongan")
+    public String lowonganKerja() {
+        return "/main/lowongan";
+    }
 }
