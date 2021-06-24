@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * Created on September, 2019
- *
- * @author kamer
+ * Created on June, 2021
+ * @author RPS
  */
+
 @Repository
 public interface UserRepository extends CrudRepository<UserLogin, Long> {
 
