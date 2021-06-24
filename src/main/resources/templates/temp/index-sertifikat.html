@@ -47,8 +47,8 @@
                             <td th:text="${sertifikat.berlakuSampai}"></td>
                             <td th:text="${sertifikat.fileAttachment}"></td>
                             <td>
-                                <a th:href="@{/sertifikat/edit/{id}(id=${sertifikat.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
-                                <form th:action="@{/sertifikat/delete/{id}(id=${sertifikat.id})}" method="post" class="d-inline">
+                                <a th:href="@{/templates/pelamar/sertifikat/edit/{id}(id=${sertifikat.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
+                                <form th:action="@{/templates/pelamar/sertifikat/delete/{id}(id=${sertifikat.id})}" method="post" class="d-inline">
                                     <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger">
                                         <i class="fa fa-trash"></i> Hapus</button>
                                 </form>

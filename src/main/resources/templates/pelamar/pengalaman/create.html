@@ -17,7 +17,7 @@
             <div class="card-job-content-title border-bottom mb-3">
               <h2>Tambah Pengalaman</h2>
             </div>
-            <form th:action="@{/pengalaman/create}" th:object="${pengalaman}" id="pengalamanForm" method="post" enctype="multipart/form-data">
+            <form th:action="@{/pelamar/pengalaman/create}" th:object="${pengalaman}" id="pengalamanForm" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="idJabatan">Jabatan</label>
                 <select id="idJabatan" th:field="*{jabatan.id}" th:class="'form-control '+ ${#fields.hasErrors('jabatan') ? 'is-invalid' : ''}">

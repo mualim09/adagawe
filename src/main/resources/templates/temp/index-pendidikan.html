@@ -49,8 +49,8 @@ D<!DOCTYPE html>
                             <td th:text="${pendidikan.tahunMulai}"></td>
                             <td th:text="${pendidikan.tahunSelesai}"></td>
                             <td>
-                                <a th:href="@{/pendidikan/edit/{id}(id=${pendidikan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
-                                <form th:action="@{/pendidikan/delete/{id}(id=${pendidikan.id})}" method="post" class="d-inline">
+                                <a th:href="@{/templates/pelamar/pendidikan/edit/{id}(id=${pendidikan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
+                                <form th:action="@{/templates/pelamar/pendidikan/delete/{id}(id=${pendidikan.id})}" method="post" class="d-inline">
                                     <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger">
                                         <i class="fa fa-trash"></i> Hapus</button>
                                 </form>

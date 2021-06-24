@@ -1,7 +1,8 @@
 package com.rps.adagawe.controller;
 
+import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.helper.AdagaweMethods;
-import com.rps.adagawe.model.pelamar;
+import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.UserLogin;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class PelamarController {
     @Autowired
     SertifikatService sertifikatService;
 
+    // Prefix URL
+    private final String PREFIX = "/pelamar/profile";
+    private final String PREFIX_SECURITY = "/pelamar/profile/security";
+    private final String PREFIX_EDIT = "/pelamar/profile/edit";
+
     @GetMapping("/pelamar/profile")
     public String getView(Model model) {
         int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
@@ -33,15 +39,15 @@ public class PelamarController {
         model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(idPelamar));
         model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(idPelamar));
 
-        return "pelamar/profile/index";
+        return "/pelamar/profile/index";
     }
 
     @GetMapping("/pelamar/profile/security")
     public String getSecurity(Model model) {
 
         //UserLogin userLogin = userService.getUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
-        model.addAttribute("userLogin", userLogin);
-        return "/pelamar/profile/security";
+        //model.addAttribute("userLogin", userLogin);
+        return PREFIX_SECURITY;
     }
 
     @PostMapping("/pelamar/profile/security")
