@@ -19,7 +19,8 @@ public class MainController {
 
     @GetMapping("/")
     public String indexPelamar(Model model) {
-        return "main/index";
+        //return "main/index";
+        return "/perusahaan/dashboard";
     }
 
     @GetMapping("/admin")

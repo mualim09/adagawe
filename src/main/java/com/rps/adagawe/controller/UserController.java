@@ -25,6 +25,11 @@ public class UserController {
 		return "main/login";
 	}
 
+	@GetMapping("/template")
+	public String sigsfdf(Model model) {
+		return "layout/baru";
+	}
+
 	@GetMapping("/daftar")
 	public String signUpPage(Model model, UserLogin user) {
 		model.addAttribute("user", new UserLogin());
