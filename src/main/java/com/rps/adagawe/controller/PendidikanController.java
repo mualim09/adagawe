@@ -19,6 +19,7 @@ import java.util.List;
 
 @Controller
 public class PendidikanController {
+
     @Autowired
     PendidikanService pendidikanService;
 
@@ -28,26 +29,24 @@ public class PendidikanController {
     @Autowired
     JenjangService jenjangService;
 
+    // Prefix URL
+    private final String PREFIX = "/pelamar/pendidikan";
+    private final String PREFIX_CREATE = "/pelamar/pendidikan/create";
+    private final String PREFIX_EDIT = "/pelamar/pendidikan/edit";
 
-    @GetMapping("/pendidikan")
-    public String index(Model model) {
-        List<Pendidikan> pendidikans = pendidikanService.findPendidikanByRowStatus();
-        model.addAttribute("pendidikans", pendidikans);
-        return "/pendidikan/index";
-    }
-
-    @GetMapping("/pendidikan/create")
+    @GetMapping(PREFIX_CREATE)
     public String create(Model model) {
         model.addAttribute("jenjangs", jenjangService.getAll());
         model.addAttribute("pendidikan", new Pendidikan());
-        return "/pendidikan/create";
+
+        return PREFIX_CREATE;
     }
 
     /**
      * Tambah Data Pendidikan
      * @CheckedBy Rifqy
      */
-    @PostMapping("/pendidikan/create")
+    @PostMapping(PREFIX_CREATE)
     public String postCreate(RedirectAttributes redirectAttributes,
                              @ModelAttribute("pendidikan") @Valid Pendidikan pendidikan, BindingResult result, Model model) {
         if (pendidikan.getJenjang().getId() == null) {
@@ -56,34 +55,33 @@ public class PendidikanController {
 
         if (result.hasErrors()) {
             model.addAttribute("jenjangs", jenjangService.getAll());
-            return "/pendidikan/create";
+            return PREFIX_CREATE;
         }
 
         int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
         Pelamar pelamar = pelamarService.getPelamarById(idPelamar);
         pendidikan.setPelamar(pelamar);
-
         pendidikanService.save(pendidikan);
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil ditambah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
 
-    @GetMapping("/pendidikan/edit/{id}")
+    @GetMapping(PREFIX_EDIT + "/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Pendidikan pendidikan = pendidikanService.getPendidikanById(id);
-
         model.addAttribute("jenjangs", jenjangService.getAll());
         model.addAttribute("pendidikan", pendidikan);
-        return "/pendidikan/edit";
+
+        return PREFIX_EDIT;
     }
 
     /**
      * Mengubah Data Pendidikan
      * @CheckedBy Rifqy
      */
-    @PostMapping("/pendidikan/edit/{id}")
+    @PostMapping(PREFIX_EDIT + "/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                            @ModelAttribute("pendidikan") @Valid Pendidikan pendidikan, BindingResult result, Model model) {
         if (pendidikan.getJenjang().getId() == null) {
@@ -93,28 +91,28 @@ public class PendidikanController {
         if (result.hasErrors()) {
             pendidikan.setId(id);
             model.addAttribute("jenjangs", jenjangService.getAll());
-            return "/pendidikan/edit";
+            return PREFIX_EDIT;
         }
 
         Pendidikan p = pendidikanService.updatePendidikan(id, pendidikan);
         if (p == null) {
-            return "/pendidikan/edit";
+            return PREFIX_EDIT;
         }
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil diubah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
     /**
      * Mengubah Status Pengalaman Menjadi 0 (Tidak Aktif)
      * @CheckedBy Rifqy
      */
-    @PostMapping("/pendidikan/delete/{id}")
+    @PostMapping(PREFIX + "/delete/{id}")
     public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                    @ModelAttribute("pendidikan") @Valid Pendidikan pendidikan, BindingResult result, Model model) {
         Pendidikan emp = pendidikanService.deletePendidikan(id, pendidikan);
 
         redirectAttributes.addFlashAttribute("message", "Pendidikan berhasil dihapus.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 }

@@ -6,6 +6,7 @@ import com.rps.adagawe.repository.UserRepository;
 import com.rps.adagawe.service.ConfirmationTokenService;
 import com.rps.adagawe.service.EmailSenderService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,6 +26,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
 
+    @Autowired
     private final UserRepository userRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -72,5 +74,9 @@ public class UserService implements UserDetailsService {
         user.setEnabled(true);
         userRepository.save(user);
         confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
+    }
+
+    public UserLogin getUserLoginByEmail(String email) {
+        return userRepository.findUserLoginByEmail(email);
     }
 }

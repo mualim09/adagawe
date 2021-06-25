@@ -35,10 +35,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/masuk/**",
 						"/css/**",
 						"/js/**",
+						"/assets/**",
 						"/img/**", "/font-awesome/**")
 				.permitAll()
 				.antMatchers("/admin/**").hasAuthority("Admin")
 				.antMatchers("/perusahaan/**").hasAuthority("Perusahaan")
+				.antMatchers("/pelamar/**").hasAuthority("Pelamar")
 				.anyRequest()
 				.authenticated()
 				.and()

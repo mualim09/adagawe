@@ -34,26 +34,25 @@ public class PengalamanController {
     @Autowired
     JenisPegawaiService jenisPegawaiService;
 
-    @GetMapping("/pengalaman")
-    public String index(Model model) {
-        List<Pengalaman> pengalamans = pengalamanService.findPengalamanByRowStatus();
-        model.addAttribute("pengalamans", pengalamans);
-        return "/pengalaman/index";
-    }
+    // Prefix URL
+    private final String PREFIX = "/pelamar/pengalaman";
+    private final String PREFIX_CREATE = "/pelamar/pengalaman/create";
+    private final String PREFIX_EDIT = "/pelamar/pengalaman/edit";
 
-    @GetMapping("/pengalaman/create")
+    @GetMapping(PREFIX_CREATE)
     public String create(Model model) {
         model.addAttribute("jabatans", jabatanService.findJabatanByRowStatus());
         model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
         model.addAttribute("pengalaman", new Pengalaman());
-        return "/pengalaman/create";
+
+        return PREFIX_CREATE;
     }
 
     /**
      * Menambah Data Pengalaman
      * @CheckedBy Rifqy
      */
-    @PostMapping("/pengalaman/create")
+    @PostMapping(PREFIX_CREATE)
     public String postCreate(RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file,
                              @ModelAttribute("pengalaman") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
         if (pengalaman.getJabatan().getId() == null) {
@@ -67,7 +66,7 @@ public class PengalamanController {
         if (result.hasErrors()) {
             model.addAttribute("jabatans", jabatanService.findJabatanByRowStatus());
             model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
-            return "/pengalaman/create";
+            return PREFIX_CREATE;
         }
 
         String fileName = FileUploadHelper.Upload(file);
@@ -77,24 +76,24 @@ public class PengalamanController {
         pengalamanService.save(pengalaman);
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil ditambah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
-    @GetMapping("/pengalaman/edit/{id}")
+    @GetMapping(PREFIX_EDIT + "/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Pengalaman pengalaman = pengalamanService.getPengalamanById(id);
-
         model.addAttribute("jabatans", jabatanService.findJabatanByRowStatus());
         model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
         model.addAttribute("pengalaman", pengalaman);
-        return "/pengalaman/edit";
+
+        return PREFIX_EDIT;
     }
 
     /**
      * Mengubah Data Pengalaman
      * @CheckedBy Rifqy
      */
-    @PostMapping("/pengalaman/edit/{id}")
+    @PostMapping(PREFIX_EDIT + "/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                @ModelAttribute("pengalaman") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
         if (pengalaman.getJabatan().getId() == null) {
@@ -109,28 +108,28 @@ public class PengalamanController {
             pengalaman.setId(id);
             model.addAttribute("jabatans", jabatanService.getAll());
             model.addAttribute("jenisPegawais", jenisPegawaiService.getAll());
-            return "/pengalaman/edit";
+            return PREFIX_EDIT;
         }
 
         Pengalaman p = pengalamanService.updatePengalaman(id, pengalaman);
         if (p == null) {
-            return "/pengalaman/edit";
+            return PREFIX_EDIT;
         }
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil diubah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
     /**
      * Mengubah Status Pengalaman Menjadi 0 (Tidak Aktif)
      * @CheckedBy Rifqy
      */
-    @PostMapping("/pengalaman/delete/{id}")
+    @PostMapping(PREFIX + "/delete/{id}")
     public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                    @ModelAttribute("jenispegawai") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
         Pengalaman emp = pengalamanService.deletePengalaman(id, pengalaman);
 
         redirectAttributes.addFlashAttribute("message", "Pengalaman berhasil dihapus.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 }

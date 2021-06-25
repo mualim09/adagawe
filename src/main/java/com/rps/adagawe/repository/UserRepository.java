@@ -1,10 +1,12 @@
 package com.rps.adagawe.repository;
 
+import com.rps.adagawe.model.Sertifikat;
 import com.rps.adagawe.model.UserLogin;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -16,4 +18,7 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<UserLogin, Long> {
 
 	Optional<UserLogin> findByEmail(String email);
+
+	@Query("from UserLogin a WHERE a.email = :email")
+	UserLogin findUserLoginByEmail(String email);
 }

@@ -1,18 +1,19 @@
 package com.rps.adagawe.controller;
 
+import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.model.Pelamar;
-import com.rps.adagawe.model.Sertifikat;
 import com.rps.adagawe.model.UserLogin;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
 public class PelamarController {
@@ -26,19 +27,42 @@ public class PelamarController {
     @Autowired
     SertifikatService sertifikatService;
 
-    @GetMapping("/pelamar/profile")
-    public String viewPelamar(Model model) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserLogin ul = pelamarService.findUserLoginByEmail(authentication.getName());
-//        int idPelamar = pelamarService.findPelamarByUserLogin(ul.getId()).getId();
-//        model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(1));
-//        model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(1));
-//        model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(1));
+    // Prefix URL
+    private final String PREFIX = "/pelamar/profile";
+    private final String PREFIX_SECURITY = "/pelamar/profile/security";
+    private final String PREFIX_EDIT = "/pelamar/profile/edit";
 
+    @GetMapping("/pelamar/profile")
+    public String getView(Model model) {
         int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
         model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(idPelamar));
         model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(idPelamar));
         model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(idPelamar));
-        return "pelamar/profile";
+
+        return "/pelamar/profile/index";
+    }
+
+    @GetMapping("/pelamar/profile/security")
+    public String getSecurity(Model model) {
+
+        //UserLogin userLogin = userService.getUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
+        //model.addAttribute("userLogin", userLogin);
+        return PREFIX_SECURITY;
+    }
+
+    @PostMapping("/pelamar/profile/security")
+    public String postSecurity(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
+
+        //userService.updateUserLogin(userLogin);
+        return "/pelamar/profile/index";
+    }
+
+    @GetMapping("/pelamar/profile/edit")
+    public String getProfileEdit(Model model) {
+
+        //pelamar pelamar = pelamarService.getpelamarById(AdagaweMethods.getIdpelamarBySession(pelamarService));
+        //pelamar pelamar = pelamarService.getpelamarById(1);
+        //model.addAttribute("pelamar", pelamar);
+        return "/pelamar/profile/edit";
     }
 }

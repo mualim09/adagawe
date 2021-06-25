@@ -25,31 +25,27 @@ public class SertifikatController {
     @Autowired
     PelamarService pelamarService;
 
-    @GetMapping("/sertifikat")
-    public String index(Model model) {
-        List<Sertifikat> sertifikats = sertifikatService.getAll();
-        model.addAttribute("sertifikats", sertifikats);
-        return "/sertifikat/index";
-    }
-
-    @GetMapping("/sertifikat/create")
-    public String create(Model model) {
-//        model.addAttribute("jabatans", jabatanService.getAll());
-//        model.addAttribute("jenisPegawais", jenisPegawaiService.getAll());
-        model.addAttribute("sertifikat", new Sertifikat());
-        return "/sertifikat/create";
-    }
+    // Prefix URL
+    private final String PREFIX = "/pelamar/sertifikat";
+    private final String PREFIX_CREATE = "/pelamar/sertifikat/create";
+    private final String PREFIX_EDIT = "/pelamar/sertifikat/edit";
 
     /**
      * Menambah Data Sertifikat
      * @CheckedBy Rifqy
      */
-    @PostMapping("/sertifikat/create")
+    @GetMapping(PREFIX_CREATE)
+    public String create(Model model) {
+        model.addAttribute("sertifikat", new Sertifikat());
+        return PREFIX_CREATE;
+    }
+
+    @PostMapping(PREFIX_CREATE)
     public String postCreate(RedirectAttributes redirectAttributes, @ModelAttribute("sertifikat") @Valid Sertifikat sertifikat,
                              BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            return "/sertifikat/create";
+            return PREFIX_CREATE;
         }
 
         int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
@@ -59,49 +55,48 @@ public class SertifikatController {
         sertifikatService.save(sertifikat);
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil ditambah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
-    }
-
-
-    @GetMapping("/sertifikat/edit/{id}")
-    public String edit(@PathVariable("id") Integer id, Model model) {
-        Sertifikat sertifikat = sertifikatService.getSertifikatById(id);
-        model.addAttribute("sertifikat", sertifikat);
-        return "/sertifikat/edit";
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
     /**
      * Mengubah Data Sertifikat
      * @CheckedBy Rifqy
      */
-    @PostMapping("/sertifikat/edit/{id}")
+    @GetMapping(PREFIX_EDIT + "/{id}")
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        Sertifikat sertifikat = sertifikatService.getSertifikatById(id);
+        model.addAttribute("sertifikat", sertifikat);
+        return PREFIX_EDIT;
+    }
+
+    @PostMapping(PREFIX_EDIT + "/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                            @ModelAttribute("sertifikat") @Valid Sertifikat sertifikat, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             sertifikat.setId(id);
-            return "/sertifikat/edit";
+            return PREFIX_EDIT;
         }
 
         sertifikat.setStatus(1);
         Sertifikat p = sertifikatService.updateSertifikat(id, sertifikat);
         if (p == null) {
-            return "/sertifikat/edit";
+            return PREFIX_EDIT;
         }
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil diubah.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
     /**
      * Ubah Status Sertifikat Menjadi 0 (Tidak Aktif)
      * @CheckedBy Rifqy
      */
-    @PostMapping("/sertifikat/delete/{id}")
+    @PostMapping(PREFIX + "/delete/{id}")
     public String deleteSertifikat(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
         Sertifikat data = sertifikatService.deleteSertifikat(id);
 
         redirectAttributes.addFlashAttribute("message", "Sertifikat berhasil dihapus.");
-        return AdagaweConstants.REDIRECT_TO_PROFILE;
+        return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 }

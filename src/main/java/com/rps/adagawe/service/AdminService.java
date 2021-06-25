@@ -1,6 +1,7 @@
 package com.rps.adagawe.service;
 
 import com.rps.adagawe.model.Admin;
+import com.rps.adagawe.model.UserLogin;
 import com.rps.adagawe.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,4 +26,11 @@ public class AdminService {
         return adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Admin Id:" + id));
     }
+
+    public UserLogin findUserLoginByEmail(String email) {
+        return adminRepository.getAdminByUserLogin(email);
+    }
+
+
+
 }
