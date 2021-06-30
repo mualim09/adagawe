@@ -22,9 +22,21 @@ public class Lowongan {
     @Column(name = "judul_lowongan")
     private String judulLowongan;
 
+    @ManyToOne
+    @JoinColumn(name = "id_jenis_pegawai", nullable = false)
+    private JenisPegawai jenisPegawai;
+
     @NotEmpty(message = "Keterangan wajib diisi.")
     @Column(name = "keterangan")
     private String keterangan;
+
+    @NotEmpty(message = "Pengalaman Kerja wajib diisi.")
+    @Column(name = "pengalaman_kerja")
+    private String pengalamanKerja;
+
+    @NotEmpty(message = "Keahlian wajib diisi.")
+    @Column(name = "keahlian")
+    private String keahlian;
 
     @NotEmpty(message = "Gaji Minimal wajib diisi.")
     @Column(name = "gaji_minimal")
@@ -36,6 +48,9 @@ public class Lowongan {
 
     @Column(name = "sembunyikan_gaji")
     private int sembunyikanGaji;
+
+    @Column(name = "row_status")
+    private int status;
 
     @Column(name = "created_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -115,5 +130,37 @@ public class Lowongan {
 
     public void setLastModified(Date lastModified) {
         this.lastModified = lastModified;
+    }
+
+    public JenisPegawai getJenisPegawai() {
+        return jenisPegawai;
+    }
+
+    public void setJenisPegawai(JenisPegawai jenisPegawai) {
+        this.jenisPegawai = jenisPegawai;
+    }
+
+    public String getPengalamanKerja() {
+        return pengalamanKerja;
+    }
+
+    public void setPengalamanKerja(String pengalamanKerja) {
+        this.pengalamanKerja = pengalamanKerja;
+    }
+
+    public String getKeahlian() {
+        return keahlian;
+    }
+
+    public void setKeahlian(String keahlian) {
+        this.keahlian = keahlian;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
