@@ -6,32 +6,37 @@
     <meta charset="UTF-8">
     <title>Tambah Jabatan</title>
 </head>
+
 <body>
 <div layout:fragment="content">
-    <div class="ibox ">
-        <div class="ibox-title">
-            <h5>Tambah Jabatan</h5>
-        </div>
-        <div class="ibox-content">
-            <form th:action="@{/admin/jabatan/create}" th:object="${jabatan}" id="jabatanForm" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="namaJabatan">Nama Jabatan</label>
-                    <input type="text" th:field="*{namaJabatan}" id="namaJabatan" placeholder="Nama Jabatan"
-                           th:class="'form-control '+ ${#fields.hasErrors('namaJabatan') ? 'is-invalid' : ''}">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('namaJabatan')}" th:errors="*{namaJabatan}"></div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">Tambah Jabatan</h4>
                 </div>
-                <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
-                    <textarea th:field="*{deskripsi}" id="deskripsi" placeholder="Deskripsi"
-                              th:class="'form-control '+ ${#fields.hasErrors('deskripsi') ? 'is-invalid' : ''}"></textarea>
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('deskripsi')}" th:errors="*{deskripsi}"></div>
-                </div>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/admin/jabatan/create}" th:object="${jabatan}" id="jabatanForm" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="namaJabatan">Nama Jabatan</label>
+                        <input type="text" th:field="*{namaJabatan}" id="namaJabatan" placeholder="Nama Jabatan"
+                               th:class="'form-control '+ ${#fields.hasErrors('namaJabatan') ? 'is-invalid' : ''}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('namaJabatan')}" th:errors="*{namaJabatan}"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="deskripsi">Deskripsi</label>
+                        <textarea th:field="*{deskripsi}" id="deskripsi" placeholder="Deskripsi"
+                                  th:class="'form-control '+ ${#fields.hasErrors('deskripsi') ? 'is-invalid' : ''}"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('deskripsi')}" th:errors="*{deskripsi}"></div>
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </form>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 </body>
+
 </html>

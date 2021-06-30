@@ -25,7 +25,7 @@ public class SertifikatController {
     @Autowired
     PelamarService pelamarService;
 
-    // Prefix URL
+    // Prefix Page URL
     private final String PREFIX = "/pelamar/sertifikat";
     private final String PREFIX_CREATE = "/pelamar/sertifikat/create";
     private final String PREFIX_EDIT = "/pelamar/sertifikat/edit";
@@ -34,13 +34,13 @@ public class SertifikatController {
      * Menambah Data Sertifikat
      * @CheckedBy Rifqy
      */
-    @GetMapping(PREFIX_CREATE)
+    @GetMapping("/pelamar/sertifikat/create")
     public String create(Model model) {
         model.addAttribute("sertifikat", new Sertifikat());
         return PREFIX_CREATE;
     }
 
-    @PostMapping(PREFIX_CREATE)
+    @PostMapping("/pelamar/sertifikat/create")
     public String postCreate(RedirectAttributes redirectAttributes, @ModelAttribute("sertifikat") @Valid Sertifikat sertifikat,
                              BindingResult result, Model model) {
 
@@ -62,14 +62,14 @@ public class SertifikatController {
      * Mengubah Data Sertifikat
      * @CheckedBy Rifqy
      */
-    @GetMapping(PREFIX_EDIT + "/{id}")
+    @GetMapping("/pelamar/sertifikat/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Sertifikat sertifikat = sertifikatService.getSertifikatById(id);
         model.addAttribute("sertifikat", sertifikat);
         return PREFIX_EDIT;
     }
 
-    @PostMapping(PREFIX_EDIT + "/{id}")
+    @PostMapping("/pelamar/sertifikat/edit/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                            @ModelAttribute("sertifikat") @Valid Sertifikat sertifikat, BindingResult result, Model model) {
 
@@ -92,7 +92,7 @@ public class SertifikatController {
      * Ubah Status Sertifikat Menjadi 0 (Tidak Aktif)
      * @CheckedBy Rifqy
      */
-    @PostMapping(PREFIX + "/delete/{id}")
+    @PostMapping("/pelamar/sertifikat/delete/{id}")
     public String deleteSertifikat(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
         Sertifikat data = sertifikatService.deleteSertifikat(id);
 

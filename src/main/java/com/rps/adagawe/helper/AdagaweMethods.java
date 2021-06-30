@@ -6,6 +6,8 @@ import com.rps.adagawe.service.PelamarService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created on June, 2021
  * @author RPS
@@ -33,5 +35,19 @@ public class AdagaweMethods {
         int idAdmin= service.getAdminById(ul.getId()).getId();
 
         return idAdmin;
+    }
+
+    public static String getMainUrl(HttpServletRequest request) {
+
+        /**
+         * Url = /pelamar/profile
+         * [0] = NULL
+         * [1] = pelamar
+         * [2] = profile
+         */
+
+        String url = request.getRequestURI();
+        String[] words = url.split("[/]");
+        return words[2];
     }
 }

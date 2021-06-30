@@ -29,12 +29,12 @@ public class PendidikanController {
     @Autowired
     JenjangService jenjangService;
 
-    // Prefix URL
+    // Prefix Page URL
     private final String PREFIX = "/pelamar/pendidikan";
     private final String PREFIX_CREATE = "/pelamar/pendidikan/create";
     private final String PREFIX_EDIT = "/pelamar/pendidikan/edit";
 
-    @GetMapping(PREFIX_CREATE)
+    @GetMapping("/pelamar/pendidikan/create")
     public String create(Model model) {
         model.addAttribute("jenjangs", jenjangService.getAll());
         model.addAttribute("pendidikan", new Pendidikan());
@@ -46,7 +46,7 @@ public class PendidikanController {
      * Tambah Data Pendidikan
      * @CheckedBy Rifqy
      */
-    @PostMapping(PREFIX_CREATE)
+    @PostMapping("/pelamar/pendidikan/create")
     public String postCreate(RedirectAttributes redirectAttributes,
                              @ModelAttribute("pendidikan") @Valid Pendidikan pendidikan, BindingResult result, Model model) {
         if (pendidikan.getJenjang().getId() == null) {
@@ -68,7 +68,7 @@ public class PendidikanController {
     }
 
 
-    @GetMapping(PREFIX_EDIT + "/{id}")
+    @GetMapping("/pelamar/pendidikan/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Pendidikan pendidikan = pendidikanService.getPendidikanById(id);
         model.addAttribute("jenjangs", jenjangService.getAll());
@@ -81,7 +81,7 @@ public class PendidikanController {
      * Mengubah Data Pendidikan
      * @CheckedBy Rifqy
      */
-    @PostMapping(PREFIX_EDIT + "/{id}")
+    @PostMapping("/pelamar/pendidikan/edit/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                            @ModelAttribute("pendidikan") @Valid Pendidikan pendidikan, BindingResult result, Model model) {
         if (pendidikan.getJenjang().getId() == null) {
@@ -107,7 +107,7 @@ public class PendidikanController {
      * Mengubah Status Pengalaman Menjadi 0 (Tidak Aktif)
      * @CheckedBy Rifqy
      */
-    @PostMapping(PREFIX + "/delete/{id}")
+    @PostMapping("/pelamar/pendidikan/delete/{id}")
     public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                    @ModelAttribute("pendidikan") @Valid Pendidikan pendidikan, BindingResult result, Model model) {
         Pendidikan emp = pendidikanService.deletePendidikan(id, pendidikan);

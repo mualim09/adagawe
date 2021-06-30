@@ -27,7 +27,7 @@ public class UserController {
 
 	@GetMapping("/template")
 	public String sigsfdf(Model model) {
-		return "layout/baru";
+		return "perusahaan";
 	}
 
 	@GetMapping("/daftar")
