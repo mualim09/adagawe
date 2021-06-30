@@ -24,8 +24,9 @@ public class MainController {
 
     @GetMapping("/")
     public String indexPelamar(Model model) {
+        model.addAttribute("lokers", lowonganRepository.findAll());
+
         return "main/index";
-        //return "/perusahaan/dashboard";
     }
 
     @GetMapping("/admin")
@@ -36,9 +37,9 @@ public class MainController {
 
     @GetMapping("/lowongan/{id}")
     public String lowongan(@PathVariable("id") int id, Model model) {
-        
+        model.addAttribute("loker", lowonganRepository.findById(id));
 
-        return "main/index-admin";
+        return "main/detail";
     }
 
     @GetMapping("/about")
@@ -47,7 +48,9 @@ public class MainController {
     }
 
     @GetMapping("/lowongan")
-    public String lowonganKerja() {
+    public String lowonganKerja(Model model) {
+        model.addAttribute("lokers", lowonganRepository.findAll());
+
         return "/main/lowongan";
     }
 }
