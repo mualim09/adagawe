@@ -6,26 +6,31 @@
     <meta charset="UTF-8">
     <title>Tambah Jenis Pegawai</title>
 </head>
+
 <body>
 <div layout:fragment="content">
-    <div class="ibox ">
-        <div class="ibox-title">
-            <h5>Tambah Jenis Pegawai</h5>
-        </div>
-        <div class="ibox-content">
-            <form th:action="@{/admin/jenispegawai/create}" th:object="${jenispegawai}" id="jenispegawaiForm" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="namajenisPegawai">Nama Jenis Pegawai</label>
-                    <input type="text" th:field="*{namajenisPegawai}" id="namajenisPegawai" placeholder="Nama Jenis Pegawai"
-                           th:class="'form-control '+ ${#fields.hasErrors('namajenisPegawai') ? 'is-invalid' : ''}">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('namajenisPegawai')}" th:errors="*{namajenisPegawai}"></div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">Tambah Jenis Pegawai</h4>
                 </div>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/admin/jenispegawai/create}" th:object="${jenispegawai}" id="jenispegawaiForm" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="namajenisPegawai">Nama Jenis Pegawai</label>
+                        <input type="text" th:field="*{namajenisPegawai}" id="namajenisPegawai" placeholder="Nama Jenis Pegawai"
+                               th:class="'form-control '+ ${#fields.hasErrors('namajenisPegawai') ? 'is-invalid' : ''}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('namajenisPegawai')}" th:errors="*{namajenisPegawai}"></div>
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </form>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 </body>
+
 </html>

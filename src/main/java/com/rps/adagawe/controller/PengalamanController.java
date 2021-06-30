@@ -34,12 +34,12 @@ public class PengalamanController {
     @Autowired
     JenisPegawaiService jenisPegawaiService;
 
-    // Prefix URL
+    // Prefix Page URL
     private final String PREFIX = "/pelamar/pengalaman";
     private final String PREFIX_CREATE = "/pelamar/pengalaman/create";
     private final String PREFIX_EDIT = "/pelamar/pengalaman/edit";
 
-    @GetMapping(PREFIX_CREATE)
+    @GetMapping("/pelamar/pengalaman/create")
     public String create(Model model) {
         model.addAttribute("jabatans", jabatanService.findJabatanByRowStatus());
         model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
@@ -52,7 +52,7 @@ public class PengalamanController {
      * Menambah Data Pengalaman
      * @CheckedBy Rifqy
      */
-    @PostMapping(PREFIX_CREATE)
+    @PostMapping("/pelamar/pengalaman/create")
     public String postCreate(RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file,
                              @ModelAttribute("pengalaman") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
         if (pengalaman.getJabatan().getId() == null) {
@@ -79,7 +79,7 @@ public class PengalamanController {
         return AdagaweConstants.REDIRECT_TO_PELAMAR_PROFILE;
     }
 
-    @GetMapping(PREFIX_EDIT + "/{id}")
+    @GetMapping("/pelamar/pengalaman/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Pengalaman pengalaman = pengalamanService.getPengalamanById(id);
         model.addAttribute("jabatans", jabatanService.findJabatanByRowStatus());
@@ -93,7 +93,7 @@ public class PengalamanController {
      * Mengubah Data Pengalaman
      * @CheckedBy Rifqy
      */
-    @PostMapping(PREFIX_EDIT + "/{id}")
+    @PostMapping("/pelamar/pengalaman/edit/{id}")
     public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                @ModelAttribute("pengalaman") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
         if (pengalaman.getJabatan().getId() == null) {
@@ -124,7 +124,7 @@ public class PengalamanController {
      * Mengubah Status Pengalaman Menjadi 0 (Tidak Aktif)
      * @CheckedBy Rifqy
      */
-    @PostMapping(PREFIX + "/delete/{id}")
+    @PostMapping("/pelamar/pengalaman/delete/{id}")
     public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
                                    @ModelAttribute("jenispegawai") @Valid Pengalaman pengalaman, BindingResult result, Model model) {
         Pengalaman emp = pengalamanService.deletePengalaman(id, pengalaman);

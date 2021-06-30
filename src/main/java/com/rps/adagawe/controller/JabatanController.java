@@ -1,5 +1,6 @@
 package com.rps.adagawe.controller;
 
+import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.model.Jabatan;
 import com.rps.adagawe.service.JabatanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -21,15 +23,19 @@ public class JabatanController {
     JabatanService jabatanService;
 
     @GetMapping("/admin/jabatan")
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest request) {
             List<Jabatan> jabatans = jabatanService.findJabatanByRowStatus();
         model.addAttribute("jabatans", jabatans);
+
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
         return "/admin/jabatan/index";
     }
 
     @GetMapping("/admin/jabatan/create")
-    public String create(Model model) {
+    public String create(Model model, HttpServletRequest request) {
         model.addAttribute("jabatan", new Jabatan());
+
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
         return "/admin/jabatan/create";
     }
 
@@ -49,10 +55,12 @@ public class JabatanController {
 
 
     @GetMapping("/admin/jabatan/edit/{id}")
-    public String edit(@PathVariable("id") Integer id, Model model) {
+    public String edit(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
         Jabatan jabatan = jabatanService.getJabatanById(id);
 
         model.addAttribute("jabatan", jabatan);
+
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
         return "/admin/jabatan/edit";
     }
 

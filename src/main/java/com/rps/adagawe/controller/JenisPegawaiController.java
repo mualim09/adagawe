@@ -1,5 +1,6 @@
 package com.rps.adagawe.controller;
 
+import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.model.JenisPegawai;
 import com.rps.adagawe.service.JabatanService;
 import com.rps.adagawe.service.JenisPegawaiService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -22,15 +24,19 @@ public class JenisPegawaiController {
     JenisPegawaiService jenisPegawaiService;
 
     @GetMapping("/admin/jenispegawai")
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest request) {
         List<JenisPegawai> jenisPegawais = jenisPegawaiService.findJenisPegawaiByRowStatus();
         model.addAttribute("jenisPegawais", jenisPegawais);
+
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
         return "/admin/jenispegawai/index";
     }
 
     @GetMapping("/admin/jenispegawai/create")
-    public String create(Model model) {
+    public String create(Model model, HttpServletRequest request) {
         model.addAttribute("jenispegawai", new JenisPegawai());
+
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
         return "/admin/jenispegawai/create";
     }
 
@@ -50,10 +56,12 @@ public class JenisPegawaiController {
 
 
     @GetMapping("/admin/jenispegawai/edit/{id}")
-    public String edit(@PathVariable("id") Integer id, Model model) {
+    public String edit(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
         JenisPegawai jenispegawai = jenisPegawaiService.getJenisPegawaiById(id);
 
         model.addAttribute("jenispegawai", jenispegawai);
+
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
         return "/admin/jenispegawai/edit";
     }
 
