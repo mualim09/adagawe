@@ -145,131 +145,27 @@
     <div class="section-content">
       <div class="row row-flex">
         <!-- Card -->
-        <div class="col-md-4">
+        <div class="col-md-4" th:each="loker, iter : ${lokers}">
           <div class="card-job">
             <div class="media mb-3">
               <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
-                      class="img-company mr-3" alt="...">
+                      th:src="@{'/uploads/' + ${loker.perusahaan.fotoProfil}}"
+                      class="img-company mr-3" th:alt="${loker.perusahaan.namaPerusahaan}">
               <div class="media-body">
-                <a href="#" class="card-job-title">Marketing & Communication</a>
-                <a href="#" class="card-job-subtitle">PT. Google Jakarta</a>
+                <a th:href="@{/lowongan/{id}(id=${loker.id})}" class="card-job-title" th:text="${loker.judulLowongan}"></a>
+                <a href="#" class="card-job-subtitle" th:text="${loker.perusahaan.namaPerusahaan}"></a>
               </div>
             </div>
 
-            <p class="card-job-detail"><i class="fa fa-map-marker"></i> Kuningan, Jawa Barat</p>
-            <p class="card-job-detail"><i class="fa fa-dollar-sign"></i> Rp5.000.000 - Rp10.000.000</p>
+            <p class="card-job-detail"><i class="fa fa-map-marker"></i> <span th:text="${loker.perusahaan.kota + ', ' + loker.perusahaan.provinsi}"></span></p>
+            <p class="card-job-detail"><i class="fa fa-dollar-sign"></i>
+              <span th:text="${'Rp' + #numbers.formatDecimal(loker.gajiMinimal, 0, 'POINT', 2, 'COMMA')
+                + ' - Rp' + #numbers.formatDecimal(loker.gajiMaksimal, 0, 'POINT', 2, 'COMMA')}"></span>
+            </p>
 
-            <form action="#">
-              <button type="submit" class="btn btn-primary w-100 mt-4">Kirim Lamaran</button>
-            </form>
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="card-job">
-            <div class="media mb-3">
-              <img
-                      src="https://icon-library.com/images/microsoft-icon-png/microsoft-icon-png-21.jpg"
-                      class="img-company mr-3" alt="...">
-              <div class="media-body">
-                <a href="#" class="card-job-title">Data Analyst</a>
-                <a href="#" class="card-job-subtitle">Microsoft Indonesia</a>
-              </div>
-            </div>
-
-            <p class="card-job-detail"><i class="fa fa-map-marker"></i> Kuningan, Jawa Barat</p>
-            <p class="card-job-detail"><i class="fa fa-dollar-sign"></i> Rp5.000.000 - Rp10.000.000</p>
-
-            <form action="#">
-              <button type="submit" class="btn btn-primary w-100 mt-4">Kirim Lamaran</button>
-            </form>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card-job">
-            <div class="media mb-3">
-              <img
-                      src="https://assets.tokopedia.net/assets-tokopedia-lite/v2/arael/kratos/36c1015e.png"
-                      class="img-company mr-3" alt="...">
-              <div class="media-body">
-                <a href="#" class="card-job-title">Principal Engineer</a>
-                <a href="#" class="card-job-subtitle">Tokopedia</a>
-              </div>
-            </div>
-
-            <p class="card-job-detail"><i class="fa fa-map-marker"></i> Kuningan, Jawa Barat</p>
-            <p class="card-job-detail"><i class="fa fa-dollar-sign"></i> Rp5.000.000 - Rp10.000.000</p>
-
-            <form action="#">
-              <button type="submit" class="btn btn-primary w-100 mt-4">Kirim Lamaran</button>
-            </form>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card-job">
-            <div class="media mb-3">
-              <img
-                      src="https://www.freepnglogos.com/uploads/shopee-logo/shopee-bag-logo-free-transparent-icon-17.png"
-                      class="img-company mr-3" alt="...">
-              <div class="media-body">
-                <a href="#" class="card-job-title">Software Engineer</a>
-                <a href="#" class="card-job-subtitle">Shopee Indonesia</a>
-              </div>
-            </div>
-
-            <p class="card-job-detail"><i class="fa fa-map-marker"></i> Kuningan, Jawa Barat</p>
-            <p class="card-job-detail"><i class="fa fa-dollar-sign"></i> Rp5.000.000 - Rp10.000.000</p>
-
-            <form action="#">
-              <button type="submit" class="btn btn-primary w-100 mt-4">Kirim Lamaran</button>
-            </form>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card-job">
-            <div class="media mb-3">
-              <img
-                      src="https://avatars.githubusercontent.com/u/29785210?s=200&v=4"
-                      class="img-company mr-3" alt="...">
-              <div class="media-body">
-                <a href="#" class="card-job-title">Customer Service</a>
-                <a href="#" class="card-job-subtitle">Gojek Jakarta</a>
-              </div>
-            </div>
-
-            <p class="card-job-detail"><i class="fa fa-map-marker"></i> Kuningan, Jawa Barat</p>
-            <p class="card-job-detail"><i class="fa fa-dollar-sign"></i> Rp5.000.000 - Rp10.000.000</p>
-
-            <form action="#">
-              <button type="submit" class="btn btn-primary w-100 mt-4">Kirim Lamaran</button>
-            </form>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card-job">
-            <div class="media mb-3">
-              <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Logo_flip.png"
-                      class="img-company mr-3" alt="...">
-              <div class="media-body">
-                <a href="#" class="card-job-title">Front-End Web Developer</a>
-                <a href="#" class="card-job-subtitle">PT. Fliptech Indonesia</a>
-              </div>
-            </div>
-
-            <p class="card-job-detail"><i class="fa fa-map-marker"></i> Kuningan, Jawa Barat</p>
-            <p class="card-job-detail"><i class="fa fa-dollar-sign"></i> Rp5.000.000 - Rp10.000.000</p>
-
-            <form action="#">
-              <button type="submit" class="btn btn-primary w-100 mt-4">Kirim Lamaran</button>
-            </form>
-          </div>
-        </div>
       </div>
 
       <div class="d-flex justify-content-center mt-4">

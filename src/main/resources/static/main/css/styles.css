@@ -252,7 +252,7 @@ footer .company-title {
 
 footer .top-footer {
   padding: 70px 10%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 footer .bottom-footer p {
@@ -278,6 +278,13 @@ footer .footer-menu li a {
 
 .profile-image {
   position: relative;
+}
+
+.img-job-company {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .profile-detail {
@@ -325,6 +332,25 @@ footer .footer-menu li a {
   font-size: .85em;
 }
 
+.job-title {
+  display: block;
+  color: #3a3a3a;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.job-subtitle {
+  display: block;
+  margin: 10px 0;
+  color: #3a3a3a;
+  font-size: 1em;
+}
+
+.job-subtitle-2 {
+  font-size: .9em;
+  margin: 5px 0;
+}
+
 .experience-title {
   display: block;
   color: #3a3a3a;
@@ -348,4 +374,86 @@ footer .footer-menu li a {
   font-size: .9em;
   color: #818181;
 }
-/*# sourceMappingURL=styles.css.map */
+
+.card-job-content-detail {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.card-job-content-detail * {
+  text-align: center;
+}
+
+.card-job-content-detail .block {
+  padding: 20px 0px;
+}
+
+.card-job-content-detail .block:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card-job-content-detail .title {
+  color: #292929;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.custom-badge-container {
+  margin-top: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.custom-badge-container .custom-badge {
+  font-size: 0.9em;
+  display: inline-block;
+  padding: 5px 20px;
+  margin-right: 10px;
+  border-radius: 50px;
+}
+
+.custom-badge-container.gray .custom-badge {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #3f3f3f;
+  background-color: #dddddd;
+}
+
+.custom-badge-container.success .custom-badge {
+  border: 1px solid rgba(252, 252, 252, 0.1);
+  color: #fff;
+  background-color: #28A745;
+}
+
+.custom-badge-container.sm {
+  margin-top: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.custom-badge-container.sm .custom-badge {
+  font-size: 0.7em;
+  display: inline-block;
+  padding: 5px 20px;
+  margin-right: 10px;
+  border-radius: 50px;
+}
+
+.custom-badge-container.sm.gray .custom-badge {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #3f3f3f;
+  background-color: #dddddd;
+}
+
+.custom-badge-container.sm.success .custom-badge {
+  border: 1px solid rgba(252, 252, 252, 0.1);
+  color: #fff;
+  background-color: #28A745;
+}
+
+.list-job {
+  margin: 50px 10%;
+}

@@ -31,11 +31,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().authorizeRequests()
 				.antMatchers("/daftar/**",
 						"/",
+						"/lowongan/**",
 						"/main/**",
 						"/masuk/**",
 						"/css/**",
 						"/js/**",
 						"/assets/**",
+						"/uploads/**",
 						"/img/**", "/font-awesome/**")
 				.permitAll()
 				.antMatchers("/admin/**").hasAuthority("Admin")
