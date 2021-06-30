@@ -375,11 +375,16 @@ footer .footer-menu li a {
   color: #818181;
 }
 
+<<<<<<< Updated upstream
 .card-job-detail {
+=======
+.card-job-content-detail {
+>>>>>>> Stashed changes
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
+<<<<<<< Updated upstream
 .card-job-detail * {
   text-align: center;
 }
@@ -393,6 +398,21 @@ footer .footer-menu li a {
 }
 
 .card-job-detail .title {
+=======
+.card-job-content-detail * {
+  text-align: center;
+}
+
+.card-job-content-detail .block {
+  padding: 20px 0px;
+}
+
+.card-job-content-detail .block:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card-job-content-detail .title {
+>>>>>>> Stashed changes
   color: #292929;
   font-weight: bold;
   letter-spacing: 1px;
@@ -453,4 +473,11 @@ footer .footer-menu li a {
   color: #fff;
   background-color: #28A745;
 }
+<<<<<<< Updated upstream
+=======
+
+.list-job {
+  margin: 50px 10%;
+}
+>>>>>>> Stashed changes
 /*# sourceMappingURL=styles.css.map */
