@@ -4,6 +4,9 @@ $sf-bold: 'SF Pro Display Bold';
 $text-gray: #818181;
 $text-gray-dim: #424242;
 $primary: #007bff;
+$success: #28A745;
+$danger: #DC3545;
+$warning: #FFC107;
 
 html {
   font-size: 18px;
@@ -238,7 +241,7 @@ footer {
 
   .top-footer {
     padding: 70px 10%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
   }
 
   .bottom-footer {
@@ -268,6 +271,12 @@ footer {
 
 .profile-image {
   position: relative;
+}
+
+.img-job-company {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }
 
 .profile-detail {
@@ -314,6 +323,25 @@ footer {
   font-size: .85em;
 }
 
+.job-title {
+  display: block;
+  color: #3a3a3a;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.job-subtitle {
+  display: block;
+  margin: 10px 0;
+  color: #3a3a3a;
+  font-size: 1em;
+}
+
+.job-subtitle-2 {
+  font-size: .9em;
+  margin: 5px 0;
+}
+
 .experience-title {
   display: block;
   color: #3a3a3a;
@@ -336,4 +364,61 @@ footer {
 .experience-date {
   font-size: .9em;
   color: $text-gray;
+}
+
+.card-job-detail {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  * {
+    text-align: center;
+  }
+
+  .block {
+    &:not(:last-child) {
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    padding: 20px 0px;
+  }
+
+  .title {
+    color: rgb(41, 41, 41);
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+}
+
+@mixin custom-badge($font-size: .9em) {
+  margin-top: 15px;
+  display: flex;
+
+  .custom-badge {
+    font-size: $font-size;
+    display: inline-block;
+    padding: 5px 20px;
+    margin-right: 10px;
+    border-radius: 50px;
+  }
+
+  &.gray .custom-badge {
+    border: 1px solid rgba(0, 0, 0, .1);
+    color: rgb(63, 63, 63);
+    background-color: #dddddd;
+  }
+
+  &.success .custom-badge  {
+    border: 1px solid rgba(252, 252, 252, 0.1);
+    color: #fff;
+    background-color: $success;
+  }
+}
+
+.custom-badge-container {
+  @include custom-badge(.9em);
+}
+
+.custom-badge-container.sm {
+  @include custom-badge(.7em);
 }
