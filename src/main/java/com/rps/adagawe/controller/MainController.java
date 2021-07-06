@@ -1,19 +1,41 @@
 package com.rps.adagawe.controller;
 
+import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.FileUploadHelper;
+import com.rps.adagawe.model.Lamaran;
+import com.rps.adagawe.model.Lowongan;
+import com.rps.adagawe.model.Pelamar;
+import com.rps.adagawe.model.Perusahaan;
 import com.rps.adagawe.repository.LowonganRepository;
+import com.rps.adagawe.repository.PelamarRepository;
+import com.rps.adagawe.service.LamaranService;
+import com.rps.adagawe.service.LowonganService;
+import com.rps.adagawe.service.PelamarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
+import java.util.Date;
 
 
 @Controller
 public class MainController {
     @Autowired
-    private LowonganRepository lowonganRepository;
+    private LowonganService lowonganService;
+
+    @Autowired
+    private PelamarService pelamarService;
+
+    @Autowired
+    private LamaranService lamaranService;
 
     private void redirectIndex(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -24,7 +46,7 @@ public class MainController {
 
     @GetMapping("/")
     public String indexPelamar(Model model) {
-        model.addAttribute("lokers", lowonganRepository.findAll());
+        model.addAttribute("lokers", lowonganService.getAll());
 
         return "main/index";
     }
@@ -37,7 +59,8 @@ public class MainController {
 
     @GetMapping("/lowongan/{id}")
     public String lowongan(@PathVariable("id") int id, Model model) {
-        model.addAttribute("loker", lowonganRepository.findById(id));
+        Lowongan lowongan = lowonganService.getLowonganById(id);
+        model.addAttribute("loker", lowongan);
 
         return "main/detail";
     }
@@ -49,8 +72,52 @@ public class MainController {
 
     @GetMapping("/lowongan")
     public String lowonganKerja(Model model) {
-        model.addAttribute("lokers", lowonganRepository.findAll());
+        model.addAttribute("lokers", lowonganService.getAll());
 
         return "/main/lowongan";
+    }
+
+    @GetMapping("/lamaran/{id}")
+    public String lamaran(@PathVariable("id") int id, Model model) {
+        Lowongan lowongan = lowonganService.getLowonganById(id);
+        model.addAttribute("loker", lowongan);
+        model.addAttribute("lamaran", new Lamaran());
+
+        return "/main/lamaran";
+    }
+
+    @PostMapping("/lamaran/{id}")
+    public String saveLamaran(@PathVariable("id") int id, RedirectAttributes redirectAttributes, @RequestParam("resumeFile") MultipartFile file,
+                              @ModelAttribute("lamaran") @Valid Lamaran lamaran, BindingResult result, Model model) {
+
+        if (file.isEmpty()) {
+            result.addError(new FieldError("resume", "resume", "Resume wajib diisi."));
+        }
+
+        Lowongan lowongan = lowonganService.getLowonganById(id);
+
+        if (result.hasErrors()) {
+            model.addAttribute("loker", lowongan);
+            model.addAttribute("lamaran", lamaran);
+            return "/main/lamaran";
+        }
+
+        String fileName = FileUploadHelper.upload(file, "resume");
+        int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
+        Pelamar pelamar = pelamarService.getPelamarById(idPelamar);
+
+        lamaran.setResume(fileName);
+        lamaran.setTanggalMelamar(new Date());
+        lamaran.setLowongan(lowongan);
+        lamaran.setPelamar(pelamar);
+        lamaran.setStatusLamaran(0);
+        lamaranService.save(lamaran);
+
+        return "redirect:/lamaran/result";
+    }
+
+    @GetMapping("/lamaran/result")
+    public String lamaranResult() {
+        return "main/lamaran-success";
     }
 }

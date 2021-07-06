@@ -18,25 +18,17 @@ public class Lowongan {
     @JoinColumn(name = "id_perusahaan", nullable = false)
     private Perusahaan perusahaan;
 
-    @NotEmpty(message = "Judul Lowongan wajib diisi.")
-    @Column(name = "judul_lowongan")
-    private String judulLowongan;
-
     @ManyToOne
     @JoinColumn(name = "id_jenis_pegawai", nullable = false)
     private JenisPegawai jenisPegawai;
 
+    @NotEmpty(message = "Judul Lowongan wajib diisi.")
+    @Column(name = "judul_lowongan")
+    private String judulLowongan;
+
     @NotEmpty(message = "Keterangan wajib diisi.")
     @Column(name = "keterangan")
     private String keterangan;
-
-    @NotEmpty(message = "Pengalaman Kerja wajib diisi.")
-    @Column(name = "pengalaman_kerja")
-    private String pengalamanKerja;
-
-    @NotEmpty(message = "Keahlian wajib diisi.")
-    @Column(name = "keahlian")
-    private String keahlian;
 
     @NotEmpty(message = "Gaji Minimal wajib diisi.")
     @Column(name = "gaji_minimal")
@@ -46,10 +38,16 @@ public class Lowongan {
     @Column(name = "gaji_maksimal")
     private int gajiMaksimal;
 
+    @NotEmpty(message = "Pengalaman kerja wajib diisi.")
+    @Column(name = "pengalaman_kerja")
+    private String pengalamanKerja;
+
+    @NotEmpty(message = "Keahlian wajib diisi.")
+    private String keahlian;
+
     @Column(name = "sembunyikan_gaji")
     private int sembunyikanGaji;
 
-    @Column(name = "row_status")
     private int status;
 
     @Column(name = "created_date")
@@ -74,6 +72,14 @@ public class Lowongan {
 
     public void setPerusahaan(Perusahaan perusahaan) {
         this.perusahaan = perusahaan;
+    }
+
+    public JenisPegawai getJenisPegawai() {
+        return jenisPegawai;
+    }
+
+    public void setJenisPegawai(JenisPegawai jenisPegawai) {
+        this.jenisPegawai = jenisPegawai;
     }
 
     public String getJudulLowongan() {
@@ -132,14 +138,6 @@ public class Lowongan {
         this.lastModified = lastModified;
     }
 
-    public JenisPegawai getJenisPegawai() {
-        return jenisPegawai;
-    }
-
-    public void setJenisPegawai(JenisPegawai jenisPegawai) {
-        this.jenisPegawai = jenisPegawai;
-    }
-
     public String getPengalamanKerja() {
         return pengalamanKerja;
     }
@@ -162,5 +160,23 @@ public class Lowongan {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Lowongan{" +
+                "id=" + id +
+                ", perusahaan=" + perusahaan +
+                ", judulLowongan='" + judulLowongan + '\'' +
+                ", keterangan='" + keterangan + '\'' +
+                ", gajiMinimal=" + gajiMinimal +
+                ", gajiMaksimal=" + gajiMaksimal +
+                ", pengalamanKerja='" + pengalamanKerja + '\'' +
+                ", keahlian='" + keahlian + '\'' +
+                ", sembunyikanGaji=" + sembunyikanGaji +
+                ", createdDate=" + createdDate +
+                ", lastModified=" + lastModified +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
