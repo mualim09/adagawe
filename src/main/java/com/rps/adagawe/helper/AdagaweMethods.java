@@ -1,8 +1,10 @@
 package com.rps.adagawe.helper;
 
+import com.rps.adagawe.model.Perusahaan;
 import com.rps.adagawe.model.UserLogin;
 import com.rps.adagawe.service.AdminService;
 import com.rps.adagawe.service.PelamarService;
+import com.rps.adagawe.service.PerusahaanService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -14,14 +16,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class AdagaweMethods {
-
-    public static int getIdPelamarBySession(PelamarService service) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserLogin ul = service.findUserLoginByEmail(authentication.getName());
-        int idPelamar = service.findPelamarByUserLogin(ul.getId()).getId();
-
-        return idPelamar;
-    }
 
     public static String getEmailUserBySession() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -37,6 +31,22 @@ public class AdagaweMethods {
         return idAdmin;
     }
 
+    public static int getIdPelamarBySession(PelamarService service) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserLogin ul = service.findUserLoginByEmail(authentication.getName());
+        int idPelamar = service.findPelamarByUserLogin(ul.getId()).getId();
+
+        return idPelamar;
+    }
+
+//    public static int getIdPerusahaanBySession(PerusahaanService service) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        UserLogin ul = service.findUserLoginByEmail(authentication.getName());
+//        int idPelamar = service.findPelamarByUserLogin(ul.getId()).getId();
+//
+//        return idPelamar;
+//    }
+
     public static String getMainUrl(HttpServletRequest request) {
 
         /**
@@ -45,7 +55,6 @@ public class AdagaweMethods {
          * [1] = pelamar
          * [2] = profile
          */
-
         String url = request.getRequestURI();
         String[] words = url.split("[/]");
         return words[2];
