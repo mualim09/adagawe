@@ -1,5 +1,6 @@
 package com.rps.adagawe.controller;
 
+import com.rps.adagawe.model.Lowongan;
 import com.rps.adagawe.repository.LowonganRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -37,7 +38,8 @@ public class MainController {
 
     @GetMapping("/lowongan/{id}")
     public String lowongan(@PathVariable("id") int id, Model model) {
-        model.addAttribute("loker", lowonganRepository.findById(id));
+        Lowongan lowongan = lowonganRepository.findById(id).orElse(null);
+        model.addAttribute("loker", lowongan);
 
         return "main/detail";
     }
