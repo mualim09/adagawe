@@ -15,6 +15,11 @@ public class Admin {
     private int id;
 
     @NotEmpty
+    @ManyToOne
+    @JoinColumn(name = "id_user_login", nullable = false)
+    private UserLogin userLogin;
+
+    @NotEmpty
     @Column(name = "nama_admin")
     private String namaAdmin;
 
@@ -91,5 +96,13 @@ public class Admin {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public UserLogin getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(UserLogin userLogin) {
+        this.userLogin = userLogin;
     }
 }

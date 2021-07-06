@@ -2,6 +2,7 @@ package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.UserLogin;
 import com.rps.adagawe.service.*;
@@ -26,7 +27,8 @@ public class PelamarController {
     PendidikanService pendidikanService;
     @Autowired
     SertifikatService sertifikatService;
-
+    @Autowired
+    AdagaweService adagaweService;
     // Prefix URL
     private final String PREFIX = "/pelamar/profile";
     private final String PREFIX_SECURITY = "/pelamar/profile/security";
@@ -34,7 +36,7 @@ public class PelamarController {
 
     @GetMapping("/pelamar/profile")
     public String getView(Model model) {
-        int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
+        int idPelamar = AdagaweMethods.getIdPelamarBySession(adagaweService);
         model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(idPelamar));
         model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(idPelamar));
         model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(idPelamar));

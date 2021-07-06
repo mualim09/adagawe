@@ -54,12 +54,4 @@ public class PelamarService {
 
         return p;
     }
-
-    public UserLogin findUserLoginByEmail(String email) {
-        return (UserLogin) pelamarRepository.getIdUserLoginByEmail(email);
-    }
-
-    public Pelamar findPelamarByUserLogin(int userId) {
-        return pelamarRepository.getPelamarByUserLogin(userId);
-    }
 }

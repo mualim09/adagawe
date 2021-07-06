@@ -18,7 +18,4 @@ import java.util.List;
 @Repository
 public interface AdminRepository extends CrudRepository<Admin, Integer> {
 
-    @Query("from UserLogin a WHERE a.email = :email")
-    UserLogin getAdminByUserLogin(String email);
-
 }

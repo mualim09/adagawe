@@ -2,6 +2,7 @@ package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class PendidikanController {
 
     @Autowired
     JenjangService jenjangService;
+
+    @Autowired
+    AdagaweService adagaweService;
 
     // Prefix Page URL
     private final String PREFIX = "/pelamar/pendidikan";
@@ -58,7 +62,7 @@ public class PendidikanController {
             return PREFIX_CREATE;
         }
 
-        int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
+        int idPelamar = AdagaweMethods.getIdPelamarBySession(adagaweService);
         Pelamar pelamar = pelamarService.getPelamarById(idPelamar);
         pendidikan.setPelamar(pelamar);
         pendidikanService.save(pendidikan);

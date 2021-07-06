@@ -23,15 +23,15 @@ public class AdagaweMethods {
         return authentication.getName();
     }
 
-    public static int getIdAdminBySession(AdminService service) {
+    public static int getIdAdminBySession(AdagaweService service) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserLogin ul = service.findUserLoginByEmail(authentication.getName());
-        int idAdmin= service.getAdminById(ul.getId()).getId();
+        int idAdmin= service.findAdminByUserLogin(ul.getId()).getId();
 
         return idAdmin;
     }
 
-    public static int getIdPelamarBySession(PelamarService service) {
+    public static int getIdPelamarBySession(AdagaweService service) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserLogin ul = service.findUserLoginByEmail(authentication.getName());
         int idPelamar = service.findPelamarByUserLogin(ul.getId()).getId();
@@ -39,16 +39,15 @@ public class AdagaweMethods {
         return idPelamar;
     }
 
-//    public static int getIdPerusahaanBySession(PerusahaanService service) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserLogin ul = service.findUserLoginByEmail(authentication.getName());
-//        int idPelamar = service.findPelamarByUserLogin(ul.getId()).getId();
-//
-//        return idPelamar;
-//    }
+    public static int getIdPerusahaanBySession(AdagaweService service) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserLogin ul = service.findUserLoginByEmail(authentication.getName());
+        int idPelamar = service.findPelamarByUserLogin(ul.getId()).getId();
+
+        return idPelamar;
+    }
 
     public static String getMainUrl(HttpServletRequest request) {
-
         /**
          * Url = /pelamar/profile
          * [0] = NULL
@@ -57,6 +56,7 @@ public class AdagaweMethods {
          */
         String url = request.getRequestURI();
         String[] words = url.split("[/]");
+
         return words[2];
     }
 }

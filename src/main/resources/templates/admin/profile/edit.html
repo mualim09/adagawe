@@ -4,52 +4,76 @@
       layout:decorate="~{layout/admin}">
 <head>
     <meta charset="UTF-8">
-    <title>Ubah Admin</title>
+    <title>Ubah Profil</title>
 </head>
 <body>
+
+<div layout:fragment="header">
+    <h4 class="page-title">Adagawe.ID</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Profil</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+    </ul>
+</div>
 <div layout:fragment="content">
-    <div class="ibox">
-        <div class="ibox-title">
-            <h5>Ubah Admin</h5>
-        </div>
-        <div class="ibox-content">
-            <form th:action="@{/admin/profile/edit}" th:object="${admin}" id="adminForm" method="post">
-                <div class="form-group">
-                    <label for="namaAdmin">Nama Admin</label>
-                    <input type="text" th:field="*{namaAdmin}" id="namaAdmin" placeholder="Nama Admin"
-                           th:class="'form-control '+ ${#fields.hasErrors('namaAdmin') ? 'is-invalid' : ''}">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('namaAdmin')}" th:errors="*{namaAdmin}"></div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">Ubah Profil</h4>
                 </div>
-                <div class="form-group">
-                    <label for="tanggalLahir">Tanggal Lahir</label>
-                    <input type="date" th:field="*{tanggalLahir}" id="tanggalLahir" placeholder="Tanggal Lahir"
-                           th:class="'form-control '+ ${#fields.hasErrors('tanggalLahir') ? 'is-invalid' : ''}">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('tanggalLahir')}" th:errors="*{tanggalLahir}"></div>
-                </div>
-                <div class="form-group">
-                    <label>Jenis Kelamin</label>
-                    <div class="form-check">
-                        <input class="form-check-input" value="L" th:field="*{jenisKelamin}" type="radio" name="jenisKelaminL" id="jenisKelaminL">
-                        <label class="form-check-label" for="jenisKelaminL">
-                            Laki-Laki
-                        </label>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/admin/profile/edit}" th:object="${admin}" id="adminForm" method="post">
+                    <div class="form-group">
+                        <label for="namaAdmin">Nama Admin</label>
+                        <input type="text" th:field="*{namaAdmin}" id="namaAdmin" placeholder="Nama Admin"
+                               th:class="'form-control '+ ${#fields.hasErrors('namaAdmin') ? 'is-invalid' : ''}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('namaAdmin')}" th:errors="*{namaAdmin}"></div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" value="P" th:field="*{jenisKelamin}" type="radio" name="jenisKelaminP" id="jenisKelaminP">
-                        <label class="form-check-label" for="jenisKelaminP">
-                            Perempuan
-                        </label>
+                    <div class="form-group">
+                        <label for="tanggalLahir">Tanggal Lahir</label>
+                        <input type="date" th:field="*{tanggalLahir}" id="tanggalLahir" placeholder="Tanggal Lahir"
+                               th:class="'form-control '+ ${#fields.hasErrors('tanggalLahir') ? 'is-invalid' : ''}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('tanggalLahir')}" th:errors="*{tanggalLahir}"></div>
                     </div>
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('jenisKelamin')}" th:errors="*{jenisKelamin}"></div>
-                </div>
-                <div class="form-group">
-                    <label for="noTelepon">No. Telepon</label>
-                    <textarea th:field="*{noTelepon}" id="noTelepon" placeholder="Nomor Telepon"
-                              th:class="'form-control '+ ${#fields.hasErrors('noTelepon') ? 'is-invalid' : ''}"></textarea>
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('noTelepon')}" th:errors="*{noTelepon}"></div>
-                </div>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </form>
+                    <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <div class="form-check">
+                            <input class="form-check-input" value="L" th:field="*{jenisKelamin}" type="radio" name="jenisKelaminL" id="jenisKelaminL">
+                            <label class="form-check-label" for="jenisKelaminL">
+                                Laki-Laki
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" value="P" th:field="*{jenisKelamin}" type="radio" name="jenisKelaminP" id="jenisKelaminP">
+                            <label class="form-check-label" for="jenisKelaminP">
+                                Perempuan
+                            </label>
+                        </div>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('jenisKelamin')}" th:errors="*{jenisKelamin}"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="noTelepon">No. Telepon</label>
+                        <textarea th:field="*{noTelepon}" id="noTelepon" placeholder="Nomor Telepon"
+                                  th:class="'form-control '+ ${#fields.hasErrors('noTelepon') ? 'is-invalid' : ''}"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('noTelepon')}" th:errors="*{noTelepon}"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
