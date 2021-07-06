@@ -48,6 +48,8 @@ public class Lowongan {
     @Column(name = "sembunyikan_gaji")
     private int sembunyikanGaji;
 
+    private int status;
+
     @Column(name = "created_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdDate;
@@ -55,8 +57,6 @@ public class Lowongan {
     @Column(name = "last_modified")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date lastModified;
-
-    private String status;
 
     public int getId() {
         return id;
@@ -154,11 +154,11 @@ public class Lowongan {
         this.keahlian = keahlian;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
