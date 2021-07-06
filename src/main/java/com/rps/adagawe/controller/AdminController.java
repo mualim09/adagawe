@@ -74,7 +74,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/profile/security")
-    public String getSecurity(Model model) {
+    public String getSecurityAdmin(Model model) {
 
         UserLogin userLogin = adagaweService.findUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
         model.addAttribute("userLogin", userLogin);
@@ -82,14 +82,14 @@ public class AdminController {
     }
 
     @PostMapping("/admin/profile/security")
-    public String postSecurity(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
+    public String postSecurityAdmin(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
 
         //userService.updateUserLogin(userLogin);
         return "/admin/profile/index";
     }
 
     @GetMapping("/admin/profile/edit")
-    public String getProfileEdit(Model model) {
+    public String getEditProfile(Model model) {
 
         //Admin admin = adminService.getAdminById(AdagaweMethods.getIdAdminBySession(adminService));
         Admin admin = adminService.getAdminById(1);

@@ -42,7 +42,7 @@ public class AdagaweMethods {
     public static int getIdPerusahaanBySession(AdagaweService service) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserLogin ul = service.findUserLoginByEmail(authentication.getName());
-        int idPelamar = service.findPelamarByUserLogin(ul.getId()).getId();
+        int idPelamar = service.findPerusahaanByUserLogin(ul.getId()).getId();
 
         return idPelamar;
     }

@@ -22,9 +22,6 @@
         <li class="nav-item">
             <a href="#">Profil</a>
         </li>
-        <li class="separator">
-            <i class="flaticon-right-arrow"></i>
-        </li>
     </ul>
 </div>
 <div layout:fragment="content">
@@ -71,7 +68,10 @@
                                   th:class="'form-control '+ ${#fields.hasErrors('noTelepon') ? 'is-invalid' : ''}"></textarea>
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('noTelepon')}" th:errors="*{noTelepon}"></div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <a href="/admin/profile" class="btn btn-secondary">Kembali</a>
+                    </div>
                 </form>
             </div>
         </div>
