@@ -1,6 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.UserAdmin;
 import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.AdminService;
@@ -24,6 +25,9 @@ public class AdminController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AdagaweService adagaweService;
 
     @GetMapping("/admin/create")
     public String getCreate(Model model) {
@@ -61,30 +65,31 @@ public class AdminController {
     }
 
     @GetMapping("/admin/profile")
-    public String getView(Model model) {
-        //Admin admin = adminService.getAdminById(AdagaweMethods.getIdAdminBySession(adminService));
-        Admin admin = adminService.getAdminById(1);
+    public String getViewProfile(Model model) {
+        int idAdmin = AdagaweMethods.getIdAdminBySession(adagaweService);
+        Admin admin = adminService.getAdminById(idAdmin);
         model.addAttribute("admin", admin);
+
         return "/admin/profile/index";
     }
 
     @GetMapping("/admin/profile/security")
-    public String getSecurity(Model model) {
+    public String getSecurityAdmin(Model model) {
 
-        UserLogin userLogin = userService.getUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
+        UserLogin userLogin = adagaweService.findUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
         model.addAttribute("userLogin", userLogin);
         return "/admin/profile/security";
     }
 
     @PostMapping("/admin/profile/security")
-    public String postSecurity(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
+    public String postSecurityAdmin(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
 
         //userService.updateUserLogin(userLogin);
         return "/admin/profile/index";
     }
 
     @GetMapping("/admin/profile/edit")
-    public String getProfileEdit(Model model) {
+    public String getEditProfile(Model model) {
 
         //Admin admin = adminService.getAdminById(AdagaweMethods.getIdAdminBySession(adminService));
         Admin admin = adminService.getAdminById(1);

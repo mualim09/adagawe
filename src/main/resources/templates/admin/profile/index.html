@@ -7,30 +7,56 @@
     <title>Lihat Akun</title>
 </head>
 <body>
+
+<div layout:fragment="header">
+    <h4 class="page-title">Adagawe.ID</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Profil</a>
+        </li>
+    </ul>
+</div>
 <div layout:fragment="content">
-    <div class="ibox ">
-        <div class="ibox-title">
-            <h5>Informasi Akun</h5>
-        </div>
-        <div class="ibox-content">
-            <table class="table table-hover">
-                <tr>
-                    <td>Nama</td>
-                    <td th:text="${admin.namaAdmin}"></td>
-                </tr>
-                <tr>
-                    <td>Tanggal Lahir</td>
-                    <td th:text="${admin.tanggalLahir}"></td>
-                </tr>
-                <tr>
-                    <td>Jenis Kelamin</td>
-                    <td th:text="${admin.jenisKelamin}"></td>
-                </tr>
-                <tr>
-                    <td>Nomor Telepon</td>
-                    <td th:text="${admin.noTelepon}"></td>
-                </tr>
-            </table>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">Informasi Akun</h4>
+                    <a class="btn btn-warning ml-auto" href="/admin/profile/edit">
+                        Ubah Data
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <td>Nama</td>
+                            <td th:text="${admin.namaAdmin}"></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td th:text="${admin.tanggalLahir}"></td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Kelamin</td>
+                            <td th:text="${admin.jenisKelamin}"></td>
+                        </tr>
+                        <tr>
+                            <td>Nomor Telepon</td>
+                            <td th:text="${admin.noTelepon}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

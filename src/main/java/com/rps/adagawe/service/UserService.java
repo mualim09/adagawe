@@ -76,7 +76,7 @@ public class UserService implements UserDetailsService {
         confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
     }
 
-    public UserLogin getUserLoginByEmail(String email) {
-        return userRepository.findUserLoginByEmail(email);
-    }
+//    public UserLogin getUserLoginByEmail(String email) {
+//        return userRepository.findUserLoginByEmail(email);
+//    }
 }

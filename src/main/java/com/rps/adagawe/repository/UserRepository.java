@@ -18,7 +18,4 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<UserLogin, Long> {
 
 	Optional<UserLogin> findByEmail(String email);
-
-	@Query("from UserLogin a WHERE a.email = :email")
-	UserLogin findUserLoginByEmail(String email);
 }

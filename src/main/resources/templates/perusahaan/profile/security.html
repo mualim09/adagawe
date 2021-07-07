@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       lang="en"
-      layout:decorate="~{layout/admin}">
+      layout:decorate="~{layout/perusahaan}">
 <head>
     <meta charset="UTF-8">
-    <title>Keamanan</title>
+    <title>Informasi Perusahaan</title>
 </head>
 <body>
 
@@ -35,11 +35,11 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                    <h4 class="card-title">Keamanan Akun</h4>
+                    <h4 class="card-title">Informasi Perusahaan</h4>
                 </div>
             </div>
             <div class="card-body">
-                <form th:action="@{/admin/profile/security}" th:method="post" th:object="${userLogin}">
+                <form th:action="@{/perusahaan/profile/security}" th:method="post" th:object="${userLogin}">
                     <div class="form-group">
                         <div class="alert alert-info" role="alert">
                             <span>Untuk merubah email, harap hubungi System Administrator.</span>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Simpan Password</button>
-                        <a href="/admin/profile" class="btn btn-secondary">Kembali</a>
+<!--                        <a href="/admin/profile" class="btn btn-secondary">Kembali</a>-->
                     </div>
                 </form>
             </div>

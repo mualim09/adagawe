@@ -1,9 +1,12 @@
 package com.rps.adagawe.controller;
 
+import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.Pengalaman;
 import com.rps.adagawe.model.Perusahaan;
+import com.rps.adagawe.model.UserLogin;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,6 +27,9 @@ public class PerusahaanController {
 
     @Autowired
     PerusahaanService perusahaanService;
+
+    @Autowired
+    AdagaweService adagaweService;
 
     @GetMapping("/admin/perusahaan")
     public String index(Model model) {
@@ -98,5 +104,31 @@ public class PerusahaanController {
 
         model.addAttribute("userEmail", userEmail);
         return "/main/index-perusahaan";
+    }
+
+
+    @GetMapping("/perusahaan/view")
+    public String getViewPerusahaan(Model model) {
+        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+        Perusahaan perusahaan = perusahaanService.getPerusahaanById(idPerusahaan);
+
+        return "/perusahaan/index";
+    }
+
+    @GetMapping("/perusahaan/profile/edit")
+    public String getEditPerusahaan(Model model) {
+        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+        Perusahaan perusahaan = perusahaanService.getPerusahaanById(idPerusahaan);
+
+        model.addAttribute("perusahaan", perusahaan);
+        return "/perusahaan/profile/edit";
+    }
+
+    @GetMapping("/perusahaan/profile/security")
+    public String getSecurityPerusahaan(Model model) {
+        UserLogin userLogin = adagaweService.findUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
+        model.addAttribute("userLogin", userLogin);
+
+        return "/perusahaan/profile/security";
     }
 }

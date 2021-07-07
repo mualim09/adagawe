@@ -1,6 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
 import com.rps.adagawe.model.Lamaran;
 import com.rps.adagawe.model.Lowongan;
@@ -36,6 +37,9 @@ public class MainController {
 
     @Autowired
     private LamaranService lamaranService;
+
+    @Autowired
+    private AdagaweService adagaweService;
 
     private void redirectIndex(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -103,7 +107,7 @@ public class MainController {
         }
 
         String fileName = FileUploadHelper.upload(file, "resume");
-        int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
+        int idPelamar = AdagaweMethods.getIdPelamarBySession(adagaweService);
         Pelamar pelamar = pelamarService.getPelamarById(idPelamar);
 
         lamaran.setResume(fileName);
