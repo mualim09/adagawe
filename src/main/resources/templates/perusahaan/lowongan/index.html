@@ -31,7 +31,6 @@
                                     <td>Nama Lowongan</td>
                                     <td>Tanggal Dibuat</td>
                                     <td>Terakhir Diperbaharui</td>
-                                    <td>Halaman</td>
                                     <td>Aksi</td>
                                 </tr>
                                 </thead>
@@ -41,9 +40,10 @@
                                     <td th:text="${lowongan.judulLowongan}"></td>
                                     <td th:text="${lowongan.createdDate}"></td>
                                     <td th:text="${lowongan.lastModified}"></td>
-                                    <td>Ini nantinya link view halaman</td>
                                     <td>
-<!--                                        <a th:href="@{/admin/jabatan/edit/{id}(id=${jabatan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>-->
+                                        <a th:href="@{/perusahaan/lowongan/edit/{id}(id=${lowongan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
+                                        <a th:href="@{/perusahaan/lowongan/view/{id}(id=${lowongan.id})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
+                                        <a th:href="@{/perusahaan/lowongan/detail/{id}(id=${lowongan.id})}" class="btn btn-sm btn-secondary"><i class="fa fa-list"></i> Detail</a>
 <!--                                        <form th:action="@{/admin/jabatan/delete/{id}(id=${jabatan.id})}" method="post" class="d-inline">-->
 <!--                                            <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger">-->
 <!--                                                <i class="fa fa-trash"></i> Hapus</button>-->

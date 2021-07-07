@@ -30,11 +30,11 @@ public class Lowongan {
     @Column(name = "keterangan")
     private String keterangan;
 
-    @NotEmpty(message = "Gaji Minimal wajib diisi.")
+    @NotNull(message = "Gaji Minimal wajib diisi.")
     @Column(name = "gaji_minimal")
     private int gajiMinimal;
 
-    @NotEmpty(message = "Gaji Maksimal wajib diisi.")
+    @NotNull(message = "Gaji Maksimal wajib diisi.")
     @Column(name = "gaji_maksimal")
     private int gajiMaksimal;
 
