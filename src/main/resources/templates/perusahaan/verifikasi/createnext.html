@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layout/perusahaan}">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Perusahaan</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">Tambah Perusahaan2</h4>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <form th:action="@{/perusahaan/verifikasi/createnext}" th:object="${verifikasiperusahaan}" id="verifikasiperusahaanForm" method="post" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="npwp">NPWP</label>
+                        <input type="text" th:field="*{npwp}" id="npwp" placeholder="Nomor Pokok Wajib Pajak"
+                               th:class="'form-control '+ ${#fields.hasErrors('npwp') ? 'is-invalid' : ''}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('npwp')}" th:errors="*{npwp}"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tdp">TDP</label>
+                        <input type="file" name="tdpfile" id="tdp" placeholder="Tanda Daftar Perusahaan" class="form-control">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('tdp')}" th:errors="*{tdp}"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="siu">SIU</label>
+                        <input type="file" name="siufile" id="siu" placeholder="Surat Izin Usaha" class="form-control">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('siu')}" th:errors="*{siu}"></div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Ajukan Verifikasi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

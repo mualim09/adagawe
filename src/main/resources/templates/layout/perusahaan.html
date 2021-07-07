@@ -144,19 +144,25 @@
                         <h4 class="text-section">Daftar Menu</h4>
                     </li>
                     <li th:class="'nav-item ' + ${url == 'profile' ? 'active' : ''}">
-                        <a data-toggle="collapse" href="#base">
+                        <a href="#base">
                             <i class="fas fa-layer-group"></i>
                             <p>Info Perusahaan</p>
                         </a>
                     </li>
                     <li th:class="'nav-item ' + ${url == 'lowongan' ? 'active' : ''}">
-                        <a data-toggle="collapse" href="#sidebarLayouts">
+                        <a href="#sidebarLayouts">
                             <i class="fas fa-th-list"></i>
                             <p>Daftar Lowongan</p>
                         </a>
                     </li>
+                    <li th:class="'nav-item ' + ${url == 'perusahaan' ? 'active' : ''}">
+                        <a href="/perusahaan/verifikasi/create">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Ajukan Verifikasi</p>
+                        </a>
+                    </li>
                     <li th:class="'nav-item ' + ${url == 'laporan' ? 'active' : ''}">
-                        <a data-toggle="collapse" href="#charts">
+                        <a href="#charts">
                             <i class="far fa-chart-bar"></i>
                             <p>Laporan</p>
                         </a>
@@ -168,28 +174,6 @@
     <div class="main-panel">
         <div class="content">
             <div class="page-inner">
-                <div class="page-header">
-                    <h4 class="page-title">DataTables.Net</h4>
-                    <ul class="breadcrumbs">
-                        <li class="nav-home">
-                            <a href="#">
-                                <i class="flaticon-home"></i>
-                            </a>
-                        </li>
-                        <li class="separator">
-                            <i class="flaticon-right-arrow"></i>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#">Tables</a>
-                        </li>
-                        <li class="separator">
-                            <i class="flaticon-right-arrow"></i>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#">Datatables</a>
-                        </li>
-                    </ul>
-                </div>
                 <div class="row" layout:fragment="content">
 
                 </div>
@@ -197,25 +181,6 @@
         </div>
         <footer class="footer">
             <div class="container-fluid">
-<!--                <nav class="pull-left">-->
-<!--                    <ul class="nav">-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="https://www.themekita.com">-->
-<!--                                ThemeKita-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="#">-->
-<!--                                Help-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="#">-->
-<!--                                Licenses-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </nav>-->
                 <div class="text-center w-100">
                     &copy; 2021 Adagawe | PT. Adagawe Indonesia
                 </div>
