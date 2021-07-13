@@ -18,22 +18,21 @@ public class Lamaran {
     private Pelamar pelamar;
 
     @ManyToOne
-    @JoinColumn(name = "id_perusahaan", nullable = false)
-    private Perusahaan perusahaan;
+    @JoinColumn(name = "id_lowongan", nullable = false)
+    private Lowongan lowongan;
 
     @Column(name = "tanggal_melamar")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tanggalMelamar;
 
-    @NotEmpty(message = "Pesan wajib diisi.")
     @Column(name = "pesan_pelamar")
-    private String pesan;
+    private String pesanPelamar;
+
+    @Column(name = "resume")
+    private String resume;
 
     @Column(name = "status_lamaran")
     private Integer statusLamaran;
-
-    @Column(name = "telah_ditolak")
-    private Integer telahDitolak;
 
     public int getId() {
         return id;
@@ -51,12 +50,12 @@ public class Lamaran {
         this.pelamar = pelamar;
     }
 
-    public Perusahaan getPerusahaan() {
-        return perusahaan;
+    public Lowongan getLowongan() {
+        return lowongan;
     }
 
-    public void setPerusahaan(Perusahaan perusahaan) {
-        this.perusahaan = perusahaan;
+    public void setLowongan(Lowongan lowongan) {
+        this.lowongan = lowongan;
     }
 
     public Date getTanggalMelamar() {
@@ -67,12 +66,20 @@ public class Lamaran {
         this.tanggalMelamar = tanggalMelamar;
     }
 
-    public String getPesan() {
-        return pesan;
+    public String getPesanPelamar() {
+        return pesanPelamar;
     }
 
-    public void setPesan(String pesan) {
-        this.pesan = pesan;
+    public void setPesanPelamar(String pesanPelamar) {
+        this.pesanPelamar = pesanPelamar;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
     }
 
     public Integer getStatusLamaran() {
@@ -83,11 +90,16 @@ public class Lamaran {
         this.statusLamaran = statusLamaran;
     }
 
-    public Integer getTelahDitolak() {
-        return telahDitolak;
-    }
-
-    public void setTelahDitolak(Integer telahDitolak) {
-        this.telahDitolak = telahDitolak;
+    @Override
+    public String toString() {
+        return "Lamaran{" +
+                "id=" + id +
+                ", pelamar=" + pelamar +
+                ", lowongan=" + lowongan +
+                ", tanggalMelamar=" + tanggalMelamar +
+                ", pesanPelamar='" + pesanPelamar + '\'' +
+                ", resume='" + resume + '\'' +
+                ", statusLamaran=" + statusLamaran +
+                '}';
     }
 }

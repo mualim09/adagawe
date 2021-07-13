@@ -3,6 +3,7 @@ package com.rps.adagawe.repository;
 import com.rps.adagawe.model.Jabatan;
 import com.rps.adagawe.model.JenisPegawai;
 import com.rps.adagawe.model.Perusahaan;
+import com.rps.adagawe.model.Lowongan;
 import com.rps.adagawe.model.VerifikasiPerusahaan;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,7 +14,9 @@ import java.util.List;
 @Repository
 public interface VerifikasiPerusahaanRepository extends CrudRepository<VerifikasiPerusahaan, Integer> {
 
-        @Query(nativeQuery = true, value = "SELECT TOP 1 a.id from Perusahaan a ORDER BY a.id DESC")
-        int findLastId();
+    @Query(nativeQuery = true, value = "SELECT TOP 1 a.id from Perusahaan a ORDER BY a.id DESC")
+    int findLastId();
 
+    @Query("from VerifikasiPerusahaan a order by a.id desc")
+    List<VerifikasiPerusahaan> getVerifikasiPerusahaanDesc();
 }

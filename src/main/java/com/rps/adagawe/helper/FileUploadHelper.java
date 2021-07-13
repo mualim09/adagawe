@@ -22,14 +22,14 @@ public class FileUploadHelper {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyy-hhmmss-SSS");
 
-    public static String Upload(MultipartFile file) {
+    public static String upload(MultipartFile file, String folder) {
         // normalize the file path
         String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
         String fileName = StringUtils.cleanPath(dateFormat.format(new Date())) + "." + extension;
 
         // save the file on the local file systems
         try {
-            Path path = Paths.get(UPLOAD_DIR + fileName);
+            Path path = Paths.get(UPLOAD_DIR + folder + "/" + fileName);
             System.out.println(path.toAbsolutePath());
             Files.copy(file.getInputStream(), path.toAbsolutePath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {

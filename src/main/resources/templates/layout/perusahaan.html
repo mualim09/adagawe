@@ -112,18 +112,18 @@
                         <div class="collapse in" id="collapseExample">
                             <ul class="nav">
                                 <li>
-                                    <a href="#profile">
-                                        <span class="link-collapse">My Profile</span>
+                                    <a href="/perusahaan/view">
+                                        <span class="link-collapse">View Profile</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#edit">
+                                    <a href="/perusahaan/profile/edit">
                                         <span class="link-collapse">Edit Profile</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#settings">
-                                        <span class="link-collapse">Settings</span>
+                                    <a href="/perusahaan/profile/security">
+                                        <span class="link-collapse">Security</span>
                                     </a>
                                 </li>
                             </ul>
@@ -150,7 +150,7 @@
                         </a>
                     </li>
                     <li th:class="'nav-item ' + ${url == 'lowongan' ? 'active' : ''}">
-                        <a href="#sidebarLayouts">
+                        <a href="/perusahaan/lowongan">
                             <i class="fas fa-th-list"></i>
                             <p>Daftar Lowongan</p>
                         </a>
@@ -174,6 +174,9 @@
     <div class="main-panel">
         <div class="content">
             <div class="page-inner">
+                <div class="page-header" layout:fragment="header">
+
+                </div>
                 <div class="row" layout:fragment="content">
 
                 </div>

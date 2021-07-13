@@ -4,13 +4,53 @@
       layout:decorate="~{layout/main}">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Daftar Lowongan</title>
 </head>
 <body>
 <div layout:fragment="content">
-    <section class="mt-5">
-        <div class="card-job-content">
-            <h4>Halaman Lowongan</h4>
+    <section class="mt-5 list-job">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="" method="GET">
+                    <div class="d-flex mb-4">
+                        <input type="text" class="form-control" name="cari" placeholder="Cari Lowongan...">
+                        <button type="submit" class="btn btn-primary d-flex align-items-center ml-3"><i
+                                class="fas fa-search mr-2"></i> Cari
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-md-12">
+                <div class="">
+                    <div class="row row-flex">
+                        <!-- Card -->
+                        <div class="col-md-4" th:each="loker, iter : ${lokers}">
+                            <div class="card-job">
+                                <div class="media mb-3">
+                                    <img
+                                            th:src="@{'/uploads/' + ${loker.perusahaan.fotoProfil}}"
+                                            class="img-company mr-3" th:alt="${loker.perusahaan.namaPerusahaan}">
+                                    <div class="media-body">
+                                        <a th:href="@{/lowongan/{id}(id=${loker.id})}" class="card-job-title" th:text="${loker.judulLowongan}"></a>
+                                        <a href="#" class="card-job-subtitle"
+                                           th:text="${loker.perusahaan.namaPerusahaan}"></a>
+                                    </div>
+                                </div>
+
+                                <p class="card-job-detail"><i class="fa fa-map-marker"></i> <span
+                                        th:text="${loker.perusahaan.kota + ', ' + loker.perusahaan.provinsi}"></span>
+                                </p>
+                                <p class="card-job-detail"><i class="fa fa-dollar-sign"></i>
+                                    <span th:text="${'Rp' + #numbers.formatDecimal(loker.gajiMinimal, 0, 'POINT', 2, 'COMMA')
+                                        + ' - Rp' + #numbers.formatDecimal(loker.gajiMaksimal, 0, 'POINT', 2, 'COMMA')}"></span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>

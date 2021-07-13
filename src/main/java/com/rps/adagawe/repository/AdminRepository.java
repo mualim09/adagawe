@@ -23,5 +23,4 @@ public interface AdminRepository extends CrudRepository<Admin, Integer> {
 
     @Query("from Admin a WHERE a.idUserLogin = :id")
     Admin getAdminByIdUserLogin(int id);
-
 }

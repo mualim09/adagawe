@@ -34,5 +34,4 @@ public class AdminService {
     public Admin getAdminByUserLogin(Integer id) {
         return adminRepository.getAdminByIdUserLogin(id);
     }
-
 }

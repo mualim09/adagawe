@@ -10,6 +10,11 @@ public class Perusahaan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty
+    @ManyToOne
+    @JoinColumn(name = "id_user_login", nullable = false)
+    private UserLogin userLogin;
+
     @NotEmpty(message = "Nama Perusahaan wajib diisi.")
     @Column(name = "nama_perusahaan")
     private String namaPerusahaan;

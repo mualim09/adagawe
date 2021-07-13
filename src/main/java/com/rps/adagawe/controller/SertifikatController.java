@@ -2,6 +2,7 @@ package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.Sertifikat;
 import com.rps.adagawe.service.PelamarService;
@@ -24,6 +25,9 @@ public class SertifikatController {
 
     @Autowired
     PelamarService pelamarService;
+
+    @Autowired
+    AdagaweService adagaweService;
 
     // Prefix Page URL
     private final String PREFIX = "/pelamar/sertifikat";
@@ -48,7 +52,7 @@ public class SertifikatController {
             return PREFIX_CREATE;
         }
 
-        int idPelamar = AdagaweMethods.getIdPelamarBySession(pelamarService);
+        int idPelamar = AdagaweMethods.getIdPelamarBySession(adagaweService);
         Pelamar pelamar = pelamarService.getPelamarById(idPelamar);
         sertifikat.setPelamar(pelamar);
         sertifikat.setStatus(1);

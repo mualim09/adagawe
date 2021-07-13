@@ -69,7 +69,7 @@ public class PengalamanController {
             return PREFIX_CREATE;
         }
 
-        String fileName = FileUploadHelper.Upload(file);
+        String fileName = FileUploadHelper.upload(file, "attachment");
         Pelamar pelamar = pelamarService.getPelamarById(1);
         pengalaman.setPelamar(pelamar);
         pengalaman.setFileAttachment(fileName);

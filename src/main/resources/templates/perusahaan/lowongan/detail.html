@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layout/perusahaan}">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Lowongan</title>
+</head>
+
+<body>
+
+<div layout:fragment="header">
+    <h4 class="page-title">Adagawe</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Detail</a>
+        </li>
+    </ul>
+</div>
+
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">Detail Lowongan</h4>
+                </div>
+            </div>
+            <div class="card-body" th:object="${lowongan}">
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Judul Lowongan</label>
+                        </br>
+                        <span th:text="*{judulLowongan}"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Jenis Pegawai</label>
+                        </br>
+                        <span th:text="*{jenisPegawai.namajenisPegawai}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-8">
+                        <label class="font-weight-bold">Keterangan</label>
+                        </br>
+                        <span th:text="*{keterangan}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Pengalaman Kerja</label>
+                        </br>
+                        <span th:text="*{pengalamanKerja}"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Keahlian</label>
+                        </br>
+                        <span th:text="*{keahlian}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Gaji Minimal</label>
+                        </br>
+                        <span th:text="*{gajiMinimal}"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Gaji Maksimal</label>
+                        </br>
+                        <span th:text="*{gajiMaksimal}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header border-top">
+                <h4 class="card-title">Pelamar Lowongan</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="add-row" class="display table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Data</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Samodra</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
