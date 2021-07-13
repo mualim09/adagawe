@@ -35,8 +35,10 @@
                         <input type="file" name="siufile" id="siu" placeholder="Surat Izin Usaha" class="form-control">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('siu')}" th:errors="*{siu}"></div>
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary">Ajukan Verifikasi</button>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Ajukan Verifikasi</button>
+                    </div>
                 </form>
             </div>
         </div>

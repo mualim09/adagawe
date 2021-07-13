@@ -47,15 +47,19 @@ public class PerusahaanController {
     @PostMapping("/perusahaan/verifikasi/create")
     public String postCreate(RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file,
                              @ModelAttribute("perusahaan") @Valid Perusahaan perusahaan, BindingResult result, Model model) {
-        System.out.println(result.getAllErrors());
+
         if (result.hasErrors()) {
             return "/perusahaan/verifikasi/create";
         }
 
+        UserLogin ul = AdagaweMethods.getUserLoginBySession(adagaweService);
+
+        perusahaan.setIdUserLogin(ul.getId());
+
         if (file.isEmpty()){
             perusahaan.setFotoProfil("default.jpg");
         } else {
-            String fileName = FileUploadHelper.Upload(file);
+            String fileName = FileUploadHelper.upload(file, "foto_profil");
             perusahaan.setFotoProfil(fileName);
         }
         perusahaanService.save(perusahaan);

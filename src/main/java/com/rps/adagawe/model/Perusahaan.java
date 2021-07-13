@@ -10,9 +10,11 @@ public class Perusahaan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty
+    @Column(name = "id_user_login")
+    private Integer idUserLogin;
+
     @ManyToOne
-    @JoinColumn(name = "id_user_login", nullable = false)
+    @JoinColumn(name = "id_user_login", insertable = false, updatable = false)
     private UserLogin userLogin;
 
     @NotEmpty(message = "Nama Perusahaan wajib diisi.")
@@ -48,6 +50,22 @@ public class Perusahaan {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Integer getIdUserLogin() {
+        return idUserLogin;
+    }
+
+    public void setIdUserLogin(Integer idUserLogin) {
+        this.idUserLogin = idUserLogin;
+    }
+
+    public UserLogin getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(UserLogin userLogin) {
+        this.userLogin = userLogin;
     }
 
     public String getNamaPerusahaan() {

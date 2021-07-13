@@ -5,8 +5,10 @@ import com.rps.adagawe.model.UserLogin;
 import com.rps.adagawe.service.AdminService;
 import com.rps.adagawe.service.PelamarService;
 import com.rps.adagawe.service.PerusahaanService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class AdagaweMethods {
+    public static UserLogin getUserLoginBySession(AdagaweService service) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return service.findUserLoginByEmail(authentication.getName());
+    }
 
     public static String getEmailUserBySession() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -34,25 +40,22 @@ public class AdagaweMethods {
     public static int getIdPelamarBySession(AdagaweService service) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserLogin ul = service.findUserLoginByEmail(authentication.getName());
-        int idPelamar = service.findPelamarByUserLogin(ul.getId()).getId();
 
-        return idPelamar;
+        return service.findPelamarByUserLogin(ul.getId()).getId();
     }
 
     public static int getIdPerusahaanBySession(AdagaweService service) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserLogin ul = service.findUserLoginByEmail(authentication.getName());
-        int idPelamar = service.findPerusahaanByUserLogin(ul.getId()).getId();
 
-        return idPelamar;
+        return service.findPerusahaanByUserLogin(ul.getId()).getId();
     }
 
     public static String getNameAdminBySession(AdminService service) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserLogin ul = service.findUserLoginByEmail(authentication.getName());
-        String idAdmin= service.getAdminByUserLogin(ul.getId()).getNamaAdmin();
 
-        return idAdmin;
+        return service.getAdminByUserLogin(ul.getId()).getNamaAdmin();
     }
 
     public static String getMainUrl(HttpServletRequest request) {

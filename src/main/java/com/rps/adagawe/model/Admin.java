@@ -42,7 +42,7 @@ public class Admin {
     @Column(name = "row_status")
     private int status;
 
-    @Column(name = "id_user_login")
+    @Column(name = "id_user_login", insertable = false, updatable = false)
     private int idUserLogin;
 
     public int getId() {

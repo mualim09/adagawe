@@ -21,11 +21,9 @@ public class VerifikasiPerusahaan {
     @Column(name = "npwp")
     private String npwp;
 
-    //@NotEmpty(message = "TDP wajib diisi.")
     @Column(name = "tdp")
     private String tdp;
 
-    //@NotEmpty(message = "SIU wajib diisi.")
     @Column(name = "siu")
     private String siu;
 
@@ -43,7 +41,6 @@ public class VerifikasiPerusahaan {
     @Column(name = "diverifikasi_oleh")
     private String diverifikasiOleh;
 
-    @NotEmpty(message = "Komentar wajib diisi")
     @Column(name = "komentar")
     private String komentar;
 

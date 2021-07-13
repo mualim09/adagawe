@@ -52,38 +52,33 @@
                     <tr>
                         <td>SIU</td>
                         <td>
-                            <a th:href="${'/uploads/'+verifikasiperusahaan.siu}" class="btn btn-primary">Download SIU</a>
+                            <a th:href="${'/uploads/'+verifikasiperusahaan.siu}" class="btn btn-primary btn-sm">Download SIU</a>
                         </td>
                     </tr>
 
                     <tr>
                         <td>TDP</td>
                         <td>
-                            <a th:href="${'/uploads/'+verifikasiperusahaan.tdp}" class="btn btn-primary">Download TDP</a>
+                            <a th:href="${'/uploads/'+verifikasiperusahaan.tdp}" class="btn btn-primary btn-sm">Download TDP</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="form-group">
-                                <label for="komentar">Komentar</label>
-                                <textarea th:field="*{komentar}" id="komentar" placeholder="Komentar"
-                                          th:class="'form-control '+ ${#fields.hasErrors('komentar') ? 'is-invalid' : ''}"></textarea>
-                                <div class="invalid-feedback" th:if="${#fields.hasErrors('komentar')}" th:errors="*{komentar}"></div>
-                            </div>
+                            <label for="komentar">Komentar</label>
+                            <textarea th:field="*{komentar}" id="komentar" placeholder="Komentar"
+                                      th:class="'form-control '+ ${#fields.hasErrors('komentar') ? 'is-invalid' : ''}"></textarea>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('komentar')}" th:errors="*{komentar}"></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <button type="submit" name="verif" value="tolak" onclick="return confirm('Apakah anda yakin ingin untuk menolak verifikasi?')" class="btn btn-sm btn-danger"
+                            <button type="submit" name="verif" value="tolak" onclick="return confirm('Apakah anda yakin ingin untuk menolak verifikasi?')" class="btn btn-danger mt-3 mr-2"
                                     th:disabled="${verifikasiperusahaan.hasil != 0}">
                                 <i class="fa fa-not-equal"></i>Tolak</button>
-                        </td>
-                        <td>
-                            <button type="submit" name="verif" value="setuju" onclick="return confirm('Apakah anda yakin ingin untuk menyetujui verifikasi?')" class="btn btn-sm btn-success"
+                            <button type="submit" name="verif" value="setuju" onclick="return confirm('Apakah anda yakin ingin untuk menyetujui verifikasi?')" class="btn btn-success"
                                     th:disabled="${verifikasiperusahaan.hasil != 0}">
                                 <i class="fa fa-check-circle"></i>Setujui</button>
                         </td>
-
                     </tr>
 
                     </table>

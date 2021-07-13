@@ -56,8 +56,8 @@ public class VerifikasiPerusahaanController {
             return "/perusahaan/verifikasi/createnext";
         }
 
-        String fileSiu = FileUploadHelper.Upload(siufile);
-        String fileTdp = FileUploadHelper.Upload(tdpfile);
+        String fileSiu = FileUploadHelper.upload(siufile, "siu");
+        String fileTdp = FileUploadHelper.upload(tdpfile, "tdp");
 
         verifikasiperusahaan.setSiu(fileSiu);
         verifikasiperusahaan.setTdp(fileTdp);

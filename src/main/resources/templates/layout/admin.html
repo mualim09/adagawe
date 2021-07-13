@@ -23,6 +23,7 @@
     <!-- CSS Files -->
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/atlantis.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <!-- <link rel="stylesheet" href="../../assets/css/demo.css"> -->
 
@@ -80,7 +81,9 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Account Setting</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Logout</a>
+                                    <form action="/keluar" method="post" class="d-inline">
+                                        <button class="dropdown-item" type="submit">Logout</button>
+                                    </form>
                                 </li>
                             </div>
                         </ul>
