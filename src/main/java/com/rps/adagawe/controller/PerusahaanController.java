@@ -8,6 +8,7 @@ import com.rps.adagawe.model.Perusahaan;
 import com.rps.adagawe.model.VerifikasiPerusahaan;
 import com.rps.adagawe.model.UserLogin;
 import com.rps.adagawe.service.*;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -112,6 +113,12 @@ public class PerusahaanController {
 
         model.addAttribute("userEmail", userEmail);
         return "/main/index-perusahaan";
+    }
+
+    @GetMapping("/perusahaan/dashboard")
+    public String getViewDashboard(Model model) {
+
+        return "/perusahaan/dashboard";
     }
 
 

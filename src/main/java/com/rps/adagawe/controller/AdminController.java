@@ -31,9 +31,15 @@ public class AdminController {
 
     @GetMapping("/admin/create")
     public String getCreate(Model model) {
-
         model.addAttribute("userAdmin", new UserAdmin());
+
         return "/admin/create";
+    }
+
+    @GetMapping("/admin/dashboard")
+    public String getViewDashboard(Model model) {
+
+        return "/admin/dashboard";
     }
 
     @PostMapping("/admin/create")

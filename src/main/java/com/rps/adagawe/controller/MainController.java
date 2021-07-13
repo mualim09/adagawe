@@ -58,7 +58,8 @@ public class MainController {
     @GetMapping("/admin")
     public String index(Model model) {
         redirectIndex(model);
-        return "main/index-admin";
+//        return "main/index-admin";
+        return "/admin/dashboard";
     }
 
     @GetMapping("/lowongan/{id}")
