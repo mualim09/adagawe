@@ -21,11 +21,11 @@ public class VerifikasiPerusahaan {
     @Column(name = "npwp")
     private String npwp;
 
-    @NotEmpty(message = "TDP wajib diisi.")
+    //@NotEmpty(message = "TDP wajib diisi.")
     @Column(name = "tdp")
     private String tdp;
 
-    @NotEmpty(message = "SIU wajib diisi.")
+    //@NotEmpty(message = "SIU wajib diisi.")
     @Column(name = "siu")
     private String siu;
 
@@ -33,17 +33,17 @@ public class VerifikasiPerusahaan {
     private Integer hasil;
 
     @Column(name = "created_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdDate;
 
     @Column(name = "last_modified")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date lastModified;
 
     @Column(name = "diverifikasi_oleh")
     private String diverifikasiOleh;
 
-    @NotEmpty(message = "Komentar wajib diisi.")
+    @NotEmpty(message = "Komentar wajib diisi")
     @Column(name = "komentar")
     private String komentar;
 

@@ -47,6 +47,14 @@ public class AdagaweMethods {
         return idPelamar;
     }
 
+    public static String getNameAdminBySession(AdminService service) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserLogin ul = service.findUserLoginByEmail(authentication.getName());
+        String idAdmin= service.getAdminByUserLogin(ul.getId()).getNamaAdmin();
+
+        return idAdmin;
+    }
+
     public static String getMainUrl(HttpServletRequest request) {
         /**
          * Url = /pelamar/profile

@@ -42,12 +42,23 @@ public class Admin {
     @Column(name = "row_status")
     private int status;
 
+    @Column(name = "id_user_login")
+    private int idUserLogin;
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdUserLogin() {
+        return idUserLogin;
+    }
+
+    public void setIdUserLogin(int idUserLogin) {
+        this.idUserLogin = idUserLogin;
     }
 
     public String getNamaAdmin() {
