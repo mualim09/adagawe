@@ -74,4 +74,11 @@ public class LamaranController {
     public String lamaranResult() {
         return "main/lamaran-success";
     }
+
+    @PostMapping("/perusahaan/lamaran/{id}/clean")
+    public String seleksiLamaran(@PathVariable("id") int idLowongan) {
+        lamaranService.eliminatePelamarByPendidikan(idLowongan);
+
+        return "redirect:/perusahaan/lowongan/detail/" + idLowongan;
+    }
 }

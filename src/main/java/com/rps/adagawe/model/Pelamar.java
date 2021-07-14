@@ -60,10 +60,13 @@ public class Pelamar {
     private String pendidikanTerakhir;
 
     @Column(insertable = false, updatable = false)
-    private Double umur;
+    private Integer umur;
 
     @Column(name = "id_lamaran", insertable = false, updatable = false)
     private Integer idLamaran;
+
+    @Column(name = "status_lamaran", insertable = false, updatable = false)
+    private Integer statusLamaran;
 
 
     public int getId() {
@@ -170,11 +173,11 @@ public class Pelamar {
         this.pendidikanTerakhir = pendidikanTerakhir;
     }
 
-    public Double getUmur() {
+    public Integer getUmur() {
         return umur;
     }
 
-    public void setUmur(Double umur) {
+    public void setUmur(Integer umur) {
         this.umur = umur;
     }
 
@@ -184,6 +187,14 @@ public class Pelamar {
 
     public void setIdLamaran(Integer idLamaran) {
         this.idLamaran = idLamaran;
+    }
+
+    public Integer getStatusLamaran() {
+        return statusLamaran;
+    }
+
+    public void setStatusLamaran(Integer statusLamaran) {
+        this.statusLamaran = statusLamaran;
     }
 
     @Override

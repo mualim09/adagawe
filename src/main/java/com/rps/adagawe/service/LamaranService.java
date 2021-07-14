@@ -22,4 +22,8 @@ public class LamaranService {
     public List<Pelamar> getPelamarByIdLowongan(int idLowongan) {
         return null;
     }
+
+    public void eliminatePelamarByPendidikan(int idLowongan) {
+        lamaranRepository.eliminatePelamarsByPendidikan(idLowongan);
+    }
 }
