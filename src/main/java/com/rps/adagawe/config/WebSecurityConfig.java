@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/daftar/**",
 						"/",
 						"/lowongan/**",
-						"/lamaran/**",
+						"/lamaran",
 						"/main/**",
 						"/masuk/**",
 						"/css/**",

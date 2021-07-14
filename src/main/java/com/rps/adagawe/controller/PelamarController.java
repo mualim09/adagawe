@@ -21,14 +21,20 @@ public class PelamarController {
 
     @Autowired
     PelamarService pelamarService;
+
     @Autowired
     PengalamanService pengalamanService;
+
     @Autowired
     PendidikanService pendidikanService;
+
     @Autowired
     SertifikatService sertifikatService;
+
     @Autowired
     AdagaweService adagaweService;
+
+
     // Prefix URL
     private final String PREFIX = "/pelamar/profile";
     private final String PREFIX_SECURITY = "/pelamar/profile/security";
@@ -37,6 +43,8 @@ public class PelamarController {
     @GetMapping("/pelamar/profile")
     public String getView(Model model) {
         int idPelamar = AdagaweMethods.getIdPelamarBySession(adagaweService);
+
+        model.addAttribute("pelamar", pelamarService.getPelamarById(idPelamar));
         model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(idPelamar));
         model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(idPelamar));
         model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(idPelamar));

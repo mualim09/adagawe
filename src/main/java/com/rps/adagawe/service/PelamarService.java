@@ -54,4 +54,8 @@ public class PelamarService {
 
         return p;
     }
+
+    public List<Pelamar> getPelamarByIdLowongan(int idLowongan) {
+        return pelamarRepository.findPelamarsByIdLowongan(idLowongan);
+    }
 }

@@ -19,4 +19,6 @@ public interface PelamarRepository  extends CrudRepository<Pelamar, Integer> {
     @Query("from Pelamar a WHERE a.rowStatus = 1")
     List<Pelamar> findPelamarByRowStatus();
 
+    @Query(nativeQuery = true, value = "SELECT * FROM lamaran_pelamar WHERE id_lowongan = :idLowongan")
+    List<Pelamar> findPelamarsByIdLowongan(int idLowongan);
 }

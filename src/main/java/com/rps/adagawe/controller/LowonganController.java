@@ -4,7 +4,9 @@ import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.model.Jabatan;
 import com.rps.adagawe.model.Lowongan;
 import com.rps.adagawe.service.JenisPegawaiService;
+import com.rps.adagawe.service.LamaranService;
 import com.rps.adagawe.service.LowonganService;
+import com.rps.adagawe.service.PelamarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,12 @@ public class LowonganController {
 
     @Autowired
     JenisPegawaiService jenisPegawaiService;
+
+    @Autowired
+    LamaranService lamaranService;
+
+    @Autowired
+    PelamarService pelamarService;
 
     @GetMapping("/perusahaan/lowongan")
     public String index(Model model, HttpServletRequest request) {
@@ -78,7 +86,7 @@ public class LowonganController {
     public String getDetail(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
         Lowongan lowongan = lowonganService.getLowonganById(id);
         model.addAttribute("lowongan", lowongan);
-        //model.addAttribute("jenisPegawai", jenisPegawai);
+        model.addAttribute("lamarans", pelamarService.getPelamarByIdLowongan(lowongan.getId()));
 
         return "/perusahaan/lowongan/detail";
     }
