@@ -85,8 +85,13 @@ public class LowonganController {
     @GetMapping("/perusahaan/lowongan/detail/{id}")
     public String getDetail(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
         Lowongan lowongan = lowonganService.getLowonganById(id);
+        int lowonganId = lowongan.getId();
         model.addAttribute("lowongan", lowongan);
-        model.addAttribute("lamarans", pelamarService.getPelamarByIdLowongan(lowongan.getId()));
+        model.addAttribute("lamarans1", pelamarService.getPelamarByIdLowongan(lowonganId, 0, 1));
+        model.addAttribute("lamarans2", pelamarService.getPelamarByIdLowongan(lowonganId, 2, 3));
+        model.addAttribute("lamarans3", pelamarService.getPelamarByIdLowongan(lowonganId, 4, 5));
+        model.addAttribute("lamarans4", pelamarService.getPelamarByIdLowongan(lowonganId, 6, 6));
+
 
         return "/perusahaan/lowongan/detail";
     }
