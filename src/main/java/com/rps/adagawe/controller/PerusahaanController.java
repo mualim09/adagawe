@@ -112,7 +112,8 @@ public class PerusahaanController {
         String userEmail = authentication.getName();
 
         model.addAttribute("userEmail", userEmail);
-        return "/main/index-perusahaan";
+        //return "/main/index-perusahaan";
+        return "/perusahaan/dashboard";
     }
 
     @GetMapping("/perusahaan/dashboard")
