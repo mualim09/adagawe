@@ -23,7 +23,7 @@ public interface AdagaweRepository extends CrudRepository<UserLogin, Integer> {
     @Query("from Perusahaan a where a.userLogin.id = :id")
     Perusahaan getPerusahaanByUserLogin(int id);
 
-    @Query(nativeQuery = true, value = "select count(id) from UserLogin where userRole = :id ")
+    @Query(nativeQuery = true, value = "select count(id) from UserLogin where user_role = :id ")
     int getTotalUserByUserRole(int id);
 
     @Query(nativeQuery = true, value = "select count(id) from Lowongan")

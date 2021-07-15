@@ -62,7 +62,7 @@ public class PendidikanController {
             return PREFIX_CREATE;
         }
 
-        int idPelamar = AdagaweMethods.getIdPelamarBySession(adagaweService);
+        int idPelamar = AdagaweMethods.getPelamarBySession(adagaweService).getId();
         Pelamar pelamar = pelamarService.getPelamarById(idPelamar);
         pendidikan.setPelamar(pelamar);
         pendidikanService.save(pendidikan);

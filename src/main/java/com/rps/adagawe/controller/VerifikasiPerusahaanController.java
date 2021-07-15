@@ -1,6 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
 import com.rps.adagawe.model.Jabatan;
 import com.rps.adagawe.model.Pelamar;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -26,12 +28,20 @@ public class VerifikasiPerusahaanController {
 
     @Autowired
     VerifikasiPerusahaanService verifikasiPerusahaanService;
+
+    @Autowired
     PerusahaanService perusahaanService;
 
+    @Autowired
+    AdagaweService adagaweService;
+
     @GetMapping("/admin/verifikasi/index")
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest request) {
         List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.getAll();
         model.addAttribute("verifikasiperusahaans", verifikasiperusahaans);
+
+        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
         return "/admin/verifikasi/index";
     }
 

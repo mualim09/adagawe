@@ -118,7 +118,7 @@ public class PerusahaanController {
 
     @GetMapping("/perusahaan/view")
     public String getViewPerusahaan(Model model) {
-        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
         Perusahaan perusahaan = perusahaanService.getPerusahaanById(idPerusahaan);
 
         return "/perusahaan/index";
@@ -126,7 +126,7 @@ public class PerusahaanController {
 
     @GetMapping("/perusahaan/profile/edit")
     public String getEditPerusahaan(Model model) {
-        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
         Perusahaan perusahaan = perusahaanService.getPerusahaanById(idPerusahaan);
 
         model.addAttribute("perusahaan", perusahaan);

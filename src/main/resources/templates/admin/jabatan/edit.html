@@ -8,34 +8,57 @@
 </head>
 
 <body>
-<div layout:fragment="content">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="d-flex align-items-center">
-                    <h4 class="card-title">Ubah Jabatan</h4>
+    <div layout:fragment="header">
+        <h4 class="page-title">Jabatan</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="#">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Jabatan</a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Ubah</a>
+            </li>
+        </ul>
+    </div>
+
+    <div layout:fragment="content">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">Ubah Jabatan</h4>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <form th:action="@{/admin/jabatan/edit/{id}(id=${jabatan.id})}" th:object="${jabatan}" id="jabatanForm" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="namaJabatan">Nama Jabatan</label>
-                        <input type="text" th:field="*{namaJabatan}" id="namaJabatan" placeholder="Nama Jabatan"
-                               th:class="'form-control '+ ${#fields.hasErrors('namaJabatan') ? 'is-invalid' : ''}">
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('namaJabatan')}" th:errors="*{namaJabatan}"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="deskripsi">Deskripsi</label>
-                        <textarea th:field="*{deskripsi}" id="deskripsi" placeholder="Deskripsi"
-                                  th:class="'form-control '+ ${#fields.hasErrors('deskripsi') ? 'is-invalid' : ''}"></textarea>
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('deskripsi')}" th:errors="*{deskripsi}"></div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </form>
+                <div class="card-body">
+                    <form th:action="@{/admin/jabatan/edit/{id}(id=${jabatan.id})}" th:object="${jabatan}" id="jabatanForm" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="namaJabatan">Nama Jabatan</label>
+                            <input type="text" th:field="*{namaJabatan}" id="namaJabatan" placeholder="Nama Jabatan"
+                                   th:class="'form-control '+ ${#fields.hasErrors('namaJabatan') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('namaJabatan')}" th:errors="*{namaJabatan}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deskripsi">Deskripsi</label>
+                            <textarea th:field="*{deskripsi}" id="deskripsi" placeholder="Deskripsi"
+                                      th:class="'form-control '+ ${#fields.hasErrors('deskripsi') ? 'is-invalid' : ''}"></textarea>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('deskripsi')}" th:errors="*{deskripsi}"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>

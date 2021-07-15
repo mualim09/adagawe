@@ -8,29 +8,54 @@
 </head>
 
 <body>
-<div layout:fragment="content">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="d-flex align-items-center">
-                    <h4 class="card-title">Tambah Jenis Pegawai</h4>
-                </div>
-            </div>
-            <div class="card-body">
-                <form th:action="@{/admin/jenispegawai/create}" th:object="${jenispegawai}" id="jenispegawaiForm" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="namajenisPegawai">Nama Jenis Pegawai</label>
-                        <input type="text" th:field="*{namajenisPegawai}" id="namajenisPegawai" placeholder="Nama Jenis Pegawai"
-                               th:class="'form-control '+ ${#fields.hasErrors('namajenisPegawai') ? 'is-invalid' : ''}">
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('namajenisPegawai')}" th:errors="*{namajenisPegawai}"></div>
-                    </div>
 
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </form>
+    <div layout:fragment="header">
+        <h4 class="page-title">Jenis Pegawai</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="#">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Jenis Pegawai</a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Tambah</a>
+            </li>
+        </ul>
+    </div>
+
+    <div layout:fragment="content">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">Tambah Jenis Pegawai</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/admin/jenispegawai/create}" th:object="${jenispegawai}" id="jenispegawaiForm" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="namajenisPegawai">Nama Jenis Pegawai</label>
+                            <input type="text" th:field="*{namajenisPegawai}" id="namajenisPegawai" placeholder="Nama Jenis Pegawai"
+                                   th:class="'form-control '+ ${#fields.hasErrors('namajenisPegawai') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('namajenisPegawai')}" th:errors="*{namajenisPegawai}"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 </body>
 
 </html>

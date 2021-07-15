@@ -52,7 +52,7 @@ public class SertifikatController {
             return PREFIX_CREATE;
         }
 
-        int idPelamar = AdagaweMethods.getIdPelamarBySession(adagaweService);
+        int idPelamar = AdagaweMethods.getPelamarBySession(adagaweService).getId();
         Pelamar pelamar = pelamarService.getPelamarById(idPelamar);
         sertifikat.setPelamar(pelamar);
         sertifikat.setStatus(1);

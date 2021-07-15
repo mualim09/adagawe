@@ -37,13 +37,6 @@ public class MainController {
         return "main/index";
     }
 
-    @GetMapping("/admin")
-    public String index(Model model) {
-        redirectIndex(model);
-//        return "main/index-admin";
-        return "/admin/dashboard";
-    }
-
     @GetMapping("/lowongan/{id}")
     public String lowongan(@PathVariable("id") int id, Model model) {
         Lowongan lowongan = lowonganService.getLowonganById(id);

@@ -24,8 +24,6 @@
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/atlantis.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/style.css}">
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <!-- <link rel="stylesheet" href="../../assets/css/demo.css"> -->
 
     <!-- Optional Section -->
     <th:block layout:fragment="styles" />
@@ -61,25 +59,25 @@
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                             <div class="avatar-sm">
-                                <img src="/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                                <img th:src="@{'/uploads/foto_profil/' + ${admin.fotoProfil}}" alt="..." class="avatar-img rounded-circle">
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-user animated fadeIn">
                             <div class="dropdown-user-scroll scrollbar-outer">
                                 <li>
                                     <div class="user-box">
-                                        <div class="avatar-lg"><img src="/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
+                                        <div class="avatar-lg">
+                                            <img th:src="@{'/uploads/foto_profil/' + ${admin.fotoProfil}}" alt="image profile" class="avatar-img rounded">
+                                        </div>
                                         <div class="u-text">
-                                            <h4>Hizrian</h4>
-                                            <p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                            <h4 th:text="${admin.namaAdmin}"></h4>
+                                            <p class="text-muted" th:text="${admin.userLogin.email}">hello@example.com</p>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">My Profile</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Account Setting</a>
+                                    <a class="dropdown-item" href="/admin/profile">My Profile</a>
                                     <div class="dropdown-divider"></div>
                                     <form action="/keluar" method="post" class="d-inline">
                                         <button class="dropdown-item" type="submit">Logout</button>
@@ -100,12 +98,12 @@
             <div class="sidebar-content">
                 <div class="user">
                     <div class="avatar-sm float-left mr-2">
-                        <img src="/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                        <img th:src="@{'/uploads/foto_profil/' + ${admin.fotoProfil}}" alt="..." class="avatar-img rounded-circle">
                     </div>
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									Hizrian
+                                    <span th:text="${admin.namaAdmin}"></span>
 									<span class="user-level">Administrator</span>
 									<span class="caret"></span>
 								</span>
@@ -134,7 +132,7 @@
                     </div>
                 </div>
                 <ul class="nav nav-primary">
-                    <li th:class="'nav-item ' + ${url == '' ? 'active' : ''}" >
+                    <li th:class="'nav-item ' + ${url == 'admin' ? 'active' : ''}" >
                         <a href="/admin" class="collapsed" aria-expanded="false">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>

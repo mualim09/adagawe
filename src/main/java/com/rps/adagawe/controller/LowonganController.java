@@ -41,7 +41,7 @@ public class LowonganController {
         List<Lowongan> lowongans = lowonganService.getAll();
         model.addAttribute("lowongans", lowongans);
 
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
         return "/perusahaan/lowongan/index";
     }
 
@@ -50,7 +50,7 @@ public class LowonganController {
         model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
         model.addAttribute("lowongan", new Lowongan());
 
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
         return "/perusahaan/lowongan/create";
     }
 
@@ -72,7 +72,7 @@ public class LowonganController {
         model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
         model.addAttribute("lowongan", lowonganService.getLowonganById(id));
 
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
         return "/perusahaan/lowongan/edit";
     }
 
