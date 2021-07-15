@@ -31,8 +31,8 @@ public class AdminController {
 
     @GetMapping("/admin/create")
     public String getCreate(Model model) {
-
         model.addAttribute("userAdmin", new UserAdmin());
+
         return "/admin/create";
     }
 

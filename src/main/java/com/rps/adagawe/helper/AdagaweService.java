@@ -31,4 +31,12 @@ public class AdagaweService {
     public Perusahaan findPerusahaanByUserLogin(int id) {
         return adagaweRepository.getPerusahaanByUserLogin(id);
     }
+
+    public int findTotalLamaran() {
+        return adagaweRepository.getTotalLowongan();
+    }
+
+    public int findTotalUserByRole(int id) {
+        return adagaweRepository.getTotalUserByUserRole(id);
+    }
 }

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layout/admin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Jabatan</title>
+</head>
+
+<body>
+
+<div layout:fragment="header">
+    <h4 class="page-title">Dashboard</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Dashboard</a>
+        </li>
+    </ul>
+</div>
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">
+            Ada data perusahaan yang belum ditinjau!
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-stats card-round">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="icon-big text-center">
+                            <i class="flaticon-chart-pie text-warning"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                        <div class="numbers">
+                            <p class="card-category">Pelamar</p>
+                            <h4 class="card-title" th:text="${total_1}"></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-stats card-round">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="icon-big text-center">
+                            <i class="flaticon-coins text-success"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                        <div class="numbers">
+                            <p class="card-category">Perusahaan</p>
+                            <h4 class="card-title">24</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="icon-big text-center">
+                            <i class="flaticon-error text-danger"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                        <div class="numbers">
+                            <p class="card-category">Lowongan</p>
+                            <h4 class="card-title">24</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    <div class="col-sm-12 col-md-3">-->
+<!--        <div class="card">-->
+<!--            <img class="card-img-top" th:src="@{/img/dashboard_user.svg}" alt="Card Dashboard User">-->
+<!--            <div class="card-body">-->
+<!--                <h4 class="card-title font-weight-bold">Hello Rifqy!</h4>-->
+<!--                <p class="card-text">Selamat datang kembali.</p>-->
+<!--                <a href="#" class="btn btn-primary w-100">Learn More</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="col-sm-12 col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title font-weight-bold">Ringkasan Status Verifikasi</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="display table table-hover">
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Status</td>
+                        <td>Jumlah</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Belum Ditinjau</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Sedang ditinjau</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Lolos Peninjauan</td>
+                            <td>7</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title font-weight-bold">Evaluasi Lowongan</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="display table table-hover">
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Bidang</td>
+                        <td>Jumlah</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Backend Developer</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Data Science</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Front End Developer</td>
+                        <td>7</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title font-weight-bold">Evaluasi Perusahaan</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="display table table-hover">
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Jenis</td>
+                        <td>Jumlah</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Startup</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>IT Consultant</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Education</td>
+                        <td>7</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div th:if="${message}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span th:text="${message}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title font-weight-bold">Riwayat Verifikasi Perusahaan</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="add-row" class="display table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Perusahaan</td>
+                            <td>Bidang</td>
+                            <td>Tanggal Pengajuan</td>
+                            <td>Tanggal Peninjauan</td>
+                            <td>Komentar</td>
+                            <td>Hasil</td>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Tokopedia</td>
+                            <td>Startup</td>
+                            <td>10 Juli 2021</td>
+                            <td>14 Juli 2021</td>
+                            <td>Dokumen siu dan tdp jelas dan terdaftar</td>
+                            <td>Lolos Peninjauan</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
