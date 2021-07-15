@@ -116,13 +116,6 @@ public class PerusahaanController {
         return "/perusahaan/dashboard";
     }
 
-    @GetMapping("/perusahaan/dashboard")
-    public String getViewDashboard(Model model) {
-
-        return "/perusahaan/dashboard";
-    }
-
-
     @GetMapping("/perusahaan/view")
     public String getViewPerusahaan(Model model) {
         int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);

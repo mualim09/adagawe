@@ -20,8 +20,12 @@ public interface AdagaweRepository extends CrudRepository<UserLogin, Integer> {
     @Query("from Pelamar a where a.userLogin.id = :id")
     Pelamar getPelamarByUserLogin(int id);
 
-//    @Query(nativeQuery = true, value = "SELECT TOP 1 * from Perusahaan a " +
-//            "JOIN UserLogin ul ON a.id_user_login = ul.id WHERE ul.id = :id")
     @Query("from Perusahaan a where a.userLogin.id = :id")
     Perusahaan getPerusahaanByUserLogin(int id);
+
+    @Query(nativeQuery = true, value = "select count(id) from UserLogin where userRole = :id ")
+    int getTotalUserByUserRole(int id);
+
+    @Query(nativeQuery = true, value = "select count(id) from Lowongan")
+    int getTotalLowongan();
 }

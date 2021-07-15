@@ -36,12 +36,6 @@ public class AdminController {
         return "/admin/create";
     }
 
-    @GetMapping("/admin/dashboard")
-    public String getViewDashboard(Model model) {
-
-        return "/admin/dashboard";
-    }
-
     @PostMapping("/admin/create")
     public String postCreate(RedirectAttributes redirectAttributes,
                              @ModelAttribute("userAdmin") @Valid UserAdmin userAdmin, BindingResult result, Model model) {
