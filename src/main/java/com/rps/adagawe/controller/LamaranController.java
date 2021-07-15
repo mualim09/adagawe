@@ -81,4 +81,9 @@ public class LamaranController {
 
         return "redirect:/perusahaan/lowongan/detail/" + idLowongan;
     }
+
+    @GetMapping("/perusahaan/lamaran/view/{id}")
+    public String viewLamaran(@PathVariable("id") int idLamaran) {
+        return "";
+    }
 }

@@ -16,7 +16,6 @@ public interface LamaranRepository extends CrudRepository<Lamaran, Integer> {
 //    List<Lamaran> findLamaransByIdLowongan(int idLowongan);
     @Modifying(clearAutomatically = true)
     @Transactional
-    @Query(nativeQuery = true, value = "UPDATE Lamaran SET status_lamaran = 1 WHERE id IN (" +
-            "SELECT id_lamaran FROM view_LamaranPelamar WHERE id_lowongan = :idLowongan AND tingkatan_jenjang < jenjang_minimal AND status_lamaran = 0)")
+    @Query(nativeQuery = true, value = "EXEC eliminatePelamarByPendidikan @IdLowongan = :idLowongan")
     void eliminatePelamarsByPendidikan(int idLowongan);
 }
