@@ -113,7 +113,7 @@
                                     <td>Nama Pelamar</td>
                                     <td>Jenis Kelamin</td>
                                     <td>Umur</td>
-                                    <td>Kota Domisili</td>
+                                    <td>Domisili</td>
                                     <td>Pendidikan Terakhir</td>
                                     <td>Status</td>
                                     <td>Aksi</td>
@@ -138,17 +138,6 @@
                                     </td>
                                     <td>
                                         <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
-                                        <form th:action="@{/perusahaan/lamaran/reject/{id}(id=${lamaran.idLamaran})}" method="post" class="d-inline">
-                                            <button class="btn btn-sm btn-danger" type="submit" name="result" value="Tolak"
-                                                    onclick="return confirm('Apakah anda yakin ingin menolak lamaran ini?')">
-                                                <i class="fa fa-times"></i> Tolak</button>
-                                        </form>
-
-<!--                                        <form th:action="@{/perusahaan/lamaran/accept/{id}(id=${lamaran.idLamaran})}" method="post" class="d-inline">-->
-<!--                                            <button class="btn btn-sm btn-success" type="submit" name="result" value="Terima"-->
-<!--                                                    onclick="return confirm('Apakah anda yakin ingin menerima lamaran ini?')">-->
-<!--                                                <i class="fa fa-check"></i> Terima</button>-->
-<!--                                        </form>-->
                                     </td>
                                 </tr>
                                 </tbody>
@@ -162,10 +151,11 @@
                                 <tr>
                                     <td>#</td>
                                     <td>Nama Pelamar</td>
-                                    <td>Jenis Kelamin</td>
+                                    <td>Jenkel</td>
                                     <td>Umur</td>
-                                    <td>Kota Domisili</td>
-                                    <td>Pendidikan Terakhir</td>
+                                    <td>Domisili</td>
+                                    <td>Pend. Terakhir</td>
+                                    <td>Nilai Uji Kompetensi</td>
                                     <td>Status</td>
                                     <td>Aksi</td>
                                 </tr>
@@ -177,7 +167,8 @@
                                     <td th:text="${lamaran.jenisKelamin}"></td>
                                     <td th:text="${lamaran.umur}"></td>
                                     <td th:text="${lamaran.kota}"></td>
-                                    <td th:text="${lamaran.pendidikanTerakhir}"></td>
+                                    <td th:text="${lamaran.pendidikanTerakhir == null ? '-' : lamaran.pendidikanTerakhir}"></td>
+                                    <td th:text="${lamaran.nilaiUjiKompetensi} != null ? ${lamaran.nilaiUjiKompetensi} : '-'"></td>
                                     <td th:switch="${lamaran.statusLamaran}">
                                         <span th:case="0">Menunggu Kualifikasi</span>
                                         <span th:case="1">Kualifikasi Ditolak</span>
@@ -188,7 +179,26 @@
                                         <span th:case="6">Wawancara Diterima</span>
                                     </td>
                                     <td>
-                                        <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
+                                        <div class="d-flex">
+                                            <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary mr-1"><i class="fa fa-eye"></i> View</a>
+
+                                            <button type="button" th:if="${lamaran.statusLamaran != 3}" class="btn btn-success btn-sm mr-1 terimaButton"
+                                                    th:data-idlamaran="${lamaran.idLamaran}" data-status="4" data-tahap="Wawancara" data-toggle="modal" data-target="#accModal">
+                                                <i class="fa fa-check"></i> Terima
+                                            </button>
+
+                                            <form th:action="@{/perusahaan/lamaran/reject/{id}(id=${lamaran.idLamaran})}"
+                                                  th:if="${lamaran.statusLamaran != 3}" method="post" class="d-inline mr-1">
+                                                <button class="btn btn-sm btn-danger" type="submit" name="result" value="Tolak"
+                                                        onclick="return confirm('Apakah anda yakin ingin menolak lamaran ini?')">
+                                                    <i class="fa fa-times"></i> Tolak</button>
+                                            </form>
+
+                                            <button type="button" th:if="${lamaran.statusLamaran == 2}" class="btn btn-info btn-sm ujiKompetensiButton"
+                                                    th:data-idlamaran="${lamaran.idLamaran}" data-toggle="modal" data-target="#nilaiModal">
+                                                <i class="fa fa-plus"></i> Nilai
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -202,10 +212,11 @@
                                 <tr>
                                     <td>#</td>
                                     <td>Nama Pelamar</td>
-                                    <td>Jenis Kelamin</td>
+                                    <td>Jenkel</td>
                                     <td>Umur</td>
-                                    <td>Kota Domisili</td>
-                                    <td>Pendidikan Terakhir</td>
+                                    <td>Domisili</td>
+                                    <td>Pend. Terakhir</td>
+                                    <td>Nilai Wawancara</td>
                                     <td>Status</td>
                                     <td>Aksi</td>
                                 </tr>
@@ -218,6 +229,7 @@
                                     <td th:text="${lamaran.umur}"></td>
                                     <td th:text="${lamaran.kota}"></td>
                                     <td th:text="${lamaran.pendidikanTerakhir == null ? '-' : lamaran.pendidikanTerakhir}"></td>
+                                    <td th:text="${lamaran.nilaiWawancara} != null ? ${lamaran.nilaiWawancara} : '-'"></td>
                                     <td th:switch="${lamaran.statusLamaran}">
                                         <span th:case="0">Menunggu Kualifikasi</span>
                                         <span th:case="1">Kualifikasi Ditolak</span>
@@ -229,6 +241,29 @@
                                     </td>
                                     <td>
                                         <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
+
+                                        <form th:action="@{/perusahaan/lamaran/terima/{id}(id=${lamaran.idLamaran})}"
+                                              th:if="${lamaran.nilaiWawancara} != null and ${lamaran.statusLamaran != 5}"
+                                              method="post" class="d-inline">
+                                            <input type="hidden" th:value="6" name="status">
+                                            <input type="hidden" th:value="Akhir" name="tahap">
+                                            <button type="submit" class="btn btn-success btn-sm mr-1 terimaButton"
+                                                onclick="return confirm('Apakah anda yakin ingin menerima lamaran ini?')">
+                                                <i class="fa fa-check"></i> Terima
+                                            </button>
+                                        </form>
+
+                                        <form th:action="@{/perusahaan/lamaran/reject/{id}(id=${lamaran.idLamaran})}"
+                                              th:if="${lamaran.statusLamaran != 5}" method="post" class="d-inline mr-1">
+                                            <button class="btn btn-sm btn-danger" type="submit" name="result" value="Tolak"
+                                                    onclick="return confirm('Apakah anda yakin ingin menolak lamaran ini?')">
+                                                <i class="fa fa-times"></i> Tolak</button>
+                                        </form>
+
+                                        <button type="button" th:if="${lamaran.statusLamaran == 4}" class="btn btn-info btn-sm wawancaraButton"
+                                                th:data-idlamaran="${lamaran.idLamaran}" data-toggle="modal" data-target="#nilaiModal">
+                                            <i class="fa fa-plus"></i> Nilai
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -277,10 +312,93 @@
                     </div>
                 </div>
 
+                <!-- Modal -->
+                <div class="modal fade" id="nilaiModal" tabindex="-1" aria-labelledby="nilaiModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form method="post" class="d-inline" id="formNilai">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="nilaiModalLabel">Tambah Nilai</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="txtNilai">Nilai</label>
+                                        <input type="number" class="form-control" id="txtNilai" name="nilai">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="accModal" tabindex="-1" aria-labelledby="accModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form method="post" class="d-inline" id="formAcc">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="accModalLabel">Terima</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="txtTahap">Tahap</label>
+                                        <input type="hidden" name="status" id="txtStatus">
+                                        <input type="text" name="tahap" id="txtTahap" readonly class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txtWaktu">Waktu</label>
+                                        <input type="datetime-local" class="form-control" id="txtWaktu" name="tanggal_tahap">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+<!--                End of modal-->
             </div>
         </div>
     </div>
 </div>
+
+<th:block layout:fragment="scripts">
+    <script>
+        $('.ujiKompetensiButton').click(function () {
+            const idLamaran = $(this).data('idlamaran');
+            $('#formNilai').attr('action', '/perusahaan/lamaran/nilaiujikompetensi/' + idLamaran);
+        });
+
+        $('.wawancaraButton').click(function () {
+            const idLamaran = $(this).data('idlamaran');
+            $('#formNilai').attr('action', '/perusahaan/lamaran/nilaiwawancara/' + idLamaran);
+        });
+
+        $('.terimaButton').click(function () {
+            const idLamaran = $(this).data('idlamaran');
+            const tahap = $(this).data('tahap');
+            const status = $(this).data('status');
+
+            $('#formAcc').attr('action', '/perusahaan/lamaran/terima/' + idLamaran);
+            $('#txtStatus').val(status);
+            $('#txtTahap').val(tahap);
+        });
+    </script>
+</th:block>
+
 </body>
 
 </html>

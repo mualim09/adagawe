@@ -14,7 +14,7 @@ public class Notifikasi {
 
     private String isi;
 
-    private int tahap;
+    private String tahap;
 
     @Column(name = "tanggal_tahapan")
     private Date tanggalTahapan;
@@ -53,11 +53,11 @@ public class Notifikasi {
         this.isi = isi;
     }
 
-    public int getTahap() {
+    public String getTahap() {
         return tahap;
     }
 
-    public void setTahap(int tahap) {
+    public void setTahap(String tahap) {
         this.tahap = tahap;
     }
 

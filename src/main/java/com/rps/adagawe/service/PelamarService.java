@@ -37,13 +37,6 @@ public class PelamarService {
         Pelamar p = pelamarRepository.findById(id).orElse(null);
 
         if (p == null) return null;
-//        p.setJabatan(pengalaman.getJabatan());
-//        p.setJenisPegawai(pengalaman.getJenisPegawai());
-//        p.setNamaPerusahaan(pengalaman.getNamaPerusahaan());
-//        p.setMulaiKerja(pengalaman.getMulaiKerja());
-//        p.setTerakhirKerja(pengalaman.getTerakhirKerja());
-//        p.setDeskripsi(pengalaman.getDeskripsi());
-//        p.setFileAttachment(pengalaman.getFileAttachment());
 
         pelamarRepository.save(p);
 

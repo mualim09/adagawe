@@ -118,6 +118,22 @@ public class Lamaran {
         this.lowongan = lowongan;
     }
 
+    public Double getNilaiUjiKompetensi() {
+        return nilaiUjiKompetensi;
+    }
+
+    public void setNilaiUjiKompetensi(Double nilaiUjiKompetensi) {
+        this.nilaiUjiKompetensi = nilaiUjiKompetensi;
+    }
+
+    public Double getNilaiWawancara() {
+        return nilaiWawancara;
+    }
+
+    public void setNilaiWawancara(Double nilaiWawancara) {
+        this.nilaiWawancara = nilaiWawancara;
+    }
+
     @Override
     public String toString() {
         return "Lamaran{" +

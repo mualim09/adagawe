@@ -18,4 +18,6 @@ public interface LamaranRepository extends CrudRepository<Lamaran, Integer> {
     @Transactional
     @Query(nativeQuery = true, value = "EXEC eliminatePelamarByPendidikan @IdLowongan = :idLowongan")
     void eliminatePelamarsByPendidikan(int idLowongan);
+
+    Lamaran getLamaranById(int idLowongan);
 }

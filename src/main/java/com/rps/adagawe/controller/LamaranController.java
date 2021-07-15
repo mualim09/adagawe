@@ -3,12 +3,10 @@ package com.rps.adagawe.controller;
 import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
-import com.rps.adagawe.model.Lamaran;
-import com.rps.adagawe.model.LamaranPelamar;
-import com.rps.adagawe.model.Lowongan;
-import com.rps.adagawe.model.Pelamar;
+import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +37,9 @@ public class LamaranController {
 
     @Autowired
     private PendidikanService pendidikanService;
+
+    @Autowired
+    private NotifikasiService notifikasiService;
 
     @Autowired
     private AdagaweService adagaweService;
@@ -103,5 +104,46 @@ public class LamaranController {
         model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(lamaranPelamar.getIdPelamar()));
 
         return "perusahaan/lamaran/detail";
+    }
+
+    @PostMapping("/perusahaan/lamaran/nilaiujikompetensi/{id}")
+    public String saveNilaiUjiKompetensi(@PathVariable("id") int idLamaran,
+                                         @RequestParam("nilai") Double nilai) {
+        Lamaran lamaran = lamaranService.getLamaranById(idLamaran);
+        lamaran.setNilaiUjiKompetensi(nilai);
+
+        lamaranService.save(lamaran);
+
+        return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();
+    }
+
+    @PostMapping("/perusahaan/lamaran/nilaiwawancara/{id}")
+    public String saveNilaiWawancara(@PathVariable("id") int idLamaran,
+                                         @RequestParam("nilai") Double nilai) {
+        Lamaran lamaran = lamaranService.getLamaranById(idLamaran);
+        lamaran.setNilaiWawancara(nilai);
+
+        lamaranService.save(lamaran);
+
+        return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();
+    }
+
+    @PostMapping("/perusahaan/lamaran/terima/{id}")
+    public String terimaTahapan(@PathVariable("id") int idLamaran, @RequestParam("tahap") String tahap,
+                                      @RequestParam(value = "tanggal_tahap", required = false) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm") Date tanggalTahap,
+                                @RequestParam("status") int status) {
+        Lamaran lamaran = lamaranService.getLamaranById(idLamaran);
+        lamaran.setStatusLamaran(status);
+        lamaranService.save(lamaran);
+
+        Notifikasi notifikasi = new Notifikasi();
+        notifikasi.setIdLamaran(idLamaran);
+        notifikasi.setTahap(tahap);
+        notifikasi.setTanggalTahapan(tanggalTahap);
+        notifikasi.setHasilTahapSebelumnya(1);
+        notifikasi.setCreatedDate(new Date());
+        notifikasiService.save(notifikasi);
+
+        return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();
     }
 }
