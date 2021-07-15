@@ -1,8 +1,10 @@
 package com.rps.adagawe.service;
 
 import com.rps.adagawe.model.Jabatan;
+import com.rps.adagawe.model.LamaranPelamar;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.UserLogin;
+import com.rps.adagawe.repository.LamaranPelamarRepository;
 import com.rps.adagawe.repository.PelamarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ public class PelamarService {
 
     @Autowired
     PelamarRepository pelamarRepository;
+
+    @Autowired
+    LamaranPelamarRepository lamaranPelamarRepository;
 
     public List<Pelamar> getAll() {
         return (List<Pelamar>) pelamarRepository.findAll();
@@ -55,7 +60,11 @@ public class PelamarService {
         return p;
     }
 
-    public List<Pelamar> getPelamarByIdLowongan(int idLowongan, int statusLamaranAwal, int statusLamaranAkhir) {
-        return pelamarRepository.findPelamarsByIdLowongan(idLowongan, statusLamaranAwal, statusLamaranAkhir);
+    public List<LamaranPelamar> getPelamarByIdLowongan(int idLowongan, int statusLamaranAwal, int statusLamaranAkhir) {
+        return lamaranPelamarRepository.findPelamarsByIdLowongan(idLowongan, statusLamaranAwal, statusLamaranAkhir);
+    }
+
+    public LamaranPelamar getPelamarByIdLamaran(int idLamaran) {
+        return lamaranPelamarRepository.getLamaranPelamarById(idLamaran);
     }
 }

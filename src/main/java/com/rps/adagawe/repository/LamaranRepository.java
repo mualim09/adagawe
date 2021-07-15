@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 public interface LamaranRepository extends CrudRepository<Lamaran, Integer> {
-//    List<Lamaran> findLamaransByIdLowongan(int idLowongan);
+
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query(nativeQuery = true, value = "EXEC eliminatePelamarByPendidikan @IdLowongan = :idLowongan")

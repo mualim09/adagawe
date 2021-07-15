@@ -4,11 +4,10 @@ import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
 import com.rps.adagawe.model.Lamaran;
+import com.rps.adagawe.model.LamaranPelamar;
 import com.rps.adagawe.model.Lowongan;
 import com.rps.adagawe.model.Pelamar;
-import com.rps.adagawe.service.LamaranService;
-import com.rps.adagawe.service.LowonganService;
-import com.rps.adagawe.service.PelamarService;
+import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +27,18 @@ public class LamaranController {
 
     @Autowired
     private LamaranService lamaranService;
+
+    @Autowired
+    private PelamarService pelamarService;
+
+    @Autowired
+    private PengalamanService pengalamanService;
+
+    @Autowired
+    private SertifikatService sertifikatService;
+
+    @Autowired
+    private PendidikanService pendidikanService;
 
     @Autowired
     private AdagaweService adagaweService;
@@ -83,7 +94,14 @@ public class LamaranController {
     }
 
     @GetMapping("/perusahaan/lamaran/view/{id}")
-    public String viewLamaran(@PathVariable("id") int idLamaran) {
-        return "";
+    public String viewLamaran(@PathVariable("id") int idLamaran, Model model) {
+        LamaranPelamar lamaranPelamar = pelamarService.getPelamarByIdLamaran(idLamaran);
+
+        model.addAttribute("pelamar", lamaranPelamar);
+        model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(lamaranPelamar.getId()));
+        model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(lamaranPelamar.getId()));
+        model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(lamaranPelamar.getId()));
+
+        return "perusahaan/lamaran/detail";
     }
 }

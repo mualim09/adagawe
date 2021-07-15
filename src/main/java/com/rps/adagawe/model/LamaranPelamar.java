@@ -8,8 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-public class Pelamar {
-
+public class LamaranPelamar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -37,11 +36,11 @@ public class Pelamar {
     @Column(name = "no_telepon")
     private String noTelepon;
 
-    private String headline;
-
     @NotEmpty(message = "CV wajib diisi.")
     @Column(name = "dokumen_cv")
     private String dokumenCv;
+
+    private String headline;
 
     @NotEmpty
     @Column(name = "id_user_login")
@@ -57,6 +56,18 @@ public class Pelamar {
     @ManyToOne
     @JoinColumn(name = "id_user_login", insertable = false, updatable = false)
     private UserLogin userLogin;
+
+    @Column(name = "pendidikan_terakhir", insertable = false, updatable = false)
+    private String pendidikanTerakhir;
+
+    @Column(insertable = false, updatable = false)
+    private Integer umur;
+
+    @Column(name = "id_lamaran", insertable = false, updatable = false)
+    private Integer idLamaran;
+
+    @Column(name = "status_lamaran", insertable = false, updatable = false)
+    private Integer statusLamaran;
 
     public int getId() {
         return id;
@@ -114,20 +125,20 @@ public class Pelamar {
         this.noTelepon = noTelepon;
     }
 
-    public String getHeadline() {
-        return headline;
-    }
-
-    public void setHeadline(String headline) {
-        this.headline = headline;
-    }
-
     public String getDokumenCv() {
         return dokumenCv;
     }
 
     public void setDokumenCv(String dokumenCv) {
         this.dokumenCv = dokumenCv;
+    }
+
+    public String getHeadline() {
+        return headline;
+    }
+
+    public void setHeadline(String headline) {
+        this.headline = headline;
     }
 
     public int getIdUserLogin() {
@@ -162,9 +173,41 @@ public class Pelamar {
         this.userLogin = userLogin;
     }
 
+    public String getPendidikanTerakhir() {
+        return pendidikanTerakhir;
+    }
+
+    public void setPendidikanTerakhir(String pendidikanTerakhir) {
+        this.pendidikanTerakhir = pendidikanTerakhir;
+    }
+
+    public Integer getUmur() {
+        return umur;
+    }
+
+    public void setUmur(Integer umur) {
+        this.umur = umur;
+    }
+
+    public Integer getIdLamaran() {
+        return idLamaran;
+    }
+
+    public void setIdLamaran(Integer idLamaran) {
+        this.idLamaran = idLamaran;
+    }
+
+    public Integer getStatusLamaran() {
+        return statusLamaran;
+    }
+
+    public void setStatusLamaran(Integer statusLamaran) {
+        this.statusLamaran = statusLamaran;
+    }
+
     @Override
     public String toString() {
-        return "Pelamar{" +
+        return "LamaranPelamar{" +
                 "id=" + id +
                 ", namaPelamar='" + namaPelamar + '\'' +
                 ", tanggalLahir=" + tanggalLahir +
@@ -172,12 +215,16 @@ public class Pelamar {
                 ", kota='" + kota + '\'' +
                 ", alamat='" + alamat + '\'' +
                 ", noTelepon='" + noTelepon + '\'' +
-                ", headline='" + headline + '\'' +
                 ", dokumenCv='" + dokumenCv + '\'' +
+                ", headline='" + headline + '\'' +
                 ", idUserLogin=" + idUserLogin +
                 ", fotoProfil='" + fotoProfil + '\'' +
                 ", rowStatus=" + rowStatus +
                 ", userLogin=" + userLogin +
+                ", pendidikanTerakhir='" + pendidikanTerakhir + '\'' +
+                ", umur=" + umur +
+                ", idLamaran=" + idLamaran +
+                ", statusLamaran=" + statusLamaran +
                 '}';
     }
 }

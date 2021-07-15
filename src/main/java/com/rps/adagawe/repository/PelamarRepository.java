@@ -1,5 +1,6 @@
 package com.rps.adagawe.repository;
 
+import com.rps.adagawe.model.LamaranPelamar;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.model.UserLogin;
 import org.springframework.data.jpa.repository.Query;
@@ -14,12 +15,9 @@ import java.util.List;
  */
 
 @Repository
-public interface PelamarRepository  extends CrudRepository<Pelamar, Integer> {
+public interface PelamarRepository extends CrudRepository<Pelamar, Integer> {
 
     @Query("from Pelamar a WHERE a.rowStatus = 1")
     List<Pelamar> findPelamarByRowStatus();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM view_LamaranPelamar WHERE id_lowongan = :idLowongan " +
-            "AND (status_lamaran >= :statusLamaranAwal AND status_lamaran <= :statusLamaranAkhir)")
-    List<Pelamar> findPelamarsByIdLowongan(int idLowongan, int statusLamaranAwal, int statusLamaranAkhir);
 }

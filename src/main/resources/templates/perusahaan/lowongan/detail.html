@@ -70,12 +70,12 @@
                     <div class="col-lg-4">
                         <label class="font-weight-bold">Gaji Minimal</label>
                         </br>
-                        <span th:text="*{gajiMinimal}"/>
+                        <span th:text="*{'Rp' + #numbers.formatDecimal(gajiMinimal, 0, 'POINT', 0, 'COMMA')}"/>
                     </div>
                     <div class="col-lg-4">
                         <label class="font-weight-bold">Gaji Maksimal</label>
                         </br>
-                        <span th:text="*{gajiMaksimal}"/>
+                        <span th:text="*{'Rp' + #numbers.formatDecimal(gajiMaksimal, 0, 'POINT', 0, 'COMMA')}"/>
                     </div>
                 </div>
             </div>
