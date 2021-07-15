@@ -30,6 +30,9 @@ public class Lowongan {
     @Column(name = "keterangan")
     private String keterangan;
 
+    @Column(name = "jenjang_minimal")
+    private Integer jenjangMinimal;
+
     @NotNull(message = "Gaji Minimal wajib diisi.")
     @Column(name = "gaji_minimal")
     private int gajiMinimal;
@@ -57,6 +60,7 @@ public class Lowongan {
     @Column(name = "last_modified")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date lastModified;
+
 
     public int getId() {
         return id;

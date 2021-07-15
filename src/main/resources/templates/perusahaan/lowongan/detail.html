@@ -83,22 +83,189 @@
                 <h4 class="card-title">Pelamar Lowongan</h4>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table id="add-row" class="display table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <td>#</td>
-                            <td>Data</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Samodra</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
+                    <li class="nav-item submenu">
+                        <a class="nav-link active show" id="pills-kualifikasi-tab" data-toggle="pill" href="#pills-kualifikasi" role="tab" aria-controls="pills-kualifikasi" aria-selected="true">Kualifikasi</a>
+                    </li>
+                    <li class="nav-item submenu">
+                        <a class="nav-link" id="pills-ujikompetensi-tab" data-toggle="pill" href="#pills-ujikompetensi" role="tab" aria-controls="pills-ujikompetensi" aria-selected="false">Uji Kompetensi</a>
+                    </li>
+                    <li class="nav-item submenu">
+                        <a class="nav-link" id="pills-wawancara-tab" data-toggle="pill" href="#pills-wawancara" role="tab" aria-controls="pills-wawancara" aria-selected="false">Wawancara</a>
+                    </li>
+                    <li class="nav-item submenu">
+                        <a class="nav-link" id="pills-diterima-tab" data-toggle="pill" href="#pills-diterima" role="tab" aria-controls="pills-diterima" aria-selected="false">Diterima</a>
+                    </li>
+                </ul>
+                <div class="tab-content mt-2 mb-3" id="pills-tabContent">
+                    <div class="tab-pane fade active show" id="pills-kualifikasi" role="tabpanel" aria-labelledby="pills-kualifikasi-tab">
+                        <div class="d-flex justify-content-end mb-2">
+                            <form th:action="${'/perusahaan/lamaran/' + lowongan.getId() + '/clean'}" method="post">
+                                <button class="btn btn-danger" type="submit" onclick="return confirm('Apakah anda yakin ingin melakukan seleksi pendidikan?')">
+                                    <i class="fa fa-trash"></i> Seleksi Pendidikan</button>
+                            </form>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="w-100 display table table-striped table-hover datatables">
+                                <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Nama Pelamar</td>
+                                    <td>Jenis Kelamin</td>
+                                    <td>Umur</td>
+                                    <td>Kota Domisili</td>
+                                    <td>Pendidikan Terakhir</td>
+                                    <td>Status</td>
+                                    <td>Aksi</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="lamaran, iter : ${lamarans1}">
+                                    <td th:text="${iter.index + 1}"></td>
+                                    <td th:text="${lamaran.namaPelamar}"></td>
+                                    <td th:text="${lamaran.jenisKelamin}"></td>
+                                    <td th:text="${lamaran.umur}"></td>
+                                    <td th:text="${lamaran.kota}"></td>
+                                    <td th:text="${lamaran.pendidikanTerakhir}"></td>
+                                    <td th:switch="${lamaran.statusLamaran}">
+                                        <span th:case="0">Menunggu Kualifikasi</span>
+                                        <span th:case="1">Kualifikasi Ditolak</span>
+                                        <span th:case="2">Kualifikasi Diterima</span>
+                                        <span th:case="3">Uji Kompetensi Ditolak</span>
+                                        <span th:case="4">Uji Kompetensi Diterima</span>
+                                        <span th:case="5">Wawancara Ditolak</span>
+                                        <span th:case="6">Wawancara Diterima</span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-ujikompetensi" role="tabpanel" aria-labelledby="pills-ujikompetensi-tab">
+                        <div class="table-responsive">
+                            <table class="w-100 display table table-striped table-hover datatables">
+                                <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Nama Pelamar</td>
+                                    <td>Jenis Kelamin</td>
+                                    <td>Umur</td>
+                                    <td>Kota Domisili</td>
+                                    <td>Pendidikan Terakhir</td>
+                                    <td>Status</td>
+                                    <td>Aksi</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="lamaran, iter : ${lamarans2}">
+                                    <td th:text="${iter.index + 1}"></td>
+                                    <td th:text="${lamaran.namaPelamar}"></td>
+                                    <td th:text="${lamaran.jenisKelamin}"></td>
+                                    <td th:text="${lamaran.umur}"></td>
+                                    <td th:text="${lamaran.kota}"></td>
+                                    <td th:text="${lamaran.pendidikanTerakhir}"></td>
+                                    <td th:switch="${lamaran.statusLamaran}">
+                                        <span th:case="0">Menunggu Kualifikasi</span>
+                                        <span th:case="1">Kualifikasi Ditolak</span>
+                                        <span th:case="2">Kualifikasi Diterima</span>
+                                        <span th:case="3">Uji Kompetensi Ditolak</span>
+                                        <span th:case="4">Uji Kompetensi Diterima</span>
+                                        <span th:case="5">Wawancara Ditolak</span>
+                                        <span th:case="6">Wawancara Diterima</span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-wawancara" role="tabpanel" aria-labelledby="pills-wawancara-tab">
+                        <div class="table-responsive">
+                            <table class="w-100 display table table-striped table-hover datatables">
+                                <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Nama Pelamar</td>
+                                    <td>Jenis Kelamin</td>
+                                    <td>Umur</td>
+                                    <td>Kota Domisili</td>
+                                    <td>Pendidikan Terakhir</td>
+                                    <td>Status</td>
+                                    <td>Aksi</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="lamaran, iter : ${lamarans3}">
+                                    <td th:text="${iter.index + 1}"></td>
+                                    <td th:text="${lamaran.namaPelamar}"></td>
+                                    <td th:text="${lamaran.jenisKelamin}"></td>
+                                    <td th:text="${lamaran.umur}"></td>
+                                    <td th:text="${lamaran.kota}"></td>
+                                    <td th:text="${lamaran.pendidikanTerakhir == null ? '-' : lamaran.pendidikanTerakhir}"></td>
+                                    <td th:switch="${lamaran.statusLamaran}">
+                                        <span th:case="0">Menunggu Kualifikasi</span>
+                                        <span th:case="1">Kualifikasi Ditolak</span>
+                                        <span th:case="2">Kualifikasi Diterima</span>
+                                        <span th:case="3">Uji Kompetensi Ditolak</span>
+                                        <span th:case="4">Uji Kompetensi Diterima</span>
+                                        <span th:case="5">Wawancara Ditolak</span>
+                                        <span th:case="6">Wawancara Diterima</span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-diterima" role="tabpanel" aria-labelledby="pills-diterima-tab">
+                        <div class="table-responsive">
+                            <table class="w-100 display table table-striped table-hover datatables">
+                                <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Nama Pelamar</td>
+                                    <td>Jenis Kelamin</td>
+                                    <td>Umur</td>
+                                    <td>Kota Domisili</td>
+                                    <td>Pendidikan Terakhir</td>
+                                    <td>Status</td>
+                                    <td>Aksi</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="lamaran, iter : ${lamarans4}">
+                                    <td th:text="${iter.index + 1}"></td>
+                                    <td th:text="${lamaran.namaPelamar}"></td>
+                                    <td th:text="${lamaran.jenisKelamin}"></td>
+                                    <td th:text="${lamaran.umur}"></td>
+                                    <td th:text="${lamaran.kota}"></td>
+                                    <td th:text="${lamaran.pendidikanTerakhir}"></td>
+                                    <td th:switch="${lamaran.statusLamaran}">
+                                        <span th:case="0">Menunggu Kualifikasi</span>
+                                        <span th:case="1">Kualifikasi Ditolak</span>
+                                        <span th:case="2">Kualifikasi Diterima</span>
+                                        <span th:case="3">Uji Kompetensi Ditolak</span>
+                                        <span th:case="4">Uji Kompetensi Diterima</span>
+                                        <span th:case="5">Wawancara Ditolak</span>
+                                        <span th:case="6">Wawancara Diterima</span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>

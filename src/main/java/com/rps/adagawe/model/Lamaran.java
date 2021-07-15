@@ -13,13 +13,11 @@ public class Lamaran {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_pelamar", nullable = false)
-    private Pelamar pelamar;
+    @Column(name = "id_pelamar")
+    private int idPelamar;
 
-    @ManyToOne
-    @JoinColumn(name = "id_lowongan", nullable = false)
-    private Lowongan lowongan;
+    @Column(name = "id_lowongan")
+    private int idLowongan;
 
     @Column(name = "tanggal_melamar")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -34,6 +32,20 @@ public class Lamaran {
     @Column(name = "status_lamaran")
     private Integer statusLamaran;
 
+    @Column(name = "nilai_uji_kompetensi")
+    private Double nilaiUjiKompetensi;
+
+    @Column(name = "nilai_wawancara")
+    private Double nilaiWawancara;
+
+    @ManyToOne
+    @JoinColumn(name = "id_pelamar", insertable = false, updatable = false)
+    private Pelamar pelamar;
+
+    @ManyToOne
+    @JoinColumn(name = "id_lowongan", insertable = false, updatable = false)
+    private Lowongan lowongan;
+
     public int getId() {
         return id;
     }
@@ -42,20 +54,20 @@ public class Lamaran {
         this.id = id;
     }
 
-    public Pelamar getPelamar() {
-        return pelamar;
+    public int getIdPelamar() {
+        return idPelamar;
     }
 
-    public void setPelamar(Pelamar pelamar) {
-        this.pelamar = pelamar;
+    public void setIdPelamar(int idPelamar) {
+        this.idPelamar = idPelamar;
     }
 
-    public Lowongan getLowongan() {
-        return lowongan;
+    public int getIdLowongan() {
+        return idLowongan;
     }
 
-    public void setLowongan(Lowongan lowongan) {
-        this.lowongan = lowongan;
+    public void setIdLowongan(int idLowongan) {
+        this.idLowongan = idLowongan;
     }
 
     public Date getTanggalMelamar() {
@@ -88,6 +100,22 @@ public class Lamaran {
 
     public void setStatusLamaran(Integer statusLamaran) {
         this.statusLamaran = statusLamaran;
+    }
+
+    public Pelamar getPelamar() {
+        return pelamar;
+    }
+
+    public void setPelamar(Pelamar pelamar) {
+        this.pelamar = pelamar;
+    }
+
+    public Lowongan getLowongan() {
+        return lowongan;
+    }
+
+    public void setLowongan(Lowongan lowongan) {
+        this.lowongan = lowongan;
     }
 
     @Override

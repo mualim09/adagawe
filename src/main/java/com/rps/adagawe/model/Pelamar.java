@@ -14,38 +14,60 @@ public class Pelamar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty
+    @NotEmpty(message = "Nama pelamar wajib diisi.")
     @Column(name = "nama_pelamar")
     private String namaPelamar;
 
-    @NotNull
+    @NotNull(message = "Tanggal lahir wajib diisi.")
     @Column(name = "tanggal_lahir")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tanggalLahir;
 
-    @NotEmpty
+    @NotEmpty(message = "Jenis kelamin wajib diisi.")
     @Column(name = "jenis_kelamin")
     private char jenisKelamin;
 
-    @NotEmpty
+    @NotEmpty(message = "Kota wajib diisi.")
+    private String kota;
+
+    @NotEmpty(message = "Alamat wajib diisi.")
+    private String alamat;
+
+    @NotEmpty(message = "No. Telepon wajib diisi.")
     @Column(name = "no_telepon")
     private String noTelepon;
 
-    @NotEmpty
+    @NotEmpty(message = "CV wajib diisi.")
     @Column(name = "dokumen_cv")
     private String dokumenCv;
 
     @NotEmpty
-    @ManyToOne
-    @JoinColumn(name = "id_user_login", nullable = false)
-    private UserLogin userLogin;
+    @Column(name = "id_user_login")
+    private int idUserLogin;
 
-    @NotEmpty
+    @NotEmpty(message = "Foto Profil wajib diisi.")
     @Column(name = "foto_profil")
     private String fotoProfil;
 
     @Column(name = "row_status")
     private Integer rowStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user_login", insertable = false, updatable = false)
+    private UserLogin userLogin;
+
+    @Column(name = "pendidikan_terakhir", insertable = false, updatable = false)
+    private String pendidikanTerakhir;
+
+    @Column(insertable = false, updatable = false)
+    private Integer umur;
+
+    @Column(name = "id_lamaran", insertable = false, updatable = false)
+    private Integer idLamaran;
+
+    @Column(name = "status_lamaran", insertable = false, updatable = false)
+    private Integer statusLamaran;
+
 
     public int getId() {
         return id;
@@ -79,6 +101,22 @@ public class Pelamar {
         this.jenisKelamin = jenisKelamin;
     }
 
+    public String getKota() {
+        return kota;
+    }
+
+    public void setKota(String kota) {
+        this.kota = kota;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
     public String getNoTelepon() {
         return noTelepon;
     }
@@ -95,12 +133,12 @@ public class Pelamar {
         this.dokumenCv = dokumenCv;
     }
 
-    public UserLogin getUserLogin() {
-        return userLogin;
+    public int getIdUserLogin() {
+        return idUserLogin;
     }
 
-    public void setUserLogin(UserLogin userLogin) {
-        this.userLogin = userLogin;
+    public void setIdUserLogin(int idUserLogin) {
+        this.idUserLogin = idUserLogin;
     }
 
     public String getFotoProfil() {
@@ -117,5 +155,66 @@ public class Pelamar {
 
     public void setRowStatus(Integer rowStatus) {
         this.rowStatus = rowStatus;
+    }
+
+    public UserLogin getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(UserLogin userLogin) {
+        this.userLogin = userLogin;
+    }
+
+    public String getPendidikanTerakhir() {
+        return pendidikanTerakhir;
+    }
+
+    public void setPendidikanTerakhir(String pendidikanTerakhir) {
+        this.pendidikanTerakhir = pendidikanTerakhir;
+    }
+
+    public Integer getUmur() {
+        return umur;
+    }
+
+    public void setUmur(Integer umur) {
+        this.umur = umur;
+    }
+
+    public Integer getIdLamaran() {
+        return idLamaran;
+    }
+
+    public void setIdLamaran(Integer idLamaran) {
+        this.idLamaran = idLamaran;
+    }
+
+    public Integer getStatusLamaran() {
+        return statusLamaran;
+    }
+
+    public void setStatusLamaran(Integer statusLamaran) {
+        this.statusLamaran = statusLamaran;
+    }
+
+    @Override
+    public String toString() {
+        return "Pelamar{" +
+                "id=" + id +
+                ", namaPelamar='" + namaPelamar + '\'' +
+                ", tanggalLahir=" + tanggalLahir +
+                ", jenisKelamin=" + jenisKelamin +
+                ", kota='" + kota + '\'' +
+                ", alamat='" + alamat + '\'' +
+                ", noTelepon='" + noTelepon + '\'' +
+                ", dokumenCv='" + dokumenCv + '\'' +
+                ", idUserLogin=" + idUserLogin +
+                ", fotoProfil='" + fotoProfil + '\'' +
+                ", rowStatus=" + rowStatus +
+                ", userLogin=" + userLogin +
+                ", pendidikanTerakhir='" + pendidikanTerakhir + '\'' +
+                ", umur=" + umur +
+                ", idLamaran=" + idLamaran +
+                '}';
     }
 }
