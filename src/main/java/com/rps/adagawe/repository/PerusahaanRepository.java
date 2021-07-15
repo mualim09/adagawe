@@ -19,4 +19,7 @@ public interface PerusahaanRepository extends CrudRepository<Perusahaan, Integer
     @Query("from Perusahaan a WHERE a.rowStatus = 1")
     List<Perusahaan> findPerusahaanByRowStatus();
 
+    @Query("select a.idUserLogin from Perusahaan a")
+    List<Integer> findIdUserLogin();
+
 }

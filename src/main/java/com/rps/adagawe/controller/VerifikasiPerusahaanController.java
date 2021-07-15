@@ -1,6 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
 import com.rps.adagawe.model.Jabatan;
 import com.rps.adagawe.model.Pelamar;
@@ -27,6 +28,9 @@ public class VerifikasiPerusahaanController {
     @Autowired
     VerifikasiPerusahaanService verifikasiPerusahaanService;
     PerusahaanService perusahaanService;
+
+    @Autowired
+    AdagaweService adagaweService;
 
     @GetMapping("/admin/verifikasi/index")
     public String index(Model model) {
@@ -81,7 +85,6 @@ public class VerifikasiPerusahaanController {
                                @ModelAttribute("verifikasiperusahaan") @Valid VerifikasiPerusahaan verifikasiperusahaan, BindingResult result, Model model) {
 
         if (verif.equals("setuju")){
-//            verifikasiperusahaan.g
             verifikasiPerusahaanService.setujuiVerifikasi(id, verifikasiperusahaan);
             redirectAttributes.addFlashAttribute("message", "Pengajuan verifikasi berhasil disetujui.");
         } else {
@@ -90,5 +93,22 @@ public class VerifikasiPerusahaanController {
         }
 
         return "redirect:/admin/verifikasi/index";
+    }
+
+    @GetMapping("/perusahaan/verifikasi/history")
+    public String history(Model model) {
+        //List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.
+        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+        List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.getListVerifikasiPerusahaanById(idPerusahaan);
+        model.addAttribute("verifikasiperusahaans", verifikasiperusahaans);
+        return "/perusahaan/verifikasi/history";
+    }
+
+    @GetMapping("/perusahaan/verifikasi/detail/{id}")
+    public String detailRiwayat(@PathVariable("id") Integer id, Model model) {
+        VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getVerifikasiPerusahaanById(id);
+
+        model.addAttribute("verifikasiperusahaan", verifikasiperusahaan);
+        return "/perusahaan/verifikasi/detail";
     }
 }

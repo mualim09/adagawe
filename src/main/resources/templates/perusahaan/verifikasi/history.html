@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       lang="en"
-      layout:decorate="~{layout/admin}">
+      layout:decorate="~{layout/perusahaan}">
 <head>
     <meta charset="UTF-8">
-    <title>Admin</title>
+    <title>Riwayat Pengajuan Verifikasi</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                    <h4 class="card-title">Data Perusahaan</h4>
+                    <h4 class="card-title">Riwayat Pengajuan Verifikasi</h4>
                 </div>
             </div>
 
@@ -35,6 +35,8 @@
                                 <td>#</td>
                                 <td>Nama Perusahaan</td>
                                 <td>Status Verifikasi</td>
+                                <td>Komentar</td>
+                                <td>Tanggal pengajuan</td>
                                 <td>Aksi</td>
                             </tr>
                             </thead>
@@ -47,8 +49,10 @@
                                     <span th:case="'1'">Diterima</span>
                                     <span th:case="'2'">Ditolak</span>
                                 </td>
+                                <td th:text="${verifikasiperusahaan.komentar}"></td>
+                                <td th:text="${verifikasiperusahaan.createdDate}"></td>
                                 <td>
-                                    <a th:href="@{/admin/verifikasi/detail/{id}(id=${verifikasiperusahaan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i>Detail</a>
+                                    <a th:href="@{/perusahaan/verifikasi/detail/{id}(id=${verifikasiperusahaan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i>Detail</a>
                                 </td>
                             </tr>
                             </tbody>

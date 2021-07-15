@@ -3,10 +3,7 @@ package com.rps.adagawe.controller;
 import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
-import com.rps.adagawe.model.Pelamar;
-import com.rps.adagawe.model.Perusahaan;
-import com.rps.adagawe.model.VerifikasiPerusahaan;
-import com.rps.adagawe.model.UserLogin;
+import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.*;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,9 @@ public class PerusahaanController {
 
     @Autowired
     AdagaweService adagaweService;
+
+    @Autowired
+    VerifikasiPerusahaanService verifikasiPerusahaanService;
 
     @GetMapping("/admin/perusahaan")
     public String index(Model model) {
@@ -139,5 +139,26 @@ public class PerusahaanController {
         model.addAttribute("userLogin", userLogin);
 
         return "/perusahaan/profile/security";
+    }
+
+    @GetMapping("/perusahaan/profile")
+    public String profile(Model model) {
+
+        UserLogin idUserLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
+        List<Integer> perusahaan = perusahaanService.getIdUserLoginInPerusahaan();
+        String prefix;
+
+        if (perusahaan.contains(idUserLogin.getId()))
+        {
+            int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+            VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getLastIdPerusahaan(idPerusahaan);
+                    //getVerifikasiPerusahaanById(idPerusahaan);
+
+            model.addAttribute("verifikasiperusahaan", verifikasiperusahaan);
+            prefix = "/perusahaan/profile/index";
+        }else{
+            prefix = "/perusahaan/profile/create";
+        }
+        return prefix;
     }
 }
