@@ -98,9 +98,9 @@ public class LamaranController {
         LamaranPelamar lamaranPelamar = pelamarService.getPelamarByIdLamaran(idLamaran);
 
         model.addAttribute("pelamar", lamaranPelamar);
-        model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(lamaranPelamar.getId()));
-        model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(lamaranPelamar.getId()));
-        model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(lamaranPelamar.getId()));
+        model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(lamaranPelamar.getIdPelamar()));
+        model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(lamaranPelamar.getIdPelamar()));
+        model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(lamaranPelamar.getIdPelamar()));
 
         return "perusahaan/lamaran/detail";
     }

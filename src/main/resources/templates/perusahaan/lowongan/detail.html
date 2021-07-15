@@ -138,6 +138,17 @@
                                     </td>
                                     <td>
                                         <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
+                                        <form th:action="@{/perusahaan/lamaran/reject/{id}(id=${lamaran.idLamaran})}" method="post" class="d-inline">
+                                            <button class="btn btn-sm btn-danger" type="submit" name="result" value="Tolak"
+                                                    onclick="return confirm('Apakah anda yakin ingin menolak lamaran ini?')">
+                                                <i class="fa fa-times"></i> Tolak</button>
+                                        </form>
+
+<!--                                        <form th:action="@{/perusahaan/lamaran/accept/{id}(id=${lamaran.idLamaran})}" method="post" class="d-inline">-->
+<!--                                            <button class="btn btn-sm btn-success" type="submit" name="result" value="Terima"-->
+<!--                                                    onclick="return confirm('Apakah anda yakin ingin menerima lamaran ini?')">-->
+<!--                                                <i class="fa fa-check"></i> Terima</button>-->
+<!--                                        </form>-->
                                     </td>
                                 </tr>
                                 </tbody>

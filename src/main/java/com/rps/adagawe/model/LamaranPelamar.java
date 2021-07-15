@@ -23,7 +23,8 @@ public class LamaranPelamar {
     @Column(name = "jenjang_minimal")
     private Integer jenjangMinimal;
 
-    private int id;
+    @Column(name = "id_pelamar")
+    private Integer idPelamar;
 
     @NotEmpty(message = "Nama pelamar wajib diisi.")
     @Column(name = "nama_pelamar")
@@ -77,6 +78,12 @@ public class LamaranPelamar {
 
     private Integer umur;
 
+    @Column(name = "nilai_uji_kompetensi")
+    private Double nilaiUjiKompetensi;
+
+    @Column(name = "nilai_wawancara")
+    private Double nilaiWawancara;
+
     public Integer getIdLamaran() {
         return idLamaran;
     }
@@ -109,12 +116,12 @@ public class LamaranPelamar {
         this.jenjangMinimal = jenjangMinimal;
     }
 
-    public int getId() {
-        return id;
+    public Integer getIdPelamar() {
+        return idPelamar;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdPelamar(Integer idPelamar) {
+        this.idPelamar = idPelamar;
     }
 
     public String getNamaPelamar() {
@@ -237,6 +244,22 @@ public class LamaranPelamar {
         this.umur = umur;
     }
 
+    public Double getNilaiUjiKompetensi() {
+        return nilaiUjiKompetensi;
+    }
+
+    public void setNilaiUjiKompetensi(Double nilaiUjiKompetensi) {
+        this.nilaiUjiKompetensi = nilaiUjiKompetensi;
+    }
+
+    public Double getNilaiWawancara() {
+        return nilaiWawancara;
+    }
+
+    public void setNilaiWawancara(Double nilaiWawancara) {
+        this.nilaiWawancara = nilaiWawancara;
+    }
+
     @Override
     public String toString() {
         return "LamaranPelamar{" +
@@ -244,7 +267,7 @@ public class LamaranPelamar {
                 ", statusLamaran=" + statusLamaran +
                 ", idLowongan=" + idLowongan +
                 ", jenjangMinimal=" + jenjangMinimal +
-                ", id=" + id +
+                ", idPelamar=" + idPelamar +
                 ", namaPelamar='" + namaPelamar + '\'' +
                 ", tanggalLahir=" + tanggalLahir +
                 ", jenisKelamin=" + jenisKelamin +
@@ -260,6 +283,8 @@ public class LamaranPelamar {
                 ", pendidikanTerakhir='" + pendidikanTerakhir + '\'' +
                 ", tingkatanJenjang='" + tingkatanJenjang + '\'' +
                 ", umur=" + umur +
+                ", nilaiUjiKompetensi=" + nilaiUjiKompetensi +
+                ", nilaiWawancara=" + nilaiWawancara +
                 '}';
     }
 }
