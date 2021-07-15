@@ -1,6 +1,7 @@
 package com.rps.adagawe.service;
 
 import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.model.*;
 import com.rps.adagawe.repository.VerifikasiPerusahaanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class VerifikasiPerusahaanService {
 
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    AdagaweService adagaweService;
 
     public List<VerifikasiPerusahaan> getAll() {
         return (List<VerifikasiPerusahaan>) verifikasiPerusahaanRepository.findAll();
@@ -51,8 +55,8 @@ public class VerifikasiPerusahaanService {
     public VerifikasiPerusahaan setujuiVerifikasi(int id, VerifikasiPerusahaan verifikasiPerusahaan) {
 
         VerifikasiPerusahaan p = verifikasiPerusahaanRepository.findById(id).orElse(null);
-        String nama = AdagaweMethods.getNameAdminBySession(adminService);
-
+        //String nama = AdagaweMethods.getNameAdminBySession(adminService);
+        String nama = AdagaweMethods.getAdminBySession(adagaweService).getNamaAdmin();
         assert p != null;
 
         verifikasiPerusahaan.setId(id);
@@ -73,8 +77,8 @@ public class VerifikasiPerusahaanService {
     public VerifikasiPerusahaan tolakVerifikasi(int id, VerifikasiPerusahaan verifikasiPerusahaan) {
 
         VerifikasiPerusahaan p = verifikasiPerusahaanRepository.findById(id).orElse(null);
-        String nama = AdagaweMethods.getNameAdminBySession(adminService);
-
+        //String nama = AdagaweMethods.getNameAdminBySession(adminService);
+        String nama = AdagaweMethods.getAdminBySession(adagaweService).getNamaAdmin();
         assert p != null;
 
         verifikasiPerusahaan.setId(id);

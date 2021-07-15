@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -28,6 +29,18 @@ public class AdminController {
 
     @Autowired
     AdagaweService adagaweService;
+
+    @GetMapping("/admin")
+    public String index(Model model, HttpServletRequest request) {
+        model.addAttribute("total_pelamar", adagaweService.findTotalUserByRole(1));
+        model.addAttribute("total_perusahaan", adagaweService.findTotalUserByRole(2));
+        model.addAttribute("total_lowongan", adagaweService.findTotalLamaran());
+
+        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
+
+        return "/admin/dashboard";
+    }
 
     @GetMapping("/admin/create")
     public String getCreate(Model model) {
@@ -66,7 +79,7 @@ public class AdminController {
 
     @GetMapping("/admin/profile")
     public String getViewProfile(Model model) {
-        int idAdmin = AdagaweMethods.getIdAdminBySession(adagaweService);
+        int idAdmin = AdagaweMethods.getAdminBySession(adagaweService).getId();
         Admin admin = adminService.getAdminById(idAdmin);
         model.addAttribute("admin", admin);
 

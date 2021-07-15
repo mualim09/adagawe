@@ -1,6 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.model.Jabatan;
 import com.rps.adagawe.service.JabatanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,20 +23,27 @@ public class JabatanController {
     @Autowired
     JabatanService jabatanService;
 
+    @Autowired
+    AdagaweService adagaweService;
+
     @GetMapping("/admin/jabatan")
-    public String index(Model model, HttpServletRequest request) {
-            List<Jabatan> jabatans = jabatanService.findJabatanByRowStatus();
+    public String getIndex(Model model, HttpServletRequest request) {
+        List<Jabatan> jabatans = jabatanService.findJabatanByRowStatus();
         model.addAttribute("jabatans", jabatans);
 
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
+        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
         return "/admin/jabatan/index";
     }
 
     @GetMapping("/admin/jabatan/create")
-    public String create(Model model, HttpServletRequest request) {
+    public String getCreate(Model model, HttpServletRequest request) {
         model.addAttribute("jabatan", new Jabatan());
 
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
+        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
         return "/admin/jabatan/create";
     }
 
@@ -55,12 +63,12 @@ public class JabatanController {
 
 
     @GetMapping("/admin/jabatan/edit/{id}")
-    public String edit(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
-        Jabatan jabatan = jabatanService.getJabatanById(id);
+    public String getEdit(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+        model.addAttribute("jabatan", jabatanService.getJabatanById(id));
 
-        model.addAttribute("jabatan", jabatan);
+        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request));
         return "/admin/jabatan/edit";
     }
 

@@ -70,7 +70,7 @@ public class LamaranController {
         }
 
         String fileName = FileUploadHelper.upload(file, "resume");
-        int idPelamar = AdagaweMethods.getIdPelamarBySession(adagaweService);
+        int idPelamar = AdagaweMethods.getPelamarBySession(adagaweService).getId();
 
         lamaran.setResume(fileName);
         lamaran.setTanggalMelamar(new Date());

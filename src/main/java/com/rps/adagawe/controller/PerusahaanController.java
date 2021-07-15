@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -104,37 +105,35 @@ public class PerusahaanController {
         return "redirect:/perusahaan";
     }*/
 
-
-//    Perusahaan User
     @GetMapping("/perusahaan")
-    public String userPerusahaanIndex(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userEmail = authentication.getName();
+    public String getIndex(Model model, HttpServletRequest request) {
 
-        model.addAttribute("userEmail", userEmail);
-        //return "/main/index-perusahaan";
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
+
         return "/perusahaan/dashboard";
     }
 
     @GetMapping("/perusahaan/view")
-    public String getViewPerusahaan(Model model) {
-        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
-        Perusahaan perusahaan = perusahaanService.getPerusahaanById(idPerusahaan);
+    public String getViewPerusahaan(Model model, HttpServletRequest request) {
+
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/index";
     }
 
     @GetMapping("/perusahaan/profile/edit")
-    public String getEditPerusahaan(Model model) {
-        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
-        Perusahaan perusahaan = perusahaanService.getPerusahaanById(idPerusahaan);
+    public String getEditPerusahaan(Model model, HttpServletRequest request) {
 
-        model.addAttribute("perusahaan", perusahaan);
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
         return "/perusahaan/profile/edit";
     }
 
     @GetMapping("/perusahaan/profile/security")
-    public String getSecurityPerusahaan(Model model) {
+    public String getSecurityPerusahaan(Model model, HttpServletRequest request) {
         UserLogin userLogin = adagaweService.findUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
         model.addAttribute("userLogin", userLogin);
 

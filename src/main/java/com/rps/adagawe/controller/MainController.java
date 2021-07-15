@@ -23,25 +23,18 @@ public class MainController {
     @Autowired
     private AdagaweService adagaweService;
 
-    private void redirectIndex(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userEmail = authentication.getName();
-
-        model.addAttribute("userEmail", userEmail);
-    }
+//    private void redirectIndex(Model model) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String userEmail = authentication.getName();
+//
+//        model.addAttribute("userEmail", userEmail);
+//    }
 
     @GetMapping("/")
     public String indexPelamar(Model model) {
         model.addAttribute("lokers", lowonganService.getAll());
 
         return "main/index";
-    }
-
-    @GetMapping("/admin")
-    public String index(Model model) {
-        redirectIndex(model);
-//        return "main/index-admin";
-        return "/admin/dashboard";
     }
 
     @GetMapping("/lowongan/{id}")
