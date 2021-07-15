@@ -9,8 +9,20 @@ import java.util.Date;
 
 @Entity
 public class LamaranPelamar {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_lamaran")
+    private Integer idLamaran;
+
+    @Column(name = "status_lamaran")
+    private Integer statusLamaran;
+
+    @Column(name = "id_lowongan")
+    private Integer idLowongan;
+
+    @Column(name = "jenjang_minimal")
+    private Integer jenjangMinimal;
+
     private int id;
 
     @NotEmpty(message = "Nama pelamar wajib diisi.")
@@ -57,17 +69,45 @@ public class LamaranPelamar {
     @JoinColumn(name = "id_user_login", insertable = false, updatable = false)
     private UserLogin userLogin;
 
-    @Column(name = "pendidikan_terakhir", insertable = false, updatable = false)
+    @Column(name = "pendidikan_terakhir")
     private String pendidikanTerakhir;
 
-    @Column(insertable = false, updatable = false)
+    @Column(name = "tingkatan_jenjang")
+    private String tingkatanJenjang;
+
     private Integer umur;
 
-    @Column(name = "id_lamaran", insertable = false, updatable = false)
-    private Integer idLamaran;
+    public Integer getIdLamaran() {
+        return idLamaran;
+    }
 
-    @Column(name = "status_lamaran", insertable = false, updatable = false)
-    private Integer statusLamaran;
+    public void setIdLamaran(Integer idLamaran) {
+        this.idLamaran = idLamaran;
+    }
+
+    public Integer getStatusLamaran() {
+        return statusLamaran;
+    }
+
+    public void setStatusLamaran(Integer statusLamaran) {
+        this.statusLamaran = statusLamaran;
+    }
+
+    public Integer getIdLowongan() {
+        return idLowongan;
+    }
+
+    public void setIdLowongan(Integer idLowongan) {
+        this.idLowongan = idLowongan;
+    }
+
+    public Integer getJenjangMinimal() {
+        return jenjangMinimal;
+    }
+
+    public void setJenjangMinimal(Integer jenjangMinimal) {
+        this.jenjangMinimal = jenjangMinimal;
+    }
 
     public int getId() {
         return id;
@@ -181,6 +221,14 @@ public class LamaranPelamar {
         this.pendidikanTerakhir = pendidikanTerakhir;
     }
 
+    public String getTingkatanJenjang() {
+        return tingkatanJenjang;
+    }
+
+    public void setTingkatanJenjang(String tingkatanJenjang) {
+        this.tingkatanJenjang = tingkatanJenjang;
+    }
+
     public Integer getUmur() {
         return umur;
     }
@@ -189,26 +237,14 @@ public class LamaranPelamar {
         this.umur = umur;
     }
 
-    public Integer getIdLamaran() {
-        return idLamaran;
-    }
-
-    public void setIdLamaran(Integer idLamaran) {
-        this.idLamaran = idLamaran;
-    }
-
-    public Integer getStatusLamaran() {
-        return statusLamaran;
-    }
-
-    public void setStatusLamaran(Integer statusLamaran) {
-        this.statusLamaran = statusLamaran;
-    }
-
     @Override
     public String toString() {
         return "LamaranPelamar{" +
-                "id=" + id +
+                "idLamaran=" + idLamaran +
+                ", statusLamaran=" + statusLamaran +
+                ", idLowongan=" + idLowongan +
+                ", jenjangMinimal=" + jenjangMinimal +
+                ", id=" + id +
                 ", namaPelamar='" + namaPelamar + '\'' +
                 ", tanggalLahir=" + tanggalLahir +
                 ", jenisKelamin=" + jenisKelamin +
@@ -222,9 +258,8 @@ public class LamaranPelamar {
                 ", rowStatus=" + rowStatus +
                 ", userLogin=" + userLogin +
                 ", pendidikanTerakhir='" + pendidikanTerakhir + '\'' +
+                ", tingkatanJenjang='" + tingkatanJenjang + '\'' +
                 ", umur=" + umur +
-                ", idLamaran=" + idLamaran +
-                ", statusLamaran=" + statusLamaran +
                 '}';
     }
 }
