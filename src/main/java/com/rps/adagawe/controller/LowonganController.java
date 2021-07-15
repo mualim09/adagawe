@@ -1,6 +1,7 @@
 package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.model.Jabatan;
 import com.rps.adagawe.model.Lowongan;
 import com.rps.adagawe.service.JenisPegawaiService;
@@ -36,12 +37,17 @@ public class LowonganController {
     @Autowired
     PelamarService pelamarService;
 
+    @Autowired
+    AdagaweService adagaweService;
+
     @GetMapping("/perusahaan/lowongan")
     public String index(Model model, HttpServletRequest request) {
         List<Lowongan> lowongans = lowonganService.getAll();
         model.addAttribute("lowongans", lowongans);
 
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
         return "/perusahaan/lowongan/index";
     }
 
@@ -50,7 +56,9 @@ public class LowonganController {
         model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
         model.addAttribute("lowongan", new Lowongan());
 
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
         return "/perusahaan/lowongan/create";
     }
 
@@ -72,12 +80,17 @@ public class LowonganController {
         model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
         model.addAttribute("lowongan", lowonganService.getLowonganById(id));
 
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
         return "/perusahaan/lowongan/edit";
     }
 
     @GetMapping("/perusahaan/lowongan/view/{id}")
     public String getView(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/lowongan/view";
     }
@@ -92,6 +105,8 @@ public class LowonganController {
         model.addAttribute("lamarans3", pelamarService.getPelamarByIdLowongan(lowonganId, 4, 5));
         model.addAttribute("lamarans4", pelamarService.getPelamarByIdLowongan(lowonganId, 6, 6));
 
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/lowongan/detail";
     }

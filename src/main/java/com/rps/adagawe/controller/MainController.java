@@ -23,12 +23,12 @@ public class MainController {
     @Autowired
     private AdagaweService adagaweService;
 
-    private void redirectIndex(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userEmail = authentication.getName();
-
-        model.addAttribute("userEmail", userEmail);
-    }
+//    private void redirectIndex(Model model) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String userEmail = authentication.getName();
+//
+//        model.addAttribute("userEmail", userEmail);
+//    }
 
     @GetMapping("/")
     public String indexPelamar(Model model) {
