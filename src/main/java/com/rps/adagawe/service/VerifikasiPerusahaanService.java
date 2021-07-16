@@ -32,8 +32,8 @@ public class VerifikasiPerusahaanService {
 
     public Perusahaan findLastIdInt(){
         Perusahaan ab = new Perusahaan();
-        Perusahaan perusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService);
-        ab.setId(perusahaan.getId());
+        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
+        ab.setId(idPerusahaan);
 
         return ab;
     }

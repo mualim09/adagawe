@@ -39,4 +39,12 @@ public class AdagaweService {
     public int findTotalUserByRole(int id) {
         return adagaweRepository.getTotalUserByUserRole(id);
     }
+
+    public int findTotalLowonganByPerusahaan(int id) {
+        return adagaweRepository.getTotalLowonganByPerusahaan(id);
+    }
+
+    public int findTotalLowonganAktifByPerusahaan(int id) {
+        return adagaweRepository.getTotalLowonganAktifByPerusahaan(id);
+    }
 }
