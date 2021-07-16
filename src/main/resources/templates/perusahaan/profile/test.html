@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      lang="en"
+      layout:decorate="~{layout/perusahaan}">
+<head>
+    <meta charset="UTF-8">
+    <title>Info Perusahaan</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">Info Perusahaan</h4>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Nama Perusahaan</label>
+                        </br>
+                        <span th:text="${verifikasiperusahaan.perusahaan.namaPerusahaan}"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Alamat lengkap</label>
+                        </br>
+                        <span th:text="${verifikasiperusahaan.perusahaan.alamatLengkap}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Provinsi</label>
+                        </br>
+                        <span th:text="${verifikasiperusahaan.perusahaan.provinsi}"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Kota</label>
+                        </br>
+                        <span th:text="${verifikasiperusahaan.perusahaan.kota}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Bidang Perusahaan</label>
+                        </br>
+                        <span th:text="${verifikasiperusahaan.perusahaan.bidangPerusahaan}"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">NPWP</label>
+                        </br>
+                        <span th:text="${verifikasiperusahaan.npwp}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Tanda Daftar Perusahaan</label>
+                        </br>
+                        <a th:href="${'/uploads/'+verifikasiperusahaan.tdp}" class="btn btn-primary btn-sm">Download TDP</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Surat Izin Usaha</label>
+                        </br>
+                        <a th:href="${'/uploads/'+verifikasiperusahaan.siu}" class="btn btn-primary btn-sm">Download SIU</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header border-top">
+                <h4 class="card-title">Verifikasi Perusahaan</h4>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Status Perusahaan</label>
+                    </br>
+                    <span th:switch="${verifikasiperusahaan.hasil}">
+                        <span th:case="'0'">Menunggu diverifikasi</span>
+                        <span th:case="'1'">Terverifikasi</span>
+                        <span th:case="'2'">Belum diverifikasi
+                            <div>
+                                </br>
+                                <a class="btn btn-success btn-sm" href="/perusahaan/verifikasi/createnext">
+                                    <i class="fa fa-plus"></i>
+                                    Ajukan Verifikasi
+                                </a>
+                            </div>
+                        </span>
+                    </span>
+                </div>
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Riwayat Verifikasi</label>
+                    </br>
+                    <a class="btn btn-warning btn-sm" href="/perusahaan/verifikasi/history">
+                        <i class="fa fa-eye"></i>
+                        Lihat Riwayat Pengajuan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
