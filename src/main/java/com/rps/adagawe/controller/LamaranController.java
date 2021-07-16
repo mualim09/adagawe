@@ -102,6 +102,8 @@ public class LamaranController {
         model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(lamaranPelamar.getIdPelamar()));
         model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(lamaranPelamar.getIdPelamar()));
         model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(lamaranPelamar.getIdPelamar()));
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
 
         return "perusahaan/lamaran/detail";
     }

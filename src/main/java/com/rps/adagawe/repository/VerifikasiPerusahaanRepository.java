@@ -18,4 +18,7 @@ public interface VerifikasiPerusahaanRepository extends CrudRepository<Verifikas
 
     @Query(nativeQuery = true, value = "SELECT * from VerifikasiPerusahaan a where a.id_perusahaan = :idPerusahaan")
     List<VerifikasiPerusahaan> findIdPerusahaan(int idPerusahaan);
+
+    List<VerifikasiPerusahaan> findAllByOrderByHasilAsc();
+
 }

@@ -1,5 +1,6 @@
 package com.rps.adagawe.controller;
 
+import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.model.Lowongan;
 import com.rps.adagawe.service.LowonganService;
@@ -32,6 +33,7 @@ public class MainController {
 
     @GetMapping("/")
     public String indexPelamar(Model model) {
+
         model.addAttribute("lokers", lowonganService.getAll());
 
         return "main/index";

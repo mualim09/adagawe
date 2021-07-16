@@ -27,7 +27,7 @@ public class VerifikasiPerusahaanService {
     AdagaweService adagaweService;
 
     public List<VerifikasiPerusahaan> getAll() {
-        return (List<VerifikasiPerusahaan>) verifikasiPerusahaanRepository.findAll();
+        return (List<VerifikasiPerusahaan>) verifikasiPerusahaanRepository.findAllByOrderByHasilAsc();
     }
 
     public Perusahaan findLastIdInt(){

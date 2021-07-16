@@ -14,12 +14,18 @@ public class Lowongan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_perusahaan", nullable = false)
-    private Perusahaan perusahaan;
+    @Column(name = "id_perusahaan")
+    private Integer idPerusahaan;
 
     @ManyToOne
-    @JoinColumn(name = "id_jenis_pegawai", nullable = false)
+    @JoinColumn(name = "id_perusahaan", insertable = false, updatable = false)
+    private Perusahaan perusahaan;
+
+    @Column(name = "id_jenis_pegawai")
+    private Integer idJenisPegawai;
+
+    @ManyToOne
+    @JoinColumn(name = "id_jenis_pegawai", insertable = false, updatable = false)
     private JenisPegawai jenisPegawai;
 
     @NotEmpty(message = "Judul Lowongan wajib diisi.")
@@ -61,6 +67,29 @@ public class Lowongan {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date lastModified;
 
+    public Integer getIdJenisPegawai() {
+        return idJenisPegawai;
+    }
+
+    public void setIdJenisPegawai(Integer idJenisPegawai) {
+        this.idJenisPegawai = idJenisPegawai;
+    }
+
+    public Integer getJenjangMinimal() {
+        return jenjangMinimal;
+    }
+
+    public void setJenjangMinimal(Integer jenjangMinimal) {
+        this.jenjangMinimal = jenjangMinimal;
+    }
+
+    public Integer getIdPerusahaan() {
+        return idPerusahaan;
+    }
+
+    public void setIdPerusahaan(Integer idPerusahaan) {
+        this.idPerusahaan = idPerusahaan;
+    }
 
     public int getId() {
         return id;
