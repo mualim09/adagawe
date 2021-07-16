@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="idJenisPegawai">Jenis Pegawai</label>
-                            <select id="idJenisPegawai" th:field="*{jenisPegawai.id}" th:class="'form-control '+ ${#fields.hasErrors('jenisPegawai') ? 'is-invalid' : ''}">
+                            <select id="idJenisPegawai" th:field="*{idJenisPegawai}" th:class="'form-control'">
                                 <option value="">Pilih Jenis Pegawai</option>
                                 <option th:each="jenisPegawai : ${jenisPegawais}" th:value="${jenisPegawai.id}" th:text="${jenisPegawai.namajenisPegawai}"></option>
                             </select>

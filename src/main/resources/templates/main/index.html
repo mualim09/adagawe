@@ -148,9 +148,9 @@
         <div class="col-md-4" th:each="loker, iter : ${lokers}">
           <div class="card-job">
             <div class="media mb-3">
-              <img
-                      th:src="@{'/uploads/foto_perusahaan/' + ${loker.perusahaan.fotoProfil}}"
-                      class="img-company mr-3" th:alt="${loker.perusahaan.namaPerusahaan}">
+<!--              <img-->
+<!--                      th:src="@{'/uploads/foto_perusahaan/' + ${loker.perusahaan.fotoProfil}}"-->
+<!--                      class="img-company mr-3" th:alt="${loker.perusahaan.namaPerusahaan}">-->
               <div class="media-body">
                 <a th:href="@{/lowongan/{id}(id=${loker.id})}" class="card-job-title" th:text="${loker.judulLowongan}"></a>
                 <a href="#" class="card-job-subtitle" th:text="${loker.perusahaan.namaPerusahaan}"></a>

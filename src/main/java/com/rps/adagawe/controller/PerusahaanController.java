@@ -42,7 +42,8 @@ public class PerusahaanController {
 
     @GetMapping("/perusahaan/verifikasi/create")
     public String create(Model model) {
-        model.addAttribute("perusahaan", new Perusahaan());
+        model.addAttribute("perusahaanObject", new Perusahaan());
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         return "/perusahaan/verifikasi/create";
     }
 
@@ -61,7 +62,7 @@ public class PerusahaanController {
         if (file.isEmpty()){
             perusahaan.setFotoProfil("default.jpg");
         } else {
-            String fileName = FileUploadHelper.upload(file, "foto_profil");
+            String fileName = FileUploadHelper.upload(file, "foto_perusahaan");
             perusahaan.setFotoProfil(fileName);
         }
         perusahaanService.save(perusahaan);
@@ -70,45 +71,12 @@ public class PerusahaanController {
         return "redirect:/perusahaan/verifikasi/createnext";
     }
 
-/*    @GetMapping("/perusahaan/edit/{id}")
-    public String edit(@PathVariable("id") Integer id, Model model) {
-        Perusahaan perusahaan = perusahaanService.getPerusahaanById(id);
-
-        model.addAttribute("perusahaan", perusahaan);
-        return "/perusahaan/edit";
-    }
-
-    @PostMapping("/perusahaan/edit/{id}")
-    public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
-                           @ModelAttribute("perusahaan") @Valid Perusahaan perusahaan, BindingResult result, Model model) {
-
-        if (result.hasErrors()) {
-            perusahaan.setId(id);
-            return "/perusahaan/edit";
-        }
-
-        Perusahaan p = perusahaanService.updatePerusahaan(id, perusahaan);
-        if (p == null) {
-            return "/perusahaan/edit";
-        }
-
-        redirectAttributes.addFlashAttribute("message", "Perusahaan berhasil diubah.");
-        return "redirect:/perusahaan";
-    }
-
-    @PostMapping("/perusahaan/delete/{id}")
-    public String deletePengalaman(RedirectAttributes redirectAttributes, @PathVariable("id") int id,
-                                   @ModelAttribute("perusahaan") @Valid Perusahaan perusahaan, BindingResult result, Model model) {
-        Perusahaan emp = perusahaanService.deletePerusahaan(id, perusahaan);
-
-        redirectAttributes.addFlashAttribute("message", "Perusahaan berhasil dihapus.");
-        return "redirect:/perusahaan";
-    }*/
 
     @GetMapping("/perusahaan")
     public String getIndex(Model model, HttpServletRequest request) {
 
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
 
         return "/perusahaan/dashboard";
@@ -118,6 +86,7 @@ public class PerusahaanController {
     public String getViewPerusahaan(Model model, HttpServletRequest request) {
 
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/index";
@@ -127,6 +96,7 @@ public class PerusahaanController {
     public String getEditPerusahaan(Model model, HttpServletRequest request) {
 
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/profile/edit";
@@ -142,16 +112,17 @@ public class PerusahaanController {
 
     @GetMapping("/perusahaan/profile")
     public String profile(Model model) {
-
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         UserLogin idUserLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
         List<Integer> perusahaan = perusahaanService.getIdUserLoginInPerusahaan();
         String prefix;
 
+
         if (perusahaan.contains(idUserLogin.getId()))
         {
-            int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
-            VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getLastIdPerusahaan(idPerusahaan);
-                    //getVerifikasiPerusahaanById(idPerusahaan);
+            Perusahaan perusahaan1 = AdagaweMethods.getPerusahaanBySession(adagaweService);
+            VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getLastIdPerusahaan(perusahaan1.getId());
 
             model.addAttribute("verifikasiperusahaan", verifikasiperusahaan);
             prefix = "/perusahaan/profile/index";

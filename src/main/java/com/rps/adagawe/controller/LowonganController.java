@@ -63,11 +63,16 @@ public class LowonganController {
     }
 
     @PostMapping("/perusahaan/lowongan/create")
-    public String postCreate(RedirectAttributes redirectAttributes,
+    public String postCreate(RedirectAttributes redirectAttributes,  HttpServletRequest request,
                              @ModelAttribute("lowongan") @Valid Lowongan lowongan, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("lowongan", lowongan);
+            model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+            model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+            model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
             return "/perusahaan/lowongan/create";
         }
+        lowongan.setIdPerusahaan(1);
 
         lowonganService.save(lowongan);
 

@@ -70,11 +70,12 @@
             <div class="card-header border-top">
                 <h4 class="card-title">Verifikasi Perusahaan</h4>
             </div>
-            <div class="row form-group">
-                <div class="col-lg-4">
-                    <label class="font-weight-bold">Status Perusahaan</label>
-                    </br>
-                    <span th:switch="${verifikasiperusahaan.hasil}">
+            <div class="card-body">
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Status Perusahaan</label>
+                        </br>
+                        <span th:switch="${verifikasiperusahaan.hasil}">
                         <span th:case="'0'">Menunggu diverifikasi</span>
                         <span th:case="'1'">Terverifikasi</span>
                         <span th:case="'2'">Belum diverifikasi
@@ -87,15 +88,16 @@
                             </div>
                         </span>
                     </span>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Riwayat Verifikasi</label>
+                        </br>
+                        <a class="btn btn-warning btn-sm" href="/perusahaan/verifikasi/history">
+                            <i class="fa fa-eye"></i>
+                            Lihat Riwayat Pengajuan
+                        </a>
+                    </div>
                 </div>
-                <div class="col-lg-4">
-                    <label class="font-weight-bold">Riwayat Verifikasi</label>
-                    </br>
-                    <a class="btn btn-warning btn-sm" href="/perusahaan/verifikasi/history">
-                        <i class="fa fa-eye"></i>
-                        Lihat Riwayat Pengajuan
-                    </a>
-                   </div>
             </div>
         </div>
     </div>

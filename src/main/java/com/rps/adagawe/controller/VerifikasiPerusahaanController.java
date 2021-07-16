@@ -48,6 +48,8 @@ public class VerifikasiPerusahaanController {
     @GetMapping("/perusahaan/verifikasi/createnext")
     public String createnext(Model model) {
         model.addAttribute("verifikasiperusahaan", new VerifikasiPerusahaan());
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         return "/perusahaan/verifikasi/createnext";
     }
 
@@ -82,6 +84,7 @@ public class VerifikasiPerusahaanController {
     public String detail(@PathVariable("id") Integer id, Model model) {
         VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getVerifikasiPerusahaanById(id);
 
+        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
         model.addAttribute("verifikasiperusahaan", verifikasiperusahaan);
         return "/admin/verifikasi/detail";
     }
@@ -104,9 +107,11 @@ public class VerifikasiPerusahaanController {
     @GetMapping("/perusahaan/verifikasi/history")
     public String history(Model model) {
         //List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.
-        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
         List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.getListVerifikasiPerusahaanById(idPerusahaan);
         model.addAttribute("verifikasiperusahaans", verifikasiperusahaans);
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         return "/perusahaan/verifikasi/history";
     }
 
@@ -115,6 +120,8 @@ public class VerifikasiPerusahaanController {
         VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getVerifikasiPerusahaanById(id);
 
         model.addAttribute("verifikasiperusahaan", verifikasiperusahaan);
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession( adagaweService));
         return "/perusahaan/verifikasi/detail";
     }
 }

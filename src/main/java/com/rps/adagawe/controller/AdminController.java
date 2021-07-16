@@ -104,7 +104,6 @@ public class AdminController {
     @GetMapping("/admin/profile/edit")
     public String getEditProfile(Model model) {
 
-        //Admin admin = adminService.getAdminById(AdagaweMethods.getIdAdminBySession(adminService));
         Admin admin = adminService.getAdminById(1);
         model.addAttribute("admin", admin);
         return "/admin/profile/edit";
