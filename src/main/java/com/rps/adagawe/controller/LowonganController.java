@@ -46,6 +46,7 @@ public class LowonganController {
         model.addAttribute("lowongans", lowongans);
 
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/lowongan/index";
