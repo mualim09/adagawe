@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       lang="en"
-      layout:decorate="~{layout/admin}">
+      layout:decorate="~{layout/perusahaan}">
 <head>
     <meta charset="UTF-8">
-    <title>Verifikasi Perusahaan</title>
+    <title>Detail Pengajuan Verifikasi</title>
 </head>
 
 <body>
@@ -13,13 +13,13 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                    <h4 class="card-title">Verifikasi Perusahaan</h4>
+                    <h4 class="card-title">Detail Pengajuan Verifikasi</h4>
                 </div>
             </div>
 
             <div class="card-body">
 
-                <form th:action="@{/admin/verifikasi/detail/{id}(id=${verifikasiperusahaan.id})}" th:object="${verifikasiperusahaan}" id="verifikasiperusahaanForm" method="post" enctype="multipart/form-data">
+                <form th:action="@{/perusahaan/verifikasi/detail/{id}(id=${verifikasiperusahaan.id})}" th:object="${verifikasiperusahaan}" id="verifikasiperusahaanForm" method="post" enctype="multipart/form-data">
 
                     <div class="row form-group">
                         <div class="col-lg-4">
@@ -74,20 +74,9 @@
                             <label class="font-weight-bold">Komentar</label>
                             </br>
                             <textarea th:field="*{komentar}" id="komentar" placeholder="Komentar"
-                                      th:class="'form-control '+ ${#fields.hasErrors('komentar') ? 'is-invalid' : ''}"></textarea>
+                                      th:class="'form-control '+ ${#fields.hasErrors('komentar') ? 'is-invalid' : ''}"
+                                      th:disabled="${verifikasiperusahaan.hasil != null}"></textarea>
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('komentar')}" th:errors="*{komentar}"></div>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-lg-4">
-                            <button type="submit" name="verif" value="tolak" onclick="return confirm('Apakah anda yakin ingin untuk menolak verifikasi?')" class="btn btn-danger mt-3 mr-2"
-                                    th:disabled="${verifikasiperusahaan.hasil != 0}">
-                                <i class="fa fa-x-ray"></i>Tolak</button>
-                        </div>
-                        <div class="col-lg-4">
-                            <button type="submit" name="verif" value="setuju" onclick="return confirm('Apakah anda yakin ingin untuk menyetujui verifikasi?')" class="btn btn-success mt-3 mr-2"
-                                    th:disabled="${verifikasiperusahaan.hasil != 0}">
-                                <i class="fa fa-check-circle"></i>Setujui</button>
                         </div>
                     </div>
                 </form>

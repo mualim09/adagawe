@@ -131,8 +131,8 @@
                     </div>
                 </div>
                 <ul class="nav nav-primary">
-                    <li th:class="'nav-item ' + ${url == '' ? 'active' : ''}" >
-                        <a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                    <li th:class="'nav-item ' + ${url == 'perusahaan' ? 'active' : ''}" >
+                        <a href="/perusahaan" class="collapsed" aria-expanded="false">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
                         </a>
@@ -144,7 +144,7 @@
                         <h4 class="text-section">Daftar Menu</h4>
                     </li>
                     <li th:class="'nav-item ' + ${url == 'profile' ? 'active' : ''}">
-                        <a href="#base">
+                        <a href="/perusahaan/profile">
                             <i class="fas fa-layer-group"></i>
                             <p>Info Perusahaan</p>
                         </a>
@@ -155,12 +155,12 @@
                             <p>Daftar Lowongan</p>
                         </a>
                     </li>
-                    <li th:class="'nav-item ' + ${url == 'perusahaan' ? 'active' : ''}">
-                        <a href="/perusahaan/verifikasi/create">
-                            <i class="fas fa-check-circle"></i>
-                            <p>Ajukan Verifikasi</p>
-                        </a>
-                    </li>
+<!--                    <li th:class="'nav-item ' + ${url == 'history' ? 'active' : ''}">-->
+<!--                        <a href="/perusahaan/verifikasi/history">-->
+<!--                            <i class="fas fa-check-circle"></i>-->
+<!--                            <p>Riwayat Verifikasi</p>-->
+<!--                        </a>-->
+<!--                    </li>-->
                     <li th:class="'nav-item ' + ${url == 'laporan' ? 'active' : ''}">
                         <a href="#charts">
                             <i class="far fa-chart-bar"></i>

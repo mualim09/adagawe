@@ -32,8 +32,19 @@ public class VerifikasiPerusahaanService {
 
     public Perusahaan findLastIdInt(){
         Perusahaan ab = new Perusahaan();
-        ab.setId(verifikasiPerusahaanRepository.findLastId());
+        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+        ab.setId(idPerusahaan);
+
         return ab;
+    }
+
+    public VerifikasiPerusahaan getLastIdPerusahaan(Integer id) {
+        return verifikasiPerusahaanRepository.findLastIdPerusahaan(id);
+                //.orElseThrow(() -> new IllegalArgumentException("Invalid perusahaan Id:" + id));
+    }
+
+    public List<VerifikasiPerusahaan> getListVerifikasiPerusahaanById(int idPerusahaan) {
+        return verifikasiPerusahaanRepository.findIdPerusahaan(idPerusahaan);
     }
 
     public VerifikasiPerusahaan getVerifikasiPerusahaanById(Integer id) {
@@ -43,7 +54,6 @@ public class VerifikasiPerusahaanService {
 
     public void savenext(VerifikasiPerusahaan verifikasiPerusahaan) {
         Date date = new Date();
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
         verifikasiPerusahaan.setPerusahaan(findLastIdInt());
         verifikasiPerusahaan.setHasil(0);

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       lang="en"
-      layout:decorate="~{layout/admin}">
+      layout:decorate="~{layout/perusahaan}">
 <head>
     <meta charset="UTF-8">
-    <title>Verifikasi Perusahaan</title>
+    <title>Info Perusahaan</title>
 </head>
 
 <body>
@@ -13,14 +13,11 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                    <h4 class="card-title">Verifikasi Perusahaan</h4>
+                    <h4 class="card-title">Info Perusahaan</h4>
                 </div>
             </div>
 
             <div class="card-body">
-
-                <form th:action="@{/admin/verifikasi/detail/{id}(id=${verifikasiperusahaan.id})}" th:object="${verifikasiperusahaan}" id="verifikasiperusahaanForm" method="post" enctype="multipart/form-data">
-
                     <div class="row form-group">
                         <div class="col-lg-4">
                             <label class="font-weight-bold">Nama Perusahaan</label>
@@ -69,28 +66,36 @@
                             <a th:href="${'/uploads/'+verifikasiperusahaan.siu}" class="btn btn-primary btn-sm">Download SIU</a>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <div class="col-lg-4">
-                            <label class="font-weight-bold">Komentar</label>
-                            </br>
-                            <textarea th:field="*{komentar}" id="komentar" placeholder="Komentar"
-                                      th:class="'form-control '+ ${#fields.hasErrors('komentar') ? 'is-invalid' : ''}"></textarea>
-                            <div class="invalid-feedback" th:if="${#fields.hasErrors('komentar')}" th:errors="*{komentar}"></div>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-lg-4">
-                            <button type="submit" name="verif" value="tolak" onclick="return confirm('Apakah anda yakin ingin untuk menolak verifikasi?')" class="btn btn-danger mt-3 mr-2"
-                                    th:disabled="${verifikasiperusahaan.hasil != 0}">
-                                <i class="fa fa-x-ray"></i>Tolak</button>
-                        </div>
-                        <div class="col-lg-4">
-                            <button type="submit" name="verif" value="setuju" onclick="return confirm('Apakah anda yakin ingin untuk menyetujui verifikasi?')" class="btn btn-success mt-3 mr-2"
-                                    th:disabled="${verifikasiperusahaan.hasil != 0}">
-                                <i class="fa fa-check-circle"></i>Setujui</button>
-                        </div>
-                    </div>
-                </form>
+            </div>
+            <div class="card-header border-top">
+                <h4 class="card-title">Verifikasi Perusahaan</h4>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Status Perusahaan</label>
+                    </br>
+                    <span th:switch="${verifikasiperusahaan.hasil}">
+                        <span th:case="'0'">Menunggu diverifikasi</span>
+                        <span th:case="'1'">Terverifikasi</span>
+                        <span th:case="'2'">Belum diverifikasi
+                            <div>
+                                </br>
+                                <a class="btn btn-success btn-sm" href="/perusahaan/verifikasi/createnext">
+                                    <i class="fa fa-plus"></i>
+                                    Ajukan Verifikasi
+                                </a>
+                            </div>
+                        </span>
+                    </span>
+                </div>
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Riwayat Verifikasi</label>
+                    </br>
+                    <a class="btn btn-warning btn-sm" href="/perusahaan/verifikasi/history">
+                        <i class="fa fa-eye"></i>
+                        Lihat Riwayat Pengajuan
+                    </a>
+                   </div>
             </div>
         </div>
     </div>

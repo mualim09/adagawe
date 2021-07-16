@@ -32,6 +32,10 @@ public class PerusahaanService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid perusahaan Id:" + id));
     }
 
+    public List<Integer> getIdUserLoginInPerusahaan() {
+        return perusahaanRepository.findIdUserLogin();
+    }
+
 /*    public Perusahaan updatePerusahaan(int id, Perusahaan perusahaan) {
         Perusahaan p = perusahaanRepository.findById(id).orElse(null);
         assert p != null;
