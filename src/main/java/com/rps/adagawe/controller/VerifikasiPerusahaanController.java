@@ -104,7 +104,7 @@ public class VerifikasiPerusahaanController {
     @GetMapping("/perusahaan/verifikasi/history")
     public String history(Model model) {
         //List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.
-        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
         List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.getListVerifikasiPerusahaanById(idPerusahaan);
         model.addAttribute("verifikasiperusahaans", verifikasiperusahaans);
         return "/perusahaan/verifikasi/history";

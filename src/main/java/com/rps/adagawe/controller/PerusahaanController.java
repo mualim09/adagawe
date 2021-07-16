@@ -149,7 +149,7 @@ public class PerusahaanController {
 
         if (perusahaan.contains(idUserLogin.getId()))
         {
-            int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+            int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
             VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getLastIdPerusahaan(idPerusahaan);
                     //getVerifikasiPerusahaanById(idPerusahaan);
 

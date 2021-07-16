@@ -32,7 +32,7 @@ public class VerifikasiPerusahaanService {
 
     public Perusahaan findLastIdInt(){
         Perusahaan ab = new Perusahaan();
-        int idPerusahaan = AdagaweMethods.getIdPerusahaanBySession(adagaweService);
+        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
         ab.setId(idPerusahaan);
 
         return ab;
