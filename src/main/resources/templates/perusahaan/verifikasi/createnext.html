@@ -26,14 +26,20 @@
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('npwp')}" th:errors="*{npwp}"></div>
                     </div>
                     <div class="form-group">
-                        <label for="tdp">TDP</label>
-                        <input type="file" name="tdpfile" id="tdp" placeholder="Tanda Daftar Perusahaan" class="form-control">
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('tdp')}" th:errors="*{tdp}"></div>
+                        <label>Tanda Daftar Perusahaan (TDP)</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="tdpfile" id="tdp">
+                            <label class="custom-file-label font-normal" for="siu">Berkas TDP</label>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('tdp')}" th:errors="*{tdp}"></div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="siu">SIU</label>
-                        <input type="file" name="siufile" id="siu" placeholder="Surat Izin Usaha" class="form-control">
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('siu')}" th:errors="*{siu}"></div>
+                        <label>Surat Ijin Usaha (SIU)</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="siufile" id="siu">
+                            <label class="custom-file-label font-normal" for="siu">Berkas SIU</label>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('siu')}" th:errors="*{siu}"></div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -44,6 +50,14 @@
         </div>
     </div>
 </div>
+<script layout:fragment="scripts">
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 </body>
+
 
 </html>

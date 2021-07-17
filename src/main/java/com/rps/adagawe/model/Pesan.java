@@ -9,18 +9,18 @@ public class Pesan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "pesan_dari")
+    @Column(name = "pengirim_satu")
     private Integer idPesanDari;
 
     @ManyToOne
-    @JoinColumn(name = "pesan_dari", insertable = false, updatable = false)
+    @JoinColumn(name = "pengirim_satu", insertable = false, updatable = false)
     private UserLogin pesanDari;
 
-    @Column(name = "pesan_untuk")
+    @Column(name = "pengirim_dua")
     private Integer idPesanUntuk;
 
     @ManyToOne
-    @JoinColumn(name = "pesan_untuk", insertable = false, updatable = false)
+    @JoinColumn(name = "pengirim_dua", insertable = false, updatable = false)
     private UserLogin pesanUntuk;
 
     @Column(name = "pesan_terakhir")

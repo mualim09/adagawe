@@ -33,7 +33,7 @@ public class JenisPegawaiController {
         List<JenisPegawai> jenisPegawais = jenisPegawaiService.findJenisPegawaiByRowStatus();
         model.addAttribute("jenisPegawais", jenisPegawais);
 
-        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/admin/jenispegawai/index";
@@ -43,7 +43,7 @@ public class JenisPegawaiController {
     public String getCreate(Model model, HttpServletRequest request) {
         model.addAttribute("jenispegawai", new JenisPegawai());
 
-        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/admin/jenispegawai/create";
@@ -68,7 +68,7 @@ public class JenisPegawaiController {
     public String getEdit(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
         model.addAttribute("jenispegawai", jenisPegawaiService.getJenisPegawaiById(id));
 
-        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/admin/jenispegawai/edit";

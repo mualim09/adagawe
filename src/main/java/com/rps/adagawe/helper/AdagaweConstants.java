@@ -26,4 +26,8 @@ public class AdagaweConstants {
     /* URL CRUD */
     public static final String URL_CREATE = "/create";
     public static final String URL_EDIT = "/edit";
+
+    /* STRING */
+    public static final String FOTO_PROFILE_DEFAULT = "default-employee.png";
+    public static final String FOTO_PERUSAHAAN_DEFAULT = "default-company.png";
 }

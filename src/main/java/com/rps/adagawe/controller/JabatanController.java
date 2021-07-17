@@ -31,7 +31,7 @@ public class JabatanController {
         List<Jabatan> jabatans = jabatanService.findJabatanByRowStatus();
         model.addAttribute("jabatans", jabatans);
 
-        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/admin/jabatan/index";
@@ -41,7 +41,7 @@ public class JabatanController {
     public String getCreate(Model model, HttpServletRequest request) {
         model.addAttribute("jabatan", new Jabatan());
 
-        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/admin/jabatan/create";
@@ -66,7 +66,7 @@ public class JabatanController {
     public String getEdit(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
         model.addAttribute("jabatan", jabatanService.getJabatanById(id));
 
-        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/admin/jabatan/edit";
