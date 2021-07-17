@@ -55,6 +55,11 @@ public class AdagaweMethods {
         return service.findPerusahaanByUserLogin(ul.getId());
     }
 
+    public static UserLogin getUserLoginByEmail(AdagaweService service, String email) {
+
+        return service.findUserLoginByEmail(email);
+    }
+
     public static String getMainUrl(HttpServletRequest request, int index) {
         /**
          * Url = /pelamar/profile

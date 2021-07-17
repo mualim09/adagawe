@@ -98,7 +98,7 @@ public class PerusahaanController {
     public String getEditPerusahaan(Model model, HttpServletRequest request) {
 
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
-        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+//        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/profile/edit";
@@ -134,5 +134,14 @@ public class PerusahaanController {
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return prefix;
+    }
+
+    @GetMapping("/perusahaan/laporan")
+    public String getLaporan(Model model, HttpServletRequest request) {
+
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
+        return "/perusahaan/report-lowongan";
     }
 }

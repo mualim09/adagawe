@@ -40,6 +40,12 @@ public class UserLogin implements UserDetails {
     @Builder.Default
     private Boolean enabled = false;
 
+    @Column(name = "nama")
+    private String nama;
+
+    @Column(name = "foto_profil")
+    private String fotoProfil;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(userRole.name());
