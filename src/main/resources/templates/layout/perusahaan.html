@@ -22,7 +22,7 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/atlantis.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/atlantis.css}">
     <link rel="stylesheet" th:href="@{/assets/css/style.css}">
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <!-- <link rel="stylesheet" href="/assets/css/demo.css"> -->
@@ -61,8 +61,8 @@
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                             <div class="avatar-sm">
-                                <img th:if="${perusahaan == null}" th:src="@{'/uploads/foto_perusahaan/default-company.png'}" alt="..." class="avatar-img rounded-circle img-thumbnail">
-                                <img th:unless="${perusahaan == null}" th:src="@{'/uploads/foto_perusahaan/' + ${perusahaan.fotoProfil}}" alt="..." class="avatar-img rounded-circle img-thumbnail">
+                                <img th:if="${userLogin == null}" th:src="@{'/uploads/foto_perusahaan/default-company.png'}" alt="..." class="avatar-img rounded-circle img-thumbnail">
+                                <img th:unless="${userLogin == null}" th:src="@{'/uploads/foto_perusahaan/' + ${userLogin.fotoProfil}}" alt="..." class="avatar-img rounded-circle img-thumbnail">
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -70,12 +70,12 @@
                                 <li>
                                     <div class="user-box">
                                         <div class="avatar-lg">
-                                            <img th:if="${perusahaan == null}" th:src="@{'/uploads/foto_perusahaan/default-company.png'}" alt="image profile" class="avatar-img rounded">
-                                            <img th:unless="${perusahaan == null} " th:src="@{'/uploads/foto_perusahaan/' + ${perusahaan.fotoProfil}}" alt="image profile" class="avatar-img rounded">
+                                            <img th:if="${userLogin == null}" th:src="@{'/uploads/foto_perusahaan/default-company.png'}" alt="image profile" class="avatar-img rounded">
+                                            <img th:unless="${userLogin == null} " th:src="@{'/uploads/foto_perusahaan/' + ${userLogin.fotoProfil}}" alt="image profile" class="avatar-img rounded">
                                         </div>
                                         <div class="u-text">
-                                            <h4 th:if="${perusahaan == null}" th:text="${userlogin.email}"></h4>
-                                            <h4 th:unless="${perusahaan == null}" th:text="${perusahaan.namaPerusahaan}"></h4>
+                                            <h4 th:if="${userLogin == null}" th:text="@{'Unnamed Company'}"></h4>
+                                            <h4 th:unless="${userLogin == null}" th:text="${userLogin.nama}"></h4>
                                         </div>
                                     </div>
                                 </li>
@@ -102,14 +102,14 @@
             <div class="sidebar-content">
                 <div class="user">
                     <div class="avatar-sm float-left mr-2">
-                        <img th:if="${perusahaan == null}" th:src="@{'/uploads/foto_perusahaan/default-company.png'}" alt="Profile Picture" class="avatar-img rounded-circle" style="border: 1px solid #dee2e6;">
-                        <img th:unless="${perusahaan == null}" th:src="@{'/uploads/foto_perusahaan/' + ${perusahaan.fotoProfil}}" alt="Profile Picture" class="avatar-img rounded-circle" style="border: 1px solid #dee2e6;">
+                        <img th:if="${userLogin == null}" th:src="@{'/uploads/foto_perusahaan/default-company.png'}" alt="Profile Picture" class="avatar-img rounded-circle img-thumbnail">
+                        <img th:unless="${userLogin == null}" th:src="@{'/uploads/foto_perusahaan/' + ${userLogin.fotoProfil}}" alt="Profile Picture" class="avatar-img rounded-circle img-thumbnail">
                     </div>
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									<span th:if="${perusahaan == null}" th:text="${userlogin.email}"></span>
-									<span th:unless="${perusahaan == null}" th:text="${perusahaan.namaPerusahaan}"></span>
+									<span th:if="${userLogin == null}" th:text="${'Unnamed Company'}"></span>
+									<span th:unless="${userLogin == null}" th:text="${userLogin.nama}"></span>
 									<span class="user-level">HR Company</span>
 									<span class="caret"></span>
 								</span>
@@ -169,7 +169,13 @@
 <!--                        </a>-->
 <!--                    </li>-->
                     <li th:class="'nav-item ' + ${url == 'laporan' ? 'active' : ''}">
-                        <a href="#charts">
+                        <a href="/perusahaan/messages">
+                            <i class="far fa-paper-plane"></i>
+                            <p>Pesan</p>
+                        </a>
+                    </li>
+                    <li th:class="'nav-item ' + ${url == 'laporan' ? 'active' : ''}">
+                        <a href="/perusahaan/laporan">
                             <i class="far fa-chart-bar"></i>
                             <p>Laporan</p>
                         </a>
@@ -179,7 +185,7 @@
         </div>
     </div>
     <div class="main-panel">
-        <div class="content">
+        <div class="container">
             <div class="page-inner">
                 <div class="page-header" layout:fragment="header">
 

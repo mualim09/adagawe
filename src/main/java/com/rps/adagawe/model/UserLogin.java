@@ -27,8 +27,9 @@ public class UserLogin implements UserDetails {
 
     private String password;
 
+    @Builder.Default
     @Column(name = "row_status")
-    private int status;
+    private int status = 1;
 
     @Builder.Default
     @Column(name = "user_role")
@@ -39,6 +40,12 @@ public class UserLogin implements UserDetails {
 
     @Builder.Default
     private Boolean enabled = false;
+
+    @Column(name = "nama")
+    private String nama;
+
+    @Column(name = "foto_profil")
+    private String fotoProfil;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

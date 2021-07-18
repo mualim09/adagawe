@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layout/perusahaan}">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Jabatan</title>
+</head>
+
+<body>
+
+    <div layout:fragment="header">
+        <h4 class="page-title">Pesan</h4>
+    </div>
+    <div layout:fragment="content">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+                <div class="d-md-inline-block">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+											<span class="input-group-text bg-white">
+												<i class="fa fa-search search-icon"></i>
+											</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div role="separator" class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success d-none d-sm-inline-block">New Message</button>
+            </div>
+
+            <section class="card mt-4">
+                <div class="list-group list-group-messages list-group-flush">
+                    <div:block th:each="pesan : ${pesans}" class="list-group-item unread">
+                        <div class="list-group-item-figure">
+                            <a href="conversations.html" class="user-avatar">
+                                <div class="avatar avatar-online">
+                                    <img src="../assets/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group-item-body pl-3 pl-md-4">
+                            <div class="row">
+                                <div class="col-12 col-lg-10">
+                                    <h4 class="list-group-item-title">
+                                        <a th:href="@{/perusahaan/messages/{id}(id=${pesan.id})}" th:text="${pesan.pesanDari.email}">Jimmy Denis</a>
+                                        Ke
+                                        <a href="#" th:text="${pesan.pesanUntuk.email}">Jimmy Denis</a>
+                                    </h4>
+                                    <p class="list-group-item-text text-truncate">test</p>
+                                </div>
+                                <div class="col-12 col-lg-2 text-lg-right">
+                                    <p class="list-group-item-text"> 16 minutes ago </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item-figure">
+                            <div class="dropdown">
+                                <button class="btn-dropdown" data-toggle="dropdown">
+                                    <i class="icon-options-vertical"></i>
+                                </button>
+                                <div class="dropdown-arrow"></div>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="#" class="dropdown-item">Mark as read</a>
+                                    <a href="#" class="dropdown-item">Mark as unread</a>
+                                    <a href="#" class="dropdown-item">Toggle star</a>
+                                    <a href="#" class="dropdown-item">Trash</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div:block>
+<!--                    <div class="list-group-item read">-->
+<!--                        <div class="list-group-item-figure">-->
+<!--                            <a href="conversations.html" class="user-avatar">-->
+<!--                                <div class="avatar avatar-away">-->
+<!--                                    <img src="../assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="list-group-item-body pl-3 pl-md-4">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-12 col-lg-10">-->
+<!--                                    <h4 class="list-group-item-title">-->
+<!--                                        <a href="conversations.html">Talha</a>-->
+<!--                                    </h4>-->
+<!--                                    <p class="list-group-item-text text-truncate"> Follow up this reminder asap, quam error praesentium asperiores a quidem. </p>-->
+<!--                                </div>-->
+<!--                                <div class="col-12 col-lg-2 text-lg-right">-->
+<!--                                    <p class="list-group-item-text"> 2 days ago </p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="list-group-item-figure">-->
+<!--                            <div class="dropdown">-->
+<!--                                <button class="btn-dropdown" data-toggle="dropdown">-->
+<!--                                    <i class="icon-options-vertical"></i>-->
+<!--                                </button>-->
+<!--                                <div class="dropdown-arrow"></div>-->
+<!--                                <div class="dropdown-menu dropdown-menu-right">-->
+<!--                                    <a href="#" class="dropdown-item">Mark as read</a>-->
+<!--                                    <a href="#" class="dropdown-item">Mark as unread</a>-->
+<!--                                    <a href="#" class="dropdown-item">Toggle star</a>-->
+<!--                                    <a href="#" class="dropdown-item">Trash</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+
+</html>

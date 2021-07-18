@@ -42,20 +42,25 @@ public class PerusahaanController {
 
     @GetMapping("/perusahaan")
     public String getIndex(Model model, HttpServletRequest request) {
-        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
-        model.addAttribute("total_lowongan_aktif", adagaweService.findTotalLowonganAktifByPerusahaan(idPerusahaan));
-        model.addAttribute("total_lowongan", adagaweService.findTotalLowonganByPerusahaan(idPerusahaan));
+        //int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
+//        model.addAttribute("total_lowongan_aktif", adagaweService.findTotalLowonganAktifByPerusahaan(idPerusahaan));
+//        model.addAttribute("total_lowongan", adagaweService.findTotalLowonganByPerusahaan(idPerusahaan));
 
-        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+//        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
 
         return "/perusahaan/dashboard";
     }
 
     @GetMapping("/perusahaan/verifikasi/create")
-    public String create(Model model) {
+    public String create(Model model, HttpServletRequest request) {
         model.addAttribute("perusahaanObject", new Perusahaan());
         model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
         return "/perusahaan/verifikasi/create";
     }
 
@@ -64,7 +69,7 @@ public class PerusahaanController {
                              @ModelAttribute("perusahaan") @Valid Perusahaan perusahaan, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            return "/perusahaan/verifikasi/create";
+            return "/perusahaan/profile/create";
         }
 
         UserLogin ul = AdagaweMethods.getUserLoginBySession(adagaweService);
@@ -80,7 +85,9 @@ public class PerusahaanController {
         perusahaanService.save(perusahaan);
 
         //redirectAttributes.addFlashAttribute("message", "Perusahaan berhasil ditambah.");
-        return "redirect:/perusahaan/verifikasi/createnext";
+        // return "redirect:/perusahaan/verifikasi/createnext";
+
+        return "redirect:/perusahaan/profile";
     }
 
 
@@ -117,22 +124,57 @@ public class PerusahaanController {
 
         //        UserLogin idUserLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
 //        List<Integer> perusahaan = perusahaanService.getIdUserLoginInPerusahaan();
-        Perusahaan idPerusahaan;
+        //Perusahaan idPerusahaan;
         String prefix;
 
-        idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService);
-        if (idPerusahaan.getRowStatus() == 1) {
-            VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getLastIdPerusahaan(idPerusahaan.getId());
-            model.addAttribute("verifikasiperusahaan", verifikasiperusahaan);
-            prefix = "/perusahaan/profile/create";
-        } else {
+//        if (idPerusahaan.getRowStatus() == -1) {
+//            VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getLastIdPerusahaan(idPerusahaan.getId());
+//            model.addAttribute("verifikasiperusahaan", verifikasiperusahaan);
+//            prefix = "/perusahaan/profile/create";
+//        } else {
+//            prefix = "/perusahaan/profile/index";
+//        }
+        UserLogin idUserLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
+        List<Integer> perusahaan = perusahaanService.getIdUserLoginInPerusahaan();
+
+
+        if (perusahaan.contains(idUserLogin.getId())) {
+            int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
+            VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getLastIdPerusahaan(idPerusahaan);
+            List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.getListVerifikasiPerusahaanById(idPerusahaan);
+            //getVerifikasiPerusahaanById(idPerusahaan);
+            model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+            model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+            if (verifikasiperusahaans.size() != 0) {
+                model.addAttribute("verifikasiperusahaan", verifikasiperusahaans.get(verifikasiperusahaans.size() - 1));
+            } else {
+                model.addAttribute("verifikasiperusahaan", null);
+            }
+
+            model.addAttribute("verifikasiperusahaans", verifikasiperusahaans);
+            //            prefix = "/perusahaan/profile/test";
             prefix = "/perusahaan/profile/index";
         }
+        else {
+            model.addAttribute("perusahaan", new Perusahaan());
+            model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+//            model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
-        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+            prefix = "/perusahaan/profile/create";
+        }
+
+
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return prefix;
+    }
+
+    @GetMapping("/perusahaan/laporan")
+    public String getLaporan(Model model, HttpServletRequest request) {
+
+        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
+        return "/perusahaan/report-lowongan";
     }
 }

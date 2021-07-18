@@ -59,7 +59,7 @@
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                             <div class="avatar-sm">
-                                <img th:src="@{'/uploads/foto_profil/' + ${admin.fotoProfil}}" alt="..." class="avatar-img rounded-circle">
+                                <img th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}" alt="..." class="avatar-img rounded-circle">
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -67,11 +67,10 @@
                                 <li>
                                     <div class="user-box">
                                         <div class="avatar-lg">
-                                            <img th:src="@{'/uploads/foto_profil/' + ${admin.fotoProfil}}" alt="image profile" class="avatar-img rounded">
+                                            <img th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}" alt="image profile" class="avatar-img rounded">
                                         </div>
                                         <div class="u-text">
-                                            <h4 th:text="${admin.namaAdmin}"></h4>
-                                            <p class="text-muted" th:text="${admin.userLogin.email}">hello@example.com</p>
+                                            <h4 th:text="${userLogin.nama}"></h4>
                                         </div>
                                     </div>
                                 </li>
@@ -98,12 +97,12 @@
             <div class="sidebar-content">
                 <div class="user">
                     <div class="avatar-sm float-left mr-2">
-                        <img th:src="@{'/uploads/foto_profil/' + ${admin.fotoProfil}}" alt="..." class="avatar-img rounded-circle">
+                        <img th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}" alt="..." class="avatar-img rounded-circle">
                     </div>
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-                                    <span th:text="${admin.namaAdmin}"></span>
+                                    <span th:text="${userLogin.nama}"></span>
 									<span class="user-level">Administrator</span>
 									<span class="caret"></span>
 								</span>
@@ -173,7 +172,7 @@
         </div>
     </div>
     <div class="main-panel">
-        <div class="content">
+        <div class="container">
             <div class="page-inner">
                 <div class="page-header" layout:fragment="header">
 

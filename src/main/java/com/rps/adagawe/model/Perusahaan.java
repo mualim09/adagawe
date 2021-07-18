@@ -1,7 +1,10 @@
 package com.rps.adagawe.model;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Null;
 
 @Entity
 public class Perusahaan {
@@ -31,18 +34,21 @@ public class Perusahaan {
     @NotEmpty(message = "Kota wajib diisi.")
     private String kota;
 
+    @Builder.Default
     @Column(name = "telah_terverifikasi")
-    private Integer telahTerverifikasi;
+    private Integer telahTerverifikasi = 0;
 
+    @Builder.Default
     @Column(name = "foto_profil")
-    private String fotoProfil;
+    private String fotoProfil = null;
 
     @NotEmpty(message = "Bidang Perusahaan wajib diisi.")
     @Column(name = "bidang_perusahaan")
     private String bidangPerusahaan;
 
+    @Builder.Default
     @Column(name = "row_status")
-    private Integer rowStatus;
+    private Integer rowStatus = 0;
 
     public int getId() {
         return id;

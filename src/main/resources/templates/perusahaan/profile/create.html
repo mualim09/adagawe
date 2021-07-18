@@ -8,26 +8,93 @@
 </head>
 
 <body>
+
+<div layout:fragment="header">
+    <h4 class="page-title">Akun</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Informasi</a>
+        </li>
+    </ul>
+</div>
+
 <div layout:fragment="content">
     <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">
+            Ayo lengkapi profil perusahaanmu terlebih dahulu!
+        </div>
         <div class="card">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                    <h4 class="card-title">Info Perusahaan</h4>
+                    <h4 class="card-title">Informasi Perusahaan</h4>
                 </div>
             </div>
-
             <div class="card-body">
-                <div>
-                    </br>
-                    <a class="btn btn-success" href="/perusahaan/verifikasi/create">
-                        <i class="fa fa-plus"></i>
-                        Ajukan Verifikasi
-                    </a>
-                </div>
+                <form th:action="@{/perusahaan/verifikasi/create}" th:object="${perusahaan}" id="perusahaanForm" method="post" enctype="multipart/form-data">
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="namaPerusahaan">Nama Perusahaan</label>
+                            <input type="text" th:field="*{namaPerusahaan}" id="namaPerusahaan" placeholder="Nama Perusahaan"
+                                   th:class="'form-control '+ ${#fields.hasErrors('namaPerusahaan') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('namaPerusahaan')}" th:errors="*{namaPerusahaan}"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="bidangPerusahaan">Bidang Perusahaan</label>
+                            <input th:field="*{bidangPerusahaan}" id="bidangPerusahaan" placeholder="Bidang Perusahaan"
+                                   th:class="'form-control '+ ${#fields.hasErrors('bidangPerusahaan') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('bidangPerusahaan')}" th:errors="*{bidangPerusahaan}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamatLengkap">Alamat Lengkap</label>
+                        <textarea th:field="*{alamatLengkap}" id="alamatLengkap" placeholder="Alamat Lengkap"
+                                  th:class="'form-control '+ ${#fields.hasErrors('alamatLengkap') ? 'is-invalid' : ''}"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('alamatLengkap')}" th:errors="*{alamatLengkap}"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="provinsi">Provinsi</label>
+                            <input type="text" th:field="*{provinsi}" id="provinsi" placeholder="Provinsi"
+                                   th:class="'form-control '+ ${#fields.hasErrors('provinsi') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('provinsi')}" th:errors="*{provinsi}"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="kota">Kota</label>
+                            <input th:field="*{kota}" id="kota" placeholder="Kota"
+                                   th:class="'form-control '+ ${#fields.hasErrors('kota') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('kota')}" th:errors="*{kota}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Foto Profil</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="file" id="file" placeholder="Foto Profil">
+                            <label class="custom-file-label font-normal" for="file">Pilih Foto Profil</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Lanjut</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<script layout:fragment="scripts">
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 </body>
 </html>

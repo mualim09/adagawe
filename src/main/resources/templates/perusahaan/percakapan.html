@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:div="http://www.w3.org/1999/html"
+      lang="en"
+      layout:decorate="~{layout/perusahaan}">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Jabatan</title>
+</head>
+
+<body>
+
+    <div layout:fragment="header">
+        <h4 class="page-title">Pesan</h4>
+    </div>
+    <div layout:fragment="content">
+        <div class="col-md-12">
+            <div class="card conversations">
+                <div class="message-header">
+                    <div class="message-title">
+                        <a class="btn btn-light" href="#">
+                            <i class="fa fa-flip-horizontal fa-share"></i>
+                        </a>
+                        <div class="user ml-2">
+                            <div class="avatar avatar-offline">
+                                <img th:src="@{'/uploads/foto_profil/' + ${user.fotoProfil}}" alt="..." class="avatar-img rounded-circle border border-white">
+                            </div>
+                            <div class="info-user ml-2">
+                                <span class="name" th:text="${user.nama}"></span>
+                                <span class="last-active">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="conversations-body">
+                    <div class="conversations-content bg-white">
+                        <div:block th:each="percakapan : ${percakapans}" class="message-content-wrapper">
+                            <div th:if="${percakapan.role != idUserLogin}" class="message message-in">
+                                <div class="message-body">
+                                    <div class="message-content">
+                                        <div class="name" th:text="${user.nama}"></div>
+                                        <div class="content" th:text="${percakapan.isiPesan}"></div>
+                                    </div>
+                                    <div class="date">12.31</div>
+                                </div>
+                            </div>
+                            <div th:unless="${percakapan.role != idUserLogin}" class="message message-out">
+                                <div class="message-body">
+                                    <div class="message-content">
+                                        <div class="content" th:text="${percakapan.isiPesan}">
+                                        </div>
+                                    </div>
+                                    <div class="date">12.35</div>
+                                </div>
+                            </div>
+                        </div:block>
+                        <div class="message-content-wrapper">
+
+                        </div>
+                </div>
+                <div class="messages-form">
+                    <div class="messages-form-control">
+                        <input type="text" placeholder="Type here" class="form-control input-pill input-solid message-input">
+                    </div>
+<!--                    <div class="messages-form-tool">-->
+<!--                        <a href="#" class="attachment">-->
+<!--                            <i class="flaticon-file"></i>-->
+<!--                        </a>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

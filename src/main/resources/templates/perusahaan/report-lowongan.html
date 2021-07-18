@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layout/perusahaan}">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Jabatan</title>
+</head>
+
+<body>
+
+    <div layout:fragment="header">
+        <h4 class="page-title">Laporan</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="#">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Lowongan</a>
+            </li>
+        </ul>
+    </div>
+
+    <div layout:fragment="content">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-9">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="page-pretitle">
+                            Payments
+                        </h6>
+                        <h4 class="page-title">Invoice #FDS9876KD</h4>
+                    </div>
+                    <div class="col-auto">
+                        <input type="button" class="btn btn-warning" onclick="printDiv('report-area')" value="print a div!" />
+                        <a href="#" class="btn btn-light btn-border">
+                            Download
+                        </a>
+                        <a href="#" class="btn btn-primary ml-2">
+                            Pay
+                        </a>
+                    </div>
+                </div>
+                <div class="page-divider"></div>
+                <div class="row">
+                    <div class="col-md-12" id="report-area">
+                        <div class="card card-invoice" id="report-area2">
+                            <div class="card-header">
+                                <div class="invoice-header">
+                                    <h3 class="invoice-title">
+                                        Report
+                                    </h3>
+                                    <div class="avatar-sm">
+                                        <img th:if="${perusahaan == null}" th:src="@{'/uploads/foto_perusahaan/default-company.png'}" alt="Profile Picture" class="avatar-img rounded-circle img-circle">
+                                        <img th:unless="${perusahaan == null}" th:src="@{'/uploads/foto_perusahaan/' + ${perusahaan.fotoProfil}}" alt="Profile Picture" class="avatar-img rounded-circle img-thumbnail">
+                                    </div>
+                                </div>
+                                <div class="invoice-desc">
+                                    Bandung, West Java, Indonesia<br>
+                                    Fax 621113
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="separator-solid"></div>
+                                <div class="row">
+                                    <div class="col-md-4 info-invoice">
+                                        <h5 class="sub">Date</h5>
+                                        <p>Dec 21, 2017</p>
+                                    </div>
+                                    <div class="col-md-4 info-invoice">
+                                        <h5 class="sub">Laporan ID</h5>
+                                        <p>#FDS9876KD</p>
+                                    </div>
+                                    <div class="col-md-4 info-invoice">
+                                        <h5 class="sub">Laporan Lowongan</h5>
+                                        <p>
+                                            Front End Developer
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="invoice-detail">
+                                            <div class="invoice-top">
+                                                <h3 class="title"><strong>Ringkasan Laporan</strong></h3>
+                                            </div>
+                                            <div class="invoice-item">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <td><strong>Nama</strong></td>
+                                                            <td class="text-center"><strong>Jenis Kelamin</strong></td>
+                                                            <td class="text-center"><strong>Domisili</strong></td>
+                                                            <td class="text-center"><strong>Status</strong></td>
+                                                            <td class="text-center"><strong>Email</strong></td>
+                                                            <td class="text-center"><strong>Telepon</strong></td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>Samodra</td>
+                                                            <td class="text-center">Laki-Laki</td>
+                                                            <td class="text-center">Ponorogo</td>
+                                                            <td class="text-center">Diterima</td>
+                                                            <td class="text-right">0812XXXXXXXX</td>
+                                                            <td class="text-right">samodra.me@gmail.com</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Samodra Kedua</td>
+                                                            <td class="text-center">Laki-Laki</td>
+                                                            <td class="text-center">Ponorogo</td>
+                                                            <td class="text-center">Calon</td>
+                                                            <td class="text-right">0812XXXXXXXX</td>
+                                                            <td class="text-right">samodra.me@gmail.com</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td class="text-center"><strong>Total Calon</strong></td>
+                                                            <td class="text-right">2</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="separator-solid  mb-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-sm-7 col-md-5 mb-3 mb-md-0 transfer-to">
+                                        <h5 class="sub">Bank Transfer</h5>
+                                        <div class="account-transfer">
+                                            <div><span>Account Name:</span><span>Syamsuddin</span></div>
+                                            <div><span>Account Number:</span><span>1234567890934</span></div>
+                                            <div><span>Code:</span><span>BARC0032UK</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 col-md-7 transfer-total">
+                                        <h5 class="sub">Total Amount</h5>
+                                        <div class="price">$685.99</div>
+                                        <span>Taxes Included</span>
+                                    </div>
+                                </div>
+                                <div class="separator-solid"></div>
+                                <h6 class="text-uppercase mt-4 mb-3 fw-bold">
+                                    Notes
+                                </h6>
+                                <p class="text-muted mb-0">
+                                    We really appreciate your business and if there's anything else we can do, please let us know! Also, should you need us to add VAT or anything else to this order, it's super easy since this is a template, so just ask!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script layout:fragment="scripts">
+        function printDiv(divName) {
+            var originalContents = document.body.innerHTML;
+            var mywindow = window.open('', 'PRINT');
+
+            mywindow.document.write('<html><head>');
+            mywindow.document.write("<link href='../assets/css/atlantis.css' rel='stylesheet'>");
+            mywindow.document.write('</head><body>');
+            mywindow.document.write("<div class='container'>");
+            mywindow.document.write(document.getElementById(divName).innerHTML);
+            mywindow.document.write("</div>");
+            mywindow.document.write('</body></html>');
+
+            setTimeout(function () {
+                mywindow.print();
+                // mywindow.close();
+            }, 1000)
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+</body>
+
+</html>
