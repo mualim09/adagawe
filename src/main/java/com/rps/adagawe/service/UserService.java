@@ -60,10 +60,10 @@ public class UserService implements UserDetailsService {
         final String encryptedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
         final UserLogin createdUser = userRepository.save(user);
-//        final ConfirmationToken confirmationToken = new ConfirmationToken(user);
-//
-//        confirmationTokenService.saveConfirmationToken(confirmationToken);
-//        sendConfirmationMail(user.getEmail(), confirmationToken.getConfirmationToken());
+        final ConfirmationToken confirmationToken = new ConfirmationToken(user);
+
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+        sendConfirmationMail(user.getEmail(), confirmationToken.getConfirmationToken());
 
     }
 

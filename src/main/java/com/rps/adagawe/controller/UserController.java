@@ -55,6 +55,7 @@ public class UserController {
 
 	@GetMapping("/masuk")
 	public String signIn(Model model) {
+		model.addAttribute("user", new UserLogin());
 		return "main/login";
 	}
 
