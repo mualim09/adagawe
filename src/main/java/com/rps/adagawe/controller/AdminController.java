@@ -61,11 +61,11 @@ public class AdminController {
         user.setEmail(userAdmin.getEmail());
         user.setPassword(userAdmin.getPassword());
         user.setUserRole(UserRole.Admin);
+        user.setNama(userAdmin.getNamaAdmin());
+        user.setFotoProfil("default-admin.png");
         userService.signUpUser(user);
 
         Admin admin = new Admin();
-        admin.setNamaAdmin(userAdmin.getNamaAdmin());
-        admin.setFotoProfil("default-admin.png");
         admin.setStatus(1);
         admin.setJenisKelamin(userAdmin.getJenisKelamin());
         admin.setNoTelepon(userAdmin.getNoTelepon());

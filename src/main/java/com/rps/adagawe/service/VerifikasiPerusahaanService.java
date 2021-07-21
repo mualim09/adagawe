@@ -62,11 +62,11 @@ public class VerifikasiPerusahaanService {
         verifikasiPerusahaanRepository.save(verifikasiPerusahaan);
     }
 
-    public VerifikasiPerusahaan setujuiVerifikasi(int id, VerifikasiPerusahaan verifikasiPerusahaan) {
+    public VerifikasiPerusahaan verifikasiPerusahaan(int id, VerifikasiPerusahaan verifikasiPerusahaan, int hasil) {
 
         VerifikasiPerusahaan p = verifikasiPerusahaanRepository.findById(id).orElse(null);
-        //String nama = AdagaweMethods.getNameAdminBySession(adminService);
-        String nama = AdagaweMethods.getAdminBySession(adagaweService).getNamaAdmin();
+
+        String nama = AdagaweMethods.getUserLoginBySession(adagaweService).getNama();
         assert p != null;
 
         verifikasiPerusahaan.setId(id);
@@ -74,29 +74,7 @@ public class VerifikasiPerusahaanService {
         verifikasiPerusahaan.setNpwp(p.getNpwp());
         verifikasiPerusahaan.setSiu(p.getSiu());
         verifikasiPerusahaan.setTdp(p.getTdp());
-        verifikasiPerusahaan.setHasil(1);
-        verifikasiPerusahaan.setCreatedDate(p.getCreatedDate());
-        verifikasiPerusahaan.setLastModified(p.getLastModified());
-        verifikasiPerusahaan.setDiverifikasiOleh(nama);
-
-        verifikasiPerusahaanRepository.save(verifikasiPerusahaan);
-
-        return verifikasiPerusahaan;
-    }
-
-    public VerifikasiPerusahaan tolakVerifikasi(int id, VerifikasiPerusahaan verifikasiPerusahaan) {
-
-        VerifikasiPerusahaan p = verifikasiPerusahaanRepository.findById(id).orElse(null);
-        //String nama = AdagaweMethods.getNameAdminBySession(adminService);
-        String nama = AdagaweMethods.getAdminBySession(adagaweService).getNamaAdmin();
-        assert p != null;
-
-        verifikasiPerusahaan.setId(id);
-        verifikasiPerusahaan.setPerusahaan(p.getPerusahaan());
-        verifikasiPerusahaan.setNpwp(p.getNpwp());
-        verifikasiPerusahaan.setSiu(p.getSiu());
-        verifikasiPerusahaan.setTdp(p.getTdp());
-        verifikasiPerusahaan.setHasil(2);
+        verifikasiPerusahaan.setHasil(hasil);
         verifikasiPerusahaan.setCreatedDate(p.getCreatedDate());
         verifikasiPerusahaan.setLastModified(p.getLastModified());
         verifikasiPerusahaan.setDiverifikasiOleh(nama);

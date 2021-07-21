@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Controller
 public class MainController {
@@ -34,7 +37,9 @@ public class MainController {
     @GetMapping("/")
     public String indexPelamar(Model model) {
 
-        model.addAttribute("lokers", lowonganService.getAll());
+        List<Lowongan> lokers = lowonganService.getAll();
+        model.addAttribute("lokers", lokers);
+
 
         return "main/index";
     }

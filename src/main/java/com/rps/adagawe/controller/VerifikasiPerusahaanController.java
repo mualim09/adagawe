@@ -39,8 +39,8 @@ public class VerifikasiPerusahaanController {
     public String index(Model model, HttpServletRequest request) {
         List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.getAll();
         model.addAttribute("verifikasiperusahaans", verifikasiperusahaans);
+        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
 
-        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
         return "/admin/verifikasi/index";
     }
@@ -94,10 +94,10 @@ public class VerifikasiPerusahaanController {
                                @ModelAttribute("verifikasiperusahaan") @Valid VerifikasiPerusahaan verifikasiperusahaan, BindingResult result, Model model) {
 
         if (verif.equals("setuju")){
-            verifikasiPerusahaanService.setujuiVerifikasi(id, verifikasiperusahaan);
+            verifikasiPerusahaanService.verifikasiPerusahaan(id, verifikasiperusahaan, 1);
             redirectAttributes.addFlashAttribute("message", "Pengajuan verifikasi berhasil disetujui.");
         } else {
-             verifikasiPerusahaanService.tolakVerifikasi(id, verifikasiperusahaan);
+             verifikasiPerusahaanService.verifikasiPerusahaan(id, verifikasiperusahaan, 2);
             redirectAttributes.addFlashAttribute("message", "Pengajuan verifikasi ditolak.");
         }
 

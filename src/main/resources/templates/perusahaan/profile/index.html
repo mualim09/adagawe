@@ -39,13 +39,13 @@
                 <div class="card-header bg-img-profile">
                     <div class="profile-picture">
                         <div class="avatar avatar-xl">
-                            <img th:src="@{'/uploads/foto_perusahaan/' + ${perusahaan.fotoProfil}}" alt="..." class="avatar-img rounded-circle img-thumbnail">
+                            <img th:src="@{'/uploads/foto_perusahaan/' + ${perusahaan.userLogin.fotoProfil}}" alt="..." class="avatar-img rounded-circle img-thumbnail">
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="user-profile text-center">
-                        <div class="name" th:text="${perusahaan.namaPerusahaan}"></div>
+                        <div class="name" th:text="${perusahaan.userLogin.nama}"></div>
                         <div class="job mb-2" th:text="${perusahaan.bidangPerusahaan}"></div>
     <!--                    <div class="desc">A man who hates loneliness</div>-->
     <!--                    <div class="view-profile">-->
@@ -90,7 +90,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group form-group-default">
                                             <label>Name Perusahaan</label>
-                                            <input type="text" class="form-control" name="name" placeholder="Name" th:field="*{namaPerusahaan}">
+                                            <input type="text" class="form-control" name="name" placeholder="Name" th:value="${userLogin.nama}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
