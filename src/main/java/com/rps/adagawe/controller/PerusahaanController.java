@@ -166,6 +166,7 @@ public class PerusahaanController {
     @GetMapping("/perusahaan/laporan")
     public String getLaporan(Model model, HttpServletRequest request) {
 
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 

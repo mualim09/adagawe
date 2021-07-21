@@ -57,7 +57,7 @@
                                     </h3>
                                     <div class="avatar-sm">
                                         <img th:if="${perusahaan == null}" th:src="@{'/uploads/foto_perusahaan/default-company.png'}" alt="Profile Picture" class="avatar-img rounded-circle img-circle">
-                                        <img th:unless="${perusahaan == null}" th:src="@{'/uploads/foto_perusahaan/' + ${perusahaan.fotoProfil}}" alt="Profile Picture" class="avatar-img rounded-circle img-thumbnail">
+                                        <img th:unless="${perusahaan == null}" th:src="@{'/uploads/foto_perusahaan/' + ${perusahaan.userLogin.fotoProfil}}" alt="Profile Picture" class="avatar-img rounded-circle img-thumbnail">
                                     </div>
                                 </div>
                                 <div class="invoice-desc">

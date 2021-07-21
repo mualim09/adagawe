@@ -25,7 +25,7 @@
                         <div class="col-lg-4">
                             <label class="font-weight-bold">Nama Perusahaan</label>
                             </br>
-                            <span th:text="${verifikasiperusahaan.perusahaan.namaPerusahaan}"/>
+                            <span th:text="${verifikasiperusahaan.perusahaan.userLogin.nama}"/>
                         </div>
                         <div class="col-lg-4">
                             <label class="font-weight-bold">Alamat lengkap</label>
@@ -61,12 +61,12 @@
                         <div class="col-lg-4">
                             <label class="font-weight-bold">Tanda Daftar Perusahaan</label>
                             </br>
-                            <a th:href="${'/uploads/'+verifikasiperusahaan.tdp}" class="btn btn-primary btn-sm">Download TDP</a>
+                            <a th:href="${'/uploads/tdp/'+verifikasiperusahaan.tdp}" class="btn btn-primary btn-sm">Download TDP</a>
                         </div>
                         <div class="col-lg-4">
                             <label class="font-weight-bold">Surat Izin Usaha</label>
                             </br>
-                            <a th:href="${'/uploads/'+verifikasiperusahaan.siu}" class="btn btn-primary btn-sm">Download SIU</a>
+                            <a th:href="${'/uploads/siu/'+verifikasiperusahaan.siu}" class="btn btn-primary btn-sm">Download SIU</a>
                         </div>
                     </div>
                     <div class="row form-group">

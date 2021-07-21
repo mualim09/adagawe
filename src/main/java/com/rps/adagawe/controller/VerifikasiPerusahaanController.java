@@ -39,7 +39,7 @@ public class VerifikasiPerusahaanController {
     public String index(Model model, HttpServletRequest request) {
         List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.getAll();
         model.addAttribute("verifikasiperusahaans", verifikasiperusahaans);
-        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
 
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
         return "/admin/verifikasi/index";
@@ -49,7 +49,7 @@ public class VerifikasiPerusahaanController {
     public String createnext(Model model) {
         model.addAttribute("verifikasiperusahaan", new VerifikasiPerusahaan());
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
-        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         return "/perusahaan/verifikasi/createnext";
     }
 
@@ -85,6 +85,7 @@ public class VerifikasiPerusahaanController {
         VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getVerifikasiPerusahaanById(id);
 
         model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("verifikasiperusahaan", verifikasiperusahaan);
         return "/admin/verifikasi/detail";
     }
@@ -110,7 +111,7 @@ public class VerifikasiPerusahaanController {
         int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
         List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.getListVerifikasiPerusahaanById(idPerusahaan);
         model.addAttribute("verifikasiperusahaans", verifikasiperusahaans);
-        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         return "/perusahaan/verifikasi/history";
     }
@@ -120,7 +121,7 @@ public class VerifikasiPerusahaanController {
         VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getVerifikasiPerusahaanById(id);
 
         model.addAttribute("verifikasiperusahaan", verifikasiperusahaan);
-        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession( adagaweService));
         return "/perusahaan/verifikasi/detail";
     }
