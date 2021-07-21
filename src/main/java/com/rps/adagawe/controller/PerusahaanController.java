@@ -46,21 +46,28 @@ public class PerusahaanController {
     @GetMapping("/perusahaan")
     public String getIndex(Model model, HttpServletRequest request) {
 
-        if (AdagaweMethods.getPerusahaanBySession(adagaweService) == null) {
-
-            return "redirect:/perusahaan/profile";
+        // Redirect jika belum melengkapi profil
+        if (!AdagaweMethods.isPerusahaanExist(adagaweService)) {
+            return "redirect:/perusahaan/information";
         }
 
 //        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
 //        model.addAttribute("total_lowongan_aktif", adagaweService.findTotalLowonganAktifByPerusahaan(idPerusahaan));
 //        model.addAttribute("total_lowongan", adagaweService.findTotalLowonganByPerusahaan(idPerusahaan));
 
-
         model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
 //        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
 
         return "/perusahaan/dashboard";
+    }
+
+    @GetMapping("/perusahaan/information")
+    public String getInformation(Model model, HttpServletRequest request) {
+        model.addAttribute("perusahaan", new Perusahaan());
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+
+        return "/perusahaan/profile/create";
     }
 
     @GetMapping("/perusahaan/verifikasi/create")
@@ -133,6 +140,11 @@ public class PerusahaanController {
     @GetMapping("/perusahaan/profile")
     public String profile(Model model, HttpServletRequest request) {
 
+        // Redirect jika belum melengkapi profil
+        if (!AdagaweMethods.isPerusahaanExist(adagaweService)) {
+            return "redirect:/perusahaan/information";
+        }
+
         String prefix;
 
         UserLogin idUserLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
@@ -157,16 +169,12 @@ public class PerusahaanController {
             prefix = "/perusahaan/profile/index";
         }
         else {
-            model.addAttribute("perusahaan", new Perusahaan());
-            model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
 
-            prefix = "/perusahaan/profile/create";
         }
-
 
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
-        return prefix;
+        return "/perusahaan/profile/index";
     }
 
     @GetMapping("/perusahaan/laporan")

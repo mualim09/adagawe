@@ -25,6 +25,10 @@ public class LowonganService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Lowongan Id:" + id));
     }
 
+    public List<Lowongan> getLowonganByIdPerusahaan(Integer id) {
+        return lowonganRepository.getLowonganByIdPerusahaanDesc(id);
+    }
+
     public void save(Lowongan lowongan) {
         lowongan.setSembunyikanGaji(0);
         lowongan.setCreatedDate(new Date());

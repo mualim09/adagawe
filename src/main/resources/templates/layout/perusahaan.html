@@ -69,11 +69,11 @@
                             <div class="dropdown-user-scroll scrollbar-outer">
                                 <li>
                                     <div class="user-box">
-                                        <div class="avatar-lg">
+                                        <div class="avatar-sm">
                                             <img th:if="${userLogin == null}" th:src="@{'/uploads/foto_perusahaan/default-company.png'}" alt="image profile" class="avatar-img rounded">
                                             <img th:unless="${userLogin == null} " th:src="@{'/uploads/foto_perusahaan/' + ${userLogin.fotoProfil}}" alt="image profile" class="avatar-img rounded">
                                         </div>
-                                        <div class="u-text">
+                                        <div class="u-text py-1">
                                             <h4 th:if="${userLogin == null}" th:text="@{'Unnamed Company'}"></h4>
                                             <h4 th:unless="${userLogin == null}" th:text="${userLogin.nama}"></h4>
                                         </div>

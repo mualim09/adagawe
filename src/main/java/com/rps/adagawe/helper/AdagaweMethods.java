@@ -60,6 +60,14 @@ public class AdagaweMethods {
         return service.findUserLoginByEmail(email);
     }
 
+    public static boolean isPerusahaanExist(AdagaweService service) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserLogin ul = service.findUserLoginByEmail(authentication.getName());
+        Perusahaan perusahaan = service.findPerusahaanByUserLogin(ul.getId());
+
+        return perusahaan != null ? true : false;
+    }
+
     public static String getMainUrl(HttpServletRequest request, int index) {
         /**
          * Url = /pelamar/profile
