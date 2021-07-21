@@ -43,8 +43,10 @@ public class PelamarController {
     @GetMapping("/pelamar/profile")
     public String getView(Model model) {
         int idPelamar = AdagaweMethods.getPelamarBySession(adagaweService).getId();
+        UserLogin userLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
 
         model.addAttribute("pelamar", pelamarService.getPelamarById(idPelamar));
+        model.addAttribute("userLogin", userLogin);
         model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(idPelamar));
         model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(idPelamar));
         model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(idPelamar));

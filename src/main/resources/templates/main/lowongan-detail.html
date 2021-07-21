@@ -4,7 +4,7 @@
       layout:decorate="~{layout/main}">
 <head>
   <meta charset="UTF-8">
-  <title th:text="${loker.judulLowongan + ' - ' + loker.perusahaan.namaPerusahaan}"></title>
+  <title th:text="${loker.judulLowongan + ' - ' + loker.perusahaan.userLogin.fotoProfil}"></title>
 </head>
 
 <body>
@@ -16,11 +16,11 @@
           <div class="d-flex align-items-center justify-content-between">
             <div class="media my-4">
               <img
-                      th:src="${'/uploads/foto_perusahaan/' + loker.perusahaan.fotoProfil}"
-                      class="img-company img-company-profile mr-3" th:alt="${loker.perusahaan.namaPerusahaan}">
+                      th:src="${'/uploads/foto_perusahaan/' + loker.perusahaan.userLogin.fotoProfil}"
+                      class="img-company img-company-profile mr-3" th:alt="${loker.perusahaan.userLogin.nama}">
               <div class="media-body">
                 <a href="#" class="job-title" th:text="${loker.judulLowongan}"></a>
-                <a href="#" class="job-subtitle" th:text="${loker.perusahaan.namaPerusahaan}"></a>
+                <a href="#" class="job-subtitle" th:text="${loker.perusahaan.userLogin.nama}"></a>
                 <div class="custom-badge-container success sm">
                   <div class="custom-badge"><i class="far fa-check-circle"></i> Aktif</div>
                 </div>

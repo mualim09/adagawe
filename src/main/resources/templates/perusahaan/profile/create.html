@@ -41,12 +41,6 @@
                 <form th:action="@{/perusahaan/verifikasi/create}" th:object="${perusahaan}" id="perusahaanForm" method="post" enctype="multipart/form-data">
                     <div class="row form-group">
                         <div class="col-md-6">
-                            <label for="namaPerusahaan">Nama Perusahaan</label>
-                            <input type="text" th:field="*{namaPerusahaan}" id="namaPerusahaan" placeholder="Nama Perusahaan"
-                                   th:class="'form-control '+ ${#fields.hasErrors('namaPerusahaan') ? 'is-invalid' : ''}">
-                            <div class="invalid-feedback" th:if="${#fields.hasErrors('namaPerusahaan')}" th:errors="*{namaPerusahaan}"></div>
-                        </div>
-                        <div class="col-md-6">
                             <label for="bidangPerusahaan">Bidang Perusahaan</label>
                             <input th:field="*{bidangPerusahaan}" id="bidangPerusahaan" placeholder="Bidang Perusahaan"
                                    th:class="'form-control '+ ${#fields.hasErrors('bidangPerusahaan') ? 'is-invalid' : ''}">

@@ -47,6 +47,11 @@ public class UserService implements UserDetailsService {
         emailSenderService.sendEmail(mailMessage);
     }
 
+    public UserLogin findById(int id) {
+        return userRepository.findById(id);
+//        return userRepository.findById((long)id).orElse(null);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -60,10 +65,10 @@ public class UserService implements UserDetailsService {
         final String encryptedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
         final UserLogin createdUser = userRepository.save(user);
-        final ConfirmationToken confirmationToken = new ConfirmationToken(user);
-
-        confirmationTokenService.saveConfirmationToken(confirmationToken);
-        sendConfirmationMail(user.getEmail(), confirmationToken.getConfirmationToken());
+//        final ConfirmationToken confirmationToken = new ConfirmationToken(user);
+//
+//        confirmationTokenService.saveConfirmationToken(confirmationToken);
+//        sendConfirmationMail(user.getEmail(), confirmationToken.getConfirmationToken());
 
     }
 
@@ -74,6 +79,10 @@ public class UserService implements UserDetailsService {
         user.setEnabled(true);
         userRepository.save(user);
         confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
+    }
+
+    public void save(UserLogin userLogin) {
+        userRepository.save(userLogin);
     }
 
 //    public UserLogin getUserLoginByEmail(String email) {

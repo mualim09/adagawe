@@ -187,8 +187,10 @@
                                                 <i class="fa fa-check"></i> Terima
                                             </button>
 
-                                            <form th:action="@{/perusahaan/lamaran/reject/{id}(id=${lamaran.idLamaran})}"
+                                            <form th:action="@{/perusahaan/lamaran/tolak/{id}(id=${lamaran.idLamaran})}"
                                                   th:if="${lamaran.statusLamaran != 3}" method="post" class="d-inline mr-1">
+                                                <input type="hidden" th:value="3" name="status">
+                                                <input type="hidden" value="Uji Kompetensi" name="tahap">
                                                 <button class="btn btn-sm btn-danger" type="submit" name="result" value="Tolak"
                                                         onclick="return confirm('Apakah anda yakin ingin menolak lamaran ini?')">
                                                     <i class="fa fa-times"></i> Tolak</button>
@@ -246,15 +248,17 @@
                                               th:if="${lamaran.nilaiWawancara} != null and ${lamaran.statusLamaran != 5}"
                                               method="post" class="d-inline">
                                             <input type="hidden" th:value="6" name="status">
-                                            <input type="hidden" th:value="Akhir" name="tahap">
+                                            <input type="hidden" value="Akhir" name="tahap">
                                             <button type="submit" class="btn btn-success btn-sm mr-1 terimaButton"
                                                 onclick="return confirm('Apakah anda yakin ingin menerima lamaran ini?')">
                                                 <i class="fa fa-check"></i> Terima
                                             </button>
                                         </form>
 
-                                        <form th:action="@{/perusahaan/lamaran/reject/{id}(id=${lamaran.idLamaran})}"
+                                        <form th:action="@{/perusahaan/lamaran/tolak/{id}(id=${lamaran.idLamaran})}"
                                               th:if="${lamaran.statusLamaran != 5}" method="post" class="d-inline mr-1">
+                                            <input type="hidden" th:value="5" name="status">
+                                            <input type="hidden" value="Wawancara" name="tahap">
                                             <button class="btn btn-sm btn-danger" type="submit" name="result" value="Tolak"
                                                     onclick="return confirm('Apakah anda yakin ingin menolak lamaran ini?')">
                                                 <i class="fa fa-times"></i> Tolak</button>

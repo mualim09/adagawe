@@ -19,10 +19,6 @@ public class Admin {
     @JoinColumn(name = "id_user_login", nullable = false)
     private UserLogin userLogin;
 
-    @NotEmpty
-    @Column(name = "nama_admin")
-    private String namaAdmin;
-
     @NotNull
     @Column(name = "tanggal_lahir")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -35,9 +31,6 @@ public class Admin {
     @NotEmpty
     @Column(name = "no_telepon")
     private String noTelepon;
-
-    @Column(name = "foto_profil")
-    private String fotoProfil;
 
     @Column(name = "row_status")
     private int status;
@@ -59,14 +52,6 @@ public class Admin {
 
     public void setIdUserLogin(int idUserLogin) {
         this.idUserLogin = idUserLogin;
-    }
-
-    public String getNamaAdmin() {
-        return namaAdmin;
-    }
-
-    public void setNamaAdmin(String namaAdmin) {
-        this.namaAdmin = namaAdmin;
     }
 
     public Date getTanggalLahir() {
@@ -91,14 +76,6 @@ public class Admin {
 
     public void setNoTelepon(String noTelepon) {
         this.noTelepon = noTelepon;
-    }
-
-    public String getFotoProfil() {
-        return fotoProfil;
-    }
-
-    public void setFotoProfil(String fotoProfil) {
-        this.fotoProfil = fotoProfil;
     }
 
     public int getStatus() {

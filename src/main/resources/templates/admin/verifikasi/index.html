@@ -41,7 +41,7 @@
                             <tbody>
                             <tr th:each="verifikasiperusahaan, iter : ${verifikasiperusahaans}">
                                 <td th:text="${iter.index + 1}"></td>
-                                <td th:text="${verifikasiperusahaan.perusahaan.namaPerusahaan}"></td>
+                                <td th:text="${verifikasiperusahaan.perusahaan.userLogin.nama}"></td>
                                 <td th:switch="${verifikasiperusahaan.hasil}">
                                     <span th:case="'0'">Menunggu</span>
                                     <span th:case="'1'">Diterima</span>

@@ -33,6 +33,9 @@ public class PerusahaanController {
     @Autowired
     VerifikasiPerusahaanService verifikasiPerusahaanService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping("/admin/perusahaan")
     public String index(Model model) {
         List<Perusahaan> perusahaans = perusahaanService.findPerusahaanByRowStatus();
@@ -73,14 +76,15 @@ public class PerusahaanController {
         }
 
         UserLogin ul = AdagaweMethods.getUserLoginBySession(adagaweService);
+        userService.findById(ul.getId());
 
         perusahaan.setIdUserLogin(ul.getId());
 
         if (file.isEmpty()){
-            perusahaan.setFotoProfil("default.jpg");
+            ul.setFotoProfil("default.jpg");
         } else {
             String fileName = FileUploadHelper.upload(file, "foto_perusahaan");
-            perusahaan.setFotoProfil(fileName);
+            ul.setFotoProfil(fileName);
         }
         perusahaanService.save(perusahaan);
 
@@ -122,18 +126,8 @@ public class PerusahaanController {
     @GetMapping("/perusahaan/profile")
     public String profile(Model model, HttpServletRequest request) {
 
-        //        UserLogin idUserLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
-//        List<Integer> perusahaan = perusahaanService.getIdUserLoginInPerusahaan();
-        //Perusahaan idPerusahaan;
         String prefix;
 
-//        if (idPerusahaan.getRowStatus() == -1) {
-//            VerifikasiPerusahaan verifikasiperusahaan = verifikasiPerusahaanService.getLastIdPerusahaan(idPerusahaan.getId());
-//            model.addAttribute("verifikasiperusahaan", verifikasiperusahaan);
-//            prefix = "/perusahaan/profile/create";
-//        } else {
-//            prefix = "/perusahaan/profile/index";
-//        }
         UserLogin idUserLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
         List<Integer> perusahaan = perusahaanService.getIdUserLoginInPerusahaan();
 
@@ -172,6 +166,7 @@ public class PerusahaanController {
     @GetMapping("/perusahaan/laporan")
     public String getLaporan(Model model, HttpServletRequest request) {
 
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 

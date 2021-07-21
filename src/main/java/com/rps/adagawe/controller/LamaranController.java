@@ -148,4 +148,23 @@ public class LamaranController {
 
         return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();
     }
+
+    @PostMapping("/perusahaan/lamaran/tolak/{id}")
+    public String tolakTahapan(@PathVariable("id") int idLamaran, @RequestParam("tahap") String tahap,
+                                @RequestParam(value = "tanggal_tahap", required = false) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm") Date tanggalTahap,
+                                @RequestParam("status") int status) {
+        Lamaran lamaran = lamaranService.getLamaranById(idLamaran);
+        lamaran.setStatusLamaran(status);
+        lamaranService.save(lamaran);
+
+        Notifikasi notifikasi = new Notifikasi();
+        notifikasi.setIdLamaran(idLamaran);
+        notifikasi.setTahap(tahap);
+        notifikasi.setTanggalTahapan(tanggalTahap);
+        notifikasi.setHasilTahapSebelumnya(0);
+        notifikasi.setCreatedDate(new Date());
+        notifikasiService.save(notifikasi);
+
+        return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();
+    }
 }
