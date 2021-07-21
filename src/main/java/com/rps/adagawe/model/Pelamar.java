@@ -15,10 +15,6 @@ public class Pelamar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @NotEmpty(message = "Nama pelamar wajib diisi.")
-    @Column(name = "nama_pelamar")
-    private String namaPelamar;
-
     @NotNull(message = "Tanggal lahir wajib diisi.")
     @Column(name = "tanggal_lahir")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -49,11 +45,6 @@ public class Pelamar {
     @Column(name = "id_user_login")
     private int idUserLogin;
 
-//    @NotEmpty(message = "Foto Profil wajib diisi.")
-    @Column(name = "foto_profil")
-    private String fotoProfil;
-
-    @Builder.Default
     @Column(name = "row_status")
     private Integer rowStatus = 1;
 
@@ -67,14 +58,6 @@ public class Pelamar {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNamaPelamar() {
-        return namaPelamar;
-    }
-
-    public void setNamaPelamar(String namaPelamar) {
-        this.namaPelamar = namaPelamar;
     }
 
     public Date getTanggalLahir() {
@@ -141,14 +124,6 @@ public class Pelamar {
         this.idUserLogin = idUserLogin;
     }
 
-    public String getFotoProfil() {
-        return fotoProfil;
-    }
-
-    public void setFotoProfil(String fotoProfil) {
-        this.fotoProfil = fotoProfil;
-    }
-
     public Integer getRowStatus() {
         return rowStatus;
     }
@@ -169,7 +144,6 @@ public class Pelamar {
     public String toString() {
         return "Pelamar{" +
                 "id=" + id +
-                ", namaPelamar='" + namaPelamar + '\'' +
                 ", tanggalLahir=" + tanggalLahir +
                 ", jenisKelamin=" + jenisKelamin +
                 ", kota='" + kota + '\'' +
@@ -178,7 +152,6 @@ public class Pelamar {
                 ", headline='" + headline + '\'' +
                 ", dokumenCv='" + dokumenCv + '\'' +
                 ", idUserLogin=" + idUserLogin +
-                ", fotoProfil='" + fotoProfil + '\'' +
                 ", rowStatus=" + rowStatus +
                 ", userLogin=" + userLogin +
                 '}';

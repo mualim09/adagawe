@@ -4,7 +4,7 @@
       layout:decorate="~{layout/main}">
 <head>
   <meta charset="UTF-8">
-  <title th:text="${loker.judulLowongan + ' - ' + loker.perusahaan.namaPerusahaan}"></title>
+  <title th:text="${loker.judulLowongan + ' - ' + loker.perusahaan.userLogin.nama}"></title>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
       <div class="col-md-7">
         <div class="card-job px-4 pt-2 overflow-hidden">
           <h1 class="text-center my-3 lamaran-title">
-            Kamu akan melamar ke <span class="font-weight-bold" th:text="${loker.perusahaan.namaPerusahaan}"></span>
+            Kamu akan melamar ke <span class="font-weight-bold" th:text="${loker.perusahaan.userLogin.nama}"></span>
             sebagai <span class="font-weight-bold" th:text="${loker.judulLowongan}"></span>
           </h1>
 

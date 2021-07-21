@@ -20,10 +20,6 @@ public class Perusahaan {
     @JoinColumn(name = "id_user_login", insertable = false, updatable = false)
     private UserLogin userLogin;
 
-    @NotEmpty(message = "Nama Perusahaan wajib diisi.")
-    @Column(name = "nama_perusahaan")
-    private String namaPerusahaan;
-
     @NotEmpty(message = "Alamat wajib diisi.")
     @Column(name = "alamat_lengkap")
     private String alamatLengkap;
@@ -37,10 +33,6 @@ public class Perusahaan {
     @Builder.Default
     @Column(name = "telah_terverifikasi")
     private Integer telahTerverifikasi = 0;
-
-    @Builder.Default
-    @Column(name = "foto_profil")
-    private String fotoProfil = null;
 
     @NotEmpty(message = "Bidang Perusahaan wajib diisi.")
     @Column(name = "bidang_perusahaan")
@@ -72,14 +64,6 @@ public class Perusahaan {
 
     public void setUserLogin(UserLogin userLogin) {
         this.userLogin = userLogin;
-    }
-
-    public String getNamaPerusahaan() {
-        return namaPerusahaan;
-    }
-
-    public void setNamaPerusahaan(String namaPerusahaan) {
-        this.namaPerusahaan = namaPerusahaan;
     }
 
     public String getAlamatLengkap() {
@@ -114,14 +98,6 @@ public class Perusahaan {
         this.telahTerverifikasi = telahTerverifikasi;
     }
 
-    public String getFotoProfil() {
-        return fotoProfil;
-    }
-
-    public void setFotoProfil(String fotoProfil) {
-        this.fotoProfil = fotoProfil;
-    }
-
     public String getBidangPerusahaan() {
         return bidangPerusahaan;
     }
@@ -142,14 +118,13 @@ public class Perusahaan {
     public String toString() {
         return "Perusahaan{" +
                 "id=" + id +
-                ", namaPerusahaan='" + namaPerusahaan + '\'' +
                 ", alamatLengkap=" + alamatLengkap +
                 ", provinsi=" + provinsi +
                 ", kota='" + kota + '\'' +
                 ", telahTerverifikasi='" + telahTerverifikasi + '\'' +
-                ", fotoProfil='" + fotoProfil + '\'' +
                 ", bidangPerusahaan='" + bidangPerusahaan + '\'' +
                 ", rowStatus='" + rowStatus + '\'' +
+                ", userLogin='" + userLogin + '\'' +
                 '}';
     }
 

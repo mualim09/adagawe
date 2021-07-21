@@ -47,18 +47,14 @@ public class PelamarController {
 
     @GetMapping("/pelamar/profile")
     public String getView(Model model) {
+        int idPelamar = AdagaweMethods.getPelamarBySession(adagaweService).getId();
+        UserLogin userLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
 
-        Pelamar pelamar = AdagaweMethods.getPelamarBySession(adagaweService);
-
-        if (pelamar == null) {
-            return "redirect:/pelamar/information";
-        }
-
-        model.addAttribute("pelamar", pelamar);
-        model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(pelamar.getId()));
-        model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(pelamar.getId()));
-        model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(pelamar.getId()));
-        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("pelamar", pelamarService.getPelamarById(idPelamar));
+        model.addAttribute("userLogin", userLogin);
+        model.addAttribute("sertifikats", sertifikatService.getSertifikatByIdUser(idPelamar));
+        model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(idPelamar));
+        model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(idPelamar));
 
         return "/pelamar/profile/index";
     }
