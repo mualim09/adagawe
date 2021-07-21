@@ -21,9 +21,9 @@
 
                     <div class="card-job-content">
                         <div class="profile-detail">
-                            <h2 class="profile-name" th:text="${pelamar.getNamaPelamar()}"></h2>
-                            <p class="card-job-detail">Student at Astra Manufacturing Polytechnic</p>
-                            <p class="card-job-detail-city">Jakarta, Indonesia</p>
+                            <h2 class="profile-name" th:text="${userLogin.nama}"></h2>
+<!--                            <p class="card-job-detail">Student at Astra Manufacturing Polytechnic</p>-->
+                            <p class="card-job-detail-city" th:text="${pelamar.kota + ', Indonesia'}"></p>
                             <a href="/pelamar/profile/edit" class="btn btn-primary">Ubah Profil</a>
                         </div>
                     </div>
@@ -35,30 +35,23 @@
                     <div class="card-job-content">
                         <div class="card-job-content-title">
                             <h2>Tentang</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a erat ipsum. Phasellus a
-                                nibh massa. Donec sit amet lobortis urna. Quisque nec vehicula dui, sit amet interdum
-                                massa. Etiam tempus est nibh, in eleifend dolor laoreet sit amet. Proin vitae risus
-                                enim. Pellentesque non lacus in nisl condimentum tristique nec eu purus. Quisque
-                                suscipit justo dolor, et condimentum ante pretium ac. Donec nec efficitur elit. Duis et
-                                malesuada justo.</p>
+                            <p th:text="${pelamar.headline}"></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-7">
-                <div th:if="${message}">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <span th:text="${message}"></span>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+            <div class="col-md-7" th:if="${message}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <span th:text="${message}"></span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
 
             <div class="col-md-7">
-                <div class="card-job p-0 overflow-hidden">
+                <div class="card-job p-0 overflow-hidden border mb-3">
                     <div class="card-job-content">
                         <div class="card-job-content-title d-flex justify-content-between">
                             <h2>Pengalaman</h2>
@@ -88,6 +81,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="card-job p-0 overflow-hidden border mb-3">
+                    <div class="card-job-content">
                         <div class="card-job-content-title d-flex justify-content-between">
                             <h2>Pendidikan</h2>
                             <div>
@@ -116,6 +113,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="card-job p-0 overflow-hidden border mb-3">
+                    <div class="card-job-content">
                         <div class="card-job-content-title d-flex justify-content-between">
                             <h2>Sertifikat</h2>
                             <div>

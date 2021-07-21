@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layout/pelamar}">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Jabatan</title>
+</head>
+
+<body>
+
+<div layout:fragment="header">
+    <h4 class="page-title">Dashboard</h4>
+</div>
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">
+            Lengkapi profil perusahaanmu terlebih dahulu!
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span>Ada lamaran yang belum diperiksa!</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-stats card-round">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="icon-big text-center">
+                            <i class="flaticon-chart-pie text-warning"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                        <div class="numbers">
+                            <p class="card-category">Lowongan Aktif</p>
+                            <h4 class="card-title">24</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-stats card-round">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="icon-big text-center">
+                            <i class="flaticon-coins text-success"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                        <div class="numbers">
+                            <p class="card-category">Total Lowongan</p>
+                            <h4 class="card-title">24</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="icon-big text-center">
+                            <i class="flaticon-error text-danger"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                        <div class="numbers">
+                            <p class="card-category">Merekrut</p>
+                            <h4 class="card-title">8</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    <div class="col-sm-12 col-md-3">-->
+    <!--        <div class="card">-->
+    <!--            <img class="card-img-top" th:src="@{/img/dashboard_user.svg}" alt="Card Dashboard User">-->
+    <!--            <div class="card-body">-->
+    <!--                <h4 class="card-title font-weight-bold">Hello Rifqy!</h4>-->
+    <!--                <p class="card-text">Selamat datang kembali.</p>-->
+    <!--                <a href="#" class="btn btn-primary w-100">Learn More</a>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <div class="col-sm-12 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title font-weight-bold">Hasil Lowongan</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="display table table-hover">
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Lowongan</td>
+                        <td>Pelamar</td>
+                        <td>Diterima</td>
+                        <td>Status</td>
+                        <td>Aksi</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Backend Developer</td>
+                        <td>142</td>
+                        <td>4</td>
+                        <td>Selesai</td>
+                        <td>Lihat Laman & Detail</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

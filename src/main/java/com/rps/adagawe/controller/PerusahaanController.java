@@ -42,9 +42,16 @@ public class PerusahaanController {
 
     @GetMapping("/perusahaan")
     public String getIndex(Model model, HttpServletRequest request) {
-        //int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
+
+        if (AdagaweMethods.getPerusahaanBySession(adagaweService) == null) {
+
+            return "redirect:/perusahaan/profile";
+        }
+
+//        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
 //        model.addAttribute("total_lowongan_aktif", adagaweService.findTotalLowonganAktifByPerusahaan(idPerusahaan));
 //        model.addAttribute("total_lowongan", adagaweService.findTotalLowonganByPerusahaan(idPerusahaan));
+
 
         model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
 //        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
@@ -158,7 +165,6 @@ public class PerusahaanController {
         else {
             model.addAttribute("perusahaan", new Perusahaan());
             model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-//            model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
             prefix = "/perusahaan/profile/create";
         }

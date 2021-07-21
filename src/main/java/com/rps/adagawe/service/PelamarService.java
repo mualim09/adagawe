@@ -24,8 +24,8 @@ public class PelamarService {
         return (List<Pelamar>) pelamarRepository.findAll();
     }
 
-    public void save(Pelamar pengalaman) {
-        pelamarRepository.save(pengalaman);
+    public void save(Pelamar pelamar) {
+        pelamarRepository.save(pelamar);
     }
 
     public Pelamar getPelamarById(Integer id) {

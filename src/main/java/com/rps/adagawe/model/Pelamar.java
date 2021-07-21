@@ -1,5 +1,6 @@
 package com.rps.adagawe.model;
 
+import lombok.Builder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ public class Pelamar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty(message = "Nama pelamar wajib diisi.")
+//    @NotEmpty(message = "Nama pelamar wajib diisi.")
     @Column(name = "nama_pelamar")
     private String namaPelamar;
 
@@ -25,7 +26,7 @@ public class Pelamar {
 
     @NotEmpty(message = "Jenis kelamin wajib diisi.")
     @Column(name = "jenis_kelamin")
-    private char jenisKelamin;
+    private String jenisKelamin;
 
     @NotEmpty(message = "Kota wajib diisi.")
     private String kota;
@@ -37,22 +38,24 @@ public class Pelamar {
     @Column(name = "no_telepon")
     private String noTelepon;
 
+    @NotEmpty(message = "Headline wajib diisi.")
     private String headline;
 
-    @NotEmpty(message = "CV wajib diisi.")
+//    @NotEmpty(message = "CV wajib diisi.")
     @Column(name = "dokumen_cv")
     private String dokumenCv;
 
-    @NotEmpty
+    @NotNull
     @Column(name = "id_user_login")
     private int idUserLogin;
 
-    @NotEmpty(message = "Foto Profil wajib diisi.")
+//    @NotEmpty(message = "Foto Profil wajib diisi.")
     @Column(name = "foto_profil")
     private String fotoProfil;
 
+    @Builder.Default
     @Column(name = "row_status")
-    private Integer rowStatus;
+    private Integer rowStatus = 1;
 
     @ManyToOne
     @JoinColumn(name = "id_user_login", insertable = false, updatable = false)
@@ -82,11 +85,11 @@ public class Pelamar {
         this.tanggalLahir = tanggalLahir;
     }
 
-    public char getJenisKelamin() {
+    public String getJenisKelamin() {
         return jenisKelamin;
     }
 
-    public void setJenisKelamin(char jenisKelamin) {
+    public void setJenisKelamin(String jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
 
