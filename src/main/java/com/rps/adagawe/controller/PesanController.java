@@ -33,6 +33,11 @@ public class PesanController {
     @GetMapping("/perusahaan/messages")
     public String getMessagesPerusahaan(Model model, HttpServletRequest request) {
 
+        // Redirect jika belum melengkapi profil
+        if (!AdagaweMethods.isPerusahaanExist(adagaweService)) {
+            return "redirect:/perusahaan/information";
+        }
+
         model.addAttribute("pesans", pesanService.getByPesanUntuk(11));
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));

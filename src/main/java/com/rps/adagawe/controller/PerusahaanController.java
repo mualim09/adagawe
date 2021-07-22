@@ -94,16 +94,16 @@ public class PerusahaanController {
 
         perusahaan.setIdUserLogin(ul.getId());
 
-        if (file.isEmpty()){
-            ul.setFotoProfil("default.jpg");
-        } else {
+        if (file.isEmpty()) {
+            ul.setFotoProfil("default-company.png");
+        }
+        else {
             String fileName = FileUploadHelper.upload(file, "foto_perusahaan");
             ul.setFotoProfil(fileName);
+            userService.save(ul);
         }
-        perusahaanService.save(perusahaan);
 
-        //redirectAttributes.addFlashAttribute("message", "Perusahaan berhasil ditambah.");
-        // return "redirect:/perusahaan/verifikasi/createnext";
+        perusahaanService.save(perusahaan);
 
         return "redirect:/perusahaan/profile";
     }
@@ -165,11 +165,6 @@ public class PerusahaanController {
             }
 
             model.addAttribute("verifikasiperusahaans", verifikasiperusahaans);
-            //            prefix = "/perusahaan/profile/test";
-            prefix = "/perusahaan/profile/index";
-        }
-        else {
-
         }
 
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
@@ -179,6 +174,11 @@ public class PerusahaanController {
 
     @GetMapping("/perusahaan/laporan")
     public String getLaporan(Model model, HttpServletRequest request) {
+
+        // Redirect jika belum melengkapi profil
+        if (!AdagaweMethods.isPerusahaanExist(adagaweService)) {
+            return "redirect:/perusahaan/information";
+        }
 
         model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));

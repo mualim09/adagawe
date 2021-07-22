@@ -11,6 +11,7 @@ import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created on June, 2021
  * @author RPS
  */
+@Controller
 public class AdagaweMethods {
 
     public static String getEmailUserBySession() {
@@ -79,5 +81,29 @@ public class AdagaweMethods {
         String[] words = url.split("[/]");
 
         return words[index];
+    }
+
+    public static String getRoleUserLogin(UserLogin userLogin) {
+        if (userLogin.getUserRole().name() == "Admin") {
+            return "foto_profil";
+        }
+        if (userLogin.getUserRole().name() == "Pelamar") {
+            return "foto_profil";
+        }
+        else {
+            return "foto_perusahaan";
+        }
+    }
+
+    public static String getRedirectProfil(UserLogin userLogin) {
+        if (userLogin.getUserRole().name() == "Admin") {
+            return "redirect:/admin/profile";
+        }
+        if (userLogin.getUserRole().name() == "Pelamar") {
+            return "redirect:/pelamar/profile";
+        }
+        else {
+            return "redirect:/perusahaan/profile";
+        }
     }
 }

@@ -37,6 +37,7 @@ public class AdminController {
         model.addAttribute("total_lowongan", adagaweService.findTotalLamaran());
 
         model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+//        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession());
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
 
         return "/admin/dashboard";

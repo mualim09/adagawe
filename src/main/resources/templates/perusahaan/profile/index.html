@@ -33,12 +33,40 @@
 </div>
 
 <div layout:fragment="content">
-    <div class="col-md-12" th:if="${perusahaan.telahTerverifikasi == 0}">
+    <div th:if="${verifikasiperusahaan == null}" class="col-md-12">
         <div class="alert alert-danger" role="alert">
             Lakukan Verifikasi Perusahaan untuk membuka lowongan!
             <a class="btn btn-success" href="/perusahaan/verifikasi/createnext">
                 Ajukan Verifikasi
             </a>
+        </div>
+    </div>
+    <div th:unless="${verifikasiperusahaan == null}" class="col-md-12">
+        <div th:if="${verifikasiperusahaan.hasil != 1}" class="alert alert-warning" role="alert">
+            <span th:switch="${verifikasiperusahaan.hasil}">
+                <span th:case="'0'">Saat ini kami sedang memverifikasi data kamu, harap tunggu ya!</span>
+                <span th:case="'2'">Waduh, verifikasi kamu ditolak, ajukan verifikasi lagi yuk!
+                    <a class="btn btn-success" href="/perusahaan/verifikasi/createnext">
+                        Ajukan Verifikasi
+                    </a>
+                </span>
+            </span>
+        </div>
+    </div>
+    <div th:if="${message_failed}" class="col-md-12">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="${message_failed}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <div th:if="${message_success}" class="col-md-12">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${message_success}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     </div>
     <div class="col-md-3">
@@ -84,6 +112,7 @@
                 <div class="row row-nav-line">
                     <ul class="nav nav-tabs nav-line nav-color-secondary w-100 pl-3" role="tablist">
                         <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#profil" role="tab" aria-selected="true">Profil</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#detail" role="tab" aria-selected="true">Detail</a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#keamanan" role="tab" aria-selected="false">Keamanan</a> </li>
                         <li class="nav-item" th:if="${verifikasiperusahaan != null}"> <a class="nav-link" data-toggle="tab" href="#verifikasi" role="tab" aria-selected="false">Verifikasi</a> </li>
                     </ul>
@@ -92,6 +121,36 @@
             <div class="card-body">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="profil" role="tabpanel" aria-labelledby="home-tab">
+                        <form action="/account/edit" id="form" th:method="post" enctype="multipart/form-data">
+                            <div class="form-group form-floating-label mt-2">
+                                <input type="text" class="form-control input-border-bottom" name="nama" id="nama" th:value="${userLogin.nama}">
+                                <label for="nama" class="placeholder">Nama Perusahaan</label>
+                            </div>
+<!--                            <div class="form-group form-group-default">-->
+<!--                                <label>Nama Perusahaan</label>-->
+<!--                                <input type="text" class="form-control" name="nama"">-->
+<!--                            </div>-->
+                            <div class="form-group">
+                                <label class="label">Foto Profil</label>
+                                <div class="input-file input-file-image">
+                                    <img class="img-upload-preview" width="135" height="135" th:src="@{'/uploads/foto_perusahaan/' + ${userLogin.fotoProfil}}">
+                                    <input type="file" class="form-control form-control-file success" name="file" id="file" accept="image/*" aria-invalid="false"><label id="uploadImg-error" class="error" for="uploadImg"></label>
+                                    <label for="file" class="btn btn-light">Pilih Gambar</label>
+                                </div>
+                            </div>
+<!--                            <div class="form-group">-->
+<!--                                <label>Foto Profil</label>-->
+<!--                                <div class="custom-file">-->
+<!--                                    <input type="file" class="custom-file-input" name="file" id="file" placeholder="Foto Profil">-->
+<!--                                    <label class="custom-file-label" for="file">Pilih Foto Profil</label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                            <div class="form-group">
+                                <button class="btn btn-primary">Perbaharui</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="home-tab">
                         <form action="#" th:object="${perusahaan}" id="pengalamanForm" method="post" enctype="multipart/form-data">
                             <div class="row mt-3">
                                 <div class="col-md-12">
@@ -124,52 +183,54 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-primary">Simpan</button>
+                                <button class="btn btn-primary">Perbaharui</button>
                             </div>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="keamanan" role="tabpanel" aria-labelledby="profile-tab">
-                        <form th:action="@{/perusahaan/profile/security}" th:method="post" th:object="${userLogin}">
-                            <div class="form-group">
-                                <div class="alert alert-info" role="alert">
-                                    <span>Untuk merubah email, harap hubungi System Administrator.</span>
-                                </div>
-                                <label class="control-label">Email</label>
-                                <input type="email" class="form-control" placeholder="Email" th:field="*{email}" required="" readonly>
+                        <form th:action="@{/account/security}" th:method="post">
+                            <div class="alert alert-info" role="alert">
+                                <span>Untuk merubah email, harap hubungi System Administrator.</span>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Password Baru</label>
-                                <input type="password" class="form-control" placeholder="Password Baru" th:field="*{password}" required>
+                                <label class="control-label">Email</label>
+                                <input type="email" class="form-control" placeholder="Email" th:value="${userLogin.email}" readonly>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Password Lama</label>
-                                <input type="password" class="form-control" placeholder="Password Baru" required>
+                                <input type="password" class="form-control" placeholder="Password Lama" name="password1">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                <!--                        <a href="/admin/profile" class="btn btn-secondary">Kembali</a>-->
+                                <label class="control-label">Password Baru</label>
+                                <input type="password" class="form-control" placeholder="Password Baru" name="password2">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Perbaharui</button>
                             </div>
                         </form>
                     </div>
                     <div class="tab-pane fade" th:if="${verifikasiperusahaan != null}" id="verifikasi" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="alert alert-success" role="alert">
-                                <span th:switch="${verifikasiperusahaan.hasil}">
-                                    <span th:case="'0'">Menunggu diverifikasi</span>
-                                    <span th:case="'1'">Terverifikasi</span>
-                                    <span th:case="'2'">Belum diverifikasi</span>
-                                </span>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span th:switch="${verifikasiperusahaan.hasil}">
+                                        <span th:case="'0'">Menunggu diverifikasi</span>
+                                        <span th:case="'1'">Terverifikasi</span>
+                                        <span th:case="'2'">Belum diverifikasi</span>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
-                            <div class="col-md-12 mb-2">
-                                <div class="email-attachments">
-                                    <div class="title font-weight-bold">Attachments</div>
-                                    <a href="#"><i class="fa fa-paperclip"></i> tdp.docs </a>
-                                    <br/>
-                                    <a href="#"><i class="fa fa-paperclip"></i> siu.docs </a>
-                                </div>
-                            </div>
+<!--                            <div class="col-md-12 mb-2">-->
+<!--                                <div class="email-attachments">-->
+<!--                                    <div class="title font-weight-bold">Attachments</div>-->
+<!--                                    <a href="#"><i class="fa fa-paperclip"></i> tdp.docs </a>-->
+<!--                                    <br/>-->
+<!--                                    <a href="#"><i class="fa fa-paperclip"></i> siu.docs </a>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <div class="col-md-12">
                                 <label class="font-weight-bold">Riwayat Verifikasi</label>
                             </div>
@@ -213,6 +274,12 @@
         </div>
     </div>
 </div>
-
+<script layout:fragment="scripts">
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 </body>
 </html>
