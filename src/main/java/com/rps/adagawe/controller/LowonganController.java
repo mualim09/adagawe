@@ -143,4 +143,15 @@ public class LowonganController {
 
         return "/perusahaan/lowongan/detail";
     }
+
+    @GetMapping("/perusahaan/lowongan/delete/{id}")
+    public String getDelete(RedirectAttributes redirectAttributes, @PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+        Lowongan lowongan = lowonganService.getLowonganById(id);
+        lowongan.setStatus(0);
+        lowonganService.save(lowongan);
+
+        redirectAttributes.addFlashAttribute("message_success", "Lowongan berhasil ditutup.");
+
+        return "redirect:/perusahaan/lowongan";
+    }
 }

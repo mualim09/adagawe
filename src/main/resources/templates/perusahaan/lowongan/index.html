@@ -25,6 +25,14 @@
     </ul>
 </div>
 <div layout:fragment="content">
+    <div th:if="${message}" class="col-md-12">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${message}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
     <div class="col-md-12">
         <div class="card shadow">
             <div class="card-header">
@@ -58,8 +66,9 @@
                                     <td th:text="${#dates.format(lowongan.lastModified, 'dd-MM-yyyy')}"></td>
                                     <td>
                                         <a th:href="@{/perusahaan/lowongan/edit/{id}(id=${lowongan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
-                                        <a th:href="@{/perusahaan/lowongan/view/{id}(id=${lowongan.id})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
+<!--                                        <a th:href="@{/perusahaan/lowongan/view/{id}(id=${lowongan.id})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>-->
                                         <a th:href="@{/perusahaan/lowongan/detail/{id}(id=${lowongan.id})}" class="btn btn-sm btn-secondary"><i class="fa fa-list"></i> Detail</a>
+                                        <a th:if="${lowongan.status != 0}" th:href="@{/perusahaan/lowongan/delete/{id}(id=${lowongan.id})}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Tutup</a>
                                     </td>
                                 </tr>
                                 </tbody>

@@ -17,7 +17,7 @@ public class LowonganService {
     LowonganRepository lowonganRepository;
 
     public List<Lowongan> getAll() {
-        return (List<Lowongan>) lowonganRepository.findAll();
+        return (List<Lowongan>) lowonganRepository.getLowonganByStatus();
     }
 
     public Lowongan getLowonganById(Integer id) {

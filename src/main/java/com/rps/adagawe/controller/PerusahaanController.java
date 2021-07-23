@@ -5,14 +5,10 @@ import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
 import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.*;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -108,35 +104,6 @@ public class PerusahaanController {
         return "redirect:/perusahaan/profile";
     }
 
-
-    @GetMapping("/perusahaan/view")
-    public String getViewPerusahaan(Model model, HttpServletRequest request) {
-
-        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
-        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
-
-        return "/perusahaan/index";
-    }
-
-    @GetMapping("/perusahaan/profile/edit")
-    public String getEditPerusahaan(Model model, HttpServletRequest request) {
-
-        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
-        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
-
-        return "/perusahaan/profile/edit";
-    }
-
-    @GetMapping("/perusahaan/profile/security")
-    public String getSecurityPerusahaan(Model model, HttpServletRequest request) {
-        UserLogin userLogin = adagaweService.findUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
-        model.addAttribute("userLogin", userLogin);
-
-        return "/perusahaan/profile/security";
-    }
-
     @GetMapping("/perusahaan/profile")
     public String getProfile(Model model, HttpServletRequest request) {
 
@@ -184,5 +151,16 @@ public class PerusahaanController {
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/report-lowongan";
+    }
+
+    @GetMapping("/loker/perusahaan/view/{id}")
+    public String getViewPerusahaan(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+
+        model.addAttribute("perusahaan", perusahaanService.getPerusahaanById(id));
+
+//        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
+        return "/pelamar/view-perusahaan";
     }
 }

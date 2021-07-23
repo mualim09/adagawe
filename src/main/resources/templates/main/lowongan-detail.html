@@ -20,7 +20,7 @@
                       class="img-company img-company-profile mr-3" th:alt="${loker.perusahaan.userLogin.nama}">
               <div class="media-body">
                 <a href="#" class="job-title" th:text="${loker.judulLowongan}"></a>
-                <a href="#" class="job-subtitle" th:text="${loker.perusahaan.userLogin.nama}"></a>
+                <a th:href="@{/loker/perusahaan/view/{id}(id=${loker.perusahaan.id})}" class="job-subtitle" th:text="${loker.perusahaan.userLogin.nama}"></a>
                 <div class="custom-badge-container success sm">
                   <div class="custom-badge"><i class="far fa-check-circle"></i> Aktif</div>
                 </div>
