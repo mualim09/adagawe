@@ -30,7 +30,7 @@ public class SettingController {
         UserLogin ul = AdagaweMethods.getUserLoginBySession(adagaweService);
 
         if (nama.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message_failed", "Nama Perusahaan Tidak Boleh Kosong.");
+            redirectAttributes.addFlashAttribute("message_failed", "Nama tidak boleh kosong.");
             return AdagaweMethods.getRedirectProfil(ul);
         }
 
@@ -44,10 +44,10 @@ public class SettingController {
         userService.save(ul);
 
         if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message_success", "Nama Berhasil diubah.");
+            redirectAttributes.addFlashAttribute("message_success", "Nama berhasil diubah.");
         }
         else {
-            redirectAttributes.addFlashAttribute("message_success", "Nama dan Foto Profil Berhasil diubah.");
+            redirectAttributes.addFlashAttribute("message_success", "Nama dan Foto Profil berhasil diubah.");
         }
 
         return AdagaweMethods.getRedirectProfil(ul);
@@ -59,7 +59,7 @@ public class SettingController {
         UserLogin ul = AdagaweMethods.getUserLoginBySession(adagaweService);
 
         if (password1.isEmpty() || password2.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message_failed", "Password Tidak Boleh Kosong.");
+            redirectAttributes.addFlashAttribute("message_failed", "Password tidak boleh kosong.");
             return AdagaweMethods.getRedirectProfil(ul);
         }
 
@@ -67,10 +67,10 @@ public class SettingController {
             String encryptedPassword = bcrypt.encode(password2);
             ul.setPassword(encryptedPassword);
             userService.save(ul);
-            redirectAttributes.addFlashAttribute("message_success", "Password Berhasil diubah.");
+            redirectAttributes.addFlashAttribute("message_success", "Password berhasil diubah.");
         }
         else {
-            redirectAttributes.addFlashAttribute("message_failed", "Password Lama tidak sama.");
+            redirectAttributes.addFlashAttribute("message_failed", "Password lama tidak sama.");
         }
 
 

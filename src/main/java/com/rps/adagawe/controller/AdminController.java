@@ -79,34 +79,36 @@ public class AdminController {
     }
 
     @GetMapping("/admin/profile")
-    public String getViewProfile(Model model) {
-        int idAdmin = AdagaweMethods.getAdminBySession(adagaweService).getId();
-        Admin admin = adminService.getAdminById(idAdmin);
-        model.addAttribute("admin", admin);
+    public String getProfile(Model model, HttpServletRequest request) {
+
+        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/admin/profile/index";
     }
 
-    @GetMapping("/admin/profile/security")
-    public String getSecurityAdmin(Model model) {
-
-        UserLogin userLogin = adagaweService.findUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
-        model.addAttribute("userLogin", userLogin);
-        return "/admin/profile/security";
-    }
-
-    @PostMapping("/admin/profile/security")
-    public String postSecurityAdmin(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
-
-        //userService.updateUserLogin(userLogin);
-        return "/admin/profile/index";
-    }
-
-    @GetMapping("/admin/profile/edit")
-    public String getEditProfile(Model model) {
-
-        Admin admin = adminService.getAdminById(1);
-        model.addAttribute("admin", admin);
-        return "/admin/profile/edit";
-    }
+//    @GetMapping("/admin/profile/security")
+//    public String getSecurityAdmin(Model model) {
+//
+//        UserLogin userLogin = adagaweService.findUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
+//        model.addAttribute("userLogin", userLogin);
+//        return "/admin/profile/security";
+//    }
+//
+//    @PostMapping("/admin/profile/security")
+//    public String postSecurityAdmin(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
+//
+//        //userService.updateUserLogin(userLogin);
+//        return "/admin/profile/index";
+//    }
+//
+//    @GetMapping("/admin/profile/edit")
+//    public String getEditProfile(Model model) {
+//
+//        Admin admin = adminService.getAdminById(1);
+//        model.addAttribute("admin", admin);
+//        return "/admin/profile/edit";
+//    }
 }

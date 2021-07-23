@@ -138,7 +138,7 @@ public class PerusahaanController {
     }
 
     @GetMapping("/perusahaan/profile")
-    public String profile(Model model, HttpServletRequest request) {
+    public String getProfile(Model model, HttpServletRequest request) {
 
         // Redirect jika belum melengkapi profil
         if (!AdagaweMethods.isPerusahaanExist(adagaweService)) {
@@ -149,7 +149,6 @@ public class PerusahaanController {
 
         UserLogin idUserLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
         List<Integer> perusahaan = perusahaanService.getIdUserLoginInPerusahaan();
-
 
         if (perusahaan.contains(idUserLogin.getId())) {
             int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();

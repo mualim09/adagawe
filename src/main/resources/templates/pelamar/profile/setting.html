@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       lang="en"
-      layout:decorate="~{layout/admin}">
+      layout:decorate="~{layout/pelamar}">
 <head>
     <meta charset="UTF-8">
     <title>Pengaturan Akun</title>
@@ -54,14 +54,14 @@
             <div class="card-header bg-img-profile">
                 <div class="profile-picture">
                     <div class="avatar avatar-xl">
-                        <img th:src="@{'/uploads/foto_profil/' + ${admin.userLogin.fotoProfil}}" alt="..." class="avatar-img rounded-circle img-thumbnail">
+                        <img th:src="@{'/uploads/foto_profil/' + ${pelamar.userLogin.fotoProfil}}" alt="..." class="avatar-img rounded-circle img-thumbnail">
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="user-profile text-center">
-                    <div class="name" th:text="${admin.userLogin.nama}"></div>
-                    <div class="job mb-2" th:text="${admin.userLogin.email}"></div>
+                    <div class="name" th:text="${pelamar.userLogin.nama}"></div>
+                    <div class="job mb-2" th:text="${pelamar.userLogin.email}"></div>
                 </div>
             </div>
         </div>
@@ -99,41 +99,41 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="home-tab">
-<!--                        <form action="#" th:object="${perusahaan}" id="pengalamanForm" method="post" enctype="multipart/form-data">-->
-<!--                            <div class="row mt-3">-->
-<!--                                <div class="col-md-12">-->
-<!--                                    <div class="form-group form-group-default">-->
-<!--                                        <label>Bidang</label>-->
-<!--                                        <input type="text" class="form-control" name="address" th:field="*{bidangPerusahaan}">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="row mt-3">-->
-<!--                                <div class="col-md-6">-->
-<!--                                    <div class="form-group form-group-default">-->
-<!--                                        <label>Provinsi</label>-->
-<!--                                        <input type="text" class="form-control" name="address" th:field="*{provinsi}">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="col-md-6">-->
-<!--                                    <div class="form-group form-group-default">-->
-<!--                                        <label>Kota</label>-->
-<!--                                        <input type="text" class="form-control" name="address" th:field="*{kota}">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="row mt-3 mb-1">-->
-<!--                                <div class="col-md-12">-->
-<!--                                    <div class="form-group form-group-default">-->
-<!--                                        <label>Alamat</label>-->
-<!--                                        <input type="text" class="form-control" value="st Merdeka Putih, Jakarta Indonesia" name="address" th:field="*{alamatLengkap}">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <button class="btn btn-primary">Perbaharui</button>-->
-<!--                            </div>-->
-<!--                        </form>-->
+                        <!--                        <form action="#" th:object="${perusahaan}" id="pengalamanForm" method="post" enctype="multipart/form-data">-->
+                        <!--                            <div class="row mt-3">-->
+                        <!--                                <div class="col-md-12">-->
+                        <!--                                    <div class="form-group form-group-default">-->
+                        <!--                                        <label>Bidang</label>-->
+                        <!--                                        <input type="text" class="form-control" name="address" th:field="*{bidangPerusahaan}">-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="row mt-3">-->
+                        <!--                                <div class="col-md-6">-->
+                        <!--                                    <div class="form-group form-group-default">-->
+                        <!--                                        <label>Provinsi</label>-->
+                        <!--                                        <input type="text" class="form-control" name="address" th:field="*{provinsi}">-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="col-md-6">-->
+                        <!--                                    <div class="form-group form-group-default">-->
+                        <!--                                        <label>Kota</label>-->
+                        <!--                                        <input type="text" class="form-control" name="address" th:field="*{kota}">-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="row mt-3 mb-1">-->
+                        <!--                                <div class="col-md-12">-->
+                        <!--                                    <div class="form-group form-group-default">-->
+                        <!--                                        <label>Alamat</label>-->
+                        <!--                                        <input type="text" class="form-control" value="st Merdeka Putih, Jakarta Indonesia" name="address" th:field="*{alamatLengkap}">-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="form-group">-->
+                        <!--                                <button class="btn btn-primary">Perbaharui</button>-->
+                        <!--                            </div>-->
+                        <!--                        </form>-->
                     </div>
                     <div class="tab-pane fade" id="keamanan" role="tabpanel" aria-labelledby="profile-tab">
                         <form th:action="@{/account/security}" th:method="post">

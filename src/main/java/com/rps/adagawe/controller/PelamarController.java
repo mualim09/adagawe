@@ -88,27 +88,21 @@ public class PelamarController {
         return "redirect:/pelamar/profile";
     }
 
-    @GetMapping("/pelamar/profile/security")
-    public String getSecurity(Model model) {
+    @GetMapping("/pelamar/dashboard")
+    public String getDashboard(Model model, HttpServletRequest request) {
+        model.addAttribute("pelamar", new Pelamar());
 
-        //UserLogin userLogin = userService.getUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
-        //model.addAttribute("userLogin", userLogin);
-        return PREFIX_SECURITY;
+        return "/pelamar/dashboard";
     }
 
-    @PostMapping("/pelamar/profile/security")
-    public String postSecurity(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
+    @GetMapping("/pelamar/setting")
+    public String getSetting(Model model, HttpServletRequest request) {
 
-        //userService.updateUserLogin(userLogin);
-        return "/pelamar/profile/index";
-    }
+        model.addAttribute("pelamar", AdagaweMethods.getPelamarBySession(adagaweService));
 
-    @GetMapping("/pelamar/profile/edit")
-    public String getProfileEdit(Model model) {
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
-        //pelamar pelamar = pelamarService.getpelamarById(AdagaweMethods.getIdpelamarBySession(pelamarService));
-        //pelamar pelamar = pelamarService.getpelamarById(1);
-        //model.addAttribute("pelamar", pelamar);
-        return "/pelamar/profile/edit";
+        return "/pelamar/profile/setting";
     }
 }

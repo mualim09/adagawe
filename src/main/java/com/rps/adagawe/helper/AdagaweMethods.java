@@ -100,7 +100,7 @@ public class AdagaweMethods {
             return "redirect:/admin/profile";
         }
         if (userLogin.getUserRole().name() == "Pelamar") {
-            return "redirect:/pelamar/profile";
+            return "redirect:/pelamar/setting";
         }
         else {
             return "redirect:/perusahaan/profile";
