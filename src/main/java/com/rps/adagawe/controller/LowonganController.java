@@ -4,6 +4,7 @@ import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.model.Jabatan;
 import com.rps.adagawe.model.Lowongan;
+import com.rps.adagawe.model.Perusahaan;
 import com.rps.adagawe.service.JenisPegawaiService;
 import com.rps.adagawe.service.LamaranService;
 import com.rps.adagawe.service.LowonganService;
@@ -42,11 +43,17 @@ public class LowonganController {
 
     @GetMapping("/perusahaan/lowongan")
     public String index(Model model, HttpServletRequest request) {
-        List<Lowongan> lowongans = lowonganService.getAll();
-        model.addAttribute("lowongans", lowongans);
 
-        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
-        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        // Redirect jika belum melengkapi profil
+        if (!AdagaweMethods.isPerusahaanExist(adagaweService)) {
+            return "redirect:/perusahaan/information";
+        }
+
+        Perusahaan obj = AdagaweMethods.getPerusahaanBySession(adagaweService);
+
+        model.addAttribute("lowongans", lowonganService.getLowonganByIdPerusahaan(obj.getId()));
+
+        model.addAttribute("userLogin", obj.getUserLogin());
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/lowongan/index";

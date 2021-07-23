@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/js/**",
 						"/assets/**",
 						"/uploads/**",
+						"/foto_perusahaan/**",
 						"/img/**", "/font-awesome/**")
 				.permitAll()
 				.antMatchers("/admin/**").hasAuthority("Admin")

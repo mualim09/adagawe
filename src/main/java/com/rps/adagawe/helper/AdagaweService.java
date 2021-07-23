@@ -24,9 +24,7 @@ public class AdagaweService {
         return adagaweRepository.getAdminByUserLogin(id);
     }
 
-    public Pelamar findPelamarByUserLogin(int id) {
-        return adagaweRepository.getPelamarByUserLogin(id);
-    }
+    public Pelamar findPelamarByUserLogin(int id) { return adagaweRepository.getPelamarByUserLogin(id); }
 
     public Perusahaan findPerusahaanByUserLogin(int id) {
         return adagaweRepository.getPerusahaanByUserLogin(id);
@@ -44,7 +42,5 @@ public class AdagaweService {
         return adagaweRepository.getTotalLowonganByPerusahaan(id);
     }
 
-    public int findTotalLowonganAktifByPerusahaan(int id) {
-        return adagaweRepository.getTotalLowonganAktifByPerusahaan(id);
-    }
+    public int findTotalLowonganAktifByPerusahaan(int id) { return adagaweRepository.getTotalLowonganAktifByPerusahaan(id); }
 }

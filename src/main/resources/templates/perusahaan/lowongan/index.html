@@ -8,14 +8,30 @@
 </head>
 
 <body>
+<div layout:fragment="header">
+    <h4 class="page-title">Lowongan</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Lowongan</a>
+        </li>
+    </ul>
+</div>
 <div layout:fragment="content">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                    <h4 class="card-title">Add Row</h4>
+                    <h4 class="card-title">Daftar Lowongan</h4>
                     <a class="btn btn-primary ml-auto" href="/perusahaan/lowongan/create">
-                        <i class="fa fa-plus"></i> Tambah Data
+                        <i class="fa fa-plus"></i> Buat Lowongan
                     </a>
                 </div>
             </div>
@@ -38,8 +54,8 @@
                                 <tr th:each="lowongan, iter : ${lowongans}">
                                     <td th:text="${iter.index + 1}"></td>
                                     <td th:text="${lowongan.judulLowongan}"></td>
-                                    <td th:text="${lowongan.createdDate}"></td>
-                                    <td th:text="${lowongan.lastModified}"></td>
+                                    <td th:text="${#dates.format(lowongan.createdDate, 'dd-MM-yyyy')}"></td>
+                                    <td th:text="${#dates.format(lowongan.lastModified, 'dd-MM-yyyy')}"></td>
                                     <td>
                                         <a th:href="@{/perusahaan/lowongan/edit/{id}(id=${lowongan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
                                         <a th:href="@{/perusahaan/lowongan/view/{id}(id=${lowongan.id})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>

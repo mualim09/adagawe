@@ -22,7 +22,7 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/atlantis.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/atlantis.css}">
     <link rel="stylesheet" th:href="@{/assets/css/style.css}">
 
     <!-- Optional Section -->
@@ -66,7 +66,7 @@
                             <div class="dropdown-user-scroll scrollbar-outer">
                                 <li>
                                     <div class="user-box">
-                                        <div class="avatar-lg">
+                                        <div class="avatar-sm py-1">
                                             <img th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}" alt="image profile" class="avatar-img rounded">
                                         </div>
                                         <div class="u-text">
@@ -172,12 +172,14 @@
         </div>
     </div>
     <div class="main-panel">
-        <div class="page-inner">
-            <div class="page-header" layout:fragment="header">
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header" layout:fragment="header">
 
-            </div>
-            <div class="row" layout:fragment="content">
+                </div>
+                <div class="row" layout:fragment="content">
 
+                </div>
             </div>
         </div>
         <footer class="footer">
