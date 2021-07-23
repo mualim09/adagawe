@@ -120,14 +120,10 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="home-tab">
-                        <form action="#" th:object="${perusahaan}" id="pengalamanForm" method="post" enctype="multipart/form-data">
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <div class="form-group form-group-default">
-                                        <label>Bidang</label>
-                                        <input type="text" class="form-control" name="address" th:field="*{bidangPerusahaan}">
-                                    </div>
-                                </div>
+                        <form action="/account/perusahaan/edit" th:object="${perusahaan}" id="form_perusahaan" method="post" enctype="multipart/form-data">
+                            <div class="form-group form-group-default">
+                                <label>Bidang</label>
+                                <input type="text" class="form-control" name="address" th:field="*{bidangPerusahaan}">
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-6">
@@ -143,13 +139,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-3 mb-1">
-                                <div class="col-md-12">
-                                    <div class="form-group form-group-default">
-                                        <label>Alamat</label>
-                                        <input type="text" class="form-control" value="st Merdeka Putih, Jakarta Indonesia" name="address" th:field="*{alamatLengkap}">
-                                    </div>
-                                </div>
+                            <div class="form-group form-group-default">
+                                <label>Alamat</label>
+                                <textarea type="text" class="form-control" name="address" th:field="*{alamatLengkap}"></textarea>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary">Perbaharui</button>

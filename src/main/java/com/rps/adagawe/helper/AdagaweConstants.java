@@ -4,7 +4,6 @@ package com.rps.adagawe.helper;
  * Created on June, 2021
  * @author RPS
  */
-
 public class AdagaweConstants {
 
     /* RULES */

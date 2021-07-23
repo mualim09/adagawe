@@ -99,41 +99,33 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="home-tab">
-<!--                        <form action="#" th:object="${perusahaan}" id="pengalamanForm" method="post" enctype="multipart/form-data">-->
-<!--                            <div class="row mt-3">-->
-<!--                                <div class="col-md-12">-->
-<!--                                    <div class="form-group form-group-default">-->
-<!--                                        <label>Bidang</label>-->
-<!--                                        <input type="text" class="form-control" name="address" th:field="*{bidangPerusahaan}">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="row mt-3">-->
-<!--                                <div class="col-md-6">-->
-<!--                                    <div class="form-group form-group-default">-->
-<!--                                        <label>Provinsi</label>-->
-<!--                                        <input type="text" class="form-control" name="address" th:field="*{provinsi}">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="col-md-6">-->
-<!--                                    <div class="form-group form-group-default">-->
-<!--                                        <label>Kota</label>-->
-<!--                                        <input type="text" class="form-control" name="address" th:field="*{kota}">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="row mt-3 mb-1">-->
-<!--                                <div class="col-md-12">-->
-<!--                                    <div class="form-group form-group-default">-->
-<!--                                        <label>Alamat</label>-->
-<!--                                        <input type="text" class="form-control" value="st Merdeka Putih, Jakarta Indonesia" name="address" th:field="*{alamatLengkap}">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <button class="btn btn-primary">Perbaharui</button>-->
-<!--                            </div>-->
-<!--                        </form>-->
+                        <form th:action="@{/account/admin/edit}" th:object="${admin}" id="form_admin" method="post">
+                            <div class="form-group form-group-default">
+                                <label for="tanggalLahir">Tanggal Lahir</label>
+                                <input type="date" th:field="*{tanggalLahir}" id="tanggalLahir" placeholder="Tanggal Lahir"
+                                       th:class="'form-control '+ ${#fields.hasErrors('tanggalLahir') ? 'is-invalid' : ''}">
+                            </div>
+                            <div class="form-check pb-3">
+                                <label>Jenis Kelamin</label><br>
+                                <label class="form-radio-label">
+                                    <input class="form-radio-input" type="radio" name="optionsRadios" value="L" th:field="*{jenisKelamin}">
+                                    <span class="form-radio-sign">Laki-Laki</span>
+                                </label>
+                                <label class="form-radio-label ml-3">
+                                    <input class="form-radio-input" type="radio" name="optionsRadios" value="P" th:field="*{jenisKelamin}">
+                                    <span class="form-radio-sign">Perempuan</span>
+                                </label>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('jenisKelamin')}" th:errors="*{jenisKelamin}"></div>
+                            </div>
+                            <div class="form-group form-group-default">
+                                <label for="noTelepon">No. Telepon</label>
+                                <input type="text" th:field="*{noTelepon}" id="noTelepon" placeholder="Nomor Telepon"
+                                          th:class="'form-control '+ ${#fields.hasErrors('noTelepon') ? 'is-invalid' : ''}">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="tab-pane fade" id="keamanan" role="tabpanel" aria-labelledby="profile-tab">
                         <form th:action="@{/account/security}" th:method="post">

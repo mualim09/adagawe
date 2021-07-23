@@ -73,6 +73,7 @@
                     <ul class="nav nav-tabs nav-line nav-color-secondary w-100 pl-3" role="tablist">
                         <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#profil" role="tab" aria-selected="true">Profil</a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#detail" role="tab" aria-selected="true">Detail</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#headline" role="tab" aria-selected="true">Headline</a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#keamanan" role="tab" aria-selected="false">Keamanan</a> </li>
                     </ul>
                 </div>
@@ -80,7 +81,7 @@
             <div class="card-body">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="profil" role="tabpanel" aria-labelledby="home-tab">
-                        <form action="/account/edit" id="form" th:method="post" enctype="multipart/form-data">
+                        <form action="/account/edit" th:method="post" enctype="multipart/form-data">
                             <div class="form-group form-floating-label mt-2">
                                 <input type="text" class="form-control input-border-bottom" name="nama" id="nama" th:value="${userLogin.nama}">
                                 <label for="nama" class="placeholder">Nama Lengkap</label>
@@ -99,41 +100,58 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="home-tab">
-                        <!--                        <form action="#" th:object="${perusahaan}" id="pengalamanForm" method="post" enctype="multipart/form-data">-->
-                        <!--                            <div class="row mt-3">-->
-                        <!--                                <div class="col-md-12">-->
-                        <!--                                    <div class="form-group form-group-default">-->
-                        <!--                                        <label>Bidang</label>-->
-                        <!--                                        <input type="text" class="form-control" name="address" th:field="*{bidangPerusahaan}">-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="row mt-3">-->
-                        <!--                                <div class="col-md-6">-->
-                        <!--                                    <div class="form-group form-group-default">-->
-                        <!--                                        <label>Provinsi</label>-->
-                        <!--                                        <input type="text" class="form-control" name="address" th:field="*{provinsi}">-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="col-md-6">-->
-                        <!--                                    <div class="form-group form-group-default">-->
-                        <!--                                        <label>Kota</label>-->
-                        <!--                                        <input type="text" class="form-control" name="address" th:field="*{kota}">-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="row mt-3 mb-1">-->
-                        <!--                                <div class="col-md-12">-->
-                        <!--                                    <div class="form-group form-group-default">-->
-                        <!--                                        <label>Alamat</label>-->
-                        <!--                                        <input type="text" class="form-control" value="st Merdeka Putih, Jakarta Indonesia" name="address" th:field="*{alamatLengkap}">-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="form-group">-->
-                        <!--                                <button class="btn btn-primary">Perbaharui</button>-->
-                        <!--                            </div>-->
-                        <!--                        </form>-->
+                        <form th:action="@{/account/pelamar/edit}" th:object="${pelamar}" method="post">
+                            <div class="form-group form-group-default">
+                                <label for="tanggalLahir">Tanggal Lahir</label>
+                                <input type="date" th:field="*{tanggalLahir}" id="tanggalLahir" placeholder="Tanggal Lahir"
+                                       th:class="'form-control '+ ${#fields.hasErrors('tanggalLahir') ? 'is-invalid' : ''}">
+                            </div>
+                            <div class="form-check pb-3">
+                                <label>Jenis Kelamin</label><br>
+                                <label class="form-radio-label">
+                                    <input class="form-radio-input" type="radio" name="optionsRadios" value="L" th:field="*{jenisKelamin}">
+                                    <span class="form-radio-sign">Laki-Laki</span>
+                                </label>
+                                <label class="form-radio-label ml-3">
+                                    <input class="form-radio-input" type="radio" name="optionsRadios" value="P" th:field="*{jenisKelamin}">
+                                    <span class="form-radio-sign">Perempuan</span>
+                                </label>
+                            </div>
+                            <div class="form-group form-group-default">
+                                <label>Kota</label>
+                                <input type="text" class="form-control" name="address" th:field="*{kota}">
+                            </div>
+                            <div class="form-group form-group-default">
+                                <label>Alamat</label>
+                                <textarea type="text" class="form-control" name="address" th:field="*{alamat}"></textarea>
+                            </div>
+                            <div class="form-group form-group-default">
+                                <label for="noTelepon">No. Telepon</label>
+                                <input type="text" th:field="*{noTelepon}" id="noTelepon" placeholder="Nomor Telepon"
+                                       th:class="'form-control '+ ${#fields.hasErrors('noTelepon') ? 'is-invalid' : ''}">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="headline" role="tabpanel" aria-labelledby="home-tab">
+                        <form th:action="@{/account/pelamar/info}" method="post" enctype="multipart/form-data" >
+                            <div class="form-group">
+                                <label for="summernote">Headline</label>
+                                <textarea id="summernote" name="headline" th:field="${pelamar.headline}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Dokumen CV</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="file_cv">
+                                    <label class="custom-file-label font-normal" th:text="${pelamar.dokumenCv}">Pilih Dokumen CV</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="tab-pane fade" id="keamanan" role="tabpanel" aria-labelledby="profile-tab">
                         <form th:action="@{/account/security}" th:method="post">
@@ -168,6 +186,21 @@
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    $('#summernote').summernote({
+        placeholder: 'Tulis Headline',
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+        tabsize: 1,
+        // toolbar: true,
+        height: 200
+    });
+
+    // var text = "<p>Hello</p>";
+    // $('#summernote').summernote('code',text);
+    var vNavimg = document.getElementsByClassName("note-toolbar-wrapper");
+    for(var i=0;i<vNavimg.length;i++){
+        vNavimg[i].style.removeProperty("height");
+    }
 </script>
 </body>
 </html>
