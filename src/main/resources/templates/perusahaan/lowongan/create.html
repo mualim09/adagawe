@@ -56,9 +56,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="keterangan">Keterangan</label>
-                        <textarea th:field="*{keterangan}" id="keterangan" placeholder="Keterangan"
-                                  th:class="'form-control '+ ${#fields.hasErrors('keterangan') ? 'is-invalid' : ''}"></textarea>
+                        <label for="summernote">Keterangan</label>
+                        <textarea id="summernote" th:field="*{keterangan}"></textarea>
+<!--                        <textarea th:field="*{keterangan}" id="keterangan" placeholder="Keterangan"-->
+<!--                                  th:class="'form-control '+ ${#fields.hasErrors('keterangan') ? 'is-invalid' : ''}"></textarea>-->
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('keterangan')}" th:errors="*{keterangan}"></div>
                     </div>
                     <div class="row form-group">
@@ -69,9 +70,10 @@
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('pengalamanKerja')}" th:errors="*{pengalamanKerja}"></div>
                         </div>
                         <div class="col-md-8">
-                            <label for="keahlian">Keahlian</label>
-                            <input type="text" th:field="*{keahlian}" id="keahlian" placeholder="Keahlian"
-                                   th:class="'form-control '+ ${#fields.hasErrors('keahlian') ? 'is-invalid' : ''}">
+                            <label>Keahlian</label>
+                            <input type="text" value="" th:field="*{keahlian}" data-role="tagsinput" placeholder="Keahlian" />
+<!--                            <input type="text" th:field="*{keahlian}" id="keahlian" placeholder="Keahlian"-->
+<!--                                   th:class="'form-control '+ ${#fields.hasErrors('keahlian') ? 'is-invalid' : ''}">-->
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('keahlian')}" th:errors="*{keahlian}"></div>
                         </div>
                     </div>
@@ -101,6 +103,14 @@
         </div>
     </div>
 </div>
+<script layout:fragment="scripts">
+    $('#summernote').summernote({
+        placeholder: 'Tulis Keterangan',
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+        tabsize: 1,
+        height: 300
+    });
+</script>
 </body>
 
 </html>

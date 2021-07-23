@@ -69,9 +69,10 @@
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('pengalamanKerja')}" th:errors="*{pengalamanKerja}"></div>
                         </div>
                         <div class="col-md-8">
-                            <label for="keahlian">Keahlian</label>
-                            <input type="text" th:field="*{keahlian}" id="keahlian" placeholder="Keahlian"
-                                   th:class="'form-control '+ ${#fields.hasErrors('keahlian') ? 'is-invalid' : ''}">
+                            <label>Keahlian</label>
+                            <input type="text" value="" th:field="*{keahlian}" data-role="tagsinput" placeholder="Keahlian" />
+<!--                            <input type="text" th:field="*{keahlian}" id="keahlian" placeholder="Keahlian"-->
+<!--                                   th:class="'form-control '+ ${#fields.hasErrors('keahlian') ? 'is-invalid' : ''}">-->
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('keahlian')}" th:errors="*{keahlian}"></div>
                         </div>
                     </div>
