@@ -18,6 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+/**
+ * Created on June, 2021
+ * @author RPS
+ * @status FINAL
+ */
 @Controller
 public class AdminController {
 
@@ -37,45 +42,9 @@ public class AdminController {
         model.addAttribute("total_lowongan", adagaweService.findTotalLamaran());
 
         model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-//        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession());
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
 
         return "/admin/dashboard";
-    }
-
-    @GetMapping("/admin/create")
-    public String getCreate(Model model) {
-        model.addAttribute("userAdmin", new UserAdmin());
-
-        return "/admin/create";
-    }
-
-    @PostMapping("/admin/create")
-    public String postCreate(RedirectAttributes redirectAttributes,
-                             @ModelAttribute("userAdmin") @Valid UserAdmin userAdmin, BindingResult result, Model model) {
-
-        if (result.hasErrors()) {
-            return "/admin/create";
-        }
-
-        UserLogin user = new UserLogin();
-        user.setEmail(userAdmin.getEmail());
-        user.setPassword(userAdmin.getPassword());
-        user.setUserRole(UserRole.Admin);
-        user.setNama(userAdmin.getNamaAdmin());
-        user.setFotoProfil("default-admin.png");
-        userService.signUpUser(user);
-
-        Admin admin = new Admin();
-        admin.setStatus(1);
-        admin.setJenisKelamin(userAdmin.getJenisKelamin());
-        admin.setNoTelepon(userAdmin.getNoTelepon());
-        admin.setTanggalLahir(userAdmin.getTanggalLahir());
-        adminService.save(admin);
-        //jabatanService.save(jabatan);
-
-        //redirectAttributes.addFlashAttribute("message", "Jabatan berhasil ditambah.");
-        return "redirect:/admin/view";
     }
 
     @GetMapping("/admin/profile")
@@ -89,26 +58,37 @@ public class AdminController {
         return "/admin/profile/index";
     }
 
-//    @GetMapping("/admin/profile/security")
-//    public String getSecurityAdmin(Model model) {
+//    @GetMapping("/admin/create")
+//    public String getCreate(Model model) {
+//        model.addAttribute("userAdmin", new UserAdmin());
 //
-//        UserLogin userLogin = adagaweService.findUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
-//        model.addAttribute("userLogin", userLogin);
-//        return "/admin/profile/security";
+//        return "/admin/create";
 //    }
 //
-//    @PostMapping("/admin/profile/security")
-//    public String postSecurityAdmin(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
+//    @PostMapping("/admin/create")
+//    public String postCreate(RedirectAttributes redirectAttributes,
+//                             @ModelAttribute("userAdmin") @Valid UserAdmin userAdmin, BindingResult result, Model model) {
 //
-//        //userService.updateUserLogin(userLogin);
-//        return "/admin/profile/index";
-//    }
+//        if (result.hasErrors()) {
+//            return "/admin/create";
+//        }
 //
-//    @GetMapping("/admin/profile/edit")
-//    public String getEditProfile(Model model) {
+//        UserLogin user = new UserLogin();
+//        user.setEmail(userAdmin.getEmail());
+//        user.setPassword(userAdmin.getPassword());
+//        user.setUserRole(UserRole.Admin);
+//        user.setNama(userAdmin.getNamaAdmin());
+//        user.setFotoProfil("default-admin.png");
+//        userService.signUpUser(user);
 //
-//        Admin admin = adminService.getAdminById(1);
-//        model.addAttribute("admin", admin);
-//        return "/admin/profile/edit";
+//        Admin admin = new Admin();
+//        admin.setStatus(1);
+//        admin.setJenisKelamin(userAdmin.getJenisKelamin());
+//        admin.setNoTelepon(userAdmin.getNoTelepon());
+//        admin.setTanggalLahir(userAdmin.getTanggalLahir());
+//        adminService.save(admin);
+//
+//        //redirectAttributes.addFlashAttribute("message", "Jabatan berhasil ditambah.");
+//        return "redirect:/admin/view";
 //    }
 }
