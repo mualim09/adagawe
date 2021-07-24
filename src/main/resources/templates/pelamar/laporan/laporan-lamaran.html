@@ -45,8 +45,8 @@
                 <td>Kota Perusahaan</td>
                 <td>Tanggal</td>
                 <td>Status</td>
-                <td>Nilai Uji Kompetensi</td>
-                <td>Nilai Wawancara</td>
+                <td id="nilaiUjiKomCell">Nilai Uji Kompetensi</td>
+                <td id="nilaiWawancaraCell">Nilai Wawancara</td>
               </tr>
             </thead>
             <tbody>
@@ -163,27 +163,33 @@
           const api = this.api();
 
           // view page column
-          let columnData = api.column(6, {page: 'current'}).data();
+          const nilaiUjikomCell = api.column('#nilaiUjiKomCell').index();
+          const nilaiWawancaraCell = api.column('#nilaiWawancaraCell').index();
+          console.log(nilaiUjikomCell, nilaiWawancaraCell);
+
+          let columnData = api.column(nilaiUjikomCell, {page: 'current'}).data();
           const ujiKompetensiCount = columnData.filter(x => !isNaN(x)).length;
           let theColumnPage = sumNumber(columnData);
 
-          $(`tr:eq(0) th:eq(6)`, api.table().footer()).html(
+          $(`tr:eq(0) th:eq(${nilaiUjikomCell})`, api.table().footer()).html(
                   parseFloat(theColumnPage / ujiKompetensiCount).toFixed(2)
           );
 
-          columnData = api.column(7, { page: 'current' }).data();
+          columnData = api.column(nilaiWawancaraCell, { page: 'current' }).data();
           const wawancaraCount = columnData.filter(x => !isNaN(x)).length;
           theColumnPage = sumNumber(columnData);
 
-          $(`tr:eq(0) th:eq(7)`, api.table().footer()).html(
+          $(`tr:eq(0) th:eq(${nilaiWawancaraCell})`, api.table().footer()).html(
                   theColumnPage / wawancaraCount
           );
         },
         initComplete: function () {
           let columnCount = 0;
           const api = this.api();
+          const nilaiUjikomCell = api.column('#nilaiUjiKomCell').index();
+          const nilaiWawancaraCell = api.column('#nilaiWawancaraCell').index();
           api.columns().every(function () {
-            if (columnCount !== 0 && columnCount !== 6 && columnCount !== 7) {
+            if (columnCount !== 0 && columnCount !== nilaiUjikomCell && columnCount !== nilaiWawancaraCell) {
               const column = this;
               const select = $('<select class="form-control form-control-sm height-unset"><option value=""></option></select>')
                       .appendTo($(`tr:eq(1) th:eq(${columnCount})`, api.table().footer()).empty())

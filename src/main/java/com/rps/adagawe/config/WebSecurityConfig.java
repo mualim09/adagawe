@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/masuk/**",
 						"/register/**",
 						"/css/**",
+						"/perusahaan/laporan-lowongan",
 						"/js/**",
 						"/assets/**",
 						"/uploads/**",

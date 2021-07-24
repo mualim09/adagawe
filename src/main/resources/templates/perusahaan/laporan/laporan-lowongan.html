@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      lang="en"
+      layout:decorate="~{layout/perusahaan}">
+<head>
+    <meta charset="UTF-8">
+    <title>Laporan Lamaran</title>
+</head>
+
+<body>
+
+<div layout:fragment="header">
+    <h4 class="page-title">Akun</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Laporan Lamaran</a>
+        </li>
+    </ul>
+</div>
+
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">Laporan Lamaran</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="w-100 display table table-striped table-hover" id="datatables">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Lowongan</td>
+                            <td>Jenis Pegawai</td>
+                            <td>Jenjang Minimal</td>
+                            <td id="gajiMinimalCell">Gaji Minimal</td>
+                            <td id="gajiMaksimalCell">Gaji Maksimal</td>
+                            <td id="jumlahPelamarCell">Jumlah Pelamar</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="lowonganLamaran, iter : ${lowonganLamarans}">
+                            <td th:text="${iter.index + 1}"></td>
+                            <td th:text="${lowonganLamaran.lowongan.judulLowongan}"></td>
+                            <td th:text="${lowonganLamaran.lowongan.jenisPegawai.namajenisPegawai}"></td>
+                            <td th:switch="${lowonganLamaran.lowongan.jenjangMinimal}">
+                                <th:block th:case="1">SD/MI</th:block>
+                                <th:block th:case="2">SMP/MTs</th:block>
+                                <th:block th:case="3">SMA/MA/SMK</th:block>
+                                <th:block th:case="4">D3</th:block>
+                                <th:block th:case="5">S1/D4</th:block>
+                                <th:block th:case="6">S2</th:block>
+                                <th:block th:case="7">S3</th:block>
+                            </td>
+                            <td th:text="${'Rp' + #numbers.formatDecimal(lowonganLamaran.lowongan.gajiMinimal, 0, 'POINT', 0, 'COMMA')}"></td>
+                            <td th:text="${'Rp' + #numbers.formatDecimal(lowonganLamaran.lowongan.gajiMaksimal, 0, 'POINT', 0, 'COMMA')}"></td>
+                            <td th:text="${lowonganLamaran.jumlahPelamar}"></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Rata-rata</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Lowongan</th>
+                            <th>Jenis Pegawai</th>
+                            <th>Jenjang Minimal</th>
+                            <th>Gaji Minimal</th>
+                            <th>Gaji Maksimal</th>
+                            <th>Jumlah Pelamar</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+    <script src="//cdn.datatables.net/plug-ins/1.10.22/api/sum().js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#datatables').DataTable({
+                dom: '<"row"<"col-lg-4"l><"col-lg-4"B><"col-lg-4"f>>rtip',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: '<i class="fa fa-copy"></i> Copy',
+                        exportOptions: {
+                            columns: ':visible',
+                        }
+                    }, {
+                        extend: 'excel',
+                        text: '<i class="fa fa-file-excel"></i> Excel',
+                        title: 'Data Destinasi',
+                        footer: true,
+                        filename: 'Data Destinasi ' + moment().format('DD-MM-YYYY'),
+                        exportOptions: {
+                            columns: ':visible',
+                        }
+                    }, {
+                        extend: 'pdf',
+                        text: '<i class="fa fa-file-pdf"></i> PDF',
+                        title: 'Data Destinasi',
+                        footer: true,
+                        filename: 'Data Destinasi ' + moment().format('DD-MM-YYYY'),
+                        exportOptions: {
+                            columns: ':visible',
+                        }
+                    }, {
+                        extend: 'print',
+                        text: '<i class="fa fa-print"></i> Print',
+                        title: 'Data Destinasi',
+                        footer: true,
+                        filename: 'Data Destinasi ' + moment().format('DD-MM-YYYY'),
+                        exportOptions: {
+                            columns: ':visible',
+                        }
+                    }, {
+                        extend: 'colvis',
+                        text: '<i class="fa fa-eye"></i>'
+                    }
+                ],
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10', '25', '50', 'All']
+                ],
+                "language": {
+                    "lengthMenu": "_MENU_ Data per halaman",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+                    "zeroRecords": "Tidak ada data.",
+                    "search": "Pencarian :",
+                    "infoFiltered": "(tersaring dari total _MAX_ data)",
+                    "paginate": {
+                        "previous": "Sebelumnya",
+                        "next": "Selanjutnya"
+                    }
+                },
+                drawCallback: function () {
+                    const api = this.api();
+
+                    // view page column
+                    const gajiMinimalCell = api.column('#gajiMinimalCell').index();
+                    const gajiMaksimalCell = api.column('#gajiMaksimalCell').index();
+                    const jumlahPelamarCell = api.column('#jumlahPelamarCell').index();
+
+                    let columnData = api.column(gajiMinimalCell, {page: 'current'}).data();
+                    const rowCount = columnData.count();
+                    let theColumnPage = sumCurrency(columnData);
+
+                    $(`tr:eq(0) th:eq(${gajiMinimalCell})`, api.table().footer()).html(
+                        formatter.format(Math.round(theColumnPage / rowCount))
+                    );
+
+                    columnData = api.column(gajiMaksimalCell, { page: 'current' }).data();
+                    theColumnPage = sumCurrency(columnData);
+
+                    $(`tr:eq(0) th:eq(${gajiMaksimalCell})`, api.table().footer()).html(
+                        formatter.format(Math.round(theColumnPage / rowCount))
+                    );
+
+                    columnData = api.column(jumlahPelamarCell, { page: 'current' }).data();
+                    theColumnPage = sumCurrency(columnData);
+
+                    $(`tr:eq(0) th:eq(${jumlahPelamarCell})`, api.table().footer()).html(
+                        parseFloat(theColumnPage / rowCount).toFixed(2)
+                    );
+
+
+                    $(`tr:eq(1) th:eq(${jumlahPelamarCell})`, api.table().footer()).html(
+                        theColumnPage
+                    );
+                },
+                initComplete: function () {
+                    let columnCount = 0;
+                    const api = this.api();
+                    const gajiMinimalCell = api.column('#gajiMinimalCell').index();
+                    const gajiMaksimalCell = api.column('#gajiMaksimalCell').index();
+                    const jumlahPelamarCell = api.column('#jumlahPelamarCell').index();
+                    api.columns().every(function () {
+                        if (columnCount !== 0 && columnCount !== gajiMinimalCell
+                            && columnCount !== gajiMaksimalCell && columnCount !== jumlahPelamarCell) {
+                            const column = this;
+                            const select = $('<select class="form-control form-control-sm height-unset"><option value=""></option></select>')
+                                .appendTo($(`tr:eq(2) th:eq(${columnCount})`, api.table().footer()).empty())
+                                .on('change', function () {
+                                    const val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        }
+                        columnCount++;
+                    });
+                }
+            });
+        });
+    </script>
+
+</th:block>
+
+</body>
+</html>

@@ -1,9 +1,7 @@
 package com.rps.adagawe.controller;
 
-import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
-import com.rps.adagawe.helper.FileUploadHelper;
 import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +36,7 @@ public class PelamarController {
     AdagaweService adagaweService;
 
     @Autowired
-    PelamarLamaranService pelamarLamaranService;
+    LaporanService laporanService;
 
 
     // Prefix URL
@@ -116,7 +112,7 @@ public class PelamarController {
     @GetMapping("/pelamar/laporan-lamaran")
     public String getLaporan(Model model, HttpServletRequest request) {
         Pelamar pelamar = AdagaweMethods.getPelamarBySession(adagaweService);
-        List<PelamarLamaran> pelamarLamaranList = pelamarLamaranService.getByIdPelamar(pelamar.getId());
+        List<PelamarLamaran> pelamarLamaranList = laporanService.getLamaranByIdPelamar(pelamar.getId());
         System.out.println("Pelamar Lamaran " + pelamarLamaranList);
         model.addAttribute("pelamarLamarans", pelamarLamaranList);
 
