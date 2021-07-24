@@ -10,3 +10,19 @@
 .bg-img-profile {
     background-image: url("../../assets/img/blogpost.jpg");
 }
+
+.height-unset {
+    height: unset !important;
+}
+
+.dt-button-collection .dropdown-menu {
+    position: relative;
+    width: 100%;
+}
+
+.dt-button-collection .dropdown-menu .dt-button.active {
+    background: #6861CE !important;
+}
+div.dataTables_wrapper div.dataTables_length select {
+    width: 75px !important;
+}

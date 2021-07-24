@@ -4,10 +4,7 @@ import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
-import com.rps.adagawe.model.JenisPegawai;
-import com.rps.adagawe.model.Pelamar;
-import com.rps.adagawe.model.Perusahaan;
-import com.rps.adagawe.model.UserLogin;
+import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class PelamarController {
@@ -40,6 +38,9 @@ public class PelamarController {
 
     @Autowired
     AdagaweService adagaweService;
+
+    @Autowired
+    PelamarLamaranService pelamarLamaranService;
 
 
     // Prefix URL
@@ -110,5 +111,18 @@ public class PelamarController {
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/pelamar/profile/setting";
+    }
+
+    @GetMapping("/pelamar/laporan-lamaran")
+    public String getLaporan(Model model, HttpServletRequest request) {
+        Pelamar pelamar = AdagaweMethods.getPelamarBySession(adagaweService);
+        List<PelamarLamaran> pelamarLamaranList = pelamarLamaranService.getByIdPelamar(pelamar.getId());
+        System.out.println("Pelamar Lamaran " + pelamarLamaranList);
+        model.addAttribute("pelamarLamarans", pelamarLamaranList);
+
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
+        return "/pelamar/laporan/laporan-lamaran";
     }
 }
