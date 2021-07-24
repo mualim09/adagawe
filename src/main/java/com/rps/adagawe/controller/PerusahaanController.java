@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PerusahaanController {
@@ -25,6 +26,12 @@ public class PerusahaanController {
 
     @Autowired
     AdagaweService adagaweService;
+
+    @Autowired
+    JenisPegawaiService jenisPegawaiService;
+
+    @Autowired
+    LowonganService lowonganService;
 
     @Autowired
     VerifikasiPerusahaanService verifikasiPerusahaanService;
@@ -47,12 +54,15 @@ public class PerusahaanController {
             return "redirect:/perusahaan/information";
         }
 
-//        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
-//        model.addAttribute("total_lowongan_aktif", adagaweService.findTotalLowonganAktifByPerusahaan(idPerusahaan));
-//        model.addAttribute("total_lowongan", adagaweService.findTotalLowonganByPerusahaan(idPerusahaan));
+        Perusahaan data = AdagaweMethods.getPerusahaanBySession(adagaweService);
+        List<Lowongan> lowongans = lowonganService.getLowonganByIdPerusahaan(data.getId());
+        model.addAttribute("total_lowongan_aktif", AdagaweMethods.filterLowongan(lowongans, 1).size());
+        model.addAttribute("total_lowongan_tutup", AdagaweMethods.filterLowongan(lowongans, 0).size());
+        model.addAttribute("total_lowongan", lowongans.size());
+        model.addAttribute("verify", true);
+        model.addAttribute("data_jenis_pegawai", AdagaweMethods.getBarChartJenisPegawaiByPerusahaan(jenisPegawaiService, lowonganService, data.getId()));
 
         model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-//        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
 
         return "/perusahaan/dashboard";

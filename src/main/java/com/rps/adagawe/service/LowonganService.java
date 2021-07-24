@@ -20,13 +20,17 @@ public class LowonganService {
         return (List<Lowongan>) lowonganRepository.getLowonganByStatus();
     }
 
+    public List<Lowongan> getAllData() {
+        return (List<Lowongan>) lowonganRepository.findAll();
+    }
+
     public Lowongan getLowonganById(Integer id) {
         return lowonganRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Lowongan Id:" + id));
     }
 
     public List<Lowongan> getLowonganByIdPerusahaan(Integer id) {
-        return lowonganRepository.getLowonganByIdPerusahaanDesc(id);
+        return lowonganRepository.getLowonganByIdPerusahaan(id);
     }
 
     public void save(Lowongan lowongan) {

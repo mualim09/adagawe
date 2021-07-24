@@ -1,20 +1,21 @@
 package com.rps.adagawe.helper;
 
 import com.rps.adagawe.model.*;
-import com.rps.adagawe.service.AdminService;
-import com.rps.adagawe.service.PelamarService;
-import com.rps.adagawe.service.PerusahaanService;
-import org.dom4j.rule.Mode;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.rps.adagawe.service.JenisPegawaiService;
+import com.rps.adagawe.service.LowonganService;
+import com.rps.adagawe.service.VerifikasiPerusahaanService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created on June, 2021
@@ -124,5 +125,70 @@ public class AdagaweMethods {
         }
 
         return myList;
+    }
+
+    public static List<Lowongan> filterLowongan(List<Lowongan> lowongans, int hasil) {
+        List<Lowongan> myList = new ArrayList<>();
+
+        for (Lowongan lowongan: lowongans) {
+            if (lowongan.getStatus() == hasil) {
+                myList.add(lowongan);
+            }
+        }
+
+        return myList;
+    }
+
+    public static Integer filterLowonganJenisPegawai(List<Lowongan> lowongans, int id) {
+        List<Lowongan> myList = new ArrayList<>();
+
+        for (Lowongan lowongan : lowongans) {
+            if (lowongan.getJenisPegawai().getId() == id) {
+                myList.add(lowongan);
+            }
+        }
+
+        return myList.size();
+    }
+
+    public static Map<String, Integer> getBarChartVerifikasi(VerifikasiPerusahaanService service) {
+        List<VerifikasiPerusahaan> myList = service.getAll();
+        Map<String, Integer> graphData = new TreeMap<>();
+
+        graphData.put("Menunggu Verifikasi", AdagaweMethods.filterVerifikasiPerusahaan(myList, 0).size());
+        graphData.put("Terverifikasi", AdagaweMethods.filterVerifikasiPerusahaan(myList, 1).size());
+        graphData.put("Verifikasi Ditolak", AdagaweMethods.filterVerifikasiPerusahaan(myList, 2).size());
+
+        return graphData;
+    }
+
+    public static Map<String, Integer> getBarChartJenisPegawai(JenisPegawaiService jpService, LowonganService lService) {
+        List<JenisPegawai> listJp = jpService.getAll();
+        List<Lowongan> myList = lService.getAllData();
+        Map<String, Integer> graphData = new TreeMap<>();
+
+        for (int i = 0; i < listJp.size(); i++) {
+            int value = AdagaweMethods.filterLowonganJenisPegawai(myList, listJp.get(i).getId());
+            if (value > 0) {
+                graphData.put(listJp.get(i).getNamajenisPegawai(), value);
+            }
+        }
+
+        return graphData;
+    }
+
+    public static Map<String, Integer> getBarChartJenisPegawaiByPerusahaan(JenisPegawaiService jpService, LowonganService lService, int id) {
+        List<JenisPegawai> listJp = jpService.getAll();
+        Map<String, Integer> graphData = new TreeMap<>();
+        List<Lowongan> myList = lService.getLowonganByIdPerusahaan(id);
+
+        for (int i = 0; i < listJp.size(); i++) {
+            int value = AdagaweMethods.filterLowonganJenisPegawai(myList, listJp.get(i).getId());
+            if (value > 0) {
+                graphData.put(listJp.get(i).getNamajenisPegawai(), value);
+            }
+        }
+
+        return graphData;
     }
 }
