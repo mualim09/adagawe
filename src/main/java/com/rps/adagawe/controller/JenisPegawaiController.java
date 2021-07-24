@@ -54,6 +54,7 @@ public class JenisPegawaiController {
                              @ModelAttribute("jenispegawai") @Valid JenisPegawai jenispegawai, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
+            model.addAttribute("userLogin",AdagaweMethods.getUserLoginBySession(adagaweService));
             model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
             return "/admin/jenispegawai/create";
         }
@@ -81,6 +82,7 @@ public class JenisPegawaiController {
 
         if (result.hasErrors()) {
             jenispegawai.setId(id);
+            model.addAttribute("userLogin",AdagaweMethods.getUserLoginBySession(adagaweService));
             return "/admin/jenispegawai/edit";
         }
 
