@@ -37,11 +37,14 @@ public class VerifikasiPerusahaanController {
 
     @GetMapping("/admin/verifikasi/index")
     public String index(Model model, HttpServletRequest request) {
-        List<VerifikasiPerusahaan> verifikasiperusahaans = verifikasiPerusahaanService.getAll();
-        model.addAttribute("verifikasiperusahaans", verifikasiperusahaans);
-        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        List<VerifikasiPerusahaan> listData = verifikasiPerusahaanService.getAll();
+        model.addAttribute("vp_status_0", AdagaweMethods.filterVerifikasiPerusahaan(listData, 0));
+        model.addAttribute("vp_status_1", AdagaweMethods.filterVerifikasiPerusahaan(listData, 1));
+        model.addAttribute("vp_status_2", AdagaweMethods.filterVerifikasiPerusahaan(listData, 2));
 
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
         return "/admin/verifikasi/index";
     }
 

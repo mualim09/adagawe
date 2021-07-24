@@ -50,7 +50,6 @@ public class LowonganController {
         }
 
         Perusahaan obj = AdagaweMethods.getPerusahaanBySession(adagaweService);
-
         model.addAttribute("lowongans", lowonganService.getLowonganByIdPerusahaan(obj.getId()));
 
         model.addAttribute("userLogin", obj.getUserLogin());
@@ -64,25 +63,25 @@ public class LowonganController {
         model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
         model.addAttribute("lowongan", new Lowongan());
 
-        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/lowongan/create";
     }
 
     @PostMapping("/perusahaan/lowongan/create")
-    public String postCreate(RedirectAttributes redirectAttributes,  HttpServletRequest request,
+    public String postCreate(RedirectAttributes redirectAttributes, HttpServletRequest request,
                              @ModelAttribute("lowongan") @Valid Lowongan lowongan, BindingResult result, Model model) {
+
         if (result.hasErrors()) {
             model.addAttribute("lowongan", lowongan);
-            model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
-            model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+
+            model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
             model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
             return "/perusahaan/lowongan/create";
         }
 
         lowongan.setIdPerusahaan(AdagaweMethods.getPerusahaanBySession(adagaweService).getId());
-
         lowonganService.save(lowongan);
 
         redirectAttributes.addFlashAttribute("message", "Lowongan berhasil ditambah.");
@@ -94,16 +93,36 @@ public class LowonganController {
         model.addAttribute("jenisPegawais", jenisPegawaiService.findJenisPegawaiByRowStatus());
         model.addAttribute("lowongan", lowonganService.getLowonganById(id));
 
-        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/lowongan/edit";
     }
 
+    @PostMapping("/perusahaan/lowongan/edit/{id}")
+    public String postEdit(RedirectAttributes redirectAttributes, @PathVariable("id") Integer id,
+                           HttpServletRequest request, @ModelAttribute("lowongan") @Valid Lowongan lowongan, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("lowongan", lowongan);
+
+            model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+            model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+            return "/perusahaan/lowongan/edit";
+        }
+
+//        lowongan.setIdPerusahaan(AdagaweMethods.getPerusahaanBySession(adagaweService).getId());
+
+        lowonganService.save(lowongan);
+
+        redirectAttributes.addFlashAttribute("message", "Lowongan berhasil diubah.");
+        return "redirect:/perusahaan/lowongan";
+    }
+
     @GetMapping("/perusahaan/lowongan/view/{id}")
     public String getView(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 
-        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/lowongan/view";
@@ -123,5 +142,16 @@ public class LowonganController {
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/lowongan/detail";
+    }
+
+    @GetMapping("/perusahaan/lowongan/delete/{id}")
+    public String getDelete(RedirectAttributes redirectAttributes, @PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+        Lowongan lowongan = lowonganService.getLowonganById(id);
+        lowongan.setStatus(0);
+        lowonganService.save(lowongan);
+
+        redirectAttributes.addFlashAttribute("message_success", "Lowongan berhasil ditutup.");
+
+        return "redirect:/perusahaan/lowongan";
     }
 }

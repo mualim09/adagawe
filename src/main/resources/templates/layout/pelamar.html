@@ -22,7 +22,7 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/atlantis.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/atlantis.css}">
     <link rel="stylesheet" th:href="@{/assets/css/style.css}">
 
     <!-- Optional Section -->
@@ -59,18 +59,21 @@
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                             <div class="avatar-sm">
-                                <img th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}" alt="..." class="avatar-img rounded-circle">
+                                <img th:if="${userLogin == null}" th:src="@{'/uploads/foto_profil/default-employee.png'}" alt="..." class="avatar-img rounded-circle img-thumbnail">
+                                <img th:unless="${userLogin == null}" th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}" alt="..." class="avatar-img rounded-circle img-thumbnail">
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-user animated fadeIn">
                             <div class="dropdown-user-scroll scrollbar-outer">
                                 <li>
                                     <div class="user-box">
-                                        <div class="avatar-lg">
-                                            <img th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}" alt="image profile" class="avatar-img rounded">
+                                        <div class="avatar-sm">
+                                            <img th:if="${userLogin == null}" th:src="@{'/uploads/foto_profil/default-employee.png'}" alt="..." class="avatar-img rounded">
+                                            <img th:unless="${userLogin == null}" th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}" alt="..." class="avatar-img rounded">
                                         </div>
-                                        <div class="u-text">
-                                            <h4 th:text="${userLogin.nama}"></h4>
+                                        <div class="u-text py-1">
+                                            <h4 th:if="${userLogin == null}" th:text="@{'Unnamed Employee'}"></h4>
+                                            <h4 th:unless="${userLogin == null}" th:text="${userLogin.nama}"></h4>
                                         </div>
                                     </div>
                                 </li>
@@ -97,13 +100,15 @@
             <div class="sidebar-content">
                 <div class="user">
                     <div class="avatar-sm float-left mr-2">
-                        <img th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}" alt="..." class="avatar-img rounded-circle">
+                        <img th:if="${userLogin == null}" th:src="@{'/uploads/foto_profil/default-employee.png'}" alt="Profile Picture" class="avatar-img rounded-circle img-thumbnail">
+                        <img th:unless="${userLogin == null}" th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}" alt="Profile Picture" class="avatar-img rounded-circle img-thumbnail">
                     </div>
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-                                    <span th:text="${userLogin.nama}"></span>
-									<span class="user-level">Administrator</span>
+                                    <span th:if="${userLogin == null}" th:text="${'Unnamed Employee'}"></span>
+									<span th:unless="${userLogin == null}" th:text="${userLogin.nama}"></span>
+									<span class="user-level">Pelamar</span>
 									<span class="caret"></span>
 								</span>
                         </a>
@@ -131,8 +136,8 @@
                     </div>
                 </div>
                 <ul class="nav nav-primary">
-                    <li th:class="'nav-item ' + ${url == 'admin' ? 'active' : ''}" >
-                        <a href="/admin" class="collapsed" aria-expanded="false">
+                    <li th:class="'nav-item ' + ${url == 'dashboard' ? 'active' : ''}" >
+                        <a href="/pelamar/dashboard" class="collapsed" aria-expanded="false">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
                         </a>
@@ -143,28 +148,28 @@
 							</span>
                         <h4 class="text-section">Daftar Menu</h4>
                     </li>
-                    <li th:class="'nav-item ' + ${url == 'jenispegawai' ? 'active' : ''}">
-                        <a href="/admin/jenispegawai">
-                            <i class="fas fa-layer-group"></i>
-                            <p>Jenis Pegawai</p>
-                        </a>
-                    </li>
-                    <li th:class="'nav-item ' + ${url == 'jabatan' ? 'active' : ''}">
-                        <a href="/admin/jabatan">
-                            <i class="fas fa-th-list"></i>
-                            <p>Jabatan</p>
-                        </a>
-                    </li>
-                    <li th:class="'nav-item ' + ${url == 'verifikasi' ? 'active' : ''}">
-                        <a href="/admin/verifikasi/index">
-                            <i class="fas fa-pen-square"></i>
-                            <p>Verifikasi Perusahaan</p>
+                    <li th:class="'nav-item ' + ${url == 'lowongan' ? 'active' : ''}">
+                        <a href="/lowongan">
+                            <i class="fas fa-search"></i>
+                            <p>Cari Kerja</p>
                         </a>
                     </li>
                     <li th:class="'nav-item ' + ${url == 'laporan' ? 'active' : ''}">
-                        <a href="/admin/laporan">
+                        <a href="/pelamar/laporan">
                             <i class="far fa-chart-bar"></i>
                             <p>Laporan</p>
+                        </a>
+                    </li>
+                    <li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+                        <h4 class="text-section">Pengaturan</h4>
+                    </li>
+                    <li th:class="'nav-item ' + ${url == 'setting' ? 'active' : ''}">
+                        <a href="/pelamar/setting">
+                            <i class="fas fa-sliders-h"></i>
+                            <p>Akun</p>
                         </a>
                     </li>
                 </ul>
@@ -206,8 +211,10 @@
 <script th:src="@{/assets/js/plugin/datatables/datatables.min.js}"></script>
 <!-- Atlantis JS -->
 <script th:src="@{/assets/js/atlantis.min.js}"></script>
-<!-- Atlantis DEMO methods, don't include it in your project! -->
-<!--<script src="../../assets/js/setting-demo2.js"></script>-->
+<!-- Tags Input JS -->
+<script th:src="@{/assets/js/bootstrap-tagsinput.js}"></script>
+<!-- Summernote -->
+<script th:src="@{/assets/js/summernote-bs4.min.js}"></script>
 
 <script >
     $(document).ready(function() {

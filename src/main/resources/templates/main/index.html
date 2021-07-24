@@ -153,7 +153,7 @@
                       class="img-company mr-3" th:alt="${loker.perusahaan.userLogin.nama}">
               <div class="media-body">
                 <a th:href="@{/lowongan/{id}(id=${loker.id})}" class="card-job-title" th:text="${loker.judulLowongan}"></a>
-                <a href="#" class="card-job-subtitle" th:text="${loker.perusahaan.userLogin.nama}"></a>
+                <a th:href="@{/loker/perusahaan/view/{id}(id=${loker.perusahaan.id})}" class="card-job-subtitle" th:text="${loker.perusahaan.userLogin.nama}"></a>
               </div>
             </div>
 

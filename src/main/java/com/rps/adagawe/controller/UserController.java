@@ -34,21 +34,16 @@ public class UserController {
 
 	@GetMapping("/register")
 	public String getRegister(Model model, HttpServletRequest request) {
-
 		model.addAttribute("user", new UserLogin());
+
 		return "/main/register";
 	}
 
 	@PostMapping("/register")
 	public String postRegister(Model model, UserLogin user) {
-
 		user.setUserRole(UserRole.Perusahaan);
 		user.setFotoProfil(AdagaweConstants.FOTO_PERUSAHAAN_DEFAULT);
 		userService.signUpUser(user);
-
-//		Perusahaan perusahaan = new Perusahaan();
-//		perusahaan.setIdUserLogin(user.getId());
-//		perusahaanService.save(perusahaan);
 
 		return "redirect:/masuk";
 	}
@@ -56,6 +51,7 @@ public class UserController {
 	@GetMapping("/masuk")
 	public String signIn(Model model) {
 		model.addAttribute("user", new UserLogin());
+
 		return "main/login";
 	}
 
@@ -67,12 +63,12 @@ public class UserController {
 	@GetMapping("/daftar")
 	public String signUpPage(Model model, UserLogin user) {
 		model.addAttribute("user", new UserLogin());
+
 		return "main/register";
 	}
 
 	@PostMapping("/daftar")
 	public String signUp(UserLogin user) {
-
 		userService.signUpUser(user);
 
 		return "redirect:/masuk";
@@ -80,7 +76,6 @@ public class UserController {
 
 	@GetMapping("/daftar/confirm")
 	public String confirmMail(@RequestParam("token") String token) {
-
 		ConfirmationToken confirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
 
 		if (confirmationToken != null) userService.confirmUser(confirmationToken);

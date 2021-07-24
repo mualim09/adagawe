@@ -3601,7 +3601,7 @@ label {
   margin-bottom: .5rem;
   color: #495057;
   font-weight: 600;
-  font-size: 1rem;
+  /*font-size: 1rem;*/
   white-space: nowrap; }
 
 .form-group-default {
@@ -14387,4 +14387,8 @@ body {
 .label-info {
   background: #1572E8 !important;
   border-color: #1572E8 !important;
+}
+
+.note-toolbar-wrapper {
+  height: 100%; !important;
 }

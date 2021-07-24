@@ -60,7 +60,7 @@
                         <textarea id="summernote" th:field="*{keterangan}"></textarea>
 <!--                        <textarea th:field="*{keterangan}" id="keterangan" placeholder="Keterangan"-->
 <!--                                  th:class="'form-control '+ ${#fields.hasErrors('keterangan') ? 'is-invalid' : ''}"></textarea>-->
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('keterangan')}" th:errors="*{keterangan}"></div>
+                        <div class="small text-danger" th:if="${#fields.hasErrors('keterangan')}" th:errors="*{keterangan}"></div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-4">

@@ -1,9 +1,6 @@
 package com.rps.adagawe.helper;
 
-import com.rps.adagawe.model.Admin;
-import com.rps.adagawe.model.Pelamar;
-import com.rps.adagawe.model.Perusahaan;
-import com.rps.adagawe.model.UserLogin;
+import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.AdminService;
 import com.rps.adagawe.service.PelamarService;
 import com.rps.adagawe.service.PerusahaanService;
@@ -16,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created on June, 2021
@@ -70,6 +69,14 @@ public class AdagaweMethods {
         return perusahaan != null ? true : false;
     }
 
+    public static boolean isPelamarExist(AdagaweService service) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserLogin ul = service.findUserLoginByEmail(authentication.getName());
+        Pelamar pelamar = service.findPelamarByUserLogin(ul.getId());
+
+        return pelamar != null ? true : false;
+    }
+
     public static String getMainUrl(HttpServletRequest request, int index) {
         /**
          * Url = /pelamar/profile
@@ -100,10 +107,22 @@ public class AdagaweMethods {
             return "redirect:/admin/profile";
         }
         if (userLogin.getUserRole().name() == "Pelamar") {
-            return "redirect:/pelamar/profile";
+            return "redirect:/pelamar/setting";
         }
         else {
             return "redirect:/perusahaan/profile";
         }
+    }
+
+    public static List<VerifikasiPerusahaan> filterVerifikasiPerusahaan(List<VerifikasiPerusahaan> perusahaans, int hasil) {
+        List<VerifikasiPerusahaan> myList = new ArrayList<>();
+
+        for (VerifikasiPerusahaan perusahaan : perusahaans) {
+            if (perusahaan.getHasil() == hasil) {
+                myList.add(perusahaan);
+            }
+        }
+
+        return myList;
     }
 }

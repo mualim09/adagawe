@@ -13,9 +13,9 @@
             <div class="col-md-7">
                 <div class="card-job p-0 overflow-hidden">
                     <div class="profile-image">
-                        <img src="https://imgix.bustle.com/uploads/shutterstock/2020/3/25/72415f8c-3e06-40fc-b5a6-32fd76c7b567-shutterstock-1270572721.jpg?w=1200&h=630&fit=crop&crop=faces&fm=jpg"
+                        <img th:src="@{'/img/background.jpg'}"
                              alt="Sampul" class="img-cover">
-                        <img src="https://d17ivq9b7rppb3.cloudfront.net/small/avatar/202010020620078081fa4d61fefaf9a21680b8f36a1a9d.png"
+                        <img th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}"
                              alt="Profile" class="img-profile">
                     </div>
 
@@ -35,7 +35,7 @@
                     <div class="card-job-content">
                         <div class="card-job-content-title">
                             <h2>Tentang</h2>
-                            <p th:text="${pelamar.headline}"></p>
+                            <div th:utext="${pelamar.headline}"></div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
             <div class="col-md-7">
                 <div class="card-job p-0 overflow-hidden border mb-3">
                     <div class="card-job-content">
-                        <div class="card-job-content-title d-flex justify-content-between">
+                        <div class="card-job-content-title d-flex justify-content-between pb-2 border-bottom">
                             <h2>Pengalaman</h2>
                             <div>
                                 <a href="/pelamar/pengalaman/create" class="btn btn-primary"><i class="fa fa-plus"></i></a>
@@ -64,9 +64,7 @@
                                 <h2 th:case="null">Tidak ada data!</h2>
                                 <div th:case="*">
                                     <div class="media my-4" th:each="pengalaman, iter : ${pengalamans}">
-                                        <img
-                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
-                                                class="img-company img-company-profile mr-3">
+                                        <img th:src="@{'/img/briefcase.png'}" class="img-company img-company-profile mr-3">
                                         <div class="media-body">
                                             <a href="#" class="experience-title" th:text="${pengalaman.jabatan.namaJabatan}"></a>
                                             <a href="#" class="experience-subtitle" th:text="${pengalaman.namaPerusahaan}"> &#183; Full Time</a>
@@ -85,7 +83,7 @@
                 </div>
                 <div class="card-job p-0 overflow-hidden border mb-3">
                     <div class="card-job-content">
-                        <div class="card-job-content-title d-flex justify-content-between">
+                        <div class="card-job-content-title d-flex justify-content-between pb-2 border-bottom">
                             <h2>Pendidikan</h2>
                             <div>
                                 <a href="/pelamar/pendidikan/create" class="btn btn-primary"><i class="fa fa-plus"></i></a>
@@ -96,9 +94,7 @@
                                 <h2 th:case="null">Tidak ada data!</h2>
                                 <div th:case="*">
                                     <div class="media my-4" th:each="pendidikan, iter : ${pendidikans}">
-                                        <img
-                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
-                                                class="img-company img-company-profile mr-3">
+                                        <img th:src="@{'/img/school.png'}" class="img-company img-company-profile mr-3">
                                         <div class="media-body">
                                             <a href="#" class="experience-title" th:text="${pendidikan.namaUniversitas}"></a>
                                             <label class="experience-subtitle" th:utext="${pendidikan.namaJurusan} + ' &bull; ' + ${pendidikan.jenjang.deskripsi}"/>
@@ -117,7 +113,7 @@
                 </div>
                 <div class="card-job p-0 overflow-hidden border mb-3">
                     <div class="card-job-content">
-                        <div class="card-job-content-title d-flex justify-content-between">
+                        <div class="card-job-content-title d-flex justify-content-between pb-2 border-bottom">
                             <h2>Sertifikat</h2>
                             <div>
                                 <a href="/pelamar/sertifikat/create" class="btn btn-primary"><i class="fa fa-plus"></i></a>
@@ -128,9 +124,7 @@
                                 <h2 th:case="null">Tidak ada data!</h2>
                                 <div th:case="*">
                                     <div class="media my-4" th:each="sertifikat, iter : ${sertifikats}">
-                                        <img
-                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
-                                                class="img-company img-company-profile mr-3">
+                                        <img th:src="@{'/img/document.png'}" class="img-company img-company-profile mr-3">
                                         <div class="media-body">
                                             <a href="#" class="experience-title" th:text="${sertifikat.judul}"></a>
                                             <label class="experience-subtitle" th:text="${sertifikat.noSertifikat}"/>

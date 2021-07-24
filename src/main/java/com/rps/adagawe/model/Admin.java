@@ -14,9 +14,11 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty
+    @Column(name = "id_user_login")
+    private Integer idUserLogin;
+
     @ManyToOne
-    @JoinColumn(name = "id_user_login", nullable = false)
+    @JoinColumn(name = "id_user_login", insertable = false, updatable = false)
     private UserLogin userLogin;
 
     @NotNull
@@ -34,9 +36,6 @@ public class Admin {
 
     @Column(name = "row_status")
     private int status;
-
-    @Column(name = "id_user_login", insertable = false, updatable = false)
-    private int idUserLogin;
 
     public int getId() {
         return id;
