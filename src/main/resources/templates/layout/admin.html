@@ -166,10 +166,10 @@
                             <p>Verifikasi Perusahaan</p>
                         </a>
                     </li>
-                    <li th:class="'nav-item ' + ${url == 'laporan' ? 'active' : ''}">
-                        <a href="/admin/laporan">
+                    <li th:class="'nav-item ' + ${url == 'laporan-bidang' ? 'active' : ''}">
+                        <a href="/admin/laporan-bidang">
                             <i class="far fa-chart-bar"></i>
-                            <p>Laporan</p>
+                            <p>Laporan Bidang</p>
                         </a>
                     </li>
                     <li class="nav-section">
@@ -223,8 +223,22 @@
 <script th:src="@{/assets/js/plugin/datatables/datatables.min.js}"></script>
 <!-- Atlantis JS -->
 <script th:src="@{/assets/js/atlantis.min.js}"></script>
-<!-- Atlantis DEMO methods, don't include it in your project! -->
-<!--<script src="../../assets/js/setting-demo2.js"></script>-->
+
+<!-- Moment -->
+<script th:src="@{/assets/js/moment.min.js}"></script>
+
+<!-- Datatables -->
+<script th:src="@{/assets/js/plugin/datatables/datatables.min.js}"></script>
+<script th:src="@{/assets/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/assets/js/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/jszip.min.js}"></script>
+<script th:src="@{/assets/js/pdfmake.min.js}"></script>
+<script th:src="@{/assets/js/vfs_fonts.js}"></script>
+<script th:src="@{/assets/js/buttons.html5.min.js}"></script>
+<script th:src="@{/assets/js/buttons.print.min.js}"></script>
+<script th:src="@{/assets/js/buttons.colVis.min.js}"></script>
+<script th:src="@{/assets/js/scripts.js}"></script>
 
 <script >
     $(document).ready(function() {
