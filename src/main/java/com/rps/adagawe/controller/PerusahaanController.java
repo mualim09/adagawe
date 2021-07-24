@@ -169,12 +169,12 @@ public class PerusahaanController {
 
     @GetMapping("/perusahaan/laporan-lowongan")
     public String getLaporanLowongan(Model model, HttpServletRequest request) {
-//        Perusahaan perusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService);
-        List<LowonganLamaran> lowonganLamarans = laporanService.getLowonganByIdPerusahaan(1);
+        Perusahaan perusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService);
+        List<LowonganLamaran> lowonganLamarans = laporanService.getLowonganByIdPerusahaan(perusahaan.getId());
 
         model.addAttribute("lowonganLamarans", lowonganLamarans);
 
-//        model.addAttribute("userLogin", perusahaan.getUserLogin());
+        model.addAttribute("userLogin", perusahaan.getUserLogin());
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/laporan/laporan-lowongan";

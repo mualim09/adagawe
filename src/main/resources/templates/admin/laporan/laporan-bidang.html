@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       lang="en"
-      layout:decorate="~{layout/pelamar}">
+      layout:decorate="~{layout/admin}">
 <head>
   <meta charset="UTF-8">
-  <title>Laporan Lamaran</title>
+  <title>Laporan Bidang</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
       <i class="flaticon-right-arrow"></i>
     </li>
     <li class="nav-item">
-      <a href="#">Laporan Lamaran</a>
+      <a href="#">Laporan Bidang</a>
     </li>
   </ul>
 </div>
@@ -31,65 +31,41 @@
     <div class="card">
       <div class="card-header">
         <div class="d-flex align-items-center">
-          <h4 class="card-title">Laporan Lamaran</h4>
+          <h4 class="card-title">Laporan Bidang</h4>
         </div>
       </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="w-100 display table table-striped table-hover" id="datatables">
             <thead>
-              <tr>
-                <td>#</td>
-                <td>Lowongan</td>
-                <td>Perusahaan</td>
-                <td>Kota Perusahaan</td>
-                <td>Tanggal</td>
-                <td>Status</td>
-                <td id="nilaiUjiKomCell">Nilai Uji Kompetensi</td>
-                <td id="nilaiWawancaraCell">Nilai Wawancara</td>
-              </tr>
+            <tr>
+              <td>#</td>
+              <td>Bidang</td>
+              <td id="jumlahLowonganCell">Jumlah Lowongan</td>
+              <td id="jumlahLamaranCell">Jumlah Lamaran</td>
+            </tr>
             </thead>
             <tbody>
-              <tr th:each="pelamarLamaran, iter : ${pelamarLamarans}">
-                <td th:text="${iter.index + 1}"></td>
-                <td th:text="${pelamarLamaran.lowongan.judulLowongan}"></td>
-                <td th:text="${pelamarLamaran.lowongan.perusahaan.userLogin.nama}"></td>
-                <td th:text="${pelamarLamaran.lowongan.perusahaan.kota}"></td>
-                <td th:text="${#dates.format(pelamarLamaran.lamaran.tanggalMelamar, 'dd MMM yyyy')}"></td>
-                <td th:switch="${pelamarLamaran.statusLamaran}">
-                  <th:block th:case="0">Menunggu Kualifikasi</th:block>
-                  <th:block th:case="1">Kualifikasi Ditolak</th:block>
-                  <th:block th:case="2">Kualifikasi Diterima</th:block>
-                  <th:block th:case="3">Uji Kompetensi Ditolak</th:block>
-                  <th:block th:case="4">Uji Kompetensi Diterima</th:block>
-                  <th:block th:case="5">Wawancara Ditolak</th:block>
-                  <th:block th:case="6">Wawancara Diterima</th:block>
-                </td>
-                <td th:text="${pelamarLamaran.lamaran.nilaiUjiKompetensi != null ? pelamarLamaran.lamaran.nilaiUjiKompetensi : '-'}"></td>
-                <td th:text="${pelamarLamaran.lamaran.nilaiWawancara != null ? pelamarLamaran.lamaran.nilaiWawancara : '-'}"></td>
-              </tr>
+            <tr th:each="bidang, iter : ${bidangs}">
+              <td th:text="${iter.index + 1}"></td>
+              <td th:text="${bidang.namaBidang}"></td>
+              <td th:text="${bidang.jumlahLowongan}"></td>
+              <td th:text="${bidang.jumlahLamaran}"></td>
+            </tr>
             </tbody>
             <tfoot>
-              <tr>
-                <th>Rata-rata</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-              <tr>
-                <th></th>
-                <th>Lowongan</th>
-                <th>Perusahaan</th>
-                <th>Kota Perusahaan</th>
-                <th>Tanggal</th>
-                <th>Status</th>
-                <th>Nilai Uji Kompetensi</th>
-                <th>Nilai Wawancara</th>
-              </tr>
+            <tr>
+              <th>Total</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <th></th>
+              <th>Bidang</th>
+              <th>Jumlah Lowongan</th>
+              <th>Jumlah Lamaran</th>
+            </tr>
             </tfoot>
           </table>
         </div>
@@ -115,27 +91,27 @@
           }, {
             extend: 'excel',
             text: '<i class="fa fa-file-excel"></i> Excel',
-            title: 'Data Lamaran',
+            title: 'Data Bidang',
             footer: true,
-            filename: 'Data Lamaran ' + moment().format('DD-MM-YYYY'),
+            filename: 'Data Bidang ' + moment().format('DD-MM-YYYY'),
             exportOptions: {
               columns: ':visible',
             }
           }, {
             extend: 'pdf',
             text: '<i class="fa fa-file-pdf"></i> PDF',
-            title: 'Data Lamaran',
+            title: 'Data Bidang',
             footer: true,
-            filename: 'Data Lamaran ' + moment().format('DD-MM-YYYY'),
+            filename: 'Data Bidang ' + moment().format('DD-MM-YYYY'),
             exportOptions: {
               columns: ':visible',
             }
           }, {
             extend: 'print',
             text: '<i class="fa fa-print"></i> Print',
-            title: 'Data Lamaran',
+            title: 'Data Bidang',
             footer: true,
-            filename: 'Data Lamaran ' + moment().format('DD-MM-YYYY'),
+            filename: 'Data Bidang ' + moment().format('DD-MM-YYYY'),
             exportOptions: {
               columns: ':visible',
             }
@@ -163,33 +139,28 @@
           const api = this.api();
 
           // view page column
-          const nilaiUjikomCell = api.column('#nilaiUjiKomCell').index();
-          const nilaiWawancaraCell = api.column('#nilaiWawancaraCell').index();
-          console.log(nilaiUjikomCell, nilaiWawancaraCell);
+          const jumlahLowonganCell = api.column('#jumlahLowonganCell').index();
+          const jumlahLamaranCell = api.column('#jumlahLamaranCell').index();
 
-          let columnData = api.column(nilaiUjikomCell, {page: 'current'}).data();
-          const ujiKompetensiCount = columnData.filter(x => !isNaN(x)).length;
+          let columnData = api.column(jumlahLowonganCell, {page: 'current'}).data();
+          const rowCount = columnData.count();
           let theColumnPage = sumNumber(columnData);
 
-          $(`tr:eq(0) th:eq(${nilaiUjikomCell})`, api.table().footer()).html(
-                  parseFloat(theColumnPage / ujiKompetensiCount).toFixed(2)
-          );
+          $(`tr:eq(0) th:eq(${jumlahLowonganCell})`, api.table().footer()).html(theColumnPage + " Lowongan");
 
-          columnData = api.column(nilaiWawancaraCell, { page: 'current' }).data();
-          const wawancaraCount = columnData.filter(x => !isNaN(x)).length;
+          columnData = api.column(jumlahLamaranCell, { page: 'current' }).data();
           theColumnPage = sumNumber(columnData);
 
-          $(`tr:eq(0) th:eq(${nilaiWawancaraCell})`, api.table().footer()).html(
-                  theColumnPage / wawancaraCount
-          );
+          $(`tr:eq(0) th:eq(${jumlahLamaranCell})`, api.table().footer()).html(theColumnPage + " Lamaran");
         },
         initComplete: function () {
           let columnCount = 0;
           const api = this.api();
-          const nilaiUjikomCell = api.column('#nilaiUjiKomCell').index();
-          const nilaiWawancaraCell = api.column('#nilaiWawancaraCell').index();
+          const jumlahLowonganCell = api.column('#jumlahLowonganCell').index();
+          const jumlahLamaranCell = api.column('#jumlahLamaranCell').index();
           api.columns().every(function () {
-            if (columnCount !== 0 && columnCount !== nilaiUjikomCell && columnCount !== nilaiWawancaraCell) {
+            if (columnCount !== 0 && columnCount !== jumlahLowonganCell
+                    && columnCount !== jumlahLamaranCell) {
               const column = this;
               const select = $('<select class="form-control form-control-sm height-unset"><option value=""></option></select>')
                       .appendTo($(`tr:eq(1) th:eq(${columnCount})`, api.table().footer()).empty())
