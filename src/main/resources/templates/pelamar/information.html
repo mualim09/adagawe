@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       lang="en"
-      layout:decorate="~{layout/perusahaan}">
+      layout:decorate="~{layout/pelamar}">
 <head>
     <meta charset="UTF-8">
-    <title>Info Perusahaan</title>
+    <title>Info Pelamar</title>
 </head>
 
 <body>
@@ -45,18 +45,16 @@
                                th:class="'form-control '+ ${#fields.hasErrors('tanggalLahir') ? 'is-invalid' : ''}">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('tanggalLahir')}" th:errors="*{tanggalLahir}"></div>
                     </div>
-                    <div class="form-group">
-                        <label>Jenis Kelamin</label>
-                        <br />
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="option1" name="option1" class="custom-control-input" value="L" th:field="*{jenisKelamin}">
-                            <label class="custom-control-label" for="option1">Laki-Laki</label>
-                        </div>
-                        <br />
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="option2" name="option2" class="custom-control-input" value="P" th:field="*{jenisKelamin}">
-                            <label class="custom-control-label" for="option2">Perempuan</label>
-                        </div>
+                    <div class="form-check pb-3">
+                        <label>Jenis Kelamin</label><br>
+                        <label class="form-radio-label">
+                            <input class="form-radio-input" type="radio" name="optionsRadios" value="L" th:field="*{jenisKelamin}">
+                            <span class="form-radio-sign">Laki-Laki</span>
+                        </label>
+                        <label class="form-radio-label ml-3">
+                            <input class="form-radio-input" type="radio" name="optionsRadios" value="P" th:field="*{jenisKelamin}">
+                            <span class="form-radio-sign">Perempuan</span>
+                        </label>
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat Lengkap</label>
@@ -72,25 +70,25 @@
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('kota')}" th:errors="*{kota}"></div>
                         </div>
                         <div class="col-md-6">
-                            <label for="noTelepon">Kota</label>
+                            <label for="noTelepon">Telepon</label>
                             <input th:field="*{noTelepon}" id="noTelepon" placeholder="Nomor Telepon"
                                    th:class="'form-control '+ ${#fields.hasErrors('noTelepon') ? 'is-invalid' : ''}">
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('noTelepon')}" th:errors="*{noTelepon}"></div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="headline">Headline</label>
-                        <textarea th:field="*{headline}" id="headline" placeholder="Headline"
-                                  th:class="'form-control '+ ${#fields.hasErrors('headline') ? 'is-invalid' : ''}"></textarea>
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('headline')}" th:errors="*{headline}"></div>
-                    </div>
-                    <div class="form-group">
-                        <label>Dokumen CV</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="file" id="file" placeholder="CV">
-                            <label class="custom-file-label font-normal" for="file">Dokumen CV</label>
-                        </div>
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label for="headline">Headline</label>-->
+<!--                        <textarea th:field="*{headline}" id="headline" placeholder="Headline"-->
+<!--                                  th:class="'form-control '+ ${#fields.hasErrors('headline') ? 'is-invalid' : ''}"></textarea>-->
+<!--                        <div class="invalid-feedback" th:if="${#fields.hasErrors('headline')}" th:errors="*{headline}"></div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Dokumen CV</label>-->
+<!--                        <div class="custom-file">-->
+<!--                            <input type="file" class="custom-file-input" name="file" id="file" placeholder="CV">-->
+<!--                            <label class="custom-file-label font-normal" for="file">Dokumen CV</label>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Lanjut</button>
                     </div>

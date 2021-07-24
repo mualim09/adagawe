@@ -24,8 +24,6 @@
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/atlantis.css}">
     <link rel="stylesheet" th:href="@{/assets/css/style.css}">
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <!-- <link rel="stylesheet" href="/assets/css/demo.css"> -->
 
     <!-- Optional Section -->
     <th:block layout:fragment="styles" />
@@ -81,7 +79,7 @@
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">My Profile</a>
+                                    <a class="dropdown-item" href="/perusahaan/profile">My Profile</a>
                                     <div class="dropdown-divider"></div>
                                     <form action="/keluar" method="post" class="d-inline">
                                         <button class="dropdown-item" type="submit">Logout</button>
@@ -119,17 +117,12 @@
                         <div class="collapse in" id="collapseExample">
                             <ul class="nav">
                                 <li>
-                                    <a href="/perusahaan/view">
+                                    <a href="/perusahaan/profile#profil">
                                         <span class="link-collapse">View Profile</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/perusahaan/profile/edit">
-                                        <span class="link-collapse">Edit Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/perusahaan/profile/security">
+                                    <a href="/perusahaan/profile#keamanan">
                                         <span class="link-collapse">Security</span>
                                     </a>
                                 </li>
@@ -162,13 +155,7 @@
                             <p>Daftar Lowongan</p>
                         </a>
                     </li>
-<!--                    <li th:class="'nav-item ' + ${url == 'history' ? 'active' : ''}">-->
-<!--                        <a href="/perusahaan/verifikasi/history">-->
-<!--                            <i class="fas fa-check-circle"></i>-->
-<!--                            <p>Riwayat Verifikasi</p>-->
-<!--                        </a>-->
-<!--                    </li>-->
-                    <li th:class="'nav-item ' + ${url == 'laporan' ? 'active' : ''}">
+                    <li th:class="'nav-item ' + ${url == 'messages' ? 'active' : ''}">
                         <a href="/perusahaan/messages">
                             <i class="far fa-paper-plane"></i>
                             <p>Pesan</p>
@@ -223,34 +210,12 @@
 <script th:src="@{/assets/js/bootstrap-tagsinput.js}"></script>
 <!-- Summernote -->
 <script th:src="@{/assets/js/summernote-bs4.min.js}"></script>
+<!-- Priceformat -->
+<script th:src="@{/assets/js/jquery.priceformat.min.js}"></script>
 
 <script >
     $(document).ready(function() {
         $('.datatables').DataTable({
-        });
-
-        $('#multi-filter-select').DataTable( {
-            "pageLength": 5,
-            initComplete: function () {
-                this.api().columns().every( function () {
-                    var column = this;
-                    var select = $('<select class="form-control"><option value=""></option></select>')
-                        .appendTo( $(column.footer()).empty() )
-                        .on( 'change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-
-                            column
-                                .search( val ? '^'+val+'$' : '', true, false )
-                                .draw();
-                        } );
-
-                    column.data().unique().sort().each( function ( d, j ) {
-                        select.append( '<option value="'+d+'">'+d+'</option>' )
-                    } );
-                } );
-            }
         });
 
         // Add Row
@@ -269,6 +234,22 @@
             ]);
             $('#addRowModal').modal('hide');
 
+        });
+    });
+
+
+    $("form").submit(function (e) {
+        $('.priceformat').each(function(i, obj) {
+            const price = $(this).val().replace(/[^0-9]/g, '');
+            $(this).val(price);
+        });
+    });
+
+    $(document).ready(function () {
+        $('.priceformat').priceFormat({
+            prefix: 'Rp',
+            centsLimit: 0,
+            thousandsSeparator: '.'
         });
     });
 </script>

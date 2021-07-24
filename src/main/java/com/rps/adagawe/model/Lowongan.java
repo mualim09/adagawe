@@ -21,6 +21,7 @@ public class Lowongan {
     @JoinColumn(name = "id_perusahaan", insertable = false, updatable = false)
     private Perusahaan perusahaan;
 
+    @NotNull(message = "Jenis pegawai wajib diisi.")
     @Column(name = "id_jenis_pegawai")
     private Integer idJenisPegawai;
 
@@ -36,6 +37,7 @@ public class Lowongan {
     @Column(name = "keterangan")
     private String keterangan;
 
+    @NotNull(message = "Jenjang minimal wajib diisi.")
     @Column(name = "jenjang_minimal")
     private Integer jenjangMinimal;
 

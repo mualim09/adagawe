@@ -27,19 +27,10 @@ public class MainController {
     @Autowired
     private AdagaweService adagaweService;
 
-//    private void redirectIndex(Model model) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String userEmail = authentication.getName();
-//
-//        model.addAttribute("userEmail", userEmail);
-//    }
-
     @GetMapping("/")
     public String indexPelamar(Model model) {
-
         List<Lowongan> lokers = lowonganService.getAll();
         model.addAttribute("lokers", lokers);
-
 
         return "main/index";
     }

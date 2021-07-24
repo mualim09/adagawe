@@ -4,7 +4,7 @@
       layout:decorate="~{layout/main}">
 <head>
   <meta charset="UTF-8">
-  <title th:text="${loker.judulLowongan + ' - ' + loker.perusahaan.userLogin.fotoProfil}"></title>
+  <title th:text="${loker.judulLowongan + ' - ' + loker.perusahaan.userLogin.nama}"></title>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
                       class="img-company img-company-profile mr-3" th:alt="${loker.perusahaan.userLogin.nama}">
               <div class="media-body">
                 <a href="#" class="job-title" th:text="${loker.judulLowongan}"></a>
-                <a href="#" class="job-subtitle" th:text="${loker.perusahaan.userLogin.nama}"></a>
+                <a th:href="@{/loker/perusahaan/view/{id}(id=${loker.perusahaan.id})}" class="job-subtitle" th:text="${loker.perusahaan.userLogin.nama}"></a>
                 <div class="custom-badge-container success sm">
                   <div class="custom-badge"><i class="far fa-check-circle"></i> Aktif</div>
                 </div>
@@ -63,8 +63,7 @@
           <div class="card-job-content">
             <div class="card-job-content-title">
               <h2>Tentang</h2>
-              &lt;strong>Look just like this line - so then know how to type it</strong>
-              <p th:text="${loker.keterangan}"></p>
+              <div th:utext="${loker.keterangan}"></div>
             </div>
             <div class="card-job-content-title">
               <h2>Keahlian</h2>

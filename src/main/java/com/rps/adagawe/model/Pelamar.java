@@ -34,8 +34,9 @@ public class Pelamar {
     @Column(name = "no_telepon")
     private String noTelepon;
 
-    @NotEmpty(message = "Headline wajib diisi.")
-    private String headline;
+//    @NotEmpty(message = "Headline wajib diisi.")
+    @Builder.Default
+    private String headline = "<p>Hello World!</p>";
 
 //    @NotEmpty(message = "CV wajib diisi.")
     @Column(name = "dokumen_cv")

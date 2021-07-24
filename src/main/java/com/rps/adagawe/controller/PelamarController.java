@@ -4,9 +4,7 @@ import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
-import com.rps.adagawe.model.JenisPegawai;
-import com.rps.adagawe.model.Pelamar;
-import com.rps.adagawe.model.UserLogin;
+import com.rps.adagawe.model.*;
 import com.rps.adagawe.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class PelamarController {
@@ -39,6 +39,9 @@ public class PelamarController {
     @Autowired
     AdagaweService adagaweService;
 
+    @Autowired
+    PelamarLamaranService pelamarLamaranService;
+
 
     // Prefix URL
     private final String PREFIX = "/pelamar/profile";
@@ -47,6 +50,12 @@ public class PelamarController {
 
     @GetMapping("/pelamar/profile")
     public String getView(Model model) {
+
+        // Redirect jika belum melengkapi profil
+        if (!AdagaweMethods.isPelamarExist(adagaweService)) {
+            return "redirect:/pelamar/information";
+        }
+
         int idPelamar = AdagaweMethods.getPelamarBySession(adagaweService).getId();
         UserLogin userLogin = AdagaweMethods.getUserLoginBySession(adagaweService);
 
@@ -63,52 +72,57 @@ public class PelamarController {
     public String getInformation(Model model, HttpServletRequest request) {
         model.addAttribute("pelamar", new Pelamar());
 
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
         return "/pelamar/information";
     }
 
     @PostMapping("/pelamar/information")
-    public String postInformation(@ModelAttribute("pelamar") @Valid Pelamar pelamar, BindingResult result,
-                                  @RequestParam("file") MultipartFile file, Model model) {
+    public String postInformation(RedirectAttributes redirectAttributes, @ModelAttribute("pelamar") @Valid Pelamar pelamar, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             return "/pelamar/information";
         }
 
-        if (file.isEmpty()){
-            pelamar.setDokumenCv("not");
-        }
-        else {
-            String fileName = FileUploadHelper.upload(file, "cv_pelamar");
-            pelamar.setDokumenCv(fileName);
-        }
-
         pelamar.setIdUserLogin(AdagaweMethods.getUserLoginBySession(adagaweService).getId());
         pelamarService.save(pelamar);
 
-        return "redirect:/pelamar/profile";
+        redirectAttributes.addFlashAttribute("message_success", "Selamat datang, lengkapi profil kamu agar dilirik perusahaan!");
+
+        return "redirect:/pelamar/setting";
     }
 
-    @GetMapping("/pelamar/profile/security")
-    public String getSecurity(Model model) {
+    @GetMapping("/pelamar/dashboard")
+    public String getDashboard(Model model, HttpServletRequest request) {
 
-        //UserLogin userLogin = userService.getUserLoginByEmail(AdagaweMethods.getEmailUserBySession());
-        //model.addAttribute("userLogin", userLogin);
-        return PREFIX_SECURITY;
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
+        return "/pelamar/dashboard";
     }
 
-    @PostMapping("/pelamar/profile/security")
-    public String postSecurity(@ModelAttribute("userLogin") @Valid UserLogin userLogin, BindingResult result, Model model) {
+    @GetMapping("/pelamar/setting")
+    public String getSetting(Model model, HttpServletRequest request) {
 
-        //userService.updateUserLogin(userLogin);
-        return "/pelamar/profile/index";
+        model.addAttribute("pelamar", AdagaweMethods.getPelamarBySession(adagaweService));
+
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
+        return "/pelamar/profile/setting";
     }
 
-    @GetMapping("/pelamar/profile/edit")
-    public String getProfileEdit(Model model) {
+    @GetMapping("/pelamar/laporan-lamaran")
+    public String getLaporan(Model model, HttpServletRequest request) {
+        Pelamar pelamar = AdagaweMethods.getPelamarBySession(adagaweService);
+        List<PelamarLamaran> pelamarLamaranList = pelamarLamaranService.getByIdPelamar(pelamar.getId());
+        System.out.println("Pelamar Lamaran " + pelamarLamaranList);
+        model.addAttribute("pelamarLamarans", pelamarLamaranList);
 
-        //pelamar pelamar = pelamarService.getpelamarById(AdagaweMethods.getIdpelamarBySession(pelamarService));
-        //pelamar pelamar = pelamarService.getpelamarById(1);
-        //model.addAttribute("pelamar", pelamar);
-        return "/pelamar/profile/edit";
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
+        return "/pelamar/laporan/laporan-lamaran";
     }
 }

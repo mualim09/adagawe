@@ -55,6 +55,7 @@ public class JenisPegawaiController {
 
         if (result.hasErrors()) {
             model.addAttribute("userLogin",AdagaweMethods.getUserLoginBySession(adagaweService));
+            model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
             return "/admin/jenispegawai/create";
         }
 

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      lang="en"
+      layout:decorate="~{layout/pelamar}">
+<head>
+    <meta charset="UTF-8">
+    <title>Pengaturan Akun</title>
+</head>
+
+<body>
+
+<div layout:fragment="header">
+    <h4 class="page-title">Akun</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Akun</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Pengaturan</a>
+        </li>
+    </ul>
+</div>
+
+<div layout:fragment="content">
+    <div th:if="${message_failed}" class="col-md-12">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="${message_failed}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <div th:if="${message_success}" class="col-md-12">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${message_success}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card card-profile">
+            <div class="card-header bg-img-profile">
+                <div class="profile-picture">
+                    <div class="avatar avatar-xl">
+                        <img th:src="@{'/uploads/foto_profil/' + ${pelamar.userLogin.fotoProfil}}" alt="..." class="avatar-img rounded-circle img-thumbnail">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="user-profile text-center">
+                    <div class="name" th:text="${pelamar.userLogin.nama}"></div>
+                    <div class="job mb-2" th:text="${pelamar.userLogin.email}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card card-with-nav">
+            <div class="card-header">
+                <div class="row row-nav-line">
+                    <ul class="nav nav-tabs nav-line nav-color-secondary w-100 pl-3" role="tablist">
+                        <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#profil" role="tab" aria-selected="true">Profil</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#detail" role="tab" aria-selected="true">Detail</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#headline" role="tab" aria-selected="true">Headline</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#keamanan" role="tab" aria-selected="false">Keamanan</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="profil" role="tabpanel" aria-labelledby="home-tab">
+                        <form action="/account/edit" th:method="post" enctype="multipart/form-data">
+                            <div class="form-group form-floating-label mt-2">
+                                <input type="text" class="form-control input-border-bottom" name="nama" id="nama" th:value="${userLogin.nama}">
+                                <label for="nama" class="placeholder">Nama Lengkap</label>
+                            </div>
+                            <div class="form-group">
+                                <label>Foto Profil</label>
+                                <div class="input-file input-file-image">
+                                    <img class="img-upload-preview" width="135" height="135" th:src="@{'/uploads/foto_profil/' + ${userLogin.fotoProfil}}">
+                                    <input type="file" class="form-control form-control-file success" name="file" id="file" accept="image/*" aria-invalid="false"><label id="uploadImg-error" class="error" for="uploadImg"></label>
+                                    <label for="file" class="btn btn-light">Pilih Gambar</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary">Perbaharui</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="home-tab">
+                        <form th:action="@{/account/pelamar/edit}" th:object="${pelamar}" method="post">
+                            <div class="form-group form-group-default">
+                                <label for="tanggalLahir">Tanggal Lahir</label>
+                                <input type="date" th:field="*{tanggalLahir}" id="tanggalLahir" placeholder="Tanggal Lahir"
+                                       th:class="'form-control '+ ${#fields.hasErrors('tanggalLahir') ? 'is-invalid' : ''}">
+                            </div>
+                            <div class="form-check pb-3">
+                                <label>Jenis Kelamin</label><br>
+                                <label class="form-radio-label">
+                                    <input class="form-radio-input" type="radio" name="optionsRadios" value="L" th:field="*{jenisKelamin}">
+                                    <span class="form-radio-sign">Laki-Laki</span>
+                                </label>
+                                <label class="form-radio-label ml-3">
+                                    <input class="form-radio-input" type="radio" name="optionsRadios" value="P" th:field="*{jenisKelamin}">
+                                    <span class="form-radio-sign">Perempuan</span>
+                                </label>
+                            </div>
+                            <div class="form-group form-group-default">
+                                <label>Kota</label>
+                                <input type="text" class="form-control" name="address" th:field="*{kota}">
+                            </div>
+                            <div class="form-group form-group-default">
+                                <label>Alamat</label>
+                                <textarea type="text" class="form-control" name="address" th:field="*{alamat}"></textarea>
+                            </div>
+                            <div class="form-group form-group-default">
+                                <label for="noTelepon">No. Telepon</label>
+                                <input type="text" th:field="*{noTelepon}" id="noTelepon" placeholder="Nomor Telepon"
+                                       th:class="'form-control '+ ${#fields.hasErrors('noTelepon') ? 'is-invalid' : ''}">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="headline" role="tabpanel" aria-labelledby="home-tab">
+                        <form th:action="@{/account/pelamar/info}" method="post" enctype="multipart/form-data" >
+                            <div class="form-group">
+                                <label for="summernote">Headline</label>
+                                <textarea id="summernote" name="headline" th:field="${pelamar.headline}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Dokumen CV</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="file_cv">
+                                    <label class="custom-file-label font-normal" th:text="${pelamar.dokumenCv}">Pilih Dokumen CV</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="keamanan" role="tabpanel" aria-labelledby="profile-tab">
+                        <form th:action="@{/account/security}" th:method="post">
+                            <div class="alert alert-info" role="alert">
+                                <span>Untuk merubah email, harap hubungi System Administrator.</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input type="email" class="form-control" placeholder="Email" th:value="${userLogin.email}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Password Lama</label>
+                                <input type="password" class="form-control" placeholder="Password Lama" name="password1">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Password Baru</label>
+                                <input type="password" class="form-control" placeholder="Password Baru" name="password2">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Perbaharui</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script layout:fragment="scripts">
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+
+    $('#summernote').summernote({
+        placeholder: 'Tulis Headline',
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+        tabsize: 1,
+        // toolbar: true,
+        height: 200
+    });
+
+    // var text = "<p>Hello</p>";
+    // $('#summernote').summernote('code',text);
+    var vNavimg = document.getElementsByClassName("note-toolbar-wrapper");
+    for(var i=0;i<vNavimg.length;i++){
+        vNavimg[i].style.removeProperty("height");
+    }
+</script>
+</body>
+</html>
