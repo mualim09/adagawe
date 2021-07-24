@@ -26,6 +26,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomAuthenticationSuccessHandler successHandler;
 
+	@Autowired
+	private CustomAuthenticationFailureHandler failureHandler;
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
@@ -57,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.formLogin()
 				.successHandler(successHandler)
 				.loginPage("/masuk")
+				.failureHandler(failureHandler)
 				.permitAll();
 	}
 

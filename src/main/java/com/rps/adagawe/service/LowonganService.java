@@ -30,8 +30,27 @@ public class LowonganService {
     }
 
     public void save(Lowongan lowongan) {
-        lowongan.setSembunyikanGaji(0);
-        lowongan.setCreatedDate(new Date());
         lowonganRepository.save(lowongan);
+    }
+
+    public void updateLowongan(int id, Lowongan lowongan) {
+        Lowongan l = lowonganRepository.findById(id).orElse(null);
+
+        if (l != null) {
+            l.setId(id);
+            l.setIdPerusahaan(lowongan.getIdPerusahaan());
+            l.setIdJenisPegawai(lowongan.getIdJenisPegawai());
+            l.setJudulLowongan(lowongan.getJudulLowongan());
+            l.setKeterangan(lowongan.getKeterangan());
+            l.setJenjangMinimal(lowongan.getJenjangMinimal());
+            l.setGajiMinimal(lowongan.getGajiMinimal());
+            l.setGajiMaksimal(lowongan.getGajiMaksimal());
+            l.setPengalamanKerja(lowongan.getPengalamanKerja());
+            l.setKeahlian(lowongan.getKeahlian());
+            l.setSembunyikanGaji(lowongan.getSembunyikanGaji());
+            l.setLastModified(new Date());
+        }
+
+        lowonganRepository.save(l);
     }
 }

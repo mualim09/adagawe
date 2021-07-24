@@ -39,27 +39,45 @@
                 </div>
             </div>
             <div class="card-body">
-                <form th:action="@{/perusahaan/lowongan/edit}" th:object="${lowongan}" id="lowonganForm" method="post">
+                <form th:action="@{/perusahaan/lowongan/edit/{id}(id=${lowongan.id})}" th:object="${lowongan}" id="lowonganForm" method="post">
                     <div class="row form-group">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <label for="judulLowongan">Judul Lowongan</label>
                             <input type="text" th:field="*{judulLowongan}" id="judulLowongan" placeholder="Judul Lowongan"
                                    th:class="'form-control '+ ${#fields.hasErrors('judulLowongan') ? 'is-invalid' : ''}">
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('judulLowongan')}" th:errors="*{judulLowongan}"></div>
                         </div>
-                        <div class="col-md-4">
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6">
                             <label for="idJenisPegawai">Jenis Pegawai</label>
-                            <select id="idJenisPegawai" th:field="*{jenisPegawai.id}" th:class="'form-control '+ ${#fields.hasErrors('jenisPegawai') ? 'is-invalid' : ''}">
+                            <select id="idJenisPegawai" th:field="*{idJenisPegawai}"
+                                    th:class="'form-control '+ ${#fields.hasErrors('idJenisPegawai') ? 'is-invalid' : ''}">
                                 <option value="">Pilih Jenis Pegawai</option>
                                 <option th:each="jenisPegawai : ${jenisPegawais}" th:value="${jenisPegawai.id}" th:text="${jenisPegawai.namajenisPegawai}"></option>
                             </select>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('idJenisPegawai')}" th:errors="*{idJenisPegawai}"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="jenjangMinimal">Jenjang Pendidikan Minimal</label>
+                            <select id="jenjangMinimal" th:field="*{jenjangMinimal}"
+                                    th:class="'form-control '+ ${#fields.hasErrors('jenjangMinimal') ? 'is-invalid' : ''}">
+                                <option value="">Pilih Jenjang Minimal</option>
+                                <option value="1">SD/MI</option>
+                                <option value="2">SMP/MTs</option>
+                                <option value="3">SMA/MA/SMK</option>
+                                <option value="4">D3</option>
+                                <option value="5">S1/D4</option>
+                                <option value="6">S2</option>
+                                <option value="7">S3</option>
+                            </select>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('jenjangMinimal')}" th:errors="*{jenjangMinimal}"></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="keterangan">Keterangan</label>
-                        <textarea th:field="*{keterangan}" id="keterangan" placeholder="Keterangan"
-                                  th:class="'form-control '+ ${#fields.hasErrors('keterangan') ? 'is-invalid' : ''}"></textarea>
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('keterangan')}" th:errors="*{keterangan}"></div>
+                        <label for="summernote">Keterangan</label>
+                        <textarea id="summernote" th:field="*{keterangan}"></textarea>
+                        <div class="small text-danger" th:if="${#fields.hasErrors('keterangan')}" th:errors="*{keterangan}"></div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-4">
@@ -71,8 +89,6 @@
                         <div class="col-md-8">
                             <label>Keahlian</label>
                             <input type="text" value="" th:field="*{keahlian}" data-role="tagsinput" placeholder="Keahlian" />
-<!--                            <input type="text" th:field="*{keahlian}" id="keahlian" placeholder="Keahlian"-->
-<!--                                   th:class="'form-control '+ ${#fields.hasErrors('keahlian') ? 'is-invalid' : ''}">-->
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('keahlian')}" th:errors="*{keahlian}"></div>
                         </div>
                     </div>
@@ -80,20 +96,23 @@
                         <div class="col-md-6">
                             <label for="gajiMinimal">Gaji Minimal</label>
                             <input type="text" th:field="*{gajiMinimal}" id="gajiMinimal" placeholder="Gaji Minimal"
-                                   th:class="'form-control '+ ${#fields.hasErrors('gajiMinimal') ? 'is-invalid' : ''}">
+                                   th:class="'priceformat form-control '+ ${#fields.hasErrors('gajiMinimal') ? 'is-invalid' : ''}">
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('gajiMinimal')}" th:errors="*{gajiMinimal}"></div>
                         </div>
                         <div class="col-md-6">
                             <label for="gajiMaksimal">Gaji Maksimal</label>
                             <input type="text" th:field="*{gajiMaksimal}" id="gajiMaksimal" placeholder="Gaji Maksimal"
-                                   th:class="'form-control '+ ${#fields.hasErrors('gajiMaksimal') ? 'is-invalid' : ''}">
+                                   th:class="'priceformat form-control '+ ${#fields.hasErrors('gajiMaksimal') ? 'is-invalid' : ''}">
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('gajiMaksimal')}" th:errors="*{gajiMaksimal}"></div>
                         </div>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="sembunyikanGaji" value="1">
-                                <span class="form-check-sign">Sembunyikan Gaji</span>
-                            </label>
+                        <div class="col-md-12">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="isSalaryHidden"
+                                           th:checked="*{sembunyikanGaji == 1 ? 'true' : 'false'}">
+                                    <span class="form-check-sign">Sembunyikan Gaji</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -102,6 +121,14 @@
         </div>
     </div>
 </div>
+<script layout:fragment="scripts">
+    $('#summernote').summernote({
+        placeholder: 'Tulis Keterangan',
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+        tabsize: 1,
+        height: 300
+    });
+</script>
 </body>
 
 </html>
