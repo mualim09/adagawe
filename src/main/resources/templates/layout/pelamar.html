@@ -157,6 +157,12 @@
                             <p>Cari Kerja</p>
                         </a>
                     </li>
+                    <li th:class="'nav-item ' + ${url == 'notifikasi' ? 'active' : ''}">
+                        <a href="/pelamar/notifikasi">
+                            <i class="fas fa-bell"></i>
+                            <p>Notifikasi</p>
+                        </a>
+                    </li>
                     <li th:class="'nav-item ' + ${url == 'laporan-lamaran' ? 'active' : ''}">
                         <a href="/pelamar/laporan-lamaran">
                             <i class="far fa-chart-bar"></i>
@@ -232,6 +238,9 @@
 <script th:src="@{/assets/js/buttons.colVis.min.js}"></script>
 <script th:src="@{/assets/js/scripts.js}"></script>
 <!-- Optional Section -->
+<script>
+    $('.dataTable').DataTable();
+</script>
 <th:block layout:fragment="scripts" />
 
 </body>
