@@ -3,6 +3,7 @@ package com.rps.adagawe.controller;
 import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.model.Jabatan;
+import com.rps.adagawe.model.UserLogin;
 import com.rps.adagawe.service.JabatanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,6 +53,7 @@ public class JabatanController {
                              @ModelAttribute("jabatan") @Valid Jabatan jabatan, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
+            model.addAttribute("userLogin",AdagaweMethods.getUserLoginBySession(adagaweService));
             return "/admin/jabatan/create";
         }
 
@@ -78,6 +80,7 @@ public class JabatanController {
 
         if (result.hasErrors()) {
             jabatan.setId(id);
+            model.addAttribute("userLogin",AdagaweMethods.getUserLoginBySession(adagaweService));
             return "/admin/jabatan/edit";
         }
 

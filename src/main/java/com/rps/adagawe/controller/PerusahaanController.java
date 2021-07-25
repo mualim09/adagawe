@@ -39,6 +39,9 @@ public class PerusahaanController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    LaporanService laporanService;
+
     @GetMapping("/admin/perusahaan")
     public String index(Model model) {
         List<Perusahaan> perusahaans = perusahaanService.findPerusahaanByRowStatus();
@@ -150,5 +153,18 @@ public class PerusahaanController {
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/pelamar/view-perusahaan";
+    }
+
+    @GetMapping("/perusahaan/laporan-lowongan")
+    public String getLaporanLowongan(Model model, HttpServletRequest request) {
+        Perusahaan perusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService);
+        List<LowonganLamaran> lowonganLamarans = laporanService.getLowonganByIdPerusahaan(perusahaan.getId());
+
+        model.addAttribute("lowonganLamarans", lowonganLamarans);
+
+        model.addAttribute("userLogin", perusahaan.getUserLogin());
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
+        return "/perusahaan/laporan/laporan-lowongan";
     }
 }

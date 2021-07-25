@@ -2,7 +2,11 @@ package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
-import com.rps.adagawe.service.*;
+import com.rps.adagawe.helper.UserAdmin;
+import com.rps.adagawe.model.*;
+import com.rps.adagawe.service.AdminService;
+import com.rps.adagawe.service.LaporanService;
+import com.rps.adagawe.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,48 +32,37 @@ public class AdminController {
     @Autowired
     AdagaweService adagaweService;
 
+    @Autowired
+    LaporanService laporanService;
+
+    @GetMapping("/admin")
+    public String index(Model model, HttpServletRequest request) {
+        model.addAttribute("total_pelamar", adagaweService.findTotalUserByRole(1));
+        model.addAttribute("total_perusahaan", adagaweService.findTotalUserByRole(2));
+        model.addAttribute("total_lowongan", adagaweService.findTotalLamaran());
+
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
+
+        return "/admin/dashboard";
+    }
+
     @GetMapping("/admin/profile")
     public String getProfile(Model model, HttpServletRequest request) {
-
         model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
-
         model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/admin/profile/index";
     }
 
-//    @GetMapping("/admin/create")
-//    public String getCreate(Model model) {
-//        model.addAttribute("userAdmin", new UserAdmin());
-//
-//        return "/admin/create";
-//    }
-//
-//    @PostMapping("/admin/create")
-//    public String postCreate(RedirectAttributes redirectAttributes,
-//                             @ModelAttribute("userAdmin") @Valid UserAdmin userAdmin, BindingResult result, Model model) {
-//
-//        if (result.hasErrors()) {
-//            return "/admin/create";
-//        }
-//
-//        UserLogin user = new UserLogin();
-//        user.setEmail(userAdmin.getEmail());
-//        user.setPassword(userAdmin.getPassword());
-//        user.setUserRole(UserRole.Admin);
-//        user.setNama(userAdmin.getNamaAdmin());
-//        user.setFotoProfil("default-admin.png");
-//        userService.signUpUser(user);
-//
-//        Admin admin = new Admin();
-//        admin.setStatus(1);
-//        admin.setJenisKelamin(userAdmin.getJenisKelamin());
-//        admin.setNoTelepon(userAdmin.getNoTelepon());
-//        admin.setTanggalLahir(userAdmin.getTanggalLahir());
-//        adminService.save(admin);
-//
-//        //redirectAttributes.addFlashAttribute("message", "Jabatan berhasil ditambah.");
-//        return "redirect:/admin/view";
-//    }
+    @GetMapping("/admin/laporan-bidang")
+    public String getLaporanBidang(Model model, HttpServletRequest request) {
+        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("bidangs", laporanService.getBidang());
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
+        return "/admin/laporan/laporan-bidang";
+    }
 }
