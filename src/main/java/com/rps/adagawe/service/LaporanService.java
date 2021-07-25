@@ -1,9 +1,11 @@
 package com.rps.adagawe.service;
 
 import com.rps.adagawe.model.Bidang;
+import com.rps.adagawe.model.Daerah;
 import com.rps.adagawe.model.LowonganLamaran;
 import com.rps.adagawe.model.PelamarLamaran;
 import com.rps.adagawe.repository.BidangRepository;
+import com.rps.adagawe.repository.DaerahRepository;
 import com.rps.adagawe.repository.LowonganLamaranRepository;
 import com.rps.adagawe.repository.PelamarLamaranRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class LaporanService {
     @Autowired
     BidangRepository bidangRepository;
 
+    @Autowired
+    DaerahRepository daerahRepository;
+
     public List<PelamarLamaran> getLamaranByIdPelamar(int idPelamar) {
         return pelamarLamaranRepository.getPelamarLamaranByIdPelamar(idPelamar);
     }
@@ -32,5 +37,9 @@ public class LaporanService {
 
     public List<Bidang> getBidang() {
         return bidangRepository.getAllBidang();
+    }
+
+    public List<Daerah> getDaerah() {
+        return daerahRepository.getAllDaerah();
     }
 }
