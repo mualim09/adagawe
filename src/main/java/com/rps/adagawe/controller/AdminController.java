@@ -2,8 +2,7 @@ package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
-import com.rps.adagawe.helper.UserAdmin;
-import com.rps.adagawe.model.*;
+import com.rps.adagawe.service.*;
 import com.rps.adagawe.service.AdminService;
 import com.rps.adagawe.service.LaporanService;
 import com.rps.adagawe.service.UserService;
@@ -35,18 +34,6 @@ public class AdminController {
     @Autowired
     LaporanService laporanService;
 
-    @GetMapping("/admin")
-    public String index(Model model, HttpServletRequest request) {
-        model.addAttribute("total_pelamar", adagaweService.findTotalUserByRole(1));
-        model.addAttribute("total_perusahaan", adagaweService.findTotalUserByRole(2));
-        model.addAttribute("total_lowongan", adagaweService.findTotalLamaran());
-
-        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
-
-        return "/admin/dashboard";
-    }
-
     @GetMapping("/admin/profile")
     public String getProfile(Model model, HttpServletRequest request) {
         model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
@@ -64,5 +51,15 @@ public class AdminController {
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/admin/laporan/laporan-bidang";
+    }
+
+    @GetMapping("/admin/laporan-daerah")
+    public String getLaporanDaerah(Model model, HttpServletRequest request) {
+        model.addAttribute("admin", AdagaweMethods.getAdminBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("daerahs", laporanService.getDaerah());
+        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
+
+        return "/admin/laporan/laporan-daerah";
     }
 }
