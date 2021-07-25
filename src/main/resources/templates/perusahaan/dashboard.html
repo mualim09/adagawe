@@ -5,18 +5,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Daftar Jabatan</title>
+    <th:block layout:fragment="styles">
+        <link rel="stylesheet"
+              href="https://code.highcharts.com/css/highcharts.css" />
+    </th:block>
 </head>
 
 <body>
 
 <div layout:fragment="header">
     <h4 class="page-title">Dashboard</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Dashboard</a>
+        </li>
+    </ul>
 </div>
 <div layout:fragment="content">
-    <div class="col-md-12">
-        <div class="alert alert-danger" role="alert">
-            Lengkapi profil perusahaanmu terlebih dahulu!
-        </div>
+    <div class="col-md-12" th:if="${verify == true}">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <span>Ada lamaran yang belum diperiksa!</span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -24,100 +38,86 @@
             </button>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-12 col-md-4">
         <div class="card card-stats card-round">
             <div class="card-body ">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="icon-big text-center">
-                            <i class="flaticon-chart-pie text-warning"></i>
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                            <i class="fas fa-signature"></i>
                         </div>
                     </div>
-                    <div class="col-7 col-stats">
+                    <div class="col col-stats ml-3 ml-sm-0">
                         <div class="numbers">
                             <p class="card-category">Lowongan Aktif</p>
-                            <h4 class="card-title">24</h4>
+                            <h4 class="card-title" th:text="${total_lowongan_aktif}">99</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-12 col-md-4">
         <div class="card card-stats card-round">
-            <div class="card-body ">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="icon-big text-center">
-                            <i class="flaticon-coins text-success"></i>
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center icon-danger bubble-shadow-small">
+                            <i class="fas fa-window-close"></i>
                         </div>
                     </div>
-                    <div class="col-7 col-stats">
+                    <div class="col col-stats ml-3 ml-sm-0">
+                        <div class="numbers">
+                            <p class="card-category">Lowongan Tutup</p>
+                            <h4 class="card-title" th:text="${total_lowongan_tutup}">99</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center icon-secondary bubble-shadow-small">
+                            <i class="fas fa-list"></i>
+                        </div>
+                    </div>
+                    <div class="col col-stats ml-3 ml-sm-0">
                         <div class="numbers">
                             <p class="card-category">Total Lowongan</p>
-                            <h4 class="card-title">24</h4>
+                            <h4 class="card-title" th:text="${total_lowongan}">99</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card card-stats card-round">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="icon-big text-center">
-                            <i class="flaticon-error text-danger"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-stats">
-                        <div class="numbers">
-                            <p class="card-category">Merekrut</p>
-                            <h4 class="card-title">8</h4>
-                        </div>
-                    </div>
-                </div>
+    <div class="col-sm-12 col-md-6" th:if="${data_jenis_pegawai != null}">
+        <figure class="highcharts-figure" >
+            <div class="card">
+                <div id="lowongan-jenispegawai-bar" class="card-body"></div>
             </div>
-        </div>
+        </figure>
     </div>
-    <!--    <div class="col-sm-12 col-md-3">-->
-    <!--        <div class="card">-->
-    <!--            <img class="card-img-top" th:src="@{/img/dashboard_user.svg}" alt="Card Dashboard User">-->
-    <!--            <div class="card-body">-->
-    <!--                <h4 class="card-title font-weight-bold">Hello Rifqy!</h4>-->
-    <!--                <p class="card-text">Selamat datang kembali.</p>-->
-    <!--                <a href="#" class="btn btn-primary w-100">Learn More</a>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <div class="col-sm-12 col-md-12">
+    <div class="col-sm-12 col-md-6" th:if="${data_jenis_pegawai != null}">
         <div class="card">
-            <div class="card-header">
-                <div class="d-flex align-items-center">
-                    <h4 class="card-title font-weight-bold">Hasil Lowongan</h4>
-                </div>
-            </div>
             <div class="card-body">
-                <table class="display table table-hover">
+                <table class="table table-hover table-striped">
                     <thead>
                     <tr>
                         <td>#</td>
-                        <td>Lowongan</td>
-                        <td>Pelamar</td>
-                        <td>Diterima</td>
-                        <td>Status</td>
-                        <td>Aksi</td>
+                        <td>Jenis Pegawai</td>
+                        <td>Jumlah</td>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Backend Developer</td>
-                        <td>142</td>
-                        <td>4</td>
-                        <td>Selesai</td>
-                        <td>Lihat Laman & Detail</td>
+                    <tr th:each="data, iter : ${data_jenis_pegawai}">
+                        <td th:text="${iter.index + 1}"></td>
+                        <td th:text="${data.key}"></td>
+                        <td th:text="${data.value}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -125,7 +125,63 @@
         </div>
     </div>
 </div>
-
+<th:block layout:fragment="scripts">
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script type="text/javascript">
+        $(document).ready(
+            function() {
+                $.ajax({
+                    url : "/api/perusahaan/chart-jenispegawai",
+                    success : function(result) {
+                        var yearDtls = [];
+                        var countDtls = [];
+                        console.log(result);
+                        Object.keys(result).forEach(
+                            function(key) {
+                                yearDtls.push(key);
+                                countDtls.push(result[key]);
+                            });
+                        drawChart(yearDtls, countDtls, 'lowongan-jenispegawai-bar', 'Grafik Jenis Pegawai Pada Lowongan', 'Jenis Pegawai' );
+                    }
+                });
+            });
+        function drawChart(year, viewCounts, bar, titleText, labelText) {
+            Highcharts.chart(bar, {
+                chart : {
+                    type : 'column',
+                    styledMode : true
+                },
+                title : {
+                    text : titleText
+                },
+                xAxis : [ {
+                    title : {
+                        text : ''
+                    },
+                    categories : year
+                } ],
+                yAxis : [ {
+                    className : 'highcharts-color-0',
+                    title : {
+                        text : 'Jumlah'
+                    }
+                } ],
+                series : [ {
+                    name : labelText,
+                    data : viewCounts
+                } ],
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+    </script>
+</th:block>
 </body>
 
 </html>

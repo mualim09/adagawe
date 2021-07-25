@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PerusahaanController {
@@ -25,6 +26,12 @@ public class PerusahaanController {
 
     @Autowired
     AdagaweService adagaweService;
+
+    @Autowired
+    JenisPegawaiService jenisPegawaiService;
+
+    @Autowired
+    LowonganService lowonganService;
 
     @Autowired
     VerifikasiPerusahaanService verifikasiPerusahaanService;
@@ -40,25 +47,6 @@ public class PerusahaanController {
         List<Perusahaan> perusahaans = perusahaanService.findPerusahaanByRowStatus();
         model.addAttribute("perusahaans", perusahaans);
         return "/admin/perusahaan/index";
-    }
-
-    @GetMapping("/perusahaan")
-    public String getIndex(Model model, HttpServletRequest request) {
-
-        // Redirect jika belum melengkapi profil
-        if (!AdagaweMethods.isPerusahaanExist(adagaweService)) {
-            return "redirect:/perusahaan/information";
-        }
-
-//        int idPerusahaan = AdagaweMethods.getPerusahaanBySession(adagaweService).getId();
-//        model.addAttribute("total_lowongan_aktif", adagaweService.findTotalLowonganAktifByPerusahaan(idPerusahaan));
-//        model.addAttribute("total_lowongan", adagaweService.findTotalLowonganByPerusahaan(idPerusahaan));
-
-        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-//        model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
-
-        return "/perusahaan/dashboard";
     }
 
     @GetMapping("/perusahaan/information")

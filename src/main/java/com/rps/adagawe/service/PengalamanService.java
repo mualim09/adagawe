@@ -19,7 +19,7 @@ public class PengalamanService {
     }
 
     public void save(Pengalaman pengalaman) {
-        pengalaman.setRowStatus(1);
+//        pengalaman.setRowStatus(1);
         pengalamanRepository.save(pengalaman);
     }
 

@@ -1,5 +1,6 @@
 package com.rps.adagawe.model;
 
+import lombok.Builder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -59,7 +60,8 @@ public class Lowongan {
     @Column(name = "sembunyikan_gaji")
     private int sembunyikanGaji;
 
-    private int status;
+    @Builder.Default
+    private int status = 1;
 
     @Column(name = "created_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

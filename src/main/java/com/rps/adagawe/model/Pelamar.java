@@ -46,6 +46,7 @@ public class Pelamar {
     @Column(name = "id_user_login")
     private int idUserLogin;
 
+    @Builder.Default
     @Column(name = "row_status")
     private Integer rowStatus = 1;
 

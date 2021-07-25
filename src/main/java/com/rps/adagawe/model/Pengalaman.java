@@ -1,6 +1,7 @@
 package com.rps.adagawe.model;
 
 
+import lombok.Builder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -47,8 +48,9 @@ public class Pengalaman {
     @Column(name = "file_attachment")
     private String fileAttachment;
 
+    @Builder.Default
     @Column(name = "row_status")
-    private Integer rowStatus;
+    private Integer rowStatus = 1;
 
     public int getId() {
         return id;

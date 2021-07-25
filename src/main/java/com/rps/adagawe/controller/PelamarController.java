@@ -38,6 +38,8 @@ public class PelamarController {
     @Autowired
     LaporanService laporanService;
 
+    @Autowired
+    PerusahaanService perusahaanService;
 
     // Prefix URL
     private final String PREFIX = "/pelamar/profile";
@@ -87,15 +89,6 @@ public class PelamarController {
         redirectAttributes.addFlashAttribute("message_success", "Selamat datang, lengkapi profil kamu agar dilirik perusahaan!");
 
         return "redirect:/pelamar/setting";
-    }
-
-    @GetMapping("/pelamar/dashboard")
-    public String getDashboard(Model model, HttpServletRequest request) {
-
-        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
-
-        return "/pelamar/dashboard";
     }
 
     @GetMapping("/pelamar/setting")

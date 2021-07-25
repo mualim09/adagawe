@@ -20,4 +20,10 @@ public interface LamaranRepository extends CrudRepository<Lamaran, Integer> {
     void eliminatePelamarsByPendidikan(int idLowongan);
 
     Lamaran getLamaranById(int idLowongan);
+
+    @Query("from Lamaran where pelamar.id = :id")
+    List<Lamaran> getLamaranByIdPelamar(int id);
+
+    @Query("select COUNT(DISTINCT lowongan.perusahaan.userLogin.nama) from Lamaran where pelamar.id = :id")
+    int getCountLamaranByPelamar(int id);
 }

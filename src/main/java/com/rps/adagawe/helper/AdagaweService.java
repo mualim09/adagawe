@@ -47,17 +47,17 @@ public class AdagaweService {
 
     public void updatePerusahaan(Perusahaan perusahaan) { perusahaanRepository.save(perusahaan); }
 
-    public int findTotalLamaran() {
-        return adagaweRepository.getTotalLowongan();
-    }
+    public int findTotalLowongan() { return adagaweRepository.getTotalLowongan(); }
 
     public int findTotalUserByRole(int id) {
         return adagaweRepository.getTotalUserByUserRole(id);
     }
 
-    public int findTotalLowonganByPerusahaan(int id) {
-        return adagaweRepository.getTotalLowonganByPerusahaan(id);
-    }
+    public int findTotalUser() { return adagaweRepository.getTotalUser();}
 
-    public int findTotalLowonganAktifByPerusahaan(int id) { return adagaweRepository.getTotalLowonganAktifByPerusahaan(id); }
+//    public int findTotalLowonganByPerusahaan(int id) {
+//        return adagaweRepository.getTotalLowonganByPerusahaan(id);
+//    }
+//
+//    public int findTotalLowonganAktifByPerusahaan(int id) { return adagaweRepository.getTotalLowonganAktifByPerusahaan(id); }
 }

@@ -1,5 +1,6 @@
 package com.rps.adagawe.model;
 
+import lombok.Builder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -34,8 +35,9 @@ public class Admin {
     @Column(name = "no_telepon")
     private String noTelepon;
 
+    @Builder.Default
     @Column(name = "row_status")
-    private int status;
+    private int status = 1;
 
     public int getId() {
         return id;

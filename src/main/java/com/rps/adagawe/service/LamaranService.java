@@ -19,7 +19,7 @@ public class LamaranService {
     }
 
 
-    public List<Pelamar> getPelamarByIdLowongan(int idLowongan) {
+    public List<Pelamar> getLamaranByIdLowongan(int idLowongan) {
         return null;
     }
 
@@ -29,5 +29,13 @@ public class LamaranService {
 
     public Lamaran getLamaranById(int idLamaran) {
         return lamaranRepository.getLamaranById(idLamaran);
+    }
+
+    public List<Lamaran> getLamaranByIdPelamar(int id) {
+        return lamaranRepository.getLamaranByIdPelamar(id);
+    }
+
+    public int getCountLamaranPerusahaanByPelamar(int id) {
+        return lamaranRepository.getCountLamaranByPelamar(id);
     }
 }
