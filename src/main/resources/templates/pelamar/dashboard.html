@@ -5,6 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Daftar Jabatan</title>
+    <th:block layout:fragment="styles">
+        <link rel="stylesheet"
+              href="https://code.highcharts.com/css/highcharts.css" />
+    </th:block>
 </head>
 
 <body>
@@ -38,7 +42,7 @@
                     <div class="col col-stats ml-3 ml-sm-0">
                         <div class="numbers">
                             <p class="card-category">Melamar</p>
-                            <h4 class="card-title">9</h4>
+                            <h4 class="card-title" th:text="${total_lamaran}">9</h4>
                         </div>
                     </div>
                 </div>
@@ -57,15 +61,100 @@
                     <div class="col col-stats ml-3 ml-sm-0">
                         <div class="numbers">
                             <p class="card-category">Perusahaan</p>
-                            <h4 class="card-title">5</h4>
+                            <h4 class="card-title" th:text="${total_perusahaan}">5</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-sm-12 col-md-6" th:if="${data_lamaran != null}">
+        <figure class="highcharts-figure" >
+            <div class="card">
+                <div id="lamaran-bar" class="card-body"></div>
+            </div>
+        </figure>
+    </div>
+    <div class="col-sm-12 col-md-6" th:if="${data_lamaran != null}">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Perusahaan</td>
+                        <td>Jumlah</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="data, iter : ${data_lamaran}">
+                        <td th:text="${iter.index + 1}"></td>
+                        <td th:text="${data.key}"></td>
+                        <td th:text="${data.value}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
-
+<th:block layout:fragment="scripts">
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script type="text/javascript">
+        $(document).ready(
+            function() {
+                $.ajax({
+                    url : "/api/pelamar/chart-lamaran",
+                    success : function(result) {
+                        var yearDtls = [];
+                        var countDtls = [];
+                        console.log(result);
+                        Object.keys(result).forEach(
+                            function(key) {
+                                yearDtls.push(key);
+                                countDtls.push(result[key]);
+                            });
+                        drawChart(yearDtls, countDtls, 'lamaran-bar', 'Grafik Total Lamaran Pada Perusahaan', 'Perusahaan');
+                    }
+                });
+            });
+        function drawChart(year, viewCounts, bar, titleText, labelText) {
+            Highcharts.chart(bar, {
+                chart : {
+                    type : 'column',
+                    styledMode : true
+                },
+                title : {
+                    text : titleText
+                },
+                xAxis : [ {
+                    title : {
+                        text : ''
+                    },
+                    categories : year
+                } ],
+                yAxis : [ {
+                    className : 'highcharts-color-0',
+                    title : {
+                        text : 'Jumlah'
+                    }
+                } ],
+                series : [ {
+                    name : labelText,
+                    data : viewCounts
+                } ],
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+    </script>
+</th:block>
 </body>
 
 </html>

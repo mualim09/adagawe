@@ -309,6 +309,7 @@ footer .footer-menu li a {
   -o-object-fit: cover;
   object-fit: cover;
   z-index: 1;
+  background: white;
 }
 
 .card-job-content {

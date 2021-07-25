@@ -1,9 +1,7 @@
 package com.rps.adagawe.helper;
 
 import com.rps.adagawe.model.*;
-import com.rps.adagawe.service.JenisPegawaiService;
-import com.rps.adagawe.service.LowonganService;
-import com.rps.adagawe.service.VerifikasiPerusahaanService;
+import com.rps.adagawe.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -151,6 +149,18 @@ public class AdagaweMethods {
         return myList.size();
     }
 
+    public static Integer filterLamaran(List<Lamaran> lamarans, int id) {
+        List<Lamaran> myList = new ArrayList<>();
+
+        for (Lamaran lamaran :  lamarans) {
+            if (lamaran.getLowongan().getPerusahaan().getId() == id) {
+                myList.add(lamaran);
+            }
+        }
+
+        return myList.size();
+    }
+
     public static Map<String, Integer> getBarChartVerifikasi(VerifikasiPerusahaanService service) {
         List<VerifikasiPerusahaan> myList = service.getAll();
         Map<String, Integer> graphData = new TreeMap<>();
@@ -158,6 +168,21 @@ public class AdagaweMethods {
         graphData.put("Menunggu Verifikasi", AdagaweMethods.filterVerifikasiPerusahaan(myList, 0).size());
         graphData.put("Terverifikasi", AdagaweMethods.filterVerifikasiPerusahaan(myList, 1).size());
         graphData.put("Verifikasi Ditolak", AdagaweMethods.filterVerifikasiPerusahaan(myList, 2).size());
+
+        return graphData;
+    }
+
+    public static Map<String, Integer> getBarChartLamaran(LamaranService lService, PerusahaanService pService, int id) {
+        List<Lamaran> myList = lService.getLamaranByIdPelamar(id);
+        List<Perusahaan> listP = pService.getAll();
+        Map<String, Integer> graphData = new TreeMap<>();
+
+        for (int i = 0; i < myList.size(); i++) {
+            int value = AdagaweMethods.filterLamaran(myList, listP.get(i).getId());
+            if (value > 0) {
+                graphData.put(listP.get(i).getUserLogin().getNama(), value);
+            }
+        }
 
         return graphData;
     }

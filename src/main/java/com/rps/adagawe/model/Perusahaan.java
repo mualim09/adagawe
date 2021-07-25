@@ -40,7 +40,7 @@ public class Perusahaan {
 
     @Builder.Default
     @Column(name = "row_status")
-    private Integer rowStatus = 0;
+    private Integer rowStatus = 1;
 
     public int getId() {
         return id;
