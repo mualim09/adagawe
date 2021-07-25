@@ -43,9 +43,6 @@ public class PelamarController {
     PelamarLamaranService pelamarLamaranService;
 
     @Autowired
-    LamaranService lamaranService;
-
-    @Autowired
     PerusahaanService perusahaanService;
 
     // Prefix URL
@@ -96,20 +93,6 @@ public class PelamarController {
         redirectAttributes.addFlashAttribute("message_success", "Selamat datang, lengkapi profil kamu agar dilirik perusahaan!");
 
         return "redirect:/pelamar/setting";
-    }
-
-    @GetMapping("/pelamar/dashboard")
-    public String getDashboard(Model model, HttpServletRequest request) {
-
-        Pelamar pelamar = AdagaweMethods.getPelamarBySession(adagaweService);
-        model.addAttribute("total_lamaran", lamaranService.getLamaranByIdPelamar(pelamar.getId()).size());
-        model.addAttribute("total_perusahaan", lamaranService.getCountLamaranPerusahaanByPelamar(pelamar.getId()));
-        model.addAttribute("data_lamaran", AdagaweMethods.getBarChartLamaran(lamaranService, perusahaanService, pelamar.getId()));
-
-        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
-
-        return "/pelamar/dashboard";
     }
 
     @GetMapping("/pelamar/setting")

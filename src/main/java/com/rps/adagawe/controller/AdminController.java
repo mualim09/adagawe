@@ -26,34 +26,7 @@ public class AdminController {
     UserService userService;
 
     @Autowired
-    JenisPegawaiService jenisPegawaiService;
-
-    @Autowired
-    LowonganService lowonganService;
-
-    @Autowired
     AdagaweService adagaweService;
-
-    @Autowired
-    VerifikasiPerusahaanService verifikasiPerusahaanService;
-
-    @GetMapping("/admin")
-    public String index(Model model, HttpServletRequest request) {
-        model.addAttribute("total_pengguna", adagaweService.findTotalUser());
-        model.addAttribute("total_pelamar", adagaweService.findTotalUserByRole(1));
-        model.addAttribute("total_perusahaan", adagaweService.findTotalUserByRole(2));
-        model.addAttribute("total_lowongan", adagaweService.findTotalLowongan());
-
-        Map<String, Integer> barData = AdagaweMethods.getBarChartVerifikasi(verifikasiPerusahaanService);
-        model.addAttribute("verify", barData.get("Menunggu Verifikasi") > 0 ? true : false);
-        model.addAttribute("data_verifikasi", barData);
-        model.addAttribute("data_jenis_pegawai", AdagaweMethods.getBarChartJenisPegawai(jenisPegawaiService, lowonganService));
-
-        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
-
-        return "/admin/dashboard";
-    }
 
     @GetMapping("/admin/profile")
     public String getProfile(Model model, HttpServletRequest request) {

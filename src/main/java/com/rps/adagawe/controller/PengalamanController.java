@@ -1,5 +1,7 @@
 package com.rps.adagawe.controller;
 
+import com.rps.adagawe.helper.AdagaweMethods;
+import com.rps.adagawe.helper.AdagaweService;
 import com.rps.adagawe.helper.FileUploadHelper;
 import com.rps.adagawe.helper.AdagaweConstants;
 import com.rps.adagawe.model.Pelamar;
@@ -33,6 +35,9 @@ public class PengalamanController {
 
     @Autowired
     JenisPegawaiService jenisPegawaiService;
+
+    @Autowired
+    AdagaweService adagaweService;
 
     // Prefix Page URL
     private final String PREFIX = "/pelamar/pengalaman";
@@ -70,7 +75,7 @@ public class PengalamanController {
         }
 
         String fileName = FileUploadHelper.upload(file, "attachment");
-        Pelamar pelamar = pelamarService.getPelamarById(1);
+        Pelamar pelamar = pelamarService.getPelamarById(AdagaweMethods.getPelamarBySession(adagaweService).getId());
         pengalaman.setPelamar(pelamar);
         pengalaman.setFileAttachment(fileName);
         pengalamanService.save(pengalaman);

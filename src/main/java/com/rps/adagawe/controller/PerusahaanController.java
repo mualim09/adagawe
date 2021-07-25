@@ -46,28 +46,6 @@ public class PerusahaanController {
         return "/admin/perusahaan/index";
     }
 
-    @GetMapping("/perusahaan")
-    public String getIndex(Model model, HttpServletRequest request) {
-
-        // Redirect jika belum melengkapi profil
-        if (!AdagaweMethods.isPerusahaanExist(adagaweService)) {
-            return "redirect:/perusahaan/information";
-        }
-
-        Perusahaan data = AdagaweMethods.getPerusahaanBySession(adagaweService);
-        List<Lowongan> lowongans = lowonganService.getLowonganByIdPerusahaan(data.getId());
-        model.addAttribute("total_lowongan_aktif", AdagaweMethods.filterLowongan(lowongans, 1).size());
-        model.addAttribute("total_lowongan_tutup", AdagaweMethods.filterLowongan(lowongans, 0).size());
-        model.addAttribute("total_lowongan", lowongans.size());
-        model.addAttribute("verify", true);
-        model.addAttribute("data_jenis_pegawai", AdagaweMethods.getBarChartJenisPegawaiByPerusahaan(jenisPegawaiService, lowonganService, data.getId()));
-
-        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
-        model.addAttribute("url", AdagaweMethods.getMainUrl(request, 1));
-
-        return "/perusahaan/dashboard";
-    }
-
     @GetMapping("/perusahaan/information")
     public String getInformation(Model model, HttpServletRequest request) {
         model.addAttribute("perusahaan", new Perusahaan());

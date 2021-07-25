@@ -1,6 +1,8 @@
 package com.rps.adagawe.model;
 
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
@@ -18,8 +20,9 @@ public class Jabatan {
     @NotEmpty(message = "Deskripsi wajib diisi.")
     private String deskripsi;
 
+    @Builder.Default
     @Column(name = "row_status")
-    private Integer rowStatus;
+    private Integer rowStatus = 1;
 
     public Integer getId() {
         return id;

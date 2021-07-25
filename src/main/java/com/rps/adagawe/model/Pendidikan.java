@@ -1,5 +1,6 @@
 package com.rps.adagawe.model;
 
+import lombok.Builder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -38,8 +39,9 @@ public class Pendidikan {
     @Column(name = "tahun_selesai")
     private String tahunSelesai;
 
+    @Builder.Default
     @Column(name = "row_status")
-    private Integer rowStatus;
+    private Integer rowStatus = 1;
 
     public int getId() {
         return id;
