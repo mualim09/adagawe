@@ -18,6 +18,19 @@ public class NotifikasiService {
     }
 
     public List<Notifikasi> getAll() {
-        return (List<Notifikasi>) notifikasiRepository.findAllByOrderByCreatedDateDesc();
+        return notifikasiRepository.findAllByOrderByCreatedDateDesc();
     }
+
+    public List<Notifikasi> getNotifikasiByPelamar(int idPelamar) {
+        return notifikasiRepository.getNotifikasiByIdPelamar(idPelamar);
+    }
+
+    public Notifikasi getNotifikasiByIdLamaranAndTahap(int idLamaran, String tahap) {
+        return notifikasiRepository.getNotifikasiByIdLamaranAndTahap(idLamaran, tahap);
+    }
+
+    public List<Notifikasi> getNotifikasiByIdLamaran(int idLamaran) {
+        return notifikasiRepository.findAllByIdLamaran(idLamaran);
+    }
+
 }

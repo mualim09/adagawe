@@ -16,6 +16,7 @@ public class Notifikasi {
 
     private int hasil;
 
+    @Column(name = "tahap_selanjutnya")
     private String tahapSelanjutnya;
 
     @Column(name = "tanggal_tahapan")

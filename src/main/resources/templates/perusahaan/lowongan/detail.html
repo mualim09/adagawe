@@ -53,13 +53,6 @@
                         <span th:text="*{jenisPegawai.namajenisPegawai}"/>
                     </div>
                 </div>
-<!--                <div class="row form-group">-->
-<!--                    <div class="col-md-8">-->
-<!--                        <label class="font-weight-bold">Keterangan</label>-->
-<!--                        </br>-->
-<!--                        <span th:text="*{keterangan}"/>-->
-<!--                    </div>-->
-<!--                </div>-->
                 <div class="row form-group">
                     <div class="col-lg-4">
                         <label class="font-weight-bold">Pengalaman Kerja</label>
@@ -82,6 +75,21 @@
                         <label class="font-weight-bold">Gaji Maksimal</label>
                         </br>
                         <span th:text="*{'Rp' + #numbers.formatDecimal(gajiMaksimal, 0, 'POINT', 0, 'COMMA')}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <label class="font-weight-bold">Jenjang Minimal</label>
+                        </br>
+                        <th:block th:switch="*{jenjangMinimal}">
+                            <th:block th:case="1">SD/MI</th:block>
+                            <th:block th:case="2">SMP/MTs</th:block>
+                            <th:block th:case="3">SMA/MA/SMK</th:block>
+                            <th:block th:case="4">D3</th:block>
+                            <th:block th:case="5">S1/D4</th:block>
+                            <th:block th:case="6">S2</th:block>
+                            <th:block th:case="7">S3</th:block>
+                        </th:block>
                     </div>
                 </div>
             </div>
@@ -159,7 +167,6 @@
                                     <td>Nama Pelamar</td>
                                     <td>Jenkel</td>
                                     <td>Umur</td>
-                                    <td>Domisili</td>
                                     <td>Pend. Terakhir</td>
                                     <td>Nilai Uji Kompetensi</td>
                                     <td>Status</td>
@@ -172,7 +179,6 @@
                                     <td th:text="${lamaran.namaPelamar}"></td>
                                     <td th:text="${lamaran.jenisKelamin}"></td>
                                     <td th:text="${lamaran.umur}"></td>
-                                    <td th:text="${lamaran.kota}"></td>
                                     <td th:text="${lamaran.pendidikanTerakhir == null ? '-' : lamaran.pendidikanTerakhir}"></td>
                                     <td th:text="${lamaran.nilaiUjiKompetensi} != null ? ${lamaran.nilaiUjiKompetensi} : '-'"></td>
                                     <td th:switch="${lamaran.statusLamaran}">
@@ -188,20 +194,20 @@
                                         <div class="d-flex">
                                             <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary mr-1"><i class="fa fa-eye"></i> View</a>
 
-                                            <button type="button" th:if="${lamaran.statusLamaran != 3}" class="btn btn-success btn-sm mr-1 terimaButton"
+                                            <button type="button" th:if="${lamaran.statusLamaran != 3 and lamaran.nilaiUjiKompetensi != null}" class="btn btn-success btn-sm mr-1 terimaButton"
                                                     th:data-idlamaran="${lamaran.idLamaran}" data-status="4" data-tahap="Uji Kompetensi"
                                                     data-tahapselanjutnya="Wawancara" data-toggle="modal" data-target="#accModal">
                                                 <i class="fa fa-check"></i> Terima
                                             </button>
 
-                                            <button type="button" th:if="${lamaran.statusLamaran != 3}" class="btn btn-success btn-sm mr-1 scheduleButton"
-                                                    th:data-idlamaran="${lamaran.idLamaran}" data-status="4" data-tahap="Uji Kompetensi"
-                                                    data-tahapselanjutnya="Wawancara" data-toggle="modal" data-target="#accModal">
-                                                <i class="fa fa-check"></i> Terima
+                                            <button type="button" th:if="${lamaran.statusLamaran != 3}" class="btn btn-warning btn-sm mr-1 scheduleButton"
+                                                    th:data-idlamaran="${lamaran.idLamaran}" data-tahap="Uji Kompetensi"
+                                                    data-toggle="modal" data-target="#scheduleModal">
+                                                <i class="fa fa-calendar"></i> Jadwal
                                             </button>
 
                                             <form th:action="@{/perusahaan/lamaran/tolak/{id}(id=${lamaran.idLamaran})}"
-                                                  th:if="${lamaran.statusLamaran != 3}" method="post" class="d-inline mr-1">
+                                                  th:if="${lamaran.statusLamaran != 3 and lamaran.nilaiUjiKompetensi != null}" method="post" class="d-inline mr-1">
                                                 <input type="hidden" th:value="3" name="status">
                                                 <input type="hidden" value="Uji Kompetensi" name="tahap">
                                                 <button class="btn btn-sm btn-danger" type="submit" name="result" value="Tolak"
@@ -269,7 +275,7 @@
                                         </form>
 
                                         <form th:action="@{/perusahaan/lamaran/tolak/{id}(id=${lamaran.idLamaran})}"
-                                              th:if="${lamaran.statusLamaran != 5}" method="post" class="d-inline mr-1">
+                                              th:if="${lamaran.nilaiWawancara} != null and ${lamaran.statusLamaran != 5}" method="post" class="d-inline mr-1">
                                             <input type="hidden" th:value="5" name="status">
                                             <input type="hidden" value="Wawancara" name="tahap">
                                             <button class="btn btn-sm btn-danger" type="submit" name="result" value="Tolak"
@@ -370,7 +376,8 @@
                                     <div class="form-group">
                                         <label for="txtTahap">Tahap</label>
                                         <input type="hidden" name="status" id="txtStatus">
-                                        <input type="text" name="tahap" id="txtTahap" readonly class="form-control">
+                                        <input type="hidden" name="tahap" id="txtTahap" readonly class="form-control">
+                                        <input type="text" name="tahap_selanjutnya" id="txtTahapSelanjutnya" readonly class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="txtWaktu">Waktu</label>
@@ -386,7 +393,37 @@
                     </div>
                 </div>
 
-<!--                End of modal-->
+                <!-- Schedule Modal -->
+                <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form method="post" class="d-inline" id="formSchedule">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="scheduleModalLabel">Terima</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="txtTahapSchedule">Tahap</label>
+                                        <input type="text" name="tahap" id="txtTahapSchedule" readonly class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txtWaktuSchedule">Waktu</label>
+                                        <input type="datetime-local" class="form-control" id="txtWaktuSchedule" name="tanggal_tahap">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+<!--            End of modal-->
             </div>
         </div>
     </div>
@@ -407,11 +444,21 @@
         $('.terimaButton').click(function () {
             const idLamaran = $(this).data('idlamaran');
             const tahap = $(this).data('tahap');
+            const tahapSelanjutnya = $(this).data('tahapselanjutnya');
             const status = $(this).data('status');
 
             $('#formAcc').attr('action', '/perusahaan/lamaran/terima/' + idLamaran);
             $('#txtStatus').val(status);
             $('#txtTahap').val(tahap);
+            $('#txtTahapSelanjutnya').val(tahapSelanjutnya);
+        });
+
+        $('.scheduleButton').click(function () {
+            const idLamaran = $(this).data('idlamaran');
+            const tahap = $(this).data('tahap');
+
+            $('#formSchedule').attr('action', '/perusahaan/lamaran/schedule-wawancara/' + idLamaran);
+            $('#txtTahapSchedule').val(tahap);
         });
     </script>
 </th:block>
