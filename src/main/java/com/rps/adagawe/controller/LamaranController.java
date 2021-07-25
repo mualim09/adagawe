@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class LamaranController {
@@ -72,12 +73,15 @@ public class LamaranController {
         String fileName = FileUploadHelper.upload(file, "resume");
         int idPelamar = AdagaweMethods.getPelamarBySession(adagaweService).getId();
 
-        lamaran.setResume(fileName);
-        lamaran.setTanggalMelamar(new Date());
-        lamaran.setIdLowongan(lowongan.getId());
-        lamaran.setIdPelamar(idPelamar);
-        lamaran.setStatusLamaran(0);
-        lamaranService.save(lamaran);
+        Lamaran l = new Lamaran();
+        l.setIdPelamar(idPelamar);
+        l.setIdLowongan(lowongan.getId());
+        l.setTanggalMelamar(new Date());
+        l.setPesanPelamar(lamaran.getPesanPelamar());
+        l.setResume(fileName);
+        l.setStatusLamaran(0);
+
+        lamaranService.save(l);
 
         return "redirect:/lamaran/result";
     }
@@ -89,6 +93,22 @@ public class LamaranController {
 
     @PostMapping("/perusahaan/lamaran/{id}/clean")
     public String seleksiLamaran(@PathVariable("id") int idLowongan) {
+        List<LamaranPelamar> lamaranPelamarList = pelamarService.getLamaranPelamarByIdLowongan(idLowongan);
+        System.out.println("Lamaran Pelamar List " + lamaranPelamarList);
+        for(LamaranPelamar lamaranPelamar : lamaranPelamarList) {
+            double tingkatanJenjang = Double.parseDouble(lamaranPelamar.getTingkatanJenjang());
+            double jenjangMinimal = Double.parseDouble(lamaranPelamar.getJenjangMinimal().toString());
+
+            Notifikasi notifikasi = new Notifikasi();
+            notifikasi.setIdLamaran(lamaranPelamar.getIdLamaran());
+            notifikasi.setTahap("Kualifikasi");
+            notifikasi.setHasil(tingkatanJenjang < jenjangMinimal ? 0 : 1);
+            notifikasi.setTahapSelanjutnya("Uji Kompetensi");
+            notifikasi.setCreatedDate(new Date());
+            System.out.println("Loop " + notifikasi);
+            notifikasiService.save(notifikasi);
+        }
+
         lamaranService.eliminatePelamarByPendidikan(idLowongan);
 
         return "redirect:/perusahaan/lowongan/detail/" + idLowongan;
@@ -103,7 +123,8 @@ public class LamaranController {
         model.addAttribute("pengalamans", pengalamanService.getPengalamanByIdUser(lamaranPelamar.getIdPelamar()));
         model.addAttribute("pendidikans", pendidikanService.getPendidikanByIdUser(lamaranPelamar.getIdPelamar()));
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
-        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
+        model.addAttribute("notifications", notifikasiService.getNotifikasiByIdLamaran(lamaranPelamar.getIdLamaran()));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
 
         return "perusahaan/lamaran/detail";
     }
@@ -132,6 +153,7 @@ public class LamaranController {
 
     @PostMapping("/perusahaan/lamaran/terima/{id}")
     public String terimaTahapan(@PathVariable("id") int idLamaran, @RequestParam("tahap") String tahap,
+                                      @RequestParam(value = "tahap_selanjutnya", required = false) String tahapSelanjutnya,
                                       @RequestParam(value = "tanggal_tahap", required = false) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm") Date tanggalTahap,
                                 @RequestParam("status") int status) {
         Lamaran lamaran = lamaranService.getLamaranById(idLamaran);
@@ -141,9 +163,11 @@ public class LamaranController {
         Notifikasi notifikasi = new Notifikasi();
         notifikasi.setIdLamaran(idLamaran);
         notifikasi.setTahap(tahap);
+        notifikasi.setHasil(1);
+        notifikasi.setTahapSelanjutnya(tahapSelanjutnya);
         notifikasi.setTanggalTahapan(tanggalTahap);
-        notifikasi.setHasilTahapSebelumnya(1);
         notifikasi.setCreatedDate(new Date());
+
         notifikasiService.save(notifikasi);
 
         return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();
@@ -151,6 +175,7 @@ public class LamaranController {
 
     @PostMapping("/perusahaan/lamaran/tolak/{id}")
     public String tolakTahapan(@PathVariable("id") int idLamaran, @RequestParam("tahap") String tahap,
+                                @RequestParam(value = "tahap_selanjutnya", required = false) String tahapSelanjutnya,
                                 @RequestParam(value = "tanggal_tahap", required = false) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm") Date tanggalTahap,
                                 @RequestParam("status") int status) {
         Lamaran lamaran = lamaranService.getLamaranById(idLamaran);
@@ -160,9 +185,21 @@ public class LamaranController {
         Notifikasi notifikasi = new Notifikasi();
         notifikasi.setIdLamaran(idLamaran);
         notifikasi.setTahap(tahap);
-        notifikasi.setTanggalTahapan(tanggalTahap);
-        notifikasi.setHasilTahapSebelumnya(0);
+        notifikasi.setHasil(0);
         notifikasi.setCreatedDate(new Date());
+
+        notifikasiService.save(notifikasi);
+
+        return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();
+    }
+
+    @PostMapping("/perusahaan/lamaran/schedule-wawancara/{id}")
+    public String scheduleNotifikasi(@PathVariable("id") int idLamaran, @RequestParam("tahap") String tahap,
+                                     @RequestParam(value = "tanggal_tahap", required = false) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm") Date tanggalTahap) {
+        Lamaran lamaran = lamaranService.getLamaranById(idLamaran);
+
+        Notifikasi notifikasi = notifikasiService.getNotifikasiByIdLamaranAndTahap(idLamaran, tahap);
+        notifikasi.setTanggalTahapan(tanggalTahap);
         notifikasiService.save(notifikasi);
 
         return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();

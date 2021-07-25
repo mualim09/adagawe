@@ -147,6 +147,7 @@ public class LowonganController {
         model.addAttribute("lamarans4", pelamarService.getPelamarByIdLowongan(lowonganId, 6, 6));
 
         model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+        model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
         return "/perusahaan/lowongan/detail";

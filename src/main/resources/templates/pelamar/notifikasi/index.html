@@ -36,28 +36,34 @@
       <div class="card-body">
         <div class="table-responsive">
           <table id="add-row" class="display table table-striped table-hover dataTable">
-                <thead>
-                <tr>
-                  <td>#</td>
-                  <td>Tgl. Notifikasi</td>
-                  <td>Judul Lowongan</td>
-                  <td>Perusahaan</td>
-                  <td>Tahap</td>
-                  <td>Tgl. Tahapan</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="notification, iter : ${notifications}">
-                  <td th:text="${iter.index + 1}"></td>
-                  <td th:text="${#dates.format(notification.createdDate, 'dd MMM yyyy, HH:mm')}"></td>
-                  <td th:text="${notification.lamaran.lowongan.judulLowongan}"></td>
-                  <td th:text="${notification.lamaran.lowongan.perusahaan.userLogin.nama}"></td>
-                  <td th:text="${notification.tahap}"></td>
-                  <td th:text="${#dates.format(notification.tanggalTahapan, 'dd MMM yyyy, HH:mm')}"></td>
-                </tr>
-                </tbody>
-              </table>
-
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Tgl. Notifikasi</td>
+                <td>Judul Lowongan</td>
+                <td>Perusahaan</td>
+                <td>Tahap</td>
+                <td>Hasil</td>
+                <td>Tahap Selanjutnya</td>
+                <td>Tgl. Tahapan</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="notification, iter : ${notifications}">
+                <td th:text="${iter.index + 1}"></td>
+                <td th:text="${#dates.format(notification.createdDate, 'dd MMM yyyy, HH:mm')}"></td>
+                <td th:text="${notification.lamaran.lowongan.judulLowongan}"></td>
+                <td th:text="${notification.lamaran.lowongan.perusahaan.userLogin.nama}"></td>
+                <td th:text="${notification.tahap}"></td>
+                <td th:switch="${notification.hasil}">
+                  <th:block th:case="0">Ditolak</th:block>
+                  <th:block th:case="1">Diterima</th:block>
+                </td>
+                <td th:text="${notification.tahapSelanjutnya}"></td>
+                <td th:text="${#dates.format(notification.tanggalTahapan, 'dd MMM yyyy, HH:mm')}"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

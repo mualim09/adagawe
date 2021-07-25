@@ -1,6 +1,5 @@
 package com.rps.adagawe.service;
 
-import com.rps.adagawe.model.Admin;
 import com.rps.adagawe.model.Lamaran;
 import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.repository.LamaranRepository;

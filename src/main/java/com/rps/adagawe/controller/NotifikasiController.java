@@ -2,6 +2,7 @@ package com.rps.adagawe.controller;
 
 import com.rps.adagawe.helper.AdagaweMethods;
 import com.rps.adagawe.helper.AdagaweService;
+import com.rps.adagawe.model.Pelamar;
 import com.rps.adagawe.service.NotifikasiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,11 +22,13 @@ public class NotifikasiController {
 
     @GetMapping("/pelamar/notifikasi")
     public String getIndex(Model model, HttpServletRequest request) {
-        model.addAttribute("pelamar", AdagaweMethods.getPelamarBySession(adagaweService));
+        Pelamar pelamar = AdagaweMethods.getPelamarBySession(adagaweService);
+
+        model.addAttribute("pelamar", pelamar);
         model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
-        model.addAttribute("notifications", notifikasiService.getAll());
+        model.addAttribute("notifications", notifikasiService.getNotifikasiByPelamar(pelamar.getId()));
 
         return "/pelamar/notifikasi/index";
     }
