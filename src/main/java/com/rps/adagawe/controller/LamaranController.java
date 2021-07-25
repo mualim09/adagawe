@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class LamaranController {
@@ -90,6 +91,19 @@ public class LamaranController {
     @PostMapping("/perusahaan/lamaran/{id}/clean")
     public String seleksiLamaran(@PathVariable("id") int idLowongan) {
         lamaranService.eliminatePelamarByPendidikan(idLowongan);
+        List<LamaranPelamar> lamaranPelamarList = pelamarService.getLamaranPelamarByIdLowongan(idLowongan);
+        for(LamaranPelamar lamaranPelamar : lamaranPelamarList) {
+            double tingkatanJenjang = Double.parseDouble(lamaranPelamar.getTingkatanJenjang());
+            double jenjangMinimal = Double.parseDouble(lamaranPelamar.getJenjangMinimal().toString());
+
+            Notifikasi notifikasi = new Notifikasi();
+            notifikasi.setIdLamaran(lamaranPelamar.getIdLamaran());
+            notifikasi.setTahap("Kualifikasi");
+            notifikasi.setHasil(tingkatanJenjang < jenjangMinimal ? 0 : 1);
+            notifikasi.setTahapSelanjutnya("Uji Kompetensi");
+            notifikasi.setCreatedDate(new Date());
+            notifikasiService.save(notifikasi);
+        }
 
         return "redirect:/perusahaan/lowongan/detail/" + idLowongan;
     }
@@ -132,6 +146,7 @@ public class LamaranController {
 
     @PostMapping("/perusahaan/lamaran/terima/{id}")
     public String terimaTahapan(@PathVariable("id") int idLamaran, @RequestParam("tahap") String tahap,
+                                      @RequestParam("tahap_selanjutnya") String tahapSelanjutnya,
                                       @RequestParam(value = "tanggal_tahap", required = false) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm") Date tanggalTahap,
                                 @RequestParam("status") int status) {
         Lamaran lamaran = lamaranService.getLamaranById(idLamaran);
@@ -141,9 +156,11 @@ public class LamaranController {
         Notifikasi notifikasi = new Notifikasi();
         notifikasi.setIdLamaran(idLamaran);
         notifikasi.setTahap(tahap);
+        notifikasi.setHasil(1);
+        notifikasi.setTahapSelanjutnya(tahapSelanjutnya);
         notifikasi.setTanggalTahapan(tanggalTahap);
-        notifikasi.setHasilTahapSebelumnya(1);
         notifikasi.setCreatedDate(new Date());
+
         notifikasiService.save(notifikasi);
 
         return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();
@@ -151,6 +168,7 @@ public class LamaranController {
 
     @PostMapping("/perusahaan/lamaran/tolak/{id}")
     public String tolakTahapan(@PathVariable("id") int idLamaran, @RequestParam("tahap") String tahap,
+                                @RequestParam("tahap_selanjutnya") String tahapSelanjutnya,
                                 @RequestParam(value = "tanggal_tahap", required = false) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm") Date tanggalTahap,
                                 @RequestParam("status") int status) {
         Lamaran lamaran = lamaranService.getLamaranById(idLamaran);
@@ -160,10 +178,22 @@ public class LamaranController {
         Notifikasi notifikasi = new Notifikasi();
         notifikasi.setIdLamaran(idLamaran);
         notifikasi.setTahap(tahap);
+        notifikasi.setHasil(0);
+        notifikasi.setTahapSelanjutnya(tahapSelanjutnya);
         notifikasi.setTanggalTahapan(tanggalTahap);
-        notifikasi.setHasilTahapSebelumnya(0);
         notifikasi.setCreatedDate(new Date());
+
         notifikasiService.save(notifikasi);
+
+        return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();
+    }
+
+    @PostMapping("/perusahaan/lamaran/schedule-wawancara/{id}")
+    public String scheduleNotifikasi(@PathVariable("id") int idLamaran, @RequestParam("tahap") String tahap,
+                                     @RequestParam(value = "tanggal_tahap", required = false) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm") Date tanggalTahap) {
+        Lamaran lamaran = lamaranService.getLamaranById(idLamaran);
+
+        Notifikasi notifikasi = notifikasiService.get
 
         return "redirect:/perusahaan/lowongan/detail/" + lamaran.getIdLowongan();
     }

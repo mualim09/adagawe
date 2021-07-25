@@ -14,4 +14,7 @@ public interface LamaranPelamarRepository extends CrudRepository<LamaranPelamar,
 
     @Query(nativeQuery = true, value = "SELECT * FROM view_LamaranPelamar WHERE id_lamaran = :idLamaran")
     LamaranPelamar getLamaranPelamarById(int idLamaran);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM view_LamaranPelamar WHERE id_lowongan = :idLowongan AND status_lamaran = 0")
+    List<LamaranPelamar> getLamaranPelamarByIdLowongan(int idLowongan);
 }

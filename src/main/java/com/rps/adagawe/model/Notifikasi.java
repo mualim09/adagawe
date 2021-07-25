@@ -12,15 +12,14 @@ public class Notifikasi {
     @Column(name = "id_lamaran")
     private int idLamaran;
 
-    private String isi;
-
     private String tahap;
+
+    private int hasil;
+
+    private String tahapSelanjutnya;
 
     @Column(name = "tanggal_tahapan")
     private Date tanggalTahapan;
-
-    @Column(name = "hasil_tahap_sebelumnya")
-    private int hasilTahapSebelumnya;
 
     @Column(name = "created_date")
     private Date createdDate;
@@ -45,14 +44,6 @@ public class Notifikasi {
         this.idLamaran = idLamaran;
     }
 
-    public String getIsi() {
-        return isi;
-    }
-
-    public void setIsi(String isi) {
-        this.isi = isi;
-    }
-
     public String getTahap() {
         return tahap;
     }
@@ -61,20 +52,28 @@ public class Notifikasi {
         this.tahap = tahap;
     }
 
+    public int getHasil() {
+        return hasil;
+    }
+
+    public void setHasil(int hasil) {
+        this.hasil = hasil;
+    }
+
+    public String getTahapSelanjutnya() {
+        return tahapSelanjutnya;
+    }
+
+    public void setTahapSelanjutnya(String tahapSelanjutnya) {
+        this.tahapSelanjutnya = tahapSelanjutnya;
+    }
+
     public Date getTanggalTahapan() {
         return tanggalTahapan;
     }
 
     public void setTanggalTahapan(Date tanggalTahapan) {
         this.tanggalTahapan = tanggalTahapan;
-    }
-
-    public int getHasilTahapSebelumnya() {
-        return hasilTahapSebelumnya;
-    }
-
-    public void setHasilTahapSebelumnya(int hasilTahapSebelumnya) {
-        this.hasilTahapSebelumnya = hasilTahapSebelumnya;
     }
 
     public Date getCreatedDate() {
@@ -91,5 +90,19 @@ public class Notifikasi {
 
     public void setLamaran(Lamaran lamaran) {
         this.lamaran = lamaran;
+    }
+
+    @Override
+    public String toString() {
+        return "Notifikasi{" +
+                "id=" + id +
+                ", idLamaran=" + idLamaran +
+                ", tahap='" + tahap + '\'' +
+                ", hasil=" + hasil +
+                ", tahapSelanjutnya='" + tahapSelanjutnya + '\'' +
+                ", tanggalTahapan=" + tanggalTahapan +
+                ", createdDate=" + createdDate +
+                ", lamaran=" + lamaran +
+                '}';
     }
 }

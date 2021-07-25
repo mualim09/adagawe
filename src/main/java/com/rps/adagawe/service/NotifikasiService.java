@@ -14,4 +14,6 @@ public class NotifikasiService {
     public void save(Notifikasi notifikasi) {
         notifikasiRepository.save(notifikasi);
     }
+
+
 }

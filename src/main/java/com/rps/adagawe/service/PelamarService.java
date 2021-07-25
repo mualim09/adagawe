@@ -60,4 +60,8 @@ public class PelamarService {
     public LamaranPelamar getPelamarByIdLamaran(int idLamaran) {
         return lamaranPelamarRepository.getLamaranPelamarById(idLamaran);
     }
+
+    public List<LamaranPelamar> getLamaranPelamarByIdLowongan(int idLowongan) {
+        return lamaranPelamarRepository.getLamaranPelamarByIdLowongan(idLowongan);
+    }
 }

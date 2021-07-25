@@ -189,7 +189,14 @@
                                             <a th:href="@{/perusahaan/lamaran/view/{id}(id=${lamaran.idLamaran})}" class="btn btn-sm btn-primary mr-1"><i class="fa fa-eye"></i> View</a>
 
                                             <button type="button" th:if="${lamaran.statusLamaran != 3}" class="btn btn-success btn-sm mr-1 terimaButton"
-                                                    th:data-idlamaran="${lamaran.idLamaran}" data-status="4" data-tahap="Wawancara" data-toggle="modal" data-target="#accModal">
+                                                    th:data-idlamaran="${lamaran.idLamaran}" data-status="4" data-tahap="Uji Kompetensi"
+                                                    data-tahapselanjutnya="Wawancara" data-toggle="modal" data-target="#accModal">
+                                                <i class="fa fa-check"></i> Terima
+                                            </button>
+
+                                            <button type="button" th:if="${lamaran.statusLamaran != 3}" class="btn btn-success btn-sm mr-1 scheduleButton"
+                                                    th:data-idlamaran="${lamaran.idLamaran}" data-status="4" data-tahap="Uji Kompetensi"
+                                                    data-tahapselanjutnya="Wawancara" data-toggle="modal" data-target="#accModal">
                                                 <i class="fa fa-check"></i> Terima
                                             </button>
 
