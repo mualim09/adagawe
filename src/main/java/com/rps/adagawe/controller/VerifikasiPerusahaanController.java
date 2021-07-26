@@ -68,6 +68,8 @@ public class VerifikasiPerusahaanController {
         }
 
         if (result.hasErrors()) {
+            model.addAttribute("perusahaan", AdagaweMethods.getPerusahaanBySession(adagaweService));
+            model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
             return "/perusahaan/verifikasi/createnext";
         }
 

@@ -69,6 +69,7 @@ public class UserController {
 
 	@PostMapping("/daftar")
 	public String signUp(UserLogin user) {
+		user.setFotoProfil(AdagaweConstants.FOTO_PROFILE_DEFAULT);
 		userService.signUpUser(user);
 
 		return "redirect:/masuk";

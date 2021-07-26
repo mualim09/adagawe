@@ -54,8 +54,9 @@
                                       th:class="'form-control '+ ${#fields.hasErrors('deskripsi') ? 'is-invalid' : ''}"></textarea>
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('deskripsi')}" th:errors="*{deskripsi}"></div>
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
                     </form>
                 </div>
             </div>

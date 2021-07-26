@@ -3795,6 +3795,7 @@ label {
   max-width: 100%;
   display: block;
   margin-bottom: 15px;
+  object-fit: cover;
   box-shadow: 0 1px 15px 1px rgba(39, 39, 39, 0.1); }
   .input-file.input-file-image img.img-upload-preview.img-circle {
     border-radius: 2000px; }

@@ -60,7 +60,6 @@ public class PerusahaanController {
     @GetMapping("/perusahaan/verifikasi/create")
     public String create(Model model, HttpServletRequest request) {
         model.addAttribute("perusahaanObject", new Perusahaan());
-        model.addAttribute("userlogin", AdagaweMethods.getUserLoginBySession(adagaweService));
 
         model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
@@ -73,6 +72,7 @@ public class PerusahaanController {
                              @ModelAttribute("perusahaan") @Valid Perusahaan perusahaan, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
+            model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
             return "/perusahaan/profile/create";
         }
 

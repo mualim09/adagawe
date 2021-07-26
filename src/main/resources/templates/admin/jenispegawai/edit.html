@@ -48,7 +48,9 @@
                                    th:class="'form-control '+ ${#fields.hasErrors('namajenisPegawai') ? 'is-invalid' : ''}">
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('namajenisPegawai')}" th:errors="*{namajenisPegawai}"></div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
                     </form>
                 </div>
             </div>

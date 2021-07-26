@@ -19,6 +19,7 @@ import java.util.Date;
 public class FileUploadHelper {
 
     private static final String UPLOAD_DIR = "src/main/resources/static/uploads/";
+    private static final String TARGET_DIR = "target/classes/static/uploads/";
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyy-hhmmss-SSS");
 
@@ -30,8 +31,10 @@ public class FileUploadHelper {
         // save the file on the local file systems
         try {
             Path path = Paths.get(UPLOAD_DIR + folder + "/" + fileName);
-            System.out.println(path.toAbsolutePath());
             Files.copy(file.getInputStream(), path.toAbsolutePath(), StandardCopyOption.REPLACE_EXISTING);
+
+            Path path2 = Paths.get(TARGET_DIR + folder + "/" + fileName);
+            Files.copy(file.getInputStream(), path2.toAbsolutePath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }

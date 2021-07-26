@@ -46,11 +46,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <div th:switch="${jenisPegawais}">
-                            <h2 th:case="null">Tidak ada data!</h2>
-                            <div th:case="*">
-                                <table id="add-row" class="display table table-striped table-hover">
+                    <table id="add-row" class="display table table-striped table-hover">
                                     <thead>
                                     <tr>
                                         <td>#</td>
@@ -72,9 +68,6 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

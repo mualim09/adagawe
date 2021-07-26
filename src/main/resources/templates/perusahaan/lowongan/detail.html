@@ -200,7 +200,7 @@
                                                 <i class="fa fa-check"></i> Terima
                                             </button>
 
-                                            <button type="button" th:if="${lamaran.statusLamaran != 3}" class="btn btn-warning btn-sm mr-1 scheduleButton"
+                                            <button type="button" th:if="${lamaran.statusLamaran != 3 and lamaran.nilaiUjiKompetensi == null}" class="btn btn-warning btn-sm mr-1 scheduleButton"
                                                     th:data-idlamaran="${lamaran.idLamaran}" data-tahap="Uji Kompetensi"
                                                     data-toggle="modal" data-target="#scheduleModal">
                                                 <i class="fa fa-calendar"></i> Jadwal
@@ -399,7 +399,7 @@
                         <div class="modal-content">
                             <form method="post" class="d-inline" id="formSchedule">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="scheduleModalLabel">Terima</h5>
+                                    <h5 class="modal-title" id="scheduleModalLabel">Jadwal Uji Kompetensi</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
