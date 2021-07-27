@@ -104,7 +104,7 @@
                         <form action="/account/edit" id="form" th:method="post" enctype="multipart/form-data">
                             <div class="form-group form-floating-label mt-2">
                                 <input type="text" class="form-control input-border-bottom" name="nama" id="nama" th:value="${userLogin.nama}">
-                                <label for="nama" class="placeholder">Nama Perusahaan</label>
+                                <label for="nama" class="placeholder">Nama Perusahaan <span class="text-danger">*</span></label>
                             </div>
                             <div class="form-group">
                                 <label>Foto Profil</label>
@@ -122,25 +122,25 @@
                     <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="home-tab">
                         <form action="/account/perusahaan/edit" th:object="${perusahaan}" id="form_perusahaan" method="post" enctype="multipart/form-data">
                             <div class="form-group form-group-default">
-                                <label>Bidang</label>
+                                <label>Bidang <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="address" th:field="*{bidangPerusahaan}">
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
-                                        <label>Provinsi</label>
+                                        <label>Provinsi <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="address" th:field="*{provinsi}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
-                                        <label>Kota</label>
+                                        <label>Kota <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="address" th:field="*{kota}">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group form-group-default">
-                                <label>Alamat</label>
+                                <label>Alamat <span class="text-danger">*</span></label>
                                 <textarea type="text" class="form-control" name="address" th:field="*{alamatLengkap}"></textarea>
                             </div>
                             <div class="form-group">

@@ -102,12 +102,12 @@
                     <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="home-tab">
                         <form th:action="@{/account/pelamar/edit}" th:object="${pelamar}" method="post">
                             <div class="form-group form-group-default">
-                                <label for="tanggalLahir">Tanggal Lahir</label>
+                                <label for="tanggalLahir">Tanggal Lahir <span class="text-danger">*</span></label>
                                 <input type="date" th:field="*{tanggalLahir}" id="tanggalLahir" placeholder="Tanggal Lahir"
                                        th:class="'form-control '+ ${#fields.hasErrors('tanggalLahir') ? 'is-invalid' : ''}">
                             </div>
                             <div class="form-check pb-3">
-                                <label>Jenis Kelamin</label><br>
+                                <label>Jenis Kelamin <span class="text-danger">*</span></label><br>
                                 <label class="form-radio-label">
                                     <input class="form-radio-input" type="radio" name="optionsRadios" value="L" th:field="*{jenisKelamin}">
                                     <span class="form-radio-sign">Laki-Laki</span>
@@ -118,15 +118,15 @@
                                 </label>
                             </div>
                             <div class="form-group form-group-default">
-                                <label>Kota</label>
+                                <label>Kota <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="address" th:field="*{kota}">
                             </div>
                             <div class="form-group form-group-default">
-                                <label>Alamat</label>
+                                <label>Alamat <span class="text-danger">*</span></label>
                                 <textarea type="text" class="form-control" name="address" th:field="*{alamat}"></textarea>
                             </div>
                             <div class="form-group form-group-default">
-                                <label for="noTelepon">No. Telepon</label>
+                                <label for="noTelepon">No. Telepon <span class="text-danger">*</span></label>
                                 <input type="text" th:field="*{noTelepon}" id="noTelepon" placeholder="Nomor Telepon"
                                        th:class="'form-control '+ ${#fields.hasErrors('noTelepon') ? 'is-invalid' : ''}">
                             </div>
@@ -138,7 +138,7 @@
                     <div class="tab-pane fade" id="headline" role="tabpanel" aria-labelledby="home-tab">
                         <form th:action="@{/account/pelamar/info}" method="post" enctype="multipart/form-data" >
                             <div class="form-group">
-                                <label for="summernote">Headline</label>
+                                <label for="summernote">Headline <span class="text-danger">*</span></label>
                                 <textarea id="summernote" name="headline" th:field="${pelamar.headline}"></textarea>
                             </div>
                             <div class="form-group">

@@ -21,7 +21,7 @@
                             <form th:action="@{/pelamar/pendidikan/edit/{id}(id=${pendidikan.id})}" th:object="${pendidikan}" id="pendidikanForm" method="post" enctype="multipart/form-data">
 
                                 <div class="form-group">
-                                    <label for="idJenjang">Jenjang</label>
+                                    <label for="idJenjang">Jenjang <span class="text-danger">*</span></label>
                                     <select id="idJenjang" th:field="*{jenjang.id}" th:class="'form-control '+ ${#fields.hasErrors('jenjang') ? 'is-invalid' : ''}">
                                         <option value="">Pilih Jenjang</option>
                                         <option th:each="jenjang : ${jenjangs}" th:value="${jenjang.id}" th:text="${jenjang.namaJenjang}"></option>
@@ -30,13 +30,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="namaJurusan">Nama Jurusan</label>
+                                    <label for="namaJurusan">Nama Jurusan <span class="text-danger">*</span></label>
                                     <input type="text" th:field="*{namaJurusan}" id="namaJurusan" placeholder="Nama Jurusan"
                                            th:class="'form-control '+ ${#fields.hasErrors('namaJurusan') ? 'is-invalid' : ''}">
                                     <div class="invalid-feedback" th:if="${#fields.hasErrors('namaJurusan')}" th:errors="*{namaJurusan}"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="namaUniversitas">Nama Universitas</label>
+                                    <label for="namaUniversitas">Nama Universitas <span class="text-danger">*</span></label>
                                     <input type="text" th:field="*{namaUniversitas}" id="namaUniversitas" placeholder="Nama Universitas"
                                            th:class="'form-control '+ ${#fields.hasErrors('namaUniversitas') ? 'is-invalid' : ''}">
                                     <div class="invalid-feedback" th:if="${#fields.hasErrors('namaUniversitas')}" th:errors="*{namaUniversitas}"></div>
@@ -55,6 +55,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Simpan</button>
+                                <a href="/pelamar/profile" class="btn btn-warning ml-1">Batal</a>
                             </form>
                         </div>
                     </div>

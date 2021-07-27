@@ -36,15 +36,15 @@
             <div class="login-form">
                 <form th:action="@{/register}" th:method="post" th:object="${user}">
                     <div class="form-group">
-                        <label for="fullname" class="placeholder"><b>Nama Lengkap</b></label>
+                        <label for="fullname" class="placeholder"><b>Nama Lengkap</b> <span class="text-danger">*</span></label>
                         <input  id="fullname" type="text" class="form-control" th:field="*{nama}" required>
                     </div>
                     <div class="form-group">
-                        <label for="email" class="placeholder"><b>Email</b></label>
+                        <label for="email" class="placeholder"><b>Email</b> <span class="text-danger">*</span></label>
                         <input  id="email" type="email" class="form-control" th:field="*{email}" required>
                     </div>
                     <div class="form-group">
-                        <label for="passwordsignin" class="placeholder"><b>Kata Sandi</b></label>
+                        <label for="passwordsignin" class="placeholder"><b>Kata Sandi</b> <span class="text-danger">*</span></label>
                         <div class="position-relative">
                             <input id="passwordsignin" name="passwordsignin" type="password" th:field="*{password}" class="form-control" required>
                             <div class="show-password">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="confirmpassword" class="placeholder"><b>Konfirmasi Kata Sandi</b></label>
+                        <label for="confirmpassword" class="placeholder"><b>Konfirmasi Kata Sandi</b> <span class="text-danger">*</span></label>
                         <div class="position-relative">
                             <input  id="confirmpassword" name="confirmpassword" type="password" class="form-control" required>
                             <div class="show-password">

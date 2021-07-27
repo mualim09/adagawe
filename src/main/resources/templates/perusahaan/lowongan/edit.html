@@ -42,7 +42,7 @@
                 <form th:action="@{/perusahaan/lowongan/edit/{id}(id=${lowongan.id})}" th:object="${lowongan}" id="lowonganForm" method="post">
                     <div class="row form-group">
                         <div class="col-md-12">
-                            <label for="judulLowongan">Judul Lowongan</label>
+                            <label for="judulLowongan">Judul Lowongan <span class="text-danger">*</span></label>
                             <input type="text" th:field="*{judulLowongan}" id="judulLowongan" placeholder="Judul Lowongan"
                                    th:class="'form-control '+ ${#fields.hasErrors('judulLowongan') ? 'is-invalid' : ''}">
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('judulLowongan')}" th:errors="*{judulLowongan}"></div>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-md-6">
-                            <label for="idJenisPegawai">Jenis Pegawai</label>
+                            <label for="idJenisPegawai">Jenis Pegawai <span class="text-danger">*</span></label>
                             <select id="idJenisPegawai" th:field="*{idJenisPegawai}"
                                     th:class="'form-control '+ ${#fields.hasErrors('idJenisPegawai') ? 'is-invalid' : ''}">
                                 <option value="">Pilih Jenis Pegawai</option>
@@ -59,7 +59,7 @@
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('idJenisPegawai')}" th:errors="*{idJenisPegawai}"></div>
                         </div>
                         <div class="col-md-6">
-                            <label for="jenjangMinimal">Jenjang Pendidikan Minimal</label>
+                            <label for="jenjangMinimal">Jenjang Pendidikan Minimal <span class="text-danger">*</span></label>
                             <select id="jenjangMinimal" th:field="*{jenjangMinimal}"
                                     th:class="'form-control '+ ${#fields.hasErrors('jenjangMinimal') ? 'is-invalid' : ''}">
                                 <option value="">Pilih Jenjang Minimal</option>
@@ -75,13 +75,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="summernote">Keterangan</label>
+                        <label for="summernote">Keterangan <span class="text-danger">*</span></label>
                         <textarea id="summernote" th:field="*{keterangan}"></textarea>
                         <div class="small text-danger" th:if="${#fields.hasErrors('keterangan')}" th:errors="*{keterangan}"></div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-4">
-                            <label for="pengalamanKerja">Pengalaman Kerja</label>
+                            <label for="pengalamanKerja">Pengalaman Kerja <span class="text-danger">*</span></label>
                             <input type="text" th:field="*{pengalamanKerja}" id="pengalamanKerja" placeholder="Pengalaman Kerja"
                                    th:class="'form-control '+ ${#fields.hasErrors('pengalamanKerja') ? 'is-invalid' : ''}">
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('pengalamanKerja')}" th:errors="*{pengalamanKerja}"></div>
@@ -116,6 +116,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
+                    <a href="/perusahaan/lowongan" class="btn btn-warning ml-1">Batal</a>
                 </form>
             </div>
         </div>

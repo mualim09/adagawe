@@ -20,37 +20,38 @@
                             <div class="form-group">
                                 <form th:action="@{/pelamar/sertifikat/create}" th:object="${sertifikat}" id="sertifikatForm" method="post">
                                     <div class="form-group">
-                                        <label for="noSertifikat">No Sertifikat</label>
+                                        <label for="noSertifikat">No Sertifikat <span class="text-danger">*</span></label>
                                         <input type="text" th:field="*{noSertifikat}" id="noSertifikat" placeholder="Nomor Sertifikat"
                                                th:class="'form-control '+ ${#fields.hasErrors('noSertifikat') ? 'is-invalid' : ''}">
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('noSertifikat')}" th:errors="*{noSertifikat}"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="judul">Judul Sertifikat</label>
+                                        <label for="judul">Judul Sertifikat <span class="text-danger">*</span></label>
                                         <input type="text" th:field="*{judul}" id="judul" placeholder="Judul Sertifikat"
                                                th:class="'form-control '+ ${#fields.hasErrors('judul') ? 'is-invalid' : ''}">
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('judul')}" th:errors="*{judul}"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="berlakuMulai">Berlaku Mulai</label>
+                                        <label for="berlakuMulai">Berlaku Mulai <span class="text-danger">*</span></label>
                                         <input type="date" th:field="*{berlakuMulai}" id="berlakuMulai" placeholder="Berlaku Mulai"
                                                th:class="'form-control '+ ${#fields.hasErrors('berlakuMulai') ? 'is-invalid' : ''}">
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('berlakuMulai')}" th:errors="*{berlakuMulai}"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="berlakuSampai">Berlaku Sampai</label>
+                                        <label for="berlakuSampai">Berlaku Sampai <span class="text-danger">*</span></label>
                                         <input type="date" th:field="*{berlakuSampai}" id="berlakuSampai" placeholder="Berlaku Sampai"
                                                th:class="'form-control '+ ${#fields.hasErrors('berlakuSampai') ? 'is-invalid' : ''}">
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('berlakuSampai')}" th:errors="*{berlakuSampai}"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="fileAttachment">URL Attachment</label>
+                                        <label for="fileAttachment">URL Attachment <span class="text-danger">*</span></label>
                                         <input type="text" th:field="*{fileAttachment}" id="fileAttachment" placeholder="URL Berkas"
                                                th:class="'form-control '+ ${#fields.hasErrors('fileAttachment') ? 'is-invalid' : ''}">
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('fileAttachment')}" th:errors="*{fileAttachment}"></div>
                                     </div>
 
                                     <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <a href="/pelamar/profile" class="btn btn-warning ml-1">Batal</a>
                                 </form>
                             </div>
                         </div>

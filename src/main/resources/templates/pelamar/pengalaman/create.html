@@ -19,7 +19,7 @@
             </div>
             <form th:action="@{/pelamar/pengalaman/create}" th:object="${pengalaman}" id="pengalamanForm" method="post" enctype="multipart/form-data">
               <div class="form-group">
-                <label for="idJabatan">Jabatan</label>
+                <label for="idJabatan">Jabatan <span class="text-danger">*</span></label>
                 <select id="idJabatan" th:field="*{jabatan.id}" th:class="'form-control '+ ${#fields.hasErrors('jabatan') ? 'is-invalid' : ''}">
                   <option value="">Pilih Jabatan</option>
                   <option th:each="jabatan : ${jabatans}" th:value="${jabatan.id}" th:text="${jabatan.namaJabatan}"></option>
@@ -27,7 +27,7 @@
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('jabatan')}" th:errors="*{jabatan}"></div>
               </div>
               <div class="form-group">
-                <label for="idJenisPegawai">Jenis Pegawai</label>
+                <label for="idJenisPegawai">Jenis Pegawai <span class="text-danger">*</span></label>
                 <select id="idJenisPegawai" th:field="*{jenisPegawai.id}" th:class="'form-control '+ ${#fields.hasErrors('jenisPegawai') ? 'is-invalid' : ''}">
                   <option value="">Pilih Jenis Pegawai</option>
                   <option th:each="jenisPegawai : ${jenisPegawais}" th:value="${jenisPegawai.id}" th:text="${jenisPegawai.namajenisPegawai}"></option>
@@ -35,19 +35,19 @@
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('jenisPegawai')}" th:errors="*{jenisPegawai}"></div>
               </div>
               <div class="form-group">
-                <label for="namaPerusahaan">Nama Perusahaan</label>
+                <label for="namaPerusahaan">Nama Perusahaan <span class="text-danger">*</span></label>
                 <input type="text" th:field="*{namaPerusahaan}" id="namaPerusahaan" placeholder="Nama Perusahaan"
                        th:class="'form-control '+ ${#fields.hasErrors('namaPerusahaan') ? 'is-invalid' : ''}">
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('namaPerusahaan')}" th:errors="*{namaPerusahaan}"></div>
               </div>
               <div class="form-group">
-                <label for="mulaiKerja">Mulai Kerja</label>
+                <label for="mulaiKerja">Mulai Kerja <span class="text-danger">*</span></label>
                 <input type="date" th:field="*{mulaiKerja}" id="mulaiKerja" placeholder="Mulai Kerja"
                        th:class="'form-control '+ ${#fields.hasErrors('mulaiKerja') ? 'is-invalid' : ''}">
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('mulaiKerja')}" th:errors="*{mulaiKerja}"></div>
               </div>
               <div class="form-group">
-                <label for="terakhirKerja">Akhir Kerja</label>
+                <label for="terakhirKerja">Akhir Kerja <span class="text-danger">*</span></label>
                 <input type="date" th:field="*{terakhirKerja}" id="terakhirKerja" placeholder="Akhir Kerja"
                        th:class="'form-control '+ ${#fields.hasErrors('terakhirKerja') ? 'is-invalid' : ''}">
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('terakhirKerja')}" th:errors="*{terakhirKerja}"></div>
@@ -65,6 +65,7 @@
               </div>
 
               <button type="submit" class="btn btn-primary">Simpan</button>
+              <a href="/pelamar/profile" class="btn btn-warning ml-1">Batal</a>
             </form>
           </div>
         </div>
