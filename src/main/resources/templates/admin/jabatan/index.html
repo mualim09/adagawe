@@ -48,29 +48,29 @@
                 </div>
                 <div class="card-body">
                     <table id="add-row" class="display table table-striped table-hover">
-                                    <thead>
-                                    <tr>
-                                        <td>#</td>
-                                        <td>Nama Jabatan</td>
-                                        <td>Deskripsi</td>
-                                        <td>Aksi</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="jabatan, iter : ${jabatans}">
-                                        <td th:text="${iter.index + 1}"></td>
-                                        <td th:text="${jabatan.namaJabatan}"></td>
-                                        <td th:text="${jabatan.deskripsi}"></td>
-                                        <td>
-                                            <a th:href="@{/admin/jabatan/edit/{id}(id=${jabatan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
-                                            <form th:action="@{/admin/jabatan/delete/{id}(id=${jabatan.id})}" method="post" class="d-inline">
-                                                <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger">
-                                                    <i class="fa fa-trash"></i> Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Nama Jabatan</td>
+                            <td>Deskripsi</td>
+                            <td>Aksi</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="jabatan, iter : ${jabatans}">
+                            <td th:text="${iter.index + 1}"></td>
+                            <td th:text="${jabatan.namaJabatan}"></td>
+                            <td th:text="${jabatan.deskripsi}"></td>
+                            <td>
+                                <a th:href="@{/admin/jabatan/edit/{id}(id=${jabatan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
+                                <form th:action="@{/admin/jabatan/delete/{id}(id=${jabatan.id})}" method="post" class="d-inline">
+                                    <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash"></i> Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

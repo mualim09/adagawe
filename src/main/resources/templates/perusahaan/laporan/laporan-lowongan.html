@@ -62,9 +62,12 @@
                                 <th:block th:case="6">S2</th:block>
                                 <th:block th:case="7">S3</th:block>
                             </td>
-                            <td th:text="${'Rp' + #numbers.formatDecimal(lowonganLamaran.lowongan.gajiMinimal, 0, 'POINT', 0, 'COMMA')}"></td>
-                            <td th:text="${'Rp' + #numbers.formatDecimal(lowonganLamaran.lowongan.gajiMaksimal, 0, 'POINT', 0, 'COMMA')}"></td>
-                            <td th:text="${lowonganLamaran.jumlahPelamar}"></td>
+                            <td th:text="${'Rp' + #numbers.formatDecimal(lowonganLamaran.lowongan.gajiMinimal, 0, 'POINT', 0, 'COMMA')}"
+                                class="text-right"></td>
+                            <td th:text="${'Rp' + #numbers.formatDecimal(lowonganLamaran.lowongan.gajiMaksimal, 0, 'POINT', 0, 'COMMA')}"
+                                class="text-right"></td>
+                            <td th:text="${lowonganLamaran.jumlahPelamar}"
+                                class="text-center"></td>
                         </tr>
                         </tbody>
                         <tfoot>
@@ -73,9 +76,9 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th class="text-right"></th>
+                            <th class="text-right"></th>
+                            <th class="text-center"></th>
                         </tr>
                         <tr>
                             <th>Total</th>
@@ -84,7 +87,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th></th>
+                            <th class="text-center"></th>
                         </tr>
                         <tr>
                             <th></th>
@@ -109,46 +112,7 @@
     <script>
         $(document).ready(function() {
             $('#datatables').DataTable({
-                dom: '<"row"<"col-lg-4"l><"col-lg-4"B><"col-lg-4"f>>rtip',
-                buttons: [
-                    {
-                        extend: 'copy',
-                        text: '<i class="fa fa-copy"></i> Copy',
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'excel',
-                        text: '<i class="fa fa-file-excel"></i> Excel',
-                        title: 'Data Destinasi',
-                        footer: true,
-                        filename: 'Data Lowongan ' + moment().format('DD-MM-YYYY'),
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'pdf',
-                        text: '<i class="fa fa-file-pdf"></i> PDF',
-                        title: 'Data Lowongan',
-                        footer: true,
-                        filename: 'Data Lowongan ' + moment().format('DD-MM-YYYY'),
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'print',
-                        text: '<i class="fa fa-print"></i> Print',
-                        title: 'Data Lowongan',
-                        footer: true,
-                        filename: 'Data Lowongan ' + moment().format('DD-MM-YYYY'),
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'colvis',
-                        text: '<i class="fa fa-eye"></i>'
-                    }
-                ],
+                dom: '<"row"<"col-lg-6"l><"col-lg-6"f>>rtip',
                 lengthMenu: [
                     [10, 25, 50, -1],
                     ['10', '25', '50', 'All']

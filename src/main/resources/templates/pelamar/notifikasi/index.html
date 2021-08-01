@@ -45,6 +45,8 @@
                 <td>Hasil</td>
                 <td>Tahap Selanjutnya</td>
                 <td>Tgl. Tahapan</td>
+                <td>Konfirmasi</td>
+                <td>Aksi</td>
               </tr>
             </thead>
             <tbody>
@@ -60,6 +62,17 @@
                 </td>
                 <td th:text="${notification.tahapSelanjutnya}"></td>
                 <td th:text="${#dates.format(notification.tanggalTahapan, 'dd MMM yyyy, HH:mm')}"></td>
+                <td th:switch="${notification.terkonfirmasi}">
+                  <th:block th:case="0">Belum dikonfirmasi</th:block>
+                  <th:block th:case="1">Disetujui</th:block>
+                  <th:block th:case="2">Tidak disetujui</th:block>
+                </td>
+                <td>
+                  <div class="d-flex">
+                    <a th:href="@{/notifikasi/konfirmasi/1/{id}(id=${notification.id})}" class="btn btn-sm btn-success mr-2">Setuju</a>
+                    <a th:href="@{/notifikasi/konfirmasi/2/{id}(id=${notification.id})}" class="btn btn-sm btn-danger">Tidak Setuju</a>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>

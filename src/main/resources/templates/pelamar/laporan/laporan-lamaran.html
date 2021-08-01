@@ -4,7 +4,7 @@
       layout:decorate="~{layout/pelamar}">
 <head>
   <meta charset="UTF-8">
-  <title>Laporan Lamaran</title>
+  <title>Riwayat Lamaran</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
       <i class="flaticon-right-arrow"></i>
     </li>
     <li class="nav-item">
-      <a href="#">Laporan Lamaran</a>
+      <a href="#">Riwayat Lamaran</a>
     </li>
   </ul>
 </div>
@@ -31,7 +31,7 @@
     <div class="card">
       <div class="card-header">
         <div class="d-flex align-items-center">
-          <h4 class="card-title">Laporan Lamaran</h4>
+          <h4 class="card-title">Riwayat Lamaran</h4>
         </div>
       </div>
       <div class="card-body">
@@ -104,46 +104,7 @@
   <script>
     $(document).ready(function() {
       $('#datatables').DataTable({
-        dom: '<"row"<"col-lg-4"l><"col-lg-4"B><"col-lg-4"f>>rtip',
-        buttons: [
-          {
-            extend: 'copy',
-            text: '<i class="fa fa-copy"></i> Copy',
-            exportOptions: {
-              columns: ':visible',
-            }
-          }, {
-            extend: 'excel',
-            text: '<i class="fa fa-file-excel"></i> Excel',
-            title: 'Data Lamaran',
-            footer: true,
-            filename: 'Data Lamaran ' + moment().format('DD-MM-YYYY'),
-            exportOptions: {
-              columns: ':visible',
-            }
-          }, {
-            extend: 'pdf',
-            text: '<i class="fa fa-file-pdf"></i> PDF',
-            title: 'Data Lamaran',
-            footer: true,
-            filename: 'Data Lamaran ' + moment().format('DD-MM-YYYY'),
-            exportOptions: {
-              columns: ':visible',
-            }
-          }, {
-            extend: 'print',
-            text: '<i class="fa fa-print"></i> Print',
-            title: 'Data Lamaran',
-            footer: true,
-            filename: 'Data Lamaran ' + moment().format('DD-MM-YYYY'),
-            exportOptions: {
-              columns: ':visible',
-            }
-          }, {
-            extend: 'colvis',
-            text: '<i class="fa fa-eye"></i>'
-          }
-        ],
+        dom: '<"row"<"col-lg-6"l><"col-lg-6"f>>rtip',
         lengthMenu: [
           [10, 25, 50, -1],
           ['10', '25', '50', 'All']

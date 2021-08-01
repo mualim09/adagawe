@@ -33,4 +33,17 @@ public class NotifikasiService {
         return notifikasiRepository.findAllByIdLamaran(idLamaran);
     }
 
+    public Notifikasi getNotifikasiById(int idNotifikasi) {
+        return notifikasiRepository.findById(idNotifikasi).orElse(null);
+    }
+
+    public void konfirmasi(int idNotifikasi, int konfirmasi) {
+        Notifikasi notifikasi = getNotifikasiById(idNotifikasi);
+
+        if (notifikasi != null) {
+            notifikasi.setTerkonfirmasi(konfirmasi);
+            notifikasiRepository.save(notifikasi);
+        }
+    }
+
 }

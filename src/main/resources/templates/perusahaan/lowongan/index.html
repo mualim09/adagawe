@@ -45,30 +45,30 @@
             </div>
             <div class="card-body">
                 <table id="add-row" class="display table table-striped table-hover">
-                                <thead>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Nama Lowongan</td>
-                                    <td>Tanggal Dibuat</td>
-                                    <td>Terakhir Diperbaharui</td>
-                                    <td>Aksi</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="lowongan, iter : ${lowongans}">
-                                    <td th:text="${iter.index + 1}"></td>
-                                    <td th:text="${lowongan.judulLowongan}"></td>
-                                    <td th:text="${#dates.format(lowongan.createdDate, 'dd-MM-yyyy')}"></td>
-                                    <td th:text="${#dates.format(lowongan.lastModified, 'dd-MM-yyyy')}"></td>
-                                    <td>
-                                        <a th:href="@{/perusahaan/lowongan/edit/{id}(id=${lowongan.id})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
-<!--                                        <a th:href="@{/perusahaan/lowongan/view/{id}(id=${lowongan.id})}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>-->
-                                        <a th:href="@{/perusahaan/lowongan/detail/{id}(id=${lowongan.id})}" class="btn btn-sm btn-secondary"><i class="fa fa-list"></i> Detail</a>
-                                        <a th:if="${lowongan.status != 0}" th:href="@{/perusahaan/lowongan/delete/{id}(id=${lowongan.id})}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Tutup</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Nama Lowongan</td>
+                        <td>Tanggal Dibuat</td>
+                        <td>Terakhir Diperbaharui</td>
+                        <td>Aksi</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="lowongan, iter : ${lowongans}">
+                        <td th:text="${iter.index + 1}"></td>
+                        <td th:text="${lowongan.judulLowongan}"></td>
+                        <td th:text="${#dates.format(lowongan.createdDate, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${#dates.format(lowongan.lastModified, 'dd-MM-yyyy')}"></td>
+                        <td>
+                            <a th:href="@{/perusahaan/lowongan/edit/{id}(id=${lowongan.id})}" th:if="${lowongan.status != 0}"
+                               class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
+                            <a th:href="@{/perusahaan/lowongan/detail/{id}(id=${lowongan.id})}" class="btn btn-sm btn-secondary"><i class="fa fa-list"></i> Detail</a>
+                            <a th:if="${lowongan.status != 0}" th:href="@{/perusahaan/lowongan/delete/{id}(id=${lowongan.id})}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Tutup</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

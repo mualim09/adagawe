@@ -22,6 +22,9 @@ public class Notifikasi {
     @Column(name = "tanggal_tahapan")
     private Date tanggalTahapan;
 
+    @Column(name = "terkonfirmasi")
+    private int terkonfirmasi;
+
     @Column(name = "created_date")
     private Date createdDate;
 
@@ -75,6 +78,14 @@ public class Notifikasi {
 
     public void setTanggalTahapan(Date tanggalTahapan) {
         this.tanggalTahapan = tanggalTahapan;
+    }
+
+    public int getTerkonfirmasi() {
+        return terkonfirmasi;
+    }
+
+    public void setTerkonfirmasi(int terkonfirmasi) {
+        this.terkonfirmasi = terkonfirmasi;
     }
 
     public Date getCreatedDate() {

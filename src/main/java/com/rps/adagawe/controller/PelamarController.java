@@ -102,7 +102,7 @@ public class PelamarController {
         return "/pelamar/profile/setting";
     }
 
-    @GetMapping("/pelamar/laporan-lamaran")
+    @GetMapping("/pelamar/riwayat-lamaran")
     public String getLaporan(Model model, HttpServletRequest request) {
         Pelamar pelamar = AdagaweMethods.getPelamarBySession(adagaweService);
         List<PelamarLamaran> pelamarLamaranList = laporanService.getLamaranByIdPelamar(pelamar.getId());
@@ -112,6 +112,6 @@ public class PelamarController {
         model.addAttribute("userLogin", AdagaweMethods.getUserLoginBySession(adagaweService));
         model.addAttribute("url", AdagaweMethods.getMainUrl(request, 2));
 
-        return "/pelamar/laporan/laporan-lamaran";
+        return "/pelamar/laporan/riwayat-lamaran";
     }
 }
