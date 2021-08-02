@@ -68,10 +68,15 @@
                   <th:block th:case="2">Tidak disetujui</th:block>
                 </td>
                 <td>
-                  <div class="d-flex">
-                    <a th:href="@{/notifikasi/konfirmasi/1/{id}(id=${notification.id})}" class="btn btn-sm btn-success mr-2">Setuju</a>
-                    <a th:href="@{/notifikasi/konfirmasi/2/{id}(id=${notification.id})}" class="btn btn-sm btn-danger">Tidak Setuju</a>
+                  <div class="d-flex" th:if="${notification.terkonfirmasi == 0 and notification.hasil == 1
+                    and notification.tanggalTahapan != null}">
+                    <a th:href="@{/notifikasi/konfirmasi/1/{id}(id=${notification.id})}" class="btn btn-sm btn-success mr-2"
+                      onclick="return confirm('Apakah anda yakin ingin menyetujui jadwal ini?')">Setuju</a>
+                    <a th:href="@{/notifikasi/konfirmasi/2/{id}(id=${notification.id})}" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Apakah anda yakin tidak ingin menyetujui jadwal ini?')">Tidak Setuju</a>
                   </div>
+                  <span th:unless="${notification.terkonfirmasi == 0 and notification.hasil == 1
+                    and notification.tanggalTahapan != null}">-</span>
                 </td>
               </tr>
             </tbody>

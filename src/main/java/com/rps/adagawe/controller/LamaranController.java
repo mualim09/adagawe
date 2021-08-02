@@ -93,8 +93,8 @@ public class LamaranController {
 
     @PostMapping("/perusahaan/lamaran/{id}/clean")
     public String seleksiLamaran(@PathVariable("id") int idLowongan) {
-        List<LamaranPelamar> lamaranPelamarList = pelamarService.getLamaranPelamarByIdLowongan(idLowongan);
-        System.out.println("Lamaran Pelamar List " + lamaranPelamarList);
+        List<LamaranPelamar> lamaranPelamarList = pelamarService.getLamaranPelamarByIdLowongan(idLowongan, 0);
+
         for(LamaranPelamar lamaranPelamar : lamaranPelamarList) {
             double tingkatanJenjang = Double.parseDouble(lamaranPelamar.getTingkatanJenjang());
             double jenjangMinimal = Double.parseDouble(lamaranPelamar.getJenjangMinimal().toString());
@@ -113,6 +113,51 @@ public class LamaranController {
 
         return "redirect:/perusahaan/lowongan/detail/" + idLowongan;
     }
+
+    @PostMapping("/perusahaan/lamaran/ujikombynilai/{id}")
+    public String seleksiNilaiUjikom(@PathVariable("id") int idLowongan, @RequestParam("nilaiUjikom") double nilaiUjikom) {
+        List<LamaranPelamar> lamaranPelamarList = pelamarService.getLamaranPelamarByIdLowongan(idLowongan, 2);
+
+        for(LamaranPelamar lamaranPelamar : lamaranPelamarList) {
+            double nilaiUjikomPelamar = lamaranPelamar.getNilaiUjiKompetensi();
+
+            Notifikasi notifikasi = new Notifikasi();
+            notifikasi.setIdLamaran(lamaranPelamar.getIdLamaran());
+            notifikasi.setTahap("Uji Kompetensi");
+            notifikasi.setHasil(nilaiUjikomPelamar < nilaiUjikom ? 0 : 1);
+            notifikasi.setTahapSelanjutnya("Wawancara");
+            notifikasi.setCreatedDate(new Date());
+
+            notifikasiService.save(notifikasi);
+        }
+
+        lamaranService.eliminatePelamarByNilaiUjikom(idLowongan, nilaiUjikom);
+
+        return "redirect:/perusahaan/lowongan/detail/" + idLowongan;
+    }
+
+    @PostMapping("/perusahaan/lamaran/wawancarabynilai/{id}")
+    public String seleksiNilaiWawancara(@PathVariable("id") int idLowongan, @RequestParam("nilaiWawancara") double nilaiWawancara) {
+        List<LamaranPelamar> lamaranPelamarList = pelamarService.getLamaranPelamarByIdLowongan(idLowongan, 4);
+
+        for(LamaranPelamar lamaranPelamar : lamaranPelamarList) {
+            double nilaiWawancaraPelamar = lamaranPelamar.getNilaiUjiKompetensi();
+
+            Notifikasi notifikasi = new Notifikasi();
+            notifikasi.setIdLamaran(lamaranPelamar.getIdLamaran());
+            notifikasi.setTahap("Wawancara");
+            notifikasi.setHasil(nilaiWawancaraPelamar < nilaiWawancara ? 0 : 1);
+            notifikasi.setTahapSelanjutnya("-");
+            notifikasi.setCreatedDate(new Date());
+
+            notifikasiService.save(notifikasi);
+        }
+
+        lamaranService.eliminatePelamarByNilaiWawancara(idLowongan, nilaiWawancara);
+
+        return "redirect:/perusahaan/lowongan/detail/" + idLowongan;
+    }
+
 
     @GetMapping("/perusahaan/lamaran/view/{id}")
     public String viewLamaran(@PathVariable("id") int idLamaran, Model model) {

@@ -61,7 +61,7 @@ public class PelamarService {
         return lamaranPelamarRepository.getLamaranPelamarById(idLamaran);
     }
 
-    public List<LamaranPelamar> getLamaranPelamarByIdLowongan(int idLowongan) {
-        return lamaranPelamarRepository.getLamaranPelamarByIdLowongan(idLowongan);
+    public List<LamaranPelamar> getLamaranPelamarByIdLowongan(int idLowongan, int statusLamaran) {
+        return lamaranPelamarRepository.getLamaranPelamarByIdLowongan(idLowongan, statusLamaran);
     }
 }

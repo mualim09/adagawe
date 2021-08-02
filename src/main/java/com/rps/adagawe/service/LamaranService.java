@@ -26,6 +26,14 @@ public class LamaranService {
         lamaranRepository.eliminatePelamarsByPendidikan(idLowongan);
     }
 
+    public void eliminatePelamarByNilaiUjikom(int idLowongan, double nilai) {
+        lamaranRepository.eliminatePelamarsByNilaiUjikom(idLowongan, nilai);
+    }
+
+    public void eliminatePelamarByNilaiWawancara(int idLowongan, double nilai) {
+        lamaranRepository.eliminatePelamarsByNilaiWawancara(idLowongan, nilai);
+    }
+
     public Lamaran getLamaranById(int idLamaran) {
         return lamaranRepository.getLamaranById(idLamaran);
     }

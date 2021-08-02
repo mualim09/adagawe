@@ -160,6 +160,10 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-ujikompetensi" role="tabpanel" aria-labelledby="pills-ujikompetensi-tab">
+                        <div class="d-flex justify-content-end mb-2">
+                            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#ujikomModal">
+                                <i class="fa fa-check-circle"></i> Seleksi Nilai</button>
+                        </div>
                         <div class="table-responsive">
                             <table class="w-100 display table table-striped table-hover datatables">
                                 <thead>
@@ -228,6 +232,10 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-wawancara" role="tabpanel" aria-labelledby="pills-wawancara-tab">
+                        <div class="d-flex justify-content-end mb-2">
+                            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#wawancaraModal">
+                                <i class="fa fa-check-circle"></i> Seleksi Nilai</button>
+                        </div>
                         <div class="table-responsive">
                             <table class="w-100 display table table-striped table-hover datatables">
                                 <thead>
@@ -383,6 +391,58 @@
                                     <div class="form-group">
                                         <label for="txtWaktu">Waktu</label>
                                         <input type="datetime-local" class="form-control" id="txtWaktu" name="tanggal_tahap">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ujikom Modal -->
+                <div class="modal fade" id="ujikomModal" tabindex="-1" aria-labelledby="nilaiModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form method="post" th:action="${'/perusahaan/lamaran/ujikombynilai/' + lowongan.getId()}" class="d-inline">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ujikomModalLabel">Seleksi berdasarkan nilai</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="txtNilai">Nilai Uji Kompetensi Minimal</label>
+                                        <input type="number" class="form-control" id="nilaiUjikom" name="nilaiUjikom">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wawancara Modal -->
+                <div class="modal fade" id="wawancaraModal" tabindex="-1" aria-labelledby="nilaiModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form method="post" th:action="${'/perusahaan/lamaran/wawancarabynilai/' + lowongan.getId()}" class="d-inline">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="wawancaraModalLabel">Seleksi berdasarkan nilai</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="txtNilai">Nilai Wawancara Minimal</label>
+                                        <input type="number" class="form-control" id="nilaiWawancara" name="nilaiWawancara">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
