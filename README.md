@@ -41,4 +41,4 @@ Adagawe is an employment website that carries topics around technology. Adagawe 
 
 
 ## Copyright ##
-© 2020 Adagawe
+© 2021 Adagawe
